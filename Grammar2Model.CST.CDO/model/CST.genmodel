@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/Grammar2Model.CST.CDO/src"
+    modelPluginID="Grammar2Model.CST.CDO" modelName="CST" rootExtendsInterface="org.eclipse.emf.cdo.CDOObject"
+    rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl" reflectiveDelegation="true"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>CST.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <genPackages prefix="CST" basePackage="gts.modernization.model" disposableProviderFactory="true"
+      ecorePackage="CST.ecore#/">
+    <genClasses ecoreClass="CST.ecore#//Tree"/>
+    <genClasses ecoreClass="CST.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CST.ecore#//Element/kind"/>
+    </genClasses>
+    <genClasses ecoreClass="CST.ecore#//Node">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CST.ecore#//Node/children"/>
+    </genClasses>
+    <genClasses ecoreClass="CST.ecore#//Leaf">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CST.ecore#//Leaf/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CST.ecore#//Leaf/pos"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CST.ecore#//Leaf/line"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
