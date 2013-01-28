@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmi:id="_iT4l0K4VEdypc6d5Bl8RZg" type="Ecore" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_iU7HoK4VEdypc6d5Bl8RZg" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_iU7Ho64VEdypc6d5Bl8RZg" type="5001"/>
+    <children xmi:type="notation:Node" xmi:id="_iU7HpK4VEdypc6d5Bl8RZg" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hpa4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Hpq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hp64VEdypc6d5Bl8RZg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iU7HqK4VEdypc6d5Bl8RZg" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hqa4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Hqq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hq64VEdypc6d5Bl8RZg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iU7HrK4VEdypc6d5Bl8RZg" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hra4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Hrq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hr64VEdypc6d5Bl8RZg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_iU7Hoa4VEdypc6d5Bl8RZg"/>
+    <element xmi:type="ecore:EClass" href="GVQ.ecore#//Core/Rule"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iU7Hoq4VEdypc6d5Bl8RZg" x="276" y="48"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_iU7HsK4VEdypc6d5Bl8RZg" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_iU7Hs64VEdypc6d5Bl8RZg" type="5001"/>
+    <children xmi:type="notation:Node" xmi:id="_iU7HtK4VEdypc6d5Bl8RZg" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hta4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Htq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Ht64VEdypc6d5Bl8RZg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iU7HuK4VEdypc6d5Bl8RZg" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hua4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Huq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hu64VEdypc6d5Bl8RZg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iU7HvK4VEdypc6d5Bl8RZg" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hva4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Hvq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hv64VEdypc6d5Bl8RZg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_iU7Hsa4VEdypc6d5Bl8RZg"/>
+    <element xmi:type="ecore:EClass" href="GVQ.ecore#//Core/InitUnit"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iU7Hsq4VEdypc6d5Bl8RZg" x="520" y="74"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_iU7HwK4VEdypc6d5Bl8RZg" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_iU7Hw64VEdypc6d5Bl8RZg" type="5001"/>
+    <children xmi:type="notation:Node" xmi:id="_iU7HxK4VEdypc6d5Bl8RZg" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hxa4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Hxq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hx64VEdypc6d5Bl8RZg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iU7HyK4VEdypc6d5Bl8RZg" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hya4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Hyq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hy64VEdypc6d5Bl8RZg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iU7HzK4VEdypc6d5Bl8RZg" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_iU7Hza4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_iU7Hzq4VEdypc6d5Bl8RZg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_iU7Hz64VEdypc6d5Bl8RZg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_iU7Hwa4VEdypc6d5Bl8RZg"/>
+    <element xmi:type="ecore:EClass" href="GVQ.ecore#//Core/ViewDefinition"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iU7Hwq4VEdypc6d5Bl8RZg" x="72" y="72"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_iT4l0a4VEdypc6d5Bl8RZg"/>
+  <element xmi:type="ecore:EPackage" href="GVQ.ecore#//Core"/>
+  <edges xmi:type="notation:Edge" xmi:id="_iVE4oK4VEdypc6d5Bl8RZg" type="4003" source="_iU7HoK4VEdypc6d5Bl8RZg" target="_iU7HsK4VEdypc6d5Bl8RZg">
+    <children xmi:type="notation:Node" xmi:id="_iVE4pK4VEdypc6d5Bl8RZg" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iVE4pa4VEdypc6d5Bl8RZg" x="4" y="-18"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iVE4pq4VEdypc6d5Bl8RZg" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iVE4p64VEdypc6d5Bl8RZg" x="3" y="12"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_iVE4oa4VEdypc6d5Bl8RZg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iVE4oq4VEdypc6d5Bl8RZg"/>
+    <element xmi:type="ecore:EReference" href="GVQ.ecore#//Core/Rule/inits"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_iVE4o64VEdypc6d5Bl8RZg" points="[0, 54, 0, -97]$[0, 114, 0, -37]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_iVE4qK4VEdypc6d5Bl8RZg" type="4003" source="_iU7HwK4VEdypc6d5Bl8RZg" target="_iU7HoK4VEdypc6d5Bl8RZg">
+    <children xmi:type="notation:Node" xmi:id="_iVE4rK4VEdypc6d5Bl8RZg" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iVE4ra4VEdypc6d5Bl8RZg" x="6" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_iVE4rq4VEdypc6d5Bl8RZg" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iVE4r64VEdypc6d5Bl8RZg" x="3" y="14"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_iVE4qa4VEdypc6d5Bl8RZg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iVE4qq4VEdypc6d5Bl8RZg"/>
+    <element xmi:type="ecore:EReference" href="GVQ.ecore#//Core/ViewDefinition/rules"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_iVE4q64VEdypc6d5Bl8RZg" points="[0, 30, 0, -113]$[0, 90, 0, -53]"/>
+  </edges>
+</notation:Diagram>
