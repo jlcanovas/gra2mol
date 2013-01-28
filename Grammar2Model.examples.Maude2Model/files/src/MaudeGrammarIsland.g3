@@ -1,0 +1,192 @@
+grammar MaudeGrammarIsland;
+
+options {
+	backtrack=true; 
+}
+
+mainRule
+	: (module)+
+	;
+	
+arrow
+	: '->'
+	| '~>'
+	;
+
+attr
+	:
+	;	
+
+condition
+	:
+	;
+
+kind 
+	: '[' sort (COMMA sort)* ']'
+	;
+	
+label
+	: '[' labelId ']' COLON
+	;
+
+leftEq
+	: term
+	;
+
+leftEqOps
+	: leftEq+
+	;
+
+leftOp
+	: type
+	;
+
+module
+	: 'fmod' modId (parameterList)? 'is' modElt* 'endfm'
+	| 'mod' modId (parameterList)? 'is' modElt2* 'endm'
+	;
+
+modExp
+	: modId
+	| '(' modExp ')'
+	//| modExp '+' modExp
+	//| modExp '*' modExp
+	//| modExp '{' viewId (COMMA viewId)* '}'
+	;
+
+modElt
+	: 'including' modExp '.'
+	| 'extending' modExp '.'
+	| 'protecting' modExp '.'
+	| ( 'sort' | 'sorts') sort+ '.' // La posibilidad de sort es mia
+	| 'subsorts' sort+ ('<' sort+)+ '.'
+	| 'op' opForm COLON leftOp* arrow rightOp (attr)? '.' // leftOp y rightOp es mio
+	| 'ops' (opId | '(' opForm ')')+ COLON type* arrow type (attr)? '.' 
+	| 'vars' varId+ COLON type '.'
+	| statement (statementAttr)? '.'
+	| EQVALIslandIsland // Esto antes estaba en statement
+	; 
+
+modElt2
+	: modElt
+	| statement2 (statementAttr)? '.'
+	;
+
+opForm
+	:  opId
+	| '(' opForm ')'
+	//| opForm+
+	;
+	
+parameterDecl
+	: paramId '::' modExp
+	;
+	
+parameterList
+	: '{' parameterDecl (COMMA parameterDecl)* '}'
+	;
+
+printItem
+	:
+	;
+
+rightEqOps
+	: rightEq+
+	;
+
+rightEq
+	: term
+	;
+
+rightOp
+	: type	
+	;
+
+sort 
+	: sortId
+	//| sort '{' sort (COMMA sort)* '}'
+	;
+
+// Los operadores + son mios
+statement    
+	: 'mb' (label)? term+ COLON sort 
+	| 'cmb' (label)? term+ COLON sort 'if' condition
+	| 'ceq' (label)? term+ '=' term+ 'if' condition
+	;
+
+statement2
+	:
+	;
+
+statementAttr
+	: '[' statementAttrValue+ ']'
+	;
+	
+statementAttrValue 	
+	: 'nonexec' | 'otherwise' | 'metadata' stringId | 'label' labelId | 'print' printItem*
+	;
+
+term
+	: ID // esto es mio
+	| '(' term+ ')'
+	| DQVAL // esto es mio
+	| COMMA
+	//| term+
+	;
+
+type 
+	: sort
+	| kind
+	;
+
+
+
+
+labelId
+	: ID
+	;
+	
+modId
+	: ID
+	;
+
+opId
+	: ID
+	;
+		
+paramId
+	: ID
+	;
+
+sortId
+	: ID
+	;
+
+stringId
+	: DQVAL
+	;
+
+varId
+	: ID
+	;
+	
+viewId
+	: ID
+	;
+
+COLON	: '\u003A';
+DQUOTE 	: '\u0022';
+COMMA	: '\u002C';
+ID      : ('a'..'z' | 'A'..'Z' | '_' | '+' | '@') ('a'..'z' | 'A'..'Z' | '0'..'9' | '_' | '$' | '#' | '-' | COLON | '+' | '@')*;
+DQVAL  	: DQUOTE (options {greedy=false;} : .)* DQUOTE;
+WS 	   	: (' ' | '\t' | '\n' | '\r')+ {$channel=HIDDEN;};
+COMMENT
+    : '***(' ( options {greedy=false;} : . )* ')' {$channel=HIDDEN;}
+    ;    
+
+LINE_COMMENT
+    : ('***' | '---') ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
+    ;
+EQVALIslandIsland	: 'eq' (options {greedy=false;} : .)* '.' 
+	;
+    

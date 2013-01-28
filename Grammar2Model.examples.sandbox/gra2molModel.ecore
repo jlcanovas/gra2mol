@@ -1,0 +1,2177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:Transformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules xsi:type="Core:StandardRule" name="createAemiliaSpec">
+    <queries variable="mains">
+      <filter type="INDIRECT">
+        <element name="archi_type" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="archiTypeDecl">
+        <value type="QUERY_RESULT" value="mains"/>
+      </inits>
+    </inits>
+    <from name="file" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="file" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="AEmiliaSpecification"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapArchiType">
+    <queries variable="name">
+      <filter>
+        <element name="at"/>
+        <next>
+          <element name="word" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="intest">
+      <filter>
+        <element name="at"/>
+        <next type="INDIRECT">
+          <element name="archi_header" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="aet">
+      <filter>
+        <element name="at"/>
+        <next type="INDIRECT">
+          <element name="archi_elem_types" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="topology">
+      <filter>
+        <element name="at"/>
+        <next type="INDIRECT">
+          <element name="archi_topology" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="atName">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="header">
+        <value type="QUERY_RESULT" value="intest"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="aetDeclaration">
+        <value type="QUERY_RESULT" value="aet"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="atDeclaration">
+        <value type="QUERY_RESULT" value="topology"/>
+      </inits>
+    </inits>
+    <from name="archi_type" alias="at">
+      <filter variable="at">
+        <filter>
+          <element name="archi_type" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="ArchiType"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapArchiHeader">
+    <queries variable="const">
+      <filter>
+        <element name="ah"/>
+        <next>
+          <element name="init_constant_list"/>
+          <next>
+            <element name="init_constant" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="initConst">
+        <value type="QUERY_RESULT" value="const"/>
+      </inits>
+    </inits>
+    <from name="archi_header" alias="ah">
+      <filter variable="ah">
+        <filter>
+          <element name="archi_header" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::AT_Header"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="constInitialization">
+    <queries variable="name">
+      <filter>
+        <element name="i"/>
+        <next>
+          <element name="constName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeNormal">
+      <filter>
+        <element name="i"/>
+        <next>
+          <element name="dataType"/>
+          <next>
+            <element name="normalType" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeSpecial">
+      <filter>
+        <element name="i"/>
+        <next>
+          <element name="dataType"/>
+          <next>
+            <element name="specialType" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp">
+      <filter>
+        <element name="i"/>
+        <next>
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="initConstData">
+          <value type="QUERY_RESULT" value="typeNormal"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="initConstData">
+            <value type="QUERY_RESULT" value="typeSpecial"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="typeNormal"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="initConstExpr">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+    </inits>
+    <from name="init_constant" alias="i">
+      <filter variable="i">
+        <filter>
+          <element name="init_constant" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::ConstInit"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapSpecialType">
+    <queries variable="typeName">
+      <filter>
+        <element name="st" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_ACCESS" value="typeName" extension="TOKEN"/>
+      </inits>
+    </inits>
+    <from name="specialType" alias="st">
+      <filter variable="st">
+        <filter>
+          <element name="specialType" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::Special"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNormalType">
+    <inits/>
+    <from name="normalType" alias="nt">
+      <filter variable="nt">
+        <filter>
+          <element name="normalType" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="boolean"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::Boolean"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNormalType">
+    <inits/>
+    <from name="normalType" alias="nt">
+      <filter variable="nt">
+        <filter>
+          <element name="normalType" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="real"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::Real"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNormalType">
+    <inits/>
+    <from name="normalType" alias="nt">
+      <filter variable="nt">
+        <filter>
+          <element name="normalType" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="integer"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+                <element name="TOKEN" position="1"/>
+              </expressions>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+                <element name="TOKEN" position="2"/>
+              </expressions>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::Integer"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNormalType">
+    <queries variable="minv">
+      <filter>
+        <element name="nt" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="maxv">
+      <filter>
+        <element name="nt" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="minVal">
+        <value type="QUERY_ACCESS" value="minv" extension="DIGIT">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="maxVal">
+        <value type="QUERY_ACCESS" value="maxv" extension="DIGIT">
+          <params value="1" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+    </inits>
+    <from name="normalType" alias="nt">
+      <filter variable="nt">
+        <filter>
+          <element name="normalType" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="integer"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN" position="1"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN" position="2"/>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::RangeInt"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNormalType">
+    <queries variable="type">
+      <filter>
+        <element name="nt"/>
+        <next>
+          <element name="elemType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="elementType">
+        <value type="QUERY_ACCESS" value="type" extension="TOKEN"/>
+      </inits>
+    </inits>
+    <from name="normalType" alias="nt">
+      <filter variable="nt">
+        <filter>
+          <element name="normalType" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="list"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::List"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNormalType">
+    <queries variable="len">
+      <filter>
+        <element name="nt" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="nt"/>
+        <next>
+          <element name="elemType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="lenght">
+        <value type="QUERY_ACCESS" value="len" extension="DIGIT"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="elemType">
+        <value type="QUERY_ACCESS" value="type" extension="TOKEN"/>
+      </inits>
+    </inits>
+    <from name="normalType" alias="nt">
+      <filter variable="nt">
+        <filter>
+          <element name="normalType" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="array"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::Array"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNormalType">
+    <queries variable="var">
+      <filter>
+        <element name="nt"/>
+        <next>
+          <element name="recordList" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="field_decl_seq">
+        <value type="OPERATION_CODE" value="var"/>
+      </inits>
+    </inits>
+    <from name="normalType" alias="nt">
+      <filter variable="nt">
+        <filter>
+          <element name="normalType" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="record"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="DataType::Record"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapArchiElemTypes">
+    <queries variable="elemTypes">
+      <filter>
+        <element name="aet"/>
+        <next type="INDIRECT">
+          <element name="elem_type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="etDeclaration">
+        <value type="QUERY_RESULT" value="elemTypes"/>
+      </inits>
+    </inits>
+    <from name="archi_elem_types" alias="aet">
+      <filter variable="aet">
+        <filter>
+          <element name="archi_elem_types" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="ArchiElemTypes"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapElemTypes">
+    <queries variable="name">
+      <filter>
+        <element name="et"/>
+        <next>
+          <element name="word" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="elemHeader">
+      <filter>
+        <element name="et"/>
+        <next>
+          <element name="et_header" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="inputInt">
+      <filter>
+        <element name="et"/>
+        <next type="INDIRECT">
+          <element name="interaction_list_input"/>
+          <next type="INDIRECT">
+            <element name="interaction" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="outputInt">
+      <filter>
+        <element name="et"/>
+        <next type="INDIRECT">
+          <element name="interaction_list_output"/>
+          <next type="INDIRECT">
+            <element name="interaction" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="behavior">
+      <filter>
+        <element name="et"/>
+        <next>
+          <element name="behavior_equation_list" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="etName">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="elemHeader">
+        <value type="QUERY_RESULT" value="elemHeader"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="iiDecl">
+        <value type="QUERY_RESULT" value="inputInt"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="oiDecl">
+        <value type="QUERY_RESULT" value="outputInt"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="behaviorDecl">
+        <value type="QUERY_RESULT" value="behavior"/>
+      </inits>
+    </inits>
+    <from name="elem_type" alias="et">
+      <filter variable="et">
+        <filter>
+          <element name="elem_type" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="ElemType"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapBehaviorEquations">
+    <queries variable="first_eq">
+      <filter>
+        <element name="bel"/>
+        <next>
+          <element name="first_equation" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="list">
+      <filter>
+        <element name="bel"/>
+        <next>
+          <element name="equations_list"/>
+          <next>
+            <element name="equations" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="equations">
+        <value type="QUERY_RESULT" value="first_eq"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="equations">
+        <value type="QUERY_RESULT" value="list"/>
+      </inits>
+    </inits>
+    <from name="behavior_equation_list" alias="bel">
+      <filter variable="bel">
+        <filter>
+          <element name="behavior_equation_list" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::Behavior"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapEquation">
+    <queries variable="name">
+      <filter>
+        <element name="equation"/>
+        <next>
+          <element name="eqName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="h">
+      <filter>
+        <element name="equation"/>
+        <next>
+          <element name="behavior_header_first" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="process">
+      <filter>
+        <element name="equation"/>
+        <next>
+          <element name="processTerm" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="pt">
+        <value type="QUERY_RESULT" value="process"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="bHeader">
+        <value type="QUERY_RESULT" value="h"/>
+      </inits>
+    </inits>
+    <from name="first_equation" alias="equation">
+      <filter variable="equation">
+        <filter>
+          <element name="first_equation" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::BehavEquation"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapHeaderFirstEq">
+    <queries variable="leftPart">
+      <filter>
+        <element name="bhf"/>
+        <next>
+          <element name="leftSide_first" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rightPart">
+      <filter>
+        <element name="bhf"/>
+        <next>
+          <element name="rightSide" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="left">
+        <value type="QUERY_RESULT" value="leftPart"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="right">
+        <value type="QUERY_RESULT" value="rightPart"/>
+      </inits>
+    </inits>
+    <from name="behavior_header_first" alias="bhf">
+      <filter variable="bhf">
+        <filter>
+          <element name="behavior_header_first" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::BehavHeader"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapLeftSideFirst">
+    <queries variable="var">
+      <filter>
+        <element name="lf"/>
+        <next>
+          <element name="varInit" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="initVar">
+        <value type="QUERY_RESULT" value="var"/>
+      </inits>
+    </inits>
+    <from name="leftSide_first" alias="lf">
+      <filter variable="lf">
+        <filter>
+          <element name="leftSide_first" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::LeftSide"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapVarInitialization">
+    <queries variable="name">
+      <filter>
+        <element name="vi"/>
+        <next>
+          <element name="word" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="vi"/>
+        <next>
+          <element name="normalType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp">
+      <filter>
+        <element name="vi"/>
+        <next>
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="initVarType">
+        <value type="QUERY_RESULT" value="type"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="initVarExpr">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+    </inits>
+    <from name="varInit" alias="vi">
+      <filter variable="vi">
+        <filter>
+          <element name="varInit" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::VarInit"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapRightSideFirst">
+    <queries variable="loc">
+      <filter>
+        <element name="rs"/>
+        <next>
+          <element name="local" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="localDef">
+        <value type="QUERY_RESULT" value="loc"/>
+      </inits>
+    </inits>
+    <from name="rightSide" alias="rs">
+      <filter variable="rs">
+        <filter>
+          <element name="rightSide" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::RightSide"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapLocalVar">
+    <queries variable="name">
+      <filter>
+        <element name="loc"/>
+        <next>
+          <element name="word" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="loc"/>
+        <next>
+          <element name="normalType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="localType">
+        <value type="QUERY_RESULT" value="type"/>
+      </inits>
+    </inits>
+    <from name="local" alias="loc">
+      <filter variable="loc">
+        <filter>
+          <element name="local" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::Local"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapEquation">
+    <queries variable="name">
+      <filter>
+        <element name="equation"/>
+        <next>
+          <element name="eqName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="h">
+      <filter>
+        <element name="equation"/>
+        <next>
+          <element name="behavior_header" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="process">
+      <filter>
+        <element name="equation"/>
+        <next>
+          <element name="processTerm" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="bHeader">
+        <value type="QUERY_RESULT" value="h"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="pt">
+        <value type="QUERY_RESULT" value="process"/>
+      </inits>
+    </inits>
+    <from name="equations" alias="equation">
+      <filter variable="equation">
+        <filter>
+          <element name="equations" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::BehavEquation"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapHeaderEq">
+    <queries variable="leftPart">
+      <filter>
+        <element name="bh"/>
+        <next>
+          <element name="leftSide" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rightPart">
+      <filter>
+        <element name="bh"/>
+        <next>
+          <element name="rightSide" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="left">
+        <value type="QUERY_RESULT" value="leftPart"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="right">
+        <value type="QUERY_RESULT" value="rightPart"/>
+      </inits>
+    </inits>
+    <from name="behavior_header" alias="bh">
+      <filter variable="bh">
+        <filter>
+          <element name="behavior_header" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::BehavHeader"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapLeftSide">
+    <queries variable="var">
+      <filter>
+        <element name="lf"/>
+        <next>
+          <element name="var" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="varDef">
+        <value type="QUERY_RESULT" value="var"/>
+      </inits>
+    </inits>
+    <from name="leftSide" alias="lf">
+      <filter variable="lf">
+        <filter>
+          <element name="leftSide" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::LeftSide"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapVar">
+    <queries variable="name">
+      <filter>
+        <element name="v"/>
+        <next>
+          <element name="word" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="v"/>
+        <next>
+          <element name="normalType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="varType">
+        <value type="QUERY_RESULT" value="type"/>
+      </inits>
+    </inits>
+    <from name="var" alias="v">
+      <filter variable="v">
+        <filter>
+          <element name="var" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::Var"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapElemHeader">
+    <queries variable="const">
+      <filter>
+        <element name="eh"/>
+        <next>
+          <element name="constant_list"/>
+          <next>
+            <element name="constant" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="costant">
+        <value type="QUERY_RESULT" value="const"/>
+      </inits>
+    </inits>
+    <from name="et_header" alias="eh">
+      <filter variable="eh">
+        <filter>
+          <element name="et_header" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::ET_Header"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="constantDef">
+    <queries variable="name">
+      <filter>
+        <element name="i"/>
+        <next>
+          <element name="constName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeNormal">
+      <filter>
+        <element name="i"/>
+        <next>
+          <element name="dataType"/>
+          <next>
+            <element name="normalType" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeSpecial">
+      <filter>
+        <element name="i"/>
+        <next>
+          <element name="dataType"/>
+          <next>
+            <element name="specialType" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="constantData">
+          <value type="QUERY_RESULT" value="typeNormal"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="constantData">
+            <value type="QUERY_RESULT" value="typeSpecial"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="typeNormal"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="constant" alias="i">
+      <filter variable="i">
+        <filter>
+          <element name="constant" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Headers::Const"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapInteractionListInput">
+    <queries variable="name">
+      <filter>
+        <element name="int"/>
+        <next>
+          <element name="interactionName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="int"/>
+        <next>
+          <element name="interaction_type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="intName">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_ACCESS" value="type" extension="TOKEN"/>
+      </inits>
+    </inits>
+    <from name="interaction" alias="int">
+      <filter variable="int">
+        <filter>
+          <element name="interaction" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="InputInteraction"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapInteractionListOutput">
+    <queries variable="name">
+      <filter>
+        <element name="int"/>
+        <next>
+          <element name="interactionName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="int"/>
+        <next>
+          <element name="interaction_type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="intName">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_ACCESS" value="type" extension="TOKEN"/>
+      </inits>
+    </inits>
+    <from name="interaction" alias="int">
+      <filter variable="int">
+        <filter>
+          <element name="interaction" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="OutputInteraction"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapArchiTopology">
+    <queries variable="istances">
+      <filter>
+        <element name="at"/>
+        <next>
+          <element name="archi_elem_instances"/>
+          <next type="INDIRECT">
+            <element name="instances" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="attach">
+      <filter>
+        <element name="at"/>
+        <next>
+          <element name="archi_attachments"/>
+          <next>
+            <element name="attachment_list"/>
+            <next>
+              <element name="attachment" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="aeiDecl">
+        <value type="QUERY_RESULT" value="istances"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="attDecl">
+        <value type="QUERY_RESULT" value="attach"/>
+      </inits>
+    </inits>
+    <from name="archi_topology" alias="at">
+      <filter variable="at">
+        <filter>
+          <element name="archi_topology" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="ArchiTopology"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapIstances">
+    <queries variable="name">
+      <filter>
+        <element name="i"/>
+        <next type="INDIRECT">
+          <element name="istanceName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="param">
+      <filter>
+        <element name="i"/>
+        <next type="INDIRECT">
+          <element name="parList"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="i"/>
+        <next type="INDIRECT">
+          <element name="elementType"/>
+          <next type="INDIRECT">
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="instanceName">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actualParam">
+        <value type="QUERY_ACCESS" value="param" extension="LETTER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="TypeOf">
+        <value type="OPERATION_CREATION" value="ElemType"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="TypeOf">
+        <extension>etName</extension>
+        <value type="OPERATION_CODE" value="type"/>
+      </inits>
+    </inits>
+    <from name="instances" alias="i">
+      <filter variable="i">
+        <filter>
+          <element name="instances" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="ArchiElemInstance"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapAttachement">
+    <queries variable="end">
+      <filter>
+        <element name="att"/>
+        <next>
+          <element name="istanceNameTo" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="start">
+      <filter>
+        <element name="att"/>
+        <next>
+          <element name="istanceNameFrom" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="end">
+        <value type="QUERY_RESULT" value="end"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="start">
+        <value type="QUERY_RESULT" value="start"/>
+      </inits>
+    </inits>
+    <from name="attachment" alias="att">
+      <filter variable="att">
+        <filter>
+          <element name="attachment" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Attachement"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapTo">
+    <inits/>
+    <from name="istanceNameTo" alias="name">
+      <filter variable="name">
+        <filter>
+          <element name="istanceNameTo" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="To"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapFrom">
+    <inits/>
+    <from name="istanceNameFrom" alias="name">
+      <filter variable="name">
+        <filter>
+          <element name="istanceNameFrom" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="From"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapProcessTermAction">
+    <queries variable="next">
+      <filter>
+        <element name="pt"/>
+        <next>
+          <element name="process_term_1"/>
+          <next>
+            <element name="processTerm" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="next2">
+      <filter>
+        <element name="pt"/>
+        <next>
+          <element name="process_term_1"/>
+          <next>
+            <element name="behavEqInvocation" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="action">
+      <filter>
+        <element name="pt"/>
+        <next>
+          <element name="action" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="process">
+          <value type="QUERY_RESULT" value="next"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="process">
+            <value type="QUERY_RESULT" value="next2"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="next"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="act">
+        <value type="QUERY_RESULT" value="action"/>
+      </inits>
+    </inits>
+    <from name="processTerm" alias="pt">
+      <filter variable="pt">
+        <filter>
+          <element name="processTerm" mark="true"/>
+          <next>
+            <element name="action" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::ActionProcess"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapAction">
+    <queries variable="name">
+      <filter>
+        <element name="act"/>
+        <next>
+          <element name="actionName"/>
+          <next>
+            <element name="word" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="act"/>
+        <next>
+          <element name="action_type" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rate">
+      <filter>
+        <element name="act"/>
+        <next>
+          <element name="action_rate" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_RESULT" value="type"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rate">
+        <value type="QUERY_RESULT" value="rate"/>
+      </inits>
+    </inits>
+    <from name="action" alias="act">
+      <filter variable="act">
+        <filter>
+          <element name="action" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::Action"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapActionTypeInput">
+    <queries variable="var">
+      <filter>
+        <element name="at"/>
+        <next>
+          <element name="word" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="var">
+          <value type="QUERY_ACCESS" value="var" extension="LETTER"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="var"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="action_type" alias="at">
+      <filter variable="at">
+        <filter>
+          <element name="action_type" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="?"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::ActionInput"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapActionTypeOutput">
+    <queries variable="var">
+      <filter>
+        <element name="at"/>
+        <next>
+          <element name="expr" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="exprOutput">
+          <value type="QUERY_RESULT" value="var"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="var"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="action_type" alias="at">
+      <filter variable="at">
+        <filter>
+          <element name="action_type" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="!"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::ActionOutput"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapActionRate">
+    <queries variable="expr">
+      <filter>
+        <element name="ar"/>
+        <next>
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expr">
+        <value type="QUERY_RESULT" value="expr"/>
+      </inits>
+    </inits>
+    <from name="action_rate" alias="ar">
+      <filter variable="ar">
+        <filter>
+          <element name="action_rate" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+            <element name="TOKEN"/>
+            <parameters value="exp"/>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::RateExp"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapActionRate">
+    <inits/>
+    <from name="action_rate" alias="ar">
+      <filter variable="ar">
+        <filter>
+          <element name="action_rate" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="inf"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+                <element name="TOKEN" position="1"/>
+              </expressions>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+                <element name="TOKEN" position="2"/>
+              </expressions>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::RateInf"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapActionRate">
+    <queries variable="prio">
+      <filter>
+        <element name="ar"/>
+        <next operation="POSITION">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="wei">
+      <filter>
+        <element name="ar"/>
+        <next operation="POSITION" position="1">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="inf_priority">
+          <value type="QUERY_RESULT" value="prio"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="prio"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="inf_weight">
+          <value type="QUERY_RESULT" value="wei"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="wei"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="action_rate" alias="ar">
+      <filter variable="ar">
+        <filter>
+          <element name="action_rate" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="inf"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN" position="1"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN" position="2"/>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::RateInf"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapActionRate">
+    <inits/>
+    <from name="action_rate" alias="ar">
+      <filter variable="ar">
+        <filter>
+          <element name="action_rate" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="_"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+                <element name="TOKEN" position="1"/>
+              </expressions>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+                <element name="TOKEN" position="2"/>
+              </expressions>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::Rate_"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapActionRate">
+    <queries variable="prio">
+      <filter>
+        <element name="ar"/>
+        <next operation="POSITION">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="wei">
+      <filter>
+        <element name="ar"/>
+        <next operation="POSITION" position="1">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="priority">
+          <value type="QUERY_RESULT" value="prio"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="prio"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="weight">
+          <value type="QUERY_RESULT" value="wei"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="wei"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="action_rate" alias="ar">
+      <filter variable="ar">
+        <filter>
+          <element name="action_rate" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="_"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN" position="1"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN" position="2"/>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::Rate_"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapEquationInvocation">
+    <queries variable="exp">
+      <filter>
+        <element name="bei"/>
+        <next>
+          <element name="expressionList"/>
+          <next>
+            <element name="expr" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="exprs">
+          <value type="QUERY_RESULT" value="exp"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="exp"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="behavEqInvocation" alias="bei">
+      <filter variable="bei">
+        <filter>
+          <element name="behavEqInvocation" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::BehavProcess"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapProcessTermChoice">
+    <queries variable="next">
+      <filter>
+        <element name="choice"/>
+        <next>
+          <element name="process_term_2"/>
+          <next>
+            <element name="processTerm" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cond">
+      <filter>
+        <element name="choice"/>
+        <next>
+          <element name="process_term_2"/>
+          <next>
+            <element name="condExpr"/>
+            <next>
+              <element name="expr" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="processes">
+        <value type="QUERY_RESULT" value="next"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="condition">
+        <value type="QUERY_RESULT" value="cond"/>
+      </inits>
+    </inits>
+    <from name="processTerm" alias="choice">
+      <filter variable="choice">
+        <filter>
+          <element name="processTerm" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="choice"/>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::ChoiceProcess"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapProcessTermStop">
+    <inits/>
+    <from name="processTerm" alias="stop">
+      <filter variable="stop">
+        <filter>
+          <element name="processTerm" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="exists">
+              <element name="TOKEN"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="eq">
+              <element name="TOKEN"/>
+              <parameters value="stop"/>
+            </expressions>
+          </expression>
+        </filter>
+      </filter>
+    </from>
+    <to name="Behavior::Stop"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="left">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="term" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="arithOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="right">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="term" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftExprArith">
+        <value type="QUERY_RESULT" value="left"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightExprArith">
+        <value type="QUERY_RESULT" value="right"/>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="arithExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::ArithExpr"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="left">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="term" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="relatOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="right">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="term" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftExprRel">
+        <value type="QUERY_RESULT" value="left"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightExprRel">
+        <value type="QUERY_RESULT" value="right"/>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="relationalExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::RelationalExpr"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="left">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="term" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="boolOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="right">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="term" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="leftExprBool">
+          <value type="QUERY_RESULT" value="left"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="left"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightExprBool">
+        <value type="QUERY_RESULT" value="right"/>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="booleanExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::BooleanExpr"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="recordOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="operands">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operation">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="record_operands">
+        <value type="QUERY_RESULT" value="operands"/>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="recordExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::RecordExpr"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="arrayOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="operands">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operation">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="array_operands">
+        <value type="QUERY_RESULT" value="operands"/>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="arrayExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::ArrayExpr"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="listOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="operands">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operation">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="list_operands">
+        <value type="QUERY_RESULT" value="operands"/>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="listExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::ListExpr"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="left">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="mathOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="right">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftExprMath">
+        <value type="QUERY_RESULT" value="left"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="rightExprMath">
+          <value type="QUERY_RESULT" value="right"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="right"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="mathExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::MathFunctions"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapExpression">
+    <queries variable="op">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="numGenOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="firstEl">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="second">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="third">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT" operation="POSITION" position="2">
+          <element name="expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="op" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="firstNumGenOp">
+        <value type="QUERY_RESULT" value="firstEl"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="secondNumGenOp">
+          <value type="QUERY_RESULT" value="second"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="second"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="thirdNumGenOp">
+          <value type="QUERY_RESULT" value="third"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="third"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="expr" alias="a">
+      <filter variable="a">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="numGenExpr"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::Pseudo_random_num_gen"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapTerm">
+    <queries variable="name">
+      <filter type="INDIRECT">
+        <element name="t" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="typeWord">
+      <filter>
+        <element name="t"/>
+        <next type="INDIRECT">
+          <element name="word" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeNum">
+      <filter>
+        <element name="t"/>
+        <next type="INDIRECT">
+          <element name="number" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="NUMERIC_CONST"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="typeNum"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="TYPED_IDENT"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="typeWord"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="term" alias="t">
+      <filter variable="t">
+        <filter>
+          <element name="term" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::IdentExpr"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapTerm">
+    <queries variable="name">
+      <filter type="INDIRECT">
+        <element name="t" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="typeWord">
+      <filter>
+        <element name="t"/>
+        <next type="INDIRECT">
+          <element name="word" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeNum">
+      <filter>
+        <element name="t"/>
+        <next type="INDIRECT">
+          <element name="number" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CODE" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="NUMERIC_CONST"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="typeNum"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="TYPED_IDENT"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="hasResults">
+          <element name="typeWord"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="expr" alias="t">
+      <filter variable="t">
+        <filter>
+          <element name="expr" mark="true"/>
+          <next type="INDIRECT">
+            <element name="term"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="Expressions::IdentExpr"/>
+  </rules>
+</Core:Transformation>

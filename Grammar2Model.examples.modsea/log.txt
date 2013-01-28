@@ -1,0 +1,165 @@
+Gra2MoL version 0.5
+
+Executing interpreter...
+Reading configuration file...
+
+Initializing query operation
+gts.modernization.query.actions.QueryOperationCheck query operation found with keywords: [check]
+gts.modernization.query.actions.QueryOperationEndsWith query operation found with keywords: [endsWith]
+gts.modernization.query.actions.QueryOperationEquals query operation found with keywords: [eq, equals]
+gts.modernization.query.actions.QueryOperationExists query operation found with keywords: [exists]
+gts.modernization.query.actions.QueryOperationStartsWith query operation found with keywords: [startsWith]
+
+Initializing query control statement
+[WARNING] No query control statement were found!
+
+Initializing mapping extension
+TypeHelperExtension mapping extension found with keywords: [typeHelper]
+DigestFileNameExtension mapping extension found with keywords: [digestFilename]
+TypeInitializerExtension mapping extension found with keywords: [typeInitializer]
+Models created.
+Initializing indexRules...
+Initializing mixinRules...
+Initializing packages...
+Initializing hashes...
+
+Executing rules...
+RULE: mapEPackage
+RULE: mapEPackage... executing!
+  Model Element EPackage created
+  Executing queries...
+    Query tree with 1 result nodes - CONTENT : [/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.modsea/files/src/CalendarView_accessorSpecs.json CalendarView_accessorSpecs.json [ { accessorName : "getProxy" , attributeName : "proxy" } , { accessorName : "getDuration" , bindings : [ { attributeName : "start" , type : "date" , bindingName : "start" } , { attributeName : "end" , type : "date" , bindingName : "end" , optional : true } ] } , { accessorName : "getColorKey" , type : "text" } , { accessorName : "getColorKey" , attributeName : "colorKey" , type : "text" } , { accessorName : "getIconKey" , attributeName : "iconKey" , type : "text" } , { accessorName : "getEventLabel" , attributeName : "eventLabel" , type : "text" } , { accessorName : "getHoverText" , attributeName : "hoverText" , type : "text" } ] /home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.modsea/files/src/CalendarView_settingSpecs.json CalendarView_settingSpecs.json { "showToolbox" : { type : "boolean" , defaultValue : true } } ]
+    Query elems with 1 result nodes - CONTENT in line 0: [/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.modsea/files/src/CalendarView_accessorSpecs.json CalendarView_accessorSpecs.json [ { accessorName : "getProxy" , attributeName : "proxy" } , { accessorName : "getDuration" , bindings : [ { attributeName : "start" , type : "date" , bindingName : "start" } , { attributeName : "end" , type : "date" , bindingName : "end" , optional : true } ] } , { accessorName : "getColorKey" , type : "text" } , { accessorName : "getColorKey" , attributeName : "colorKey" , type : "text" } , { accessorName : "getIconKey" , attributeName : "iconKey" , type : "text" } , { accessorName : "getEventLabel" , attributeName : "eventLabel" , type : "text" } , { accessorName : "getHoverText" , attributeName : "hoverText" , type : "text" } ] ]
+  Executing mappings...
+    - VALUE: name (property) - modsea (value)
+    - VALUE: nsURI (property) - http://modsea/1.0 (value)
+    - VALUE: nsPrefix (property) - modsea (value)
+    - QUERY_RESULT: 1 bindings:
+      (1/1) result node: file (kind). Rule... calling mapEClass rule
+
+      RULE: mapEClass
+      RULE: mapEClass... executing!
+        Model Element EClass created
+        Executing queries...
+          Query f with 1 result nodes - CONTENT in line 0: [/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.modsea/files/src/CalendarView_accessorSpecs.json CalendarView_accessorSpecs.json [ { accessorName : "getProxy" , attributeName : "proxy" } , { accessorName : "getDuration" , bindings : [ { attributeName : "start" , type : "date" , bindingName : "start" } , { attributeName : "end" , type : "date" , bindingName : "end" , optional : true } ] } , { accessorName : "getColorKey" , type : "text" } , { accessorName : "getColorKey" , attributeName : "colorKey" , type : "text" } , { accessorName : "getIconKey" , attributeName : "iconKey" , type : "text" } , { accessorName : "getEventLabel" , attributeName : "eventLabel" , type : "text" } , { accessorName : "getHoverText" , attributeName : "hoverText" , type : "text" } ] ]
+          Query refs with 7 result nodes
+          Query attrs with 1 result nodes - CONTENT in line 2: ["showToolbox" : { type : "boolean" , defaultValue : true } ]
+        Executing mappings...
+          - OPERATION_EXTENSION:  CalendarView (string value)
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: pairValue (kind). Rule... calling mapEAttributes rule
+
+            RULE: mapEAttributes
+            RULE: mapEAttributes... executing!
+              Model Element EAttribute created
+              Executing queries...
+                Query typeL with 1 result nodes - CONTENT in line 2: [type : "boolean" ]
+                Query defVR with 1 result nodes - CONTENT in line 2: [true ]
+                Query pv with 1 result nodes - CONTENT in line 2: ["showToolbox" : { type : "boolean" , defaultValue : true } ]
+                Query defVL with 1 result nodes - CONTENT in line 2: [defaultValue : true ]
+                Query typeR with 1 result nodes - CONTENT in line 2: ["boolean" ]
+                Query lhs with 3 result nodes
+              Executing mappings...
+                - QUERY_ACCESS: variable: lhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "showToolbox" (value) 
+                  node: value (kind) - LEAF NOT FOUND
+                  node: value (kind) - LEAF NOT FOUND
+                - OPERATION_EXTENSION:  (object value)
+                - CODE:  - node: value (kind) - Result: true
+
+          - QUERY_RESULT: 7 bindings:
+            (1/7) result node: pairValue (kind). Rule... calling mapEReference rule
+
+            RULE: mapEReference
+            RULE: mapEReference... executing!
+              Model Element EReference created
+              Executing queries...
+                Query rhs with 1 result nodes - CONTENT in line 3: ["proxy" ]
+                Query pv with 1 result nodes - CONTENT in line 3: [attributeName : "proxy" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: rhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "proxy" (value) 
+                - OPERATION_EXTENSION:  (object value)
+
+            (2/7) result node: pairValue (kind). Rule... calling mapEReference rule
+
+            RULE: mapEReference
+            RULE: mapEReference... executing!
+              Model Element EReference created
+              Executing queries...
+                Query rhs with 1 result nodes - CONTENT in line 7: ["start" ]
+                Query pv with 1 result nodes - CONTENT in line 7: [attributeName : "start" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: rhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "start" (value) 
+                - OPERATION_EXTENSION:  (object value)
+
+            (3/7) result node: pairValue (kind). Rule... calling mapEReference rule
+
+            RULE: mapEReference
+            RULE: mapEReference... executing!
+              Model Element EReference created
+              Executing queries...
+                Query rhs with 1 result nodes - CONTENT in line 11: ["end" ]
+                Query pv with 1 result nodes - CONTENT in line 11: [attributeName : "end" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: rhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "end" (value) 
+                - OPERATION_EXTENSION:  (object value)
+
+            (4/7) result node: pairValue (kind). Rule... calling mapEReference rule
+
+            RULE: mapEReference
+            RULE: mapEReference... executing!
+              Model Element EReference created
+              Executing queries...
+                Query rhs with 1 result nodes - CONTENT in line 22: ["colorKey" ]
+                Query pv with 1 result nodes - CONTENT in line 22: [attributeName : "colorKey" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: rhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "colorKey" (value) 
+                - OPERATION_EXTENSION:  (object value)
+
+            (5/7) result node: pairValue (kind). Rule... calling mapEReference rule
+
+            RULE: mapEReference
+            RULE: mapEReference... executing!
+              Model Element EReference created
+              Executing queries...
+                Query rhs with 1 result nodes - CONTENT in line 26: ["iconKey" ]
+                Query pv with 1 result nodes - CONTENT in line 26: [attributeName : "iconKey" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: rhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "iconKey" (value) 
+                - OPERATION_EXTENSION:  (object value)
+
+            (6/7) result node: pairValue (kind). Rule... calling mapEReference rule
+
+            RULE: mapEReference
+            RULE: mapEReference... executing!
+              Model Element EReference created
+              Executing queries...
+                Query rhs with 1 result nodes - CONTENT in line 30: ["eventLabel" ]
+                Query pv with 1 result nodes - CONTENT in line 30: [attributeName : "eventLabel" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: rhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "eventLabel" (value) 
+                - OPERATION_EXTENSION:  (object value)
+
+            (7/7) result node: pairValue (kind). Rule... calling mapEReference rule
+
+            RULE: mapEReference
+            RULE: mapEReference... executing!
+              Model Element EReference created
+              Executing queries...
+                Query rhs with 1 result nodes - CONTENT in line 35: ["hoverText" ]
+                Query pv with 1 result nodes - CONTENT in line 35: [attributeName : "hoverText" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: rhs - 
+                  node: value (kind) - leaf: DQVALUE (kind) - "hoverText" (value) 
+                - OPERATION_EXTENSION:  (object value)
+
+
+
+
+Saving...

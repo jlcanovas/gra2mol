@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:CST="http://gts.inf.um.es/modernization/cst" kind="CST">
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.semanticWhitespaces/files/src/inputs/test.txt"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="test.txt"/>
+    <children xsi:type="CST:Node" kind="mainRule">
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="HOLA" line="1"/>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value=" " pos="4" line="1"/>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;missing ' '>" pos="5"
+          line="1"/>
+      <children xsi:type="CST:Leaf" kind="ID" value="javi" pos="5" line="1"/>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="9" line="1"/>
+    </children>
+  </children>
+</CST:Node>

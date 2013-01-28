@@ -1,0 +1,2134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:CST="http://gts.inf.um.es/modernization/cst" kind="CST">
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.sandbox/files/src/scripts/example.txt"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="example.txt"/>
+    <children xsi:type="CST:Node" kind="archi_type">
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_TYPE" line="1"/>
+      <children xsi:type="CST:Leaf" kind="WORD" value="ABP_Type123asd" pos="11" line="1"/>
+      <children xsi:type="CST:Node" kind="archi_header">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="25" line="1"/>
+        <children xsi:type="CST:Node" kind="init_constant_list">
+          <children xsi:type="CST:Node" kind="init_constant">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="26" line="1"/>
+            <children xsi:type="CST:Node" kind="dataType">
+              <children xsi:type="CST:Node" kind="normalType">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="integer" pos="32"
+                    line="1"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Node" kind="constName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="msg_gen_rate" pos="42"
+                  line="1"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":=" pos="56" line="1"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="42" line="3"/>
+          <children xsi:type="CST:Node" kind="init_constant">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="6" line="2"/>
+            <children xsi:type="CST:Node" kind="dataType">
+              <children xsi:type="CST:Node" kind="normalType">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="real" pos="12" line="2"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Node" kind="constName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="timeout_rate" pos="19"
+                  line="2"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":=" pos="33" line="2"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="42" line="3"/>
+          <children xsi:type="CST:Node" kind="init_constant">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="7" line="3"/>
+            <children xsi:type="CST:Node" kind="dataType">
+              <children xsi:type="CST:Node" kind="specialType">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="rate" pos="13" line="3"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Node" kind="constName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="prop_rate" pos="20"
+                  line="3"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":=" pos="34" line="3"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="42" line="3"/>
+          <children xsi:type="CST:Node" kind="init_constant">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="7" line="4"/>
+            <children xsi:type="CST:Node" kind="dataType">
+              <children xsi:type="CST:Node" kind="specialType">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="weight" pos="13"
+                    line="4"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Node" kind="constName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="delivery_prob" pos="20"
+                  line="4"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":=" pos="34" line="4"/>
+          </children>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="41" line="4"/>
+      </children>
+      <children xsi:type="CST:Node" kind="archi_elem_types">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_ELEM_TYPES" line="7"/>
+        <children xsi:type="CST:Node" kind="elem_type">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ELEM_TYPE" pos="1" line="9"/>
+          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_Type" pos="11" line="9"/>
+          <children xsi:type="CST:Node" kind="et_header">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="22" line="9"/>
+            <children xsi:type="CST:Node" kind="constant_list">
+              <children xsi:type="CST:Node" kind="constant">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="23"
+                    line="9"/>
+                <children xsi:type="CST:Node" kind="dataType">
+                  <children xsi:type="CST:Node" kind="specialType">
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="rate" pos="29"
+                        line="9"/>
+                  </children>
+                </children>
+                <children xsi:type="CST:Node" kind="constName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="msg_gen_rate" pos="34"
+                      line="9"/>
+                </children>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="46" line="9"/>
+              <children xsi:type="CST:Node" kind="constant">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="9" line="10"/>
+                <children xsi:type="CST:Node" kind="dataType">
+                  <children xsi:type="CST:Node" kind="specialType">
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="rate" pos="15"
+                        line="10"/>
+                  </children>
+                </children>
+                <children xsi:type="CST:Node" kind="constName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="timeout_rate" pos="20"
+                      line="10"/>
+                </children>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="32" line="10"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="BEHAVIOR" pos="5" line="12"/>
+          <children xsi:type="CST:Node" kind="behavior_equation_list">
+            <children xsi:type="CST:Node" kind="first_equation">
+              <children xsi:type="CST:Node" kind="eqName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0" pos="7"
+                    line="14"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="15" line="14"/>
+              <children xsi:type="CST:Node" kind="behavior_header_first">
+                <children xsi:type="CST:Node" kind="leftSide_first">
+                  <children xsi:type="CST:Node" kind="varInit">
+                    <children xsi:type="CST:Node" kind="normalType">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="boolean" pos="16"
+                          line="14"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="WORD" value="sent_bit" pos="24"
+                        line="14"/>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":=" pos="33"
+                        line="14"/>
+                    <children xsi:type="CST:Node" kind="expr">
+                      <children xsi:type="CST:Node" kind="term">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="starting_bit"
+                            pos="36" line="14"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="48" line="14"/>
+                  <children xsi:type="CST:Node" kind="varInit">
+                    <children xsi:type="CST:Node" kind="normalType">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="real" pos="50"
+                          line="14"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="WORD" value="aaa" pos="55"
+                        line="14"/>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":=" pos="59"
+                        line="14"/>
+                    <children xsi:type="CST:Node" kind="expr">
+                      <children xsi:type="CST:Node" kind="term">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="starting_bit"
+                            pos="62" line="14"/>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="74" line="14"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="11" line="15"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="15" line="15"/>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="17" line="15"/>
+              <children xsi:type="CST:Node" kind="processTerm">
+                <children xsi:type="CST:Node" kind="action">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="2"
+                      line="16"/>
+                  <children xsi:type="CST:Node" kind="actionName">
+                    <children xsi:type="CST:Leaf" kind="WORD" value="generate_msg"
+                        pos="3" line="16"/>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="15" line="16"/>
+                  <children xsi:type="CST:Node" kind="action_rate">
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="exp" pos="17"
+                        line="16"/>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="20"
+                        line="16"/>
+                    <children xsi:type="CST:Node" kind="expr">
+                      <children xsi:type="CST:Node" kind="numGenExpr">
+                        <children xsi:type="CST:Node" kind="numGenOp">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="normal"
+                              pos="21" line="16"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="27"
+                            line="16"/>
+                        <children xsi:type="CST:Node" kind="expressionList">
+                          <children xsi:type="CST:Node" kind="expr">
+                            <children xsi:type="CST:Node" kind="term">
+                              <children xsi:type="CST:Leaf" kind="WORD" value="prop_delay_mean"
+                                  pos="28" line="16"/>
+                            </children>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="43"
+                              line="16"/>
+                          <children xsi:type="CST:Node" kind="expr">
+                            <children xsi:type="CST:Node" kind="term">
+                              <children xsi:type="CST:Leaf" kind="WORD" value="prop_delay_st_dev"
+                                  pos="45" line="16"/>
+                            </children>
+                          </children>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="62"
+                            line="16"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="63"
+                        line="16"/>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="64" line="16"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="66" line="16"/>
+                <children xsi:type="CST:Node" kind="process_term_1">
+                  <children xsi:type="CST:Node" kind="processTerm">
+                    <children xsi:type="CST:Node" kind="action">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="68"
+                          line="16"/>
+                      <children xsi:type="CST:Node" kind="actionName">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_0"
+                            pos="69" line="16"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="83"
+                          line="16"/>
+                      <children xsi:type="CST:Node" kind="action_rate">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="inf" pos="85"
+                            line="16"/>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="88"
+                            line="16"/>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="90"
+                            line="16"/>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="93"
+                            line="16"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="94"
+                          line="16"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="96"
+                        line="16"/>
+                    <children xsi:type="CST:Node" kind="process_term_1">
+                      <children xsi:type="CST:Node" kind="behavEqInvocation">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0_Waiting"
+                            pos="98" line="16"/>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="114"
+                            line="16"/>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="117"
+                            line="16"/>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="118" line="16"/>
+            </children>
+            <children xsi:type="CST:Node" kind="equations_list">
+              <children xsi:type="CST:Node" kind="equations">
+                <children xsi:type="CST:Node" kind="eqName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0_Waiting"
+                      pos="7" line="18"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="23" line="18"/>
+                <children xsi:type="CST:Node" kind="behavior_header">
+                  <children xsi:type="CST:Node" kind="leftSide">
+                    <children xsi:type="CST:Node" kind="var">
+                      <children xsi:type="CST:Node" kind="normalType">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="integer"
+                            pos="24" line="18"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="WORD" value="asd" pos="32"
+                          line="18"/>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="35" line="18"/>
+                  <children xsi:type="CST:Node" kind="rightSide">
+                    <children xsi:type="CST:Node" kind="local">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="local" pos="37"
+                          line="18"/>
+                      <children xsi:type="CST:Node" kind="normalType">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="real" pos="43"
+                            line="18"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="WORD" value="blabla" pos="48"
+                          line="18"/>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="54" line="18"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="56" line="18"/>
+                <children xsi:type="CST:Node" kind="processTerm">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="choice" pos="2"
+                      line="19"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="2" line="20"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="21"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_0"
+                              pos="5" line="21"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="21"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="21"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="21"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="21"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1"
+                              pos="25" line="21"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="33"
+                              line="21"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="34"
+                              line="21"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="43" line="22"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="22"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_1"
+                              pos="5" line="22"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="22"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="22"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="22"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="22"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0_Waiting"
+                              pos="25" line="22"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="41"
+                              line="22"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="42"
+                              line="22"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="43" line="22"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="23"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="timeout"
+                              pos="5" line="23"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="12"
+                            line="23"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="exp" pos="14"
+                              line="23"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="17"
+                              line="23"/>
+                          <children xsi:type="CST:Node" kind="expr">
+                            <children xsi:type="CST:Node" kind="term">
+                              <children xsi:type="CST:Leaf" kind="WORD" value="timeout_rate"
+                                  pos="18" line="23"/>
+                            </children>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="30"
+                              line="23"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="31"
+                            line="23"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="33"
+                          line="23"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0_Retransmitting"
+                              pos="35" line="23"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="58"
+                              line="23"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="59"
+                              line="23"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="24"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="3" line="24"/>
+              </children>
+              <children xsi:type="CST:Node" kind="equations">
+                <children xsi:type="CST:Node" kind="eqName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0_Retransmitting"
+                      pos="7" line="26"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="30" line="26"/>
+                <children xsi:type="CST:Node" kind="behavior_header">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="31"
+                      line="26"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="35" line="26"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="37"
+                      line="26"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="41" line="26"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="43" line="26"/>
+                <children xsi:type="CST:Node" kind="processTerm">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="choice" pos="2"
+                      line="27"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="2" line="28"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="29"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_0"
+                              pos="5" line="29"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="19"
+                            line="29"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="inf" pos="21"
+                              line="29"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="24"
+                            line="29"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="26"
+                          line="29"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0_Waiting"
+                              pos="28" line="29"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="44"
+                              line="29"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="45"
+                              line="29"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="35" line="30"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="30"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_0"
+                              pos="5" line="30"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="30"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="30"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="30"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="30"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1"
+                              pos="25" line="30"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="33"
+                              line="30"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="34"
+                              line="30"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="35" line="30"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="11"
+                            line="31"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_1"
+                              pos="12" line="31"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="25"
+                            line="31"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="27"
+                              line="31"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="28"
+                            line="31"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="30"
+                          line="31"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0_Retransmitting"
+                              pos="32" line="31"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="55"
+                              line="31"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="56"
+                              line="31"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="32"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="3" line="32"/>
+              </children>
+              <children xsi:type="CST:Node" kind="equations">
+                <children xsi:type="CST:Node" kind="eqName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1" pos="7"
+                      line="34"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="15" line="34"/>
+                <children xsi:type="CST:Node" kind="behavior_header">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="16"
+                      line="34"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="20" line="34"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="22"
+                      line="34"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="26" line="34"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="28" line="34"/>
+                <children xsi:type="CST:Node" kind="processTerm">
+                  <children xsi:type="CST:Node" kind="action">
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="2"
+                        line="35"/>
+                    <children xsi:type="CST:Node" kind="actionName">
+                      <children xsi:type="CST:Leaf" kind="WORD" value="generate_msg"
+                          pos="3" line="35"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="15"
+                        line="35"/>
+                    <children xsi:type="CST:Node" kind="action_rate">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="exp" pos="17"
+                          line="35"/>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="20"
+                          line="35"/>
+                      <children xsi:type="CST:Node" kind="expr">
+                        <children xsi:type="CST:Node" kind="term">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="msg_gen_rate"
+                              pos="21" line="35"/>
+                        </children>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="33"
+                          line="35"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="34"
+                        line="35"/>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="36" line="35"/>
+                  <children xsi:type="CST:Node" kind="process_term_1">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="38"
+                            line="35"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_1"
+                              pos="39" line="35"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="53"
+                            line="35"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="inf" pos="54"
+                              line="35"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="57"
+                            line="35"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="59"
+                          line="35"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1_Waiting"
+                              pos="61" line="35"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="77"
+                              line="35"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="78"
+                              line="35"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="79" line="35"/>
+              </children>
+              <children xsi:type="CST:Node" kind="equations">
+                <children xsi:type="CST:Node" kind="eqName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1_Waiting"
+                      pos="7" line="37"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="23" line="37"/>
+                <children xsi:type="CST:Node" kind="behavior_header">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="24"
+                      line="37"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="28" line="37"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="30"
+                      line="37"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="34" line="37"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="36" line="37"/>
+                <children xsi:type="CST:Node" kind="processTerm">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="choice" pos="2"
+                      line="38"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="2" line="39"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="40"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_1"
+                              pos="5" line="40"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="40"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="40"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="40"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="40"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0"
+                              pos="25" line="40"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="33"
+                              line="40"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="34"
+                              line="40"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="43" line="41"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="41"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_0"
+                              pos="5" line="41"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="41"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="41"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="41"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="41"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1_Waiting"
+                              pos="25" line="41"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="41"
+                              line="41"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="42"
+                              line="41"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="43" line="41"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="42"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="timeout"
+                              pos="5" line="42"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="12"
+                            line="42"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="exp" pos="14"
+                              line="42"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="17"
+                              line="42"/>
+                          <children xsi:type="CST:Node" kind="expr">
+                            <children xsi:type="CST:Node" kind="term">
+                              <children xsi:type="CST:Leaf" kind="WORD" value="timeout_rate"
+                                  pos="18" line="42"/>
+                            </children>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="30"
+                              line="42"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="31"
+                            line="42"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="33"
+                          line="42"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1_Retransmitting"
+                              pos="35" line="42"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="58"
+                              line="42"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="59"
+                              line="42"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="43"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="3" line="43"/>
+              </children>
+              <children xsi:type="CST:Node" kind="equations">
+                <children xsi:type="CST:Node" kind="eqName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1_Retransmitting"
+                      pos="7" line="45"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="30" line="45"/>
+                <children xsi:type="CST:Node" kind="behavior_header">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="31"
+                      line="45"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="35" line="45"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="37"
+                      line="45"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="41" line="45"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="43" line="45"/>
+                <children xsi:type="CST:Node" kind="processTerm">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="choice" pos="2"
+                      line="46"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="2" line="47"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="48"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_1"
+                              pos="5" line="48"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="19"
+                            line="48"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="inf" pos="21"
+                              line="48"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="24"
+                            line="48"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="26"
+                          line="48"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1_Waiting"
+                              pos="28" line="48"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="44"
+                              line="48"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="45"
+                              line="48"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="35" line="49"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="49"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_1"
+                              pos="5" line="49"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="49"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="49"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="49"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="49"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_0"
+                              pos="25" line="49"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="33"
+                              line="49"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="34"
+                              line="49"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="35" line="49"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="11"
+                            line="50"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_0"
+                              pos="12" line="50"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="25"
+                            line="50"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="27"
+                              line="50"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="28"
+                            line="50"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="30"
+                          line="50"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="behavEqInvocation">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="Sender_1_Retransmitting"
+                              pos="32" line="50"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="55"
+                              line="50"/>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="56"
+                              line="50"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="51"/>
+                </children>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="INPUT_INTERACTIONS" pos="5"
+              line="53"/>
+          <children xsi:type="CST:Node" kind="interaction_list_input">
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="OR" pos="7" line="55"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="generate_msg" pos="10"
+                    line="55"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="23" line="56"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="OR" pos="7" line="56"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_0" pos="10"
+                    line="56"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="23" line="56"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="7" line="57"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_1" pos="11"
+                    line="57"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="OUTPUT_INTERACTIONS" pos="5"
+              line="59"/>
+          <children xsi:type="CST:Node" kind="interaction_list_output">
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="7" line="61"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_0" pos="11"
+                    line="61"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="25" line="61"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="7" line="62"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_1" pos="11"
+                    line="62"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="elem_type">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ELEM_TYPE" pos="1" line="65"/>
+          <children xsi:type="CST:Leaf" kind="WORD" value="Line_Type" pos="11" line="65"/>
+          <children xsi:type="CST:Node" kind="et_header">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="20" line="65"/>
+            <children xsi:type="CST:Node" kind="constant_list">
+              <children xsi:type="CST:Node" kind="constant">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="21"
+                    line="65"/>
+                <children xsi:type="CST:Node" kind="dataType">
+                  <children xsi:type="CST:Node" kind="specialType">
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="rate" pos="27"
+                        line="65"/>
+                  </children>
+                </children>
+                <children xsi:type="CST:Node" kind="constName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="prop_rate" pos="34"
+                      line="65"/>
+                </children>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="43" line="65"/>
+              <children xsi:type="CST:Node" kind="constant">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="const" pos="7" line="66"/>
+                <children xsi:type="CST:Node" kind="dataType">
+                  <children xsi:type="CST:Node" kind="specialType">
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="weight" pos="13"
+                        line="66"/>
+                  </children>
+                </children>
+                <children xsi:type="CST:Node" kind="constName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="delivery_prob"
+                      pos="20" line="66"/>
+                </children>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="33" line="66"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="BEHAVIOR" pos="5" line="68"/>
+          <children xsi:type="CST:Node" kind="behavior_equation_list">
+            <children xsi:type="CST:Node" kind="first_equation">
+              <children xsi:type="CST:Node" kind="eqName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="Line" pos="7" line="70"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="11" line="70"/>
+              <children xsi:type="CST:Node" kind="behavior_header_first">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="12" line="70"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="16" line="70"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="18" line="70"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="22" line="70"/>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="24" line="70"/>
+              <children xsi:type="CST:Node" kind="processTerm">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="choice" pos="2"
+                    line="71"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="2" line="72"/>
+                <children xsi:type="CST:Node" kind="process_term_2">
+                  <children xsi:type="CST:Node" kind="processTerm">
+                    <children xsi:type="CST:Node" kind="action">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                          line="73"/>
+                      <children xsi:type="CST:Node" kind="actionName">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="receive_0"
+                            pos="5" line="73"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="14"
+                          line="73"/>
+                      <children xsi:type="CST:Node" kind="action_rate">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="16"
+                            line="73"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="17"
+                          line="73"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="19"
+                        line="73"/>
+                    <children xsi:type="CST:Node" kind="process_term_1">
+                      <children xsi:type="CST:Node" kind="processTerm">
+                        <children xsi:type="CST:Node" kind="action">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                              pos="21" line="73"/>
+                          <children xsi:type="CST:Node" kind="actionName">
+                            <children xsi:type="CST:Leaf" kind="WORD" value="propagate_0"
+                                pos="22" line="73"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="33"
+                              line="73"/>
+                          <children xsi:type="CST:Node" kind="action_rate">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="exp"
+                                pos="35" line="73"/>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="38"
+                                line="73"/>
+                            <children xsi:type="CST:Node" kind="expr">
+                              <children xsi:type="CST:Node" kind="term">
+                                <children xsi:type="CST:Leaf" kind="WORD" value="prop_rate"
+                                    pos="39" line="73"/>
+                              </children>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="48"
+                                line="73"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="49"
+                              line="73"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="51"
+                            line="73"/>
+                        <children xsi:type="CST:Node" kind="process_term_1">
+                          <children xsi:type="CST:Node" kind="processTerm">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="choice"
+                                pos="6" line="74"/>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="6"
+                                line="75"/>
+                            <children xsi:type="CST:Node" kind="process_term_2">
+                              <children xsi:type="CST:Node" kind="processTerm">
+                                <children xsi:type="CST:Node" kind="action">
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                      pos="8" line="76"/>
+                                  <children xsi:type="CST:Node" kind="actionName">
+                                    <children xsi:type="CST:Leaf" kind="WORD" value="keep_0"
+                                        pos="9" line="76"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                      pos="15" line="76"/>
+                                  <children xsi:type="CST:Node" kind="action_rate">
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                        pos="17" line="76"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                        pos="20" line="76"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                        pos="22" line="76"/>
+                                    <children xsi:type="CST:Node" kind="expr">
+                                      <children xsi:type="CST:Node" kind="term">
+                                        <children xsi:type="CST:Leaf" kind="WORD"
+                                            value="delivery_prob" pos="24" line="76"/>
+                                      </children>
+                                    </children>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                        pos="37" line="76"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                      pos="38" line="76"/>
+                                </children>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value="."
+                                    pos="40" line="76"/>
+                                <children xsi:type="CST:Node" kind="process_term_1">
+                                  <children xsi:type="CST:Node" kind="processTerm">
+                                    <children xsi:type="CST:Node" kind="action">
+                                      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                          pos="42" line="76"/>
+                                      <children xsi:type="CST:Node" kind="actionName">
+                                        <children xsi:type="CST:Leaf" kind="WORD"
+                                            value="deliver_0" pos="43" line="76"/>
+                                      </children>
+                                      <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                          pos="52" line="76"/>
+                                      <children xsi:type="CST:Node" kind="action_rate">
+                                        <children xsi:type="CST:Leaf" kind="TOKEN"
+                                            value="inf" pos="54" line="76"/>
+                                      </children>
+                                      <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                          pos="57" line="76"/>
+                                    </children>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="."
+                                        pos="59" line="76"/>
+                                    <children xsi:type="CST:Node" kind="process_term_1">
+                                      <children xsi:type="CST:Node" kind="behavEqInvocation">
+                                        <children xsi:type="CST:Leaf" kind="WORD"
+                                            value="Line" pos="61" line="76"/>
+                                        <children xsi:type="CST:Leaf" kind="TOKEN"
+                                            value="(" pos="65" line="76"/>
+                                        <children xsi:type="CST:Leaf" kind="TOKEN"
+                                            value=")" pos="66" line="76"/>
+                                      </children>
+                                    </children>
+                                  </children>
+                                </children>
+                              </children>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="67"
+                                line="76"/>
+                            <children xsi:type="CST:Node" kind="process_term_2">
+                              <children xsi:type="CST:Node" kind="processTerm">
+                                <children xsi:type="CST:Node" kind="action">
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                      pos="8" line="77"/>
+                                  <children xsi:type="CST:Node" kind="actionName">
+                                    <children xsi:type="CST:Leaf" kind="WORD" value="lose_0"
+                                        pos="9" line="77"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                      pos="15" line="77"/>
+                                  <children xsi:type="CST:Node" kind="action_rate">
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                        pos="17" line="77"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                        pos="20" line="77"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                        pos="22" line="77"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                        pos="41" line="77"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                      pos="42" line="77"/>
+                                </children>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value="."
+                                    pos="44" line="77"/>
+                                <children xsi:type="CST:Node" kind="process_term_1">
+                                  <children xsi:type="CST:Node" kind="behavEqInvocation">
+                                    <children xsi:type="CST:Leaf" kind="WORD" value="Line"
+                                        pos="46" line="77"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                        pos="50" line="77"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                        pos="51" line="77"/>
+                                  </children>
+                                </children>
+                              </children>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="6"
+                                line="78"/>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="7" line="78"/>
+                <children xsi:type="CST:Node" kind="process_term_2">
+                  <children xsi:type="CST:Node" kind="processTerm">
+                    <children xsi:type="CST:Node" kind="action">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                          line="79"/>
+                      <children xsi:type="CST:Node" kind="actionName">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="receive_1"
+                            pos="5" line="79"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="14"
+                          line="79"/>
+                      <children xsi:type="CST:Node" kind="action_rate">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="16"
+                            line="79"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="17"
+                          line="79"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="19"
+                        line="79"/>
+                    <children xsi:type="CST:Node" kind="process_term_1">
+                      <children xsi:type="CST:Node" kind="processTerm">
+                        <children xsi:type="CST:Node" kind="action">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                              pos="21" line="79"/>
+                          <children xsi:type="CST:Node" kind="actionName">
+                            <children xsi:type="CST:Leaf" kind="WORD" value="propagate_1"
+                                pos="22" line="79"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="33"
+                              line="79"/>
+                          <children xsi:type="CST:Node" kind="action_rate">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="exp"
+                                pos="35" line="79"/>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="38"
+                                line="79"/>
+                            <children xsi:type="CST:Node" kind="expr">
+                              <children xsi:type="CST:Node" kind="term">
+                                <children xsi:type="CST:Leaf" kind="WORD" value="prop_rate"
+                                    pos="39" line="79"/>
+                              </children>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="48"
+                                line="79"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="49"
+                              line="79"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="51"
+                            line="79"/>
+                        <children xsi:type="CST:Node" kind="process_term_1">
+                          <children xsi:type="CST:Node" kind="processTerm">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="choice"
+                                pos="6" line="80"/>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="6"
+                                line="81"/>
+                            <children xsi:type="CST:Node" kind="process_term_2">
+                              <children xsi:type="CST:Node" kind="processTerm">
+                                <children xsi:type="CST:Node" kind="action">
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                      pos="8" line="82"/>
+                                  <children xsi:type="CST:Node" kind="actionName">
+                                    <children xsi:type="CST:Leaf" kind="WORD" value="keep_1"
+                                        pos="9" line="82"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                      pos="15" line="82"/>
+                                  <children xsi:type="CST:Node" kind="action_rate">
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                        pos="17" line="82"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                        pos="20" line="82"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                        pos="22" line="82"/>
+                                    <children xsi:type="CST:Node" kind="expr">
+                                      <children xsi:type="CST:Node" kind="term">
+                                        <children xsi:type="CST:Leaf" kind="WORD"
+                                            value="delivery_prob" pos="24" line="82"/>
+                                      </children>
+                                    </children>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                        pos="37" line="82"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                      pos="38" line="82"/>
+                                </children>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value="."
+                                    pos="40" line="82"/>
+                                <children xsi:type="CST:Node" kind="process_term_1">
+                                  <children xsi:type="CST:Node" kind="processTerm">
+                                    <children xsi:type="CST:Node" kind="action">
+                                      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                          pos="42" line="82"/>
+                                      <children xsi:type="CST:Node" kind="actionName">
+                                        <children xsi:type="CST:Leaf" kind="WORD"
+                                            value="deliver_1" pos="43" line="82"/>
+                                      </children>
+                                      <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                          pos="52" line="82"/>
+                                      <children xsi:type="CST:Node" kind="action_rate">
+                                        <children xsi:type="CST:Leaf" kind="TOKEN"
+                                            value="inf" pos="54" line="82"/>
+                                      </children>
+                                      <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                          pos="57" line="82"/>
+                                    </children>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="."
+                                        pos="59" line="82"/>
+                                    <children xsi:type="CST:Node" kind="process_term_1">
+                                      <children xsi:type="CST:Node" kind="behavEqInvocation">
+                                        <children xsi:type="CST:Leaf" kind="WORD"
+                                            value="Line" pos="61" line="82"/>
+                                        <children xsi:type="CST:Leaf" kind="TOKEN"
+                                            value="(" pos="65" line="82"/>
+                                        <children xsi:type="CST:Leaf" kind="TOKEN"
+                                            value=")" pos="66" line="82"/>
+                                      </children>
+                                    </children>
+                                  </children>
+                                </children>
+                              </children>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="67"
+                                line="82"/>
+                            <children xsi:type="CST:Node" kind="process_term_2">
+                              <children xsi:type="CST:Node" kind="processTerm">
+                                <children xsi:type="CST:Node" kind="action">
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                      pos="8" line="83"/>
+                                  <children xsi:type="CST:Node" kind="actionName">
+                                    <children xsi:type="CST:Leaf" kind="WORD" value="lose_1"
+                                        pos="9" line="83"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                      pos="15" line="83"/>
+                                  <children xsi:type="CST:Node" kind="action_rate">
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                        pos="17" line="83"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                        pos="20" line="83"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                        pos="22" line="83"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                        pos="41" line="83"/>
+                                  </children>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                      pos="42" line="83"/>
+                                </children>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value="."
+                                    pos="44" line="83"/>
+                                <children xsi:type="CST:Node" kind="process_term_1">
+                                  <children xsi:type="CST:Node" kind="behavEqInvocation">
+                                    <children xsi:type="CST:Leaf" kind="WORD" value="Line"
+                                        pos="46" line="83"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                        pos="50" line="83"/>
+                                    <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                        pos="51" line="83"/>
+                                  </children>
+                                </children>
+                              </children>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="6"
+                                line="84"/>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="85"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Node" kind="equations_list"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="INPUT_INTERACTIONS" pos="5"
+              line="87"/>
+          <children xsi:type="CST:Node" kind="interaction_list_input">
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="8" line="89"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_0" pos="12"
+                    line="89"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="21" line="89"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="4" line="90"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_1" pos="8"
+                    line="90"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="OUTPUT_INTERACTIONS" pos="5"
+              line="92"/>
+          <children xsi:type="CST:Node" kind="interaction_list_output">
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="8" line="94"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="deliver_0" pos="12"
+                    line="94"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="21" line="94"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="4" line="95"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="deliver_1" pos="8"
+                    line="95"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="elem_type">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ELEM_TYPE" pos="1" line="98"/>
+          <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_Type" pos="11"
+              line="98"/>
+          <children xsi:type="CST:Node" kind="et_header">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="24" line="98"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="25" line="98"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="29" line="98"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="BEHAVIOR" pos="5" line="100"/>
+          <children xsi:type="CST:Node" kind="behavior_equation_list">
+            <children xsi:type="CST:Node" kind="first_equation">
+              <children xsi:type="CST:Node" kind="eqName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_0" pos="7"
+                    line="102"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="17" line="102"/>
+              <children xsi:type="CST:Node" kind="behavior_header_first">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="18" line="102"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="22" line="102"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="24" line="102"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="28" line="102"/>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="30" line="102"/>
+              <children xsi:type="CST:Node" kind="processTerm">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="choice" pos="2"
+                    line="103"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="2" line="104"/>
+                <children xsi:type="CST:Node" kind="process_term_2">
+                  <children xsi:type="CST:Node" kind="processTerm">
+                    <children xsi:type="CST:Node" kind="action">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                          line="105"/>
+                      <children xsi:type="CST:Node" kind="actionName">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_0"
+                            pos="5" line="105"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                          line="105"/>
+                      <children xsi:type="CST:Node" kind="action_rate">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                            line="105"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                          line="105"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                        line="105"/>
+                    <children xsi:type="CST:Node" kind="process_term_1">
+                      <children xsi:type="CST:Node" kind="processTerm">
+                        <children xsi:type="CST:Node" kind="action">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                              pos="25" line="105"/>
+                          <children xsi:type="CST:Node" kind="actionName">
+                            <children xsi:type="CST:Leaf" kind="WORD" value="consume_msg"
+                                pos="26" line="105"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="37"
+                              line="105"/>
+                          <children xsi:type="CST:Node" kind="action_rate">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                pos="39" line="105"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="42"
+                              line="105"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="44"
+                            line="105"/>
+                        <children xsi:type="CST:Node" kind="process_term_1">
+                          <children xsi:type="CST:Node" kind="processTerm">
+                            <children xsi:type="CST:Node" kind="action">
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                  pos="50" line="105"/>
+                              <children xsi:type="CST:Node" kind="actionName">
+                                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_0"
+                                    pos="51" line="105"/>
+                              </children>
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                  pos="65" line="105"/>
+                              <children xsi:type="CST:Node" kind="action_rate">
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                    pos="67" line="105"/>
+                              </children>
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                  pos="70" line="105"/>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="72"
+                                line="105"/>
+                            <children xsi:type="CST:Node" kind="process_term_1">
+                              <children xsi:type="CST:Node" kind="behavEqInvocation">
+                                <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_1"
+                                    pos="74" line="105"/>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                    pos="84" line="105"/>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                    pos="85" line="105"/>
+                              </children>
+                            </children>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="86" line="105"/>
+                <children xsi:type="CST:Node" kind="process_term_2">
+                  <children xsi:type="CST:Node" kind="processTerm">
+                    <children xsi:type="CST:Node" kind="action">
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                          line="106"/>
+                      <children xsi:type="CST:Node" kind="actionName">
+                        <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_1"
+                            pos="5" line="106"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                          line="106"/>
+                      <children xsi:type="CST:Node" kind="action_rate">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                            line="106"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                          line="106"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                        line="106"/>
+                    <children xsi:type="CST:Node" kind="process_term_1">
+                      <children xsi:type="CST:Node" kind="processTerm">
+                        <children xsi:type="CST:Node" kind="action">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                              pos="25" line="106"/>
+                          <children xsi:type="CST:Node" kind="actionName">
+                            <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_1"
+                                pos="26" line="106"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="40"
+                              line="106"/>
+                          <children xsi:type="CST:Node" kind="action_rate">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                pos="42" line="106"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="45"
+                              line="106"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="47"
+                            line="106"/>
+                        <children xsi:type="CST:Node" kind="process_term_1">
+                          <children xsi:type="CST:Node" kind="behavEqInvocation">
+                            <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_0"
+                                pos="53" line="106"/>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="63"
+                                line="106"/>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="64"
+                                line="106"/>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="107"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="3" line="107"/>
+            </children>
+            <children xsi:type="CST:Node" kind="equations_list">
+              <children xsi:type="CST:Node" kind="equations">
+                <children xsi:type="CST:Node" kind="eqName">
+                  <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_1" pos="7"
+                      line="109"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="17" line="109"/>
+                <children xsi:type="CST:Node" kind="behavior_header">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="18"
+                      line="109"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="22" line="109"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="24"
+                      line="109"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="28" line="109"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="30" line="109"/>
+                <children xsi:type="CST:Node" kind="processTerm">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="choice" pos="2"
+                      line="110"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="2" line="111"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="112"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_1"
+                              pos="5" line="112"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="112"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="112"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="112"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="112"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="processTerm">
+                          <children xsi:type="CST:Node" kind="action">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                pos="25" line="112"/>
+                            <children xsi:type="CST:Node" kind="actionName">
+                              <children xsi:type="CST:Leaf" kind="WORD" value="consume_msg"
+                                  pos="26" line="112"/>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="37"
+                                line="112"/>
+                            <children xsi:type="CST:Node" kind="action_rate">
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                  pos="39" line="112"/>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="42"
+                                line="112"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="44"
+                              line="112"/>
+                          <children xsi:type="CST:Node" kind="process_term_1">
+                            <children xsi:type="CST:Node" kind="processTerm">
+                              <children xsi:type="CST:Node" kind="action">
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                    pos="46" line="112"/>
+                                <children xsi:type="CST:Node" kind="actionName">
+                                  <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_1"
+                                      pos="47" line="112"/>
+                                </children>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value=","
+                                    pos="61" line="112"/>
+                                <children xsi:type="CST:Node" kind="action_rate">
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                      pos="63" line="112"/>
+                                </children>
+                                <children xsi:type="CST:Leaf" kind="TOKEN" value=">"
+                                    pos="66" line="112"/>
+                              </children>
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value="."
+                                  pos="68" line="112"/>
+                              <children xsi:type="CST:Node" kind="process_term_1">
+                                <children xsi:type="CST:Node" kind="behavEqInvocation">
+                                  <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_0"
+                                      pos="70" line="112"/>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                      pos="80" line="112"/>
+                                  <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                      pos="81" line="112"/>
+                                </children>
+                              </children>
+                            </children>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="82" line="112"/>
+                  <children xsi:type="CST:Node" kind="process_term_2">
+                    <children xsi:type="CST:Node" kind="processTerm">
+                      <children xsi:type="CST:Node" kind="action">
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;" pos="4"
+                            line="113"/>
+                        <children xsi:type="CST:Node" kind="actionName">
+                          <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_0"
+                              pos="5" line="113"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="18"
+                            line="113"/>
+                        <children xsi:type="CST:Node" kind="action_rate">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="_" pos="20"
+                              line="113"/>
+                        </children>
+                        <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="21"
+                            line="113"/>
+                      </children>
+                      <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="23"
+                          line="113"/>
+                      <children xsi:type="CST:Node" kind="process_term_1">
+                        <children xsi:type="CST:Node" kind="processTerm">
+                          <children xsi:type="CST:Node" kind="action">
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="&lt;"
+                                pos="25" line="113"/>
+                            <children xsi:type="CST:Node" kind="actionName">
+                              <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_0"
+                                  pos="26" line="113"/>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="40"
+                                line="113"/>
+                            <children xsi:type="CST:Node" kind="action_rate">
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value="inf"
+                                  pos="42" line="113"/>
+                            </children>
+                            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="45"
+                                line="113"/>
+                          </children>
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="47"
+                              line="113"/>
+                          <children xsi:type="CST:Node" kind="process_term_1">
+                            <children xsi:type="CST:Node" kind="behavEqInvocation">
+                              <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_1"
+                                  pos="48" line="113"/>
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value="("
+                                  pos="58" line="113"/>
+                              <children xsi:type="CST:Leaf" kind="TOKEN" value=")"
+                                  pos="59" line="113"/>
+                            </children>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="114"/>
+                </children>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="INPUT_INTERACTIONS" pos="5"
+              line="116"/>
+          <children xsi:type="CST:Node" kind="interaction_list_input">
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="7" line="118"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_0" pos="11"
+                    line="118"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="118"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="4" line="119"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_1" pos="8"
+                    line="119"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="OUTPUT_INTERACTIONS" pos="5"
+              line="121"/>
+          <children xsi:type="CST:Node" kind="interaction_list_output">
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="7" line="123"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="consume_msg" pos="11"
+                    line="123"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="22" line="124"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="4" line="124"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_0" pos="8"
+                    line="124"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="22" line="124"/>
+            <children xsi:type="CST:Node" kind="interaction">
+              <children xsi:type="CST:Node" kind="interaction_type">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="UNI" pos="4" line="125"/>
+              </children>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_1" pos="8"
+                    line="125"/>
+              </children>
+            </children>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="archi_topology">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_TOPOLOGY" line="128"/>
+        <children xsi:type="CST:Node" kind="archi_elem_instances">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_ELEM_INSTANCES"
+              pos="1" line="131"/>
+          <children xsi:type="CST:Node" kind="instances">
+            <children xsi:type="CST:Node" kind="istanceName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="S" pos="3" line="133"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="6" line="133"/>
+            <children xsi:type="CST:Node" kind="elementType">
+              <children xsi:type="CST:Leaf" kind="WORD" value="Sender_Type" pos="8"
+                  line="133"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="19" line="133"/>
+            <children xsi:type="CST:Node" kind="parList">
+              <children xsi:type="CST:Leaf" kind="WORD" value="msg_gen_rate" pos="20"
+                  line="133"/>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="32" line="133"/>
+              <children xsi:type="CST:Leaf" kind="WORD" value="timeout_rate" pos="6"
+                  line="134"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="18" line="134"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="19" line="134"/>
+          </children>
+          <children xsi:type="CST:Node" kind="instances">
+            <children xsi:type="CST:Node" kind="istanceName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="LM" pos="3" line="135"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="6" line="135"/>
+            <children xsi:type="CST:Node" kind="elementType">
+              <children xsi:type="CST:Leaf" kind="WORD" value="Line_Type" pos="8"
+                  line="135"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="17" line="135"/>
+            <children xsi:type="CST:Node" kind="parList">
+              <children xsi:type="CST:Leaf" kind="WORD" value="prop_rate" pos="18"
+                  line="135"/>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="27" line="135"/>
+              <children xsi:type="CST:Leaf" kind="WORD" value="delivery_prob" pos="4"
+                  line="136"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="17" line="136"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="18" line="136"/>
+          </children>
+          <children xsi:type="CST:Node" kind="instances">
+            <children xsi:type="CST:Node" kind="istanceName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="LA" pos="3" line="137"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="6" line="137"/>
+            <children xsi:type="CST:Node" kind="elementType">
+              <children xsi:type="CST:Leaf" kind="WORD" value="Line_Type" pos="8"
+                  line="137"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="17" line="137"/>
+            <children xsi:type="CST:Node" kind="parList">
+              <children xsi:type="CST:Leaf" kind="WORD" value="prop_rate" pos="18"
+                  line="137"/>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="27" line="137"/>
+              <children xsi:type="CST:Leaf" kind="WORD" value="delivery_prob" pos="4"
+                  line="138"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="17" line="138"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="18" line="138"/>
+          </children>
+          <children xsi:type="CST:Node" kind="instances">
+            <children xsi:type="CST:Node" kind="istanceName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="R" pos="3" line="139"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="6" line="139"/>
+            <children xsi:type="CST:Node" kind="elementType">
+              <children xsi:type="CST:Leaf" kind="WORD" value="Receiver_Type" pos="8"
+                  line="139"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="21" line="139"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="22" line="139"/>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="archi_interactions">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_INTERACTIONS" pos="1"
+              line="142"/>
+          <children xsi:type="CST:Node" kind="archi_interaction_list">
+            <children xsi:type="CST:Node" kind="archi_interaction">
+              <children xsi:type="CST:Node" kind="istanceName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="S" pos="3" line="144"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="4" line="144"/>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="generate_msg" pos="5"
+                    line="144"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="17" line="144"/>
+            <children xsi:type="CST:Node" kind="archi_interaction">
+              <children xsi:type="CST:Node" kind="istanceName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="R" pos="3" line="145"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="4" line="145"/>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="consume_msg" pos="5"
+                    line="145"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="archi_attachments">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_ATTACHMENTS" pos="1"
+              line="148"/>
+          <children xsi:type="CST:Node" kind="attachment_list">
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="150"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="S" pos="8" line="150"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="9" line="150"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_0" pos="10"
+                    line="150"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="150"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LM" pos="28" line="150"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="30" line="150"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_0" pos="31"
+                    line="150"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="43" line="156"/>
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="151"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="S" pos="8" line="151"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="9" line="151"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_msg_1" pos="10"
+                    line="151"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="151"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LM" pos="28" line="151"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="30" line="151"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_1" pos="31"
+                    line="151"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="43" line="156"/>
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="152"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LM" pos="8" line="152"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="10" line="152"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="deliver_0" pos="11"
+                    line="152"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="152"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="R" pos="28" line="152"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="29" line="152"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_0" pos="30"
+                    line="152"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="43" line="156"/>
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="153"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LM" pos="8" line="153"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="10" line="153"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="deliver_1" pos="11"
+                    line="153"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="153"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="R" pos="28" line="153"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="29" line="153"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_msg_1" pos="30"
+                    line="153"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="43" line="156"/>
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="154"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="R" pos="8" line="154"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="9" line="154"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_0" pos="10"
+                    line="154"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="154"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LA" pos="28" line="154"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="30" line="154"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_0" pos="31"
+                    line="154"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="43" line="156"/>
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="155"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="R" pos="8" line="155"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="9" line="155"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="transmit_ack_1" pos="10"
+                    line="155"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="155"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LA" pos="28" line="155"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="30" line="155"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_1" pos="31"
+                    line="155"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="43" line="156"/>
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="156"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LA" pos="8" line="156"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="10" line="156"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="deliver_0" pos="11"
+                    line="156"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="156"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="S" pos="28" line="156"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="29" line="156"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_0" pos="30"
+                    line="156"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="43" line="156"/>
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="3" line="157"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="LA" pos="8" line="157"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="10" line="157"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="deliver_1" pos="11"
+                    line="157"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="25" line="157"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="S" pos="28" line="157"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="29" line="157"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="receive_ack_1" pos="30"
+                    line="157"/>
+              </children>
+            </children>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="END" line="159"/>
+    </children>
+  </children>
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.sandbox/files/src/scripts/exampleMINE.txt"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="exampleMINE.txt"/>
+    <children xsi:type="CST:Node" kind="archi_type">
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_TYPE" line="1"/>
+      <children xsi:type="CST:Leaf" kind="WORD" value="a" pos="2" line="2"/>
+      <children xsi:type="CST:Node" kind="archi_header">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="4" line="2"/>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="5" line="2"/>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="9" line="2"/>
+      </children>
+      <children xsi:type="CST:Node" kind="archi_elem_types">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_ELEM_TYPES" pos="2"
+            line="3"/>
+        <children xsi:type="CST:Node" kind="elem_type">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ELEM_TYPE" pos="4" line="4"/>
+          <children xsi:type="CST:Leaf" kind="WORD" value="b" pos="6" line="5"/>
+          <children xsi:type="CST:Node" kind="et_header">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="8" line="5"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="9" line="5"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="13" line="5"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="BEHAVIOR" pos="4" line="6"/>
+          <children xsi:type="CST:Node" kind="behavior_equation_list">
+            <children xsi:type="CST:Node" kind="first_equation">
+              <children xsi:type="CST:Node" kind="eqName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="aa" pos="6" line="7"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="9" line="7"/>
+              <children xsi:type="CST:Node" kind="behavior_header_first">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="10" line="7"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="15" line="7"/>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="17" line="7"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="21" line="7"/>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="23" line="7"/>
+              <children xsi:type="CST:Node" kind="processTerm">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="stop" pos="25" line="7"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="29" line="7"/>
+            </children>
+            <children xsi:type="CST:Node" kind="equations_list"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="INPUT_INTERACTIONS" pos="4"
+              line="8"/>
+          <children xsi:type="CST:Node" kind="interaction_list_input">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="6" line="9"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="OUTPUT_INTERACTIONS" pos="4"
+              line="10"/>
+          <children xsi:type="CST:Node" kind="interaction_list_output">
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="void" pos="6" line="11"/>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="archi_topology">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_TOPOLOGY" pos="2"
+            line="12"/>
+        <children xsi:type="CST:Node" kind="archi_elem_instances">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_ELEM_INSTANCES"
+              pos="4" line="13"/>
+          <children xsi:type="CST:Node" kind="instances">
+            <children xsi:type="CST:Node" kind="istanceName">
+              <children xsi:type="CST:Leaf" kind="WORD" value="c" pos="6" line="14"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="8" line="14"/>
+            <children xsi:type="CST:Node" kind="elementType">
+              <children xsi:type="CST:Leaf" kind="WORD" value="d" pos="10" line="14"/>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="12" line="14"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="13" line="14"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="14" line="14"/>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="archi_interactions">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_INTERACTIONS" pos="4"
+              line="15"/>
+          <children xsi:type="CST:Node" kind="archi_interaction_list">
+            <children xsi:type="CST:Node" kind="archi_interaction">
+              <children xsi:type="CST:Node" kind="istanceName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="e" pos="6" line="16"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="8" line="16"/>
+              <children xsi:type="CST:Node" kind="interactionName">
+                <children xsi:type="CST:Leaf" kind="WORD" value="f" pos="10" line="16"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="archi_attachments">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="ARCHI_ATTACHMENTS" pos="4"
+              line="17"/>
+          <children xsi:type="CST:Node" kind="attachment_list">
+            <children xsi:type="CST:Node" kind="attachment">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="FROM" pos="6" line="18"/>
+              <children xsi:type="CST:Node" kind="istanceNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="e" pos="11" line="18"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="13" line="18"/>
+              <children xsi:type="CST:Node" kind="interactionNameFrom">
+                <children xsi:type="CST:Leaf" kind="WORD" value="f" pos="15" line="18"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="TO" pos="17" line="18"/>
+              <children xsi:type="CST:Node" kind="istanceNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="g" pos="20" line="18"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="22" line="18"/>
+              <children xsi:type="CST:Node" kind="interactionNameTo">
+                <children xsi:type="CST:Leaf" kind="WORD" value="h" pos="24" line="18"/>
+              </children>
+            </children>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="END" line="19"/>
+    </children>
+  </children>
+</CST:Node>

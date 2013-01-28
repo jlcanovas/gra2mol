@@ -1,0 +1,15 @@
+<kdm:Segment xmlns:platform='http://www.eclipse.org/MoDisco/kdm/platform' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.eclipse.org/MoDisco/kdm/platform files/metamodels/kdm.ecore#//platform http://www.eclipse.org/MoDisco/kdm/kdm files/metamodels/kdm.ecore#//kdm' xmi:version='2.0' xmlns:xmi='http://www.omg.org/XMI' xmlns:kdm='http://www.eclipse.org/MoDisco/kdm/kdm'>
+<model xsi:type='platform:PlatformModel'>
+<platformElement name='PlatformStrutsExtension' xsi:type='kdm:ExtensionFamily'>
+<stereotype name='ActionServlet' xsi:type='kdm:Stereotype'/>
+<stereotype name='ActionForm' xsi:type='kdm:Stereotype'/>
+<stereotype name='Action' xsi:type='kdm:Stereotype'/>
+</platformElement>
+<platformElement stereotype='#//@model.0/@platformElement.0/@stereotype.0' name='ActionServlet' xsi:type='platform:ResourceType'/>
+<platformElement name='ActionForward' xsi:type='platform:ResourceType'/>
+<platformElement name='ActionMapping' xsi:type='platform:ResourceType'/>
+<platformElement name='ActionLogin' xsi:type='platform:DeployedComponent'/>
+<platformElement name='ActionPublicarNoticia' xsi:type='platform:DeployedComponent'/>
+<platformElement name='ActionVerNoticia' xsi:type='platform:DeployedComponent'/>
+</model>
+</kdm:Segment>

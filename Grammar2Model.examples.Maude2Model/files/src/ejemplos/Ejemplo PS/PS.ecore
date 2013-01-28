@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Maude:MaudeSpec xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Maude="http://MaudeMM/1.0" printableEls="//@els.1">
+  <els xsi:type="Maude:SModule" name="@ECORE@">
+    <els xsi:type="Maude:Sort" name="@Package"/>
+    <els xsi:type="Maude:Sort" name="@BasicType"/>
+    <els xsi:type="Maude:Sort" name="@Classifier"/>
+    <els xsi:type="Maude:Sort" name="@DataType"/>
+    <els xsi:type="Maude:Sort" name="@Class" subsortRels="//@els.1/@els.11 //@els.1/@els.20"/>
+    <els xsi:type="Maude:Sort" name="@Metamodel"/>
+    <els xsi:type="Maude:Sort" name="@ERROR@"/>
+    <els xsi:type="Maude:Sort" name="@Attribute"/>
+    <els xsi:type="Maude:Sort" name="@Reference"/>
+    <els xsi:type="Maude:Sort" name="Int"/>
+    <els xsi:type="Maude:Sort" name="Nat"/>
+    <els xsi:type="Maude:Sort" name="Nat"/>
+    <els xsi:type="Maude:Sort" name="Bool"/>
+    <els xsi:type="Maude:Sort" name="String"/>
+    <els xsi:type="Maude:Sort" name="List"/>
+    <els xsi:type="Maude:Sort" name="@Enumeration"/>
+    <els xsi:type="Maude:Sort" name="@EnumerationInstance"/>
+    <els xsi:type="Maude:Sort" name="ListOrd"/>
+    <els xsi:type="Maude:Sort" name="OclVoid"/>
+  </els>
+  <els xsi:type="Maude:SModule" name="@PS@">
+    <els xsi:type="Maude:ModImportation">
+      <imports xsi:type="Maude:ModuleIdModExp" module="//@els.0"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="@PS@" coarity="//@els.0/@els.5"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.5" op="@PS@"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;PS&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="packages">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.5" op="@PS@"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="ps" coarity="//@els.0/@els.0"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;ps&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.5" op="metamodel">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.5" op="@PS@"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.18" op="superPackage">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.18" op="null"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="subPackages">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="classes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="__">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HandleGen@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HeadGen@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Assembler@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="User@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Head@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Handle@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Hammer@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+      </rhs>
+    </els>
+    <els xsi:type="Maude:Sort" name="PositionedEl@ps" subsortRels="//@els.1/@els.29 //@els.1/@els.38 //@els.1/@els.47"
+        supersortRels="//@els.1/@els.11"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.10" supersorts="//@els.0/@els.4"/>
+    <els xsi:type="Maude:Operation" name="PositionedEl@ps" coarity="//@els.1/@els.10"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;PositionedEl&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="__">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="xPos@PositionedEl@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="yPos@PositionedEl@ps"/>
+      </rhs>
+    </els>
+    <els xsi:type="Maude:Sort" name="Plant@ps" supersortRels="//@els.1/@els.20"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.19" supersorts="//@els.0/@els.4"/>
+    <els xsi:type="Maude:Operation" name="Plant@ps" coarity="//@els.1/@els.19"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Plant&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Machine@ps" subsortRels="//@els.1/@els.74 //@els.1/@els.137"
+        supersortRels="//@els.1/@els.29"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.28" supersorts="//@els.1/@els.10"/>
+    <els xsi:type="Maude:Operation" name="Machine@ps" coarity="//@els.1/@els.28"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Machine&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="__">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </rhs>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Container@ps" subsortRels="//@els.1/@els.83 //@els.1/@els.92 //@els.1/@els.101"
+        supersortRels="//@els.1/@els.38"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.37" supersorts="//@els.1/@els.10"/>
+    <els xsi:type="Maude:Operation" name="Container@ps" coarity="//@els.1/@els.37"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Container&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Part@ps" subsortRels="//@els.1/@els.110 //@els.1/@els.119 //@els.1/@els.128"
+        supersortRels="//@els.1/@els.47"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.46" supersorts="//@els.1/@els.10"/>
+    <els xsi:type="Maude:Operation" name="Part@ps" coarity="//@els.1/@els.46"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Part&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="HandleGen@ps" supersortRels="//@els.1/@els.56"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.55" supersorts="//@els.1/@els.136"/>
+    <els xsi:type="Maude:Operation" name="HandleGen@ps" coarity="//@els.1/@els.55"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HandleGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;HandleGen&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HandleGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HandleGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HandleGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HandleGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HandleGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="HeadGen@ps" supersortRels="//@els.1/@els.65"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.64" supersorts="//@els.1/@els.136"/>
+    <els xsi:type="Maude:Operation" name="HeadGen@ps" coarity="//@els.1/@els.64"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HeadGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;HeadGen&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HeadGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HeadGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HeadGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HeadGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="HeadGen@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Assembler@ps" supersortRels="//@els.1/@els.74"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.73" supersorts="//@els.1/@els.28"/>
+    <els xsi:type="Maude:Operation" name="Assembler@ps" coarity="//@els.1/@els.73"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Assembler@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Assembler&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Assembler@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Assembler@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Assembler@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Assembler@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Assembler@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Tray@ps" supersortRels="//@els.1/@els.83"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.82" supersorts="//@els.1/@els.37"/>
+    <els xsi:type="Maude:Operation" name="Tray@ps" coarity="//@els.1/@els.82"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Tray&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.7" op="capacity@Tray@ps"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Conveyor@ps" supersortRels="//@els.1/@els.92"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.91" supersorts="//@els.1/@els.37"/>
+    <els xsi:type="Maude:Operation" name="Conveyor@ps" coarity="//@els.1/@els.91"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Conveyor&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="User@ps" supersortRels="//@els.1/@els.101"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.100" supersorts="//@els.1/@els.37"/>
+    <els xsi:type="Maude:Operation" name="User@ps" coarity="//@els.1/@els.100"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="User@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;User&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="User@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="User@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="User@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="User@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="User@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Head@ps" supersortRels="//@els.1/@els.110"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.109" supersorts="//@els.1/@els.46"/>
+    <els xsi:type="Maude:Operation" name="Head@ps" coarity="//@els.1/@els.109"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Head@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Head&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Head@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Head@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Head@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Head@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Head@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Handle@ps" supersortRels="//@els.1/@els.119"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.118" supersorts="//@els.1/@els.46"/>
+    <els xsi:type="Maude:Operation" name="Handle@ps" coarity="//@els.1/@els.118"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Handle@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Handle&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Handle@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Handle@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Handle@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Handle@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Handle@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Hammer@ps" supersortRels="//@els.1/@els.128"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.127" supersorts="//@els.1/@els.46"/>
+    <els xsi:type="Maude:Operation" name="Hammer@ps" coarity="//@els.1/@els.127"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Hammer@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Hammer&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Hammer@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Hammer@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Hammer@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Hammer@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Hammer@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Sort" name="Generator@ps" subsortRels="//@els.1/@els.56 //@els.1/@els.65"
+        supersortRels="//@els.1/@els.137"/>
+    <els xsi:type="Maude:SubsortRel" subsorts="//@els.1/@els.136" supersorts="//@els.1/@els.28"/>
+    <els xsi:type="Maude:Operation" name="Generator@ps" coarity="//@els.1/@els.136"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;Generator&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isAbstract">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.0" op="package">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.0" op="ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="superTypes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="references">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.17" op="nil"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.17" op="attributes">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.7" op="counter@Generator@ps"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="els@Plant@ps" coarity="//@els.0/@els.8"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;els&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.18" op="opposite">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.18" op="null"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="0"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="*"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Plant@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isContainment">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="els@Plant@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="out@Machine@ps" coarity="//@els.0/@els.8"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;out&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.18" op="opposite">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.18" op="null"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isContainment">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="out@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="in@Machine@ps" coarity="//@els.0/@els.8"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;in&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.18" op="opposite">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.18" op="null"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="0"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Machine@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isContainment">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="in@Machine@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="parts@Container@ps" coarity="//@els.0/@els.8"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;parts&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Part@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.18" op="opposite">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.18" op="null"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="0"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="*"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Container@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isContainment">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="parts@Container@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="out@Conveyor@ps" coarity="//@els.0/@els.8"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;out&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.18" op="opposite">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.18" op="null"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Conveyor@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isContainment">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.8" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="out@Conveyor@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="xPos@PositionedEl@ps" coarity="//@els.0/@els.7"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;xPos&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.3" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.3" op="@Int"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isId">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="xPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="yPos@PositionedEl@ps" coarity="//@els.0/@els.7"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;yPos&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.3" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.3" op="@Int"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="PositionedEl@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isId">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="yPos@PositionedEl@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="capacity@Tray@ps" coarity="//@els.0/@els.7"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;capacity&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.3" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.3" op="@Int"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Tray@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isId">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="capacity@Tray@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Operation" name="counter@Generator@ps" coarity="//@els.0/@els.7"/>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.13" op="name">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.13" op="&quot;counter&quot;"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.3" op="type">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.3" op="@Int"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="lowerBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="0"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.9" op="upperBound">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.9" op="1"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.4" op="containingClass">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.4" op="Generator@ps"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isId">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.7" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="false"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isOrdered">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+    <els xsi:type="Maude:Equation">
+      <lhs xsi:type="Maude:RecTerm" type="//@els.0/@els.12" op="isUnique">
+        <args xsi:type="Maude:Constant" type="//@els.0/@els.6" op="counter@Generator@ps"/>
+      </lhs>
+      <rhs xsi:type="Maude:Constant" type="//@els.0/@els.12" op="true"/>
+    </els>
+  </els>
+</Maude:MaudeSpec>

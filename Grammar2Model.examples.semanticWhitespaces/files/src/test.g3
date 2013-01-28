@@ -1,0 +1,7 @@
+grammar test;
+
+mainRule: 
+	'HOLA' ' ' ' ' ID ';'
+	;
+	
+ID: ('a'..'z') ('a'..'z')*;

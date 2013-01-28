@@ -1,0 +1,233 @@
+<kdm:Segment xmlns:platform='http://www.eclipse.org/MoDisco/kdm/platform' xmlns:code='http://www.eclipse.org/MoDisco/kdm/code' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.eclipse.org/MoDisco/kdm/platform files/metamodels/kdm.ecore#//platform http://www.eclipse.org/MoDisco/kdm/source files/metamodels/kdm.ecore#//source http://www.eclipse.org/MoDisco/kdm/action files/metamodels/kdm.ecore#//action http://www.eclipse.org/MoDisco/kdm/kdm files/metamodels/kdm.ecore#//kdm http://www.eclipse.org/MoDisco/kdm/code files/metamodels/kdm.ecore#//code' xmlns:action='http://www.eclipse.org/MoDisco/kdm/action' xmi:version='2.0' xmlns:xmi='http://www.omg.org/XMI' xmlns:kdm='http://www.eclipse.org/MoDisco/kdm/kdm' xmlns:source='http://www.eclipse.org/MoDisco/kdm/source'>
+<model name='CodeModel' xsi:type='code:CodeModel'>
+<codeElement xsi:type='code:CompilationUnit'>
+<codeElement name='BeanTablon' xsi:type='code:ClassUnit'>
+<codeElement name='tituloSeleccionado' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='titulo' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='contenido' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='autor' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='validate' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='mapping' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='request' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.2'/>
+<codeElement name='variableDeclaration' kind='declaration' xsi:type='action:ActionElement'>
+<codeElement name='errores' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.2' xsi:type='action:Writes' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.2/@codeElement.0'/>
+</codeElement>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3' xsi:type='action:TrueFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3/@codeElement.1'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3' xsi:type='action:FalseFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3/@codeElement.3'/>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='isTituloNoValido' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='t' kind='byValue' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.5' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2'/>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2' xsi:type='action:TrueFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2/@codeElement.1'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2' xsi:type='action:FalseFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2/@codeElement.3'/>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='setTituloSeleccionado' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='tituloSeleccionado' kind='byValue' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.6' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.6/@codeElement.2'/>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='getTituloSeleccionado' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.7' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.7/@codeElement.2'/>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='setTitulo' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='titulo' kind='byValue' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.8' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.8/@codeElement.2'/>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='getTitulo' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.9' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.9/@codeElement.2'/>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='setContenido' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='contenido' kind='byValue' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.10' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.10/@codeElement.2'/>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='getContenido' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.11' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.11/@codeElement.2'/>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='setAutor' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='autor' kind='byValue' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.12' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.12/@codeElement.2'/>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='getAutor' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.13' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.0/@codeElement.13/@codeElement.2'/>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+</codeElement>
+<codeElement name='ActionLogin' xsi:type='code:ClassUnit'>
+<codeElement name='execute' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='actionMapping' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='actionForm' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='request' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='response' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+<codeElement name='variableDeclaration' kind='declaration' xsi:type='action:ActionElement'>
+<codeElement name='bean' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2' xsi:type='action:Writes' to='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0'/>
+<codeElement xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3' xsi:type='action:TrueFlow' to='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3/@codeElement.1'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement kind='block' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3' xsi:type='action:FalseFlow' to='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3/@codeElement.3'/>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.5' xsi:type='action:TrueFlow' to='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.5/@codeElement.1'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.5' xsi:type='action:FalseFlow' to='#//@model.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.5/@codeElement.3'/>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='ActionPublicarNoticia' xsi:type='code:ClassUnit'>
+<codeElement name='execute' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='actionMapping' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='actionForm' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='request' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='response' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2'/>
+<codeElement name='variableDeclaration' kind='declaration' xsi:type='action:ActionElement'>
+<codeElement name='bean' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2' xsi:type='action:Writes' to='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2/@codeElement.0'/>
+<codeElement xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.3' xsi:type='action:TrueFlow' to='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.3/@codeElement.1'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement kind='block' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.3' xsi:type='action:FalseFlow' to='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.3/@codeElement.3'/>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='variableDeclaration' kind='declaration' xsi:type='action:ActionElement'>
+<codeElement name='datos' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.4' xsi:type='action:Writes' to='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.4/@codeElement.0'/>
+<codeElement xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.5' xsi:type='action:TrueFlow' to='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.5/@codeElement.1'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement kind='block' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.5' xsi:type='action:FalseFlow' to='#//@model.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.5/@codeElement.3'/>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+</codeElement>
+<codeElement name='ActionVerNoticia' xsi:type='code:ClassUnit'>
+<codeElement name='execute' kind='method' xsi:type='code:MethodUnit' export='public'>
+<codeElement xsi:type='code:Signature'>
+<parameterUnit name='actionMapping' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='actionForm' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='request' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit name='response' kind='byValue' xsi:type='code:ParameterUnit'/>
+<parameterUnit kind='return' xsi:type='code:ParameterUnit'/>
+</codeElement>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:EntryFlow' to='#//@model.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+<codeElement name='variableDeclaration' kind='declaration' xsi:type='action:ActionElement'>
+<codeElement name='bean' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2' xsi:type='action:Writes' to='#//@model.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2/@codeElement.0'/>
+<codeElement xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='variableDeclaration' kind='declaration' xsi:type='action:ActionElement'>
+<codeElement name='noticia' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement from='#//@model.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3/@codeElement.0'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'/>
+<codeElement name='return' kind='return' xsi:type='action:ActionElement'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='Java Datatypes' xsi:type='code:LanguageUnit'>
+<codeElement xsi:type='code:BooleanType'/>
+<codeElement xsi:type='code:StringType'/>
+</codeElement>
+</model>
+<model xsi:type='source:InventoryModel'>
+<inventoryElement name='StrutsApplication' xsi:type='source:Project'>
+<inventoryElement name='src' xsi:type='source:Directory' path='/'>
+<inventoryElement name='BeanTablon' xsi:type='source:SourceFile'/>
+<inventoryElement name='ActionLogin' xsi:type='source:SourceFile'/>
+<inventoryElement name='ActionPublicarNoticia' xsi:type='source:SourceFile'/>
+<inventoryElement name='ActionVerNoticia' xsi:type='source:SourceFile'/>
+</inventoryElement>
+</inventoryElement>
+</model>
+<model xsi:type='platform:PlatformModel'>
+<platformElement name='PlatformStrutsExtension' xsi:type='kdm:ExtensionFamily'>
+<stereotype name='ActionServlet' xsi:type='kdm:Stereotype'/>
+<stereotype name='ActionForm' xsi:type='kdm:Stereotype'/>
+<stereotype name='Action' xsi:type='kdm:Stereotype'/>
+</platformElement>
+<platformElement stereotype='#//@model.2/@platformElement.0/@stereotype.0' name='ActionServlet' xsi:type='platform:ResourceType'/>
+<platformElement name='ActionForward' xsi:type='platform:ResourceType'/>
+<platformElement name='ActionMapping' xsi:type='platform:ResourceType'/>
+<platformElement name='ActionLogin' xsi:type='platform:DeployedComponent'/>
+<platformElement name='ActionPublicarNoticia' xsi:type='platform:DeployedComponent'/>
+<platformElement name='ActionVerNoticia' xsi:type='platform:DeployedComponent'/>
+</model>
+</kdm:Segment>

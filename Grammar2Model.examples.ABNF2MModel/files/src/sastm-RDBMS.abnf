@@ -1,0 +1,122 @@
+OtherSyntaxObject => RDBIndex
+                  => RDBIndexColumn
+                  => RDBTrigger
+                  => RDBConstraint
+                  ;
+Definition              =>    RDBDatabaseDefinition
+                        =>    RDBUserDefinition
+                        =>    RDBTableSpaceDefinition
+                        =>    RDBTableDefinition
+                        =>    RDBColumnDefinition
+                        =>    RDBViewDefinition
+                        =>    RDBCursorDefinition
+                        ;
+RDBDatabaseDefinition   ->    TableSpace : RDBTableSpaceReference +
+                        ;
+RDBUserDefinition       ->    Owns : RDBTableReference + ;
+RDBTableSpaceDefinition ->    Table : RDBTableReference * ;
+RDBTableDefinition      ->    PrimKey : RDBColumnReference *
+                              Column : RDBColumnDefinition *
+                              Constraint : RDBConstraint *
+                              Index : RDBIndex *
+                              Trigger : RDBTrigger *
+                        ;
+RDBColumnDefinition     ->    < NotNull : Boolean > ;
+RDBViewDefinition       ->    DefinedBy : RDBSelectExpression
+                        ;
+RDBCursorDefinition     ->    SelectExpression : RDBSelectExpression ;
+RDBIndex                ->    IndexColumn : RDBIndexColumn*
+                              < NotNull : Boolean>
+                              < IsUnique : Boolean >
+                        ;
+RDBIndexColumn          ->    Column : RDBColumnReference
+                              < AscendingOrDescending : Char >
+                        ;
+               
+RDBTrigger         -> ;            
+RDBConstraint      => RDBCheckConstraint
+                   => RDBRefIntegrity
+                   => RDBUniqueKey
+                   ;
+RDBCheckConstraint -> < RDBConstraintText : String >
+                      < RDBConstraintType : Char >
+                   ;
+RDBRefIntegrity    -> ForeignKey : RDBColumnReference *
+                      ParentKey : RDBColumnReference *
+                      ParentTable : RDBColumnReference
+                   ;
+RDBUniqueKey       -> Column : RDBColumnReference* ;
+DataType      => RDBDataBaseType
+              => RDBUserType
+              => RDBTableSpaceType
+              => RDBTableType
+              => RDBViewType
+              => ! RDBColumnType
+              => RDBCursorType;
+RDBColumnType => RDBInteger
+              => RDBInt
+              => RDBReal
+              => RDBFloat
+              => RDBDecimal
+              => RDBNumber
+              => RDBLong
+              => RDBChar
+              => RDBVarchar
+              => RDBString
+              => RDBRaw
+              => RDBDate
+              => RDBTimestamp
+              => RDBRowid
+              => RDBBoolean
+              => RDBBlob
+              => RDBClob
+              => RDBNClob
+              => RDBBFile
+              ;
+Statement               => RDBConnectStatement
+                        => RDBSelectStatement
+                        => RDBInsertStatement
+                        => ! RDBModifyStatement
+                        => ! RDBCursorStatement
+                        ;
+RDBConnectStatement     -> ConnectString : RDBHostVariableReference ;
+RDBSelectStatement      -> SelectExpression : RDBSelectExpression
+                           IntoVariable : RDBHostVariableReference +
+                        ;
+RDBInsertStatement      -> IntoTable : RDBTableReference +
+                           Columns : RDBColumnReference *
+                           Values : Expression +
+                        ;
+RDBModifyStatement      => RDBUpdateStatement
+                        => RDBDeleteStatement
+                        ;
+RDBModifyStatement      -> Table : RDBTableReference +
+                           Where : Expression?
+                        ;
+RDBUpdateStatement      -> Values : Expression + ;
+RDBCursorStatement      => RDBOpenCursorStatement
+                        => RDBFetchCursorStatement
+                        => RDBCloseCursorStatement
+                        ;
+RDBCursorStatement      -> Cursor : Expression ;
+RDBOpenCursorStatement  -> Values : Expression * ;
+RDBFetchCursorStatement -> Into : HostVariableReference + ;
+Expression               => RDBHostVariableExpression
+                         => RDBSelectExpression
+                         ;
+RDBHostVariableReference
+                         -> BaseVariable : Expression
+                            Indicator : Expression ?
+                         ;
+RDBSelectExpression   -> Table : RDBTableReference +
+                            Column : RDBColumnReference *
+                            Where : Expression?
+                    ;
+IdentifierReference =>    RDBTableReference
+                    =>    RDBTableAlias
+                    =>    RDBColumnReference
+                    ;
+RDBTableReference   ->    Alias : RDBTableAlias ? ;
+RDBTableAlias       ->    ;
+RDBColumnReference  ->    Table : Expression? ;
+                            

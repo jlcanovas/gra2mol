@@ -1,0 +1,137 @@
+**** Printable line length ***************************************************
+******************************************************************************
+
+
+
+mod METAMODEL-CTORS is
+	--- pr mOdCL-REN .
+	--- sorts renamed
+				sort @Class .
+				sort @Object .
+				sort @StructuralFeatureInstance .
+				sort Set{@StructuralFeatureInstance} .
+				op empty : -> AttributeSet .
+				sort @StructuralFeature .
+				sort @EnumerationInstance .
+				sort @DataTypeInstance .				
+
+  subsort @StructuralFeatureInstance < Set{@StructuralFeatureInstance} .
+  op _#_ : @StructuralFeatureInstance @StructuralFeatureInstance -> @StructuralFeatureInstance [ctor assoc comm id: none] .
+
+  op <_:_|_> : Oid @Class @StructuralFeatureInstance -> @Object [ctor object] .
+  op none : -> Configuration [ctor] .
+  sort Configuration .
+  op __ : Configuration Configuration -> Configuration [ctor config assoc comm id: none] .
+op _:_ : @StructuralFeature OCL-Type -> @StructuralFeatureInstance [prec 20 gather (& &)] .
+  
+   --- OCL
+   sorts Set Bag OrdSet Sequence . 
+
+   subsort Oid Int Rat Float String Bool @EnumerationInstance < @DataTypeInstance .
+   subsort @DataTypeInstance < OCL-Type . 
+   subsort Set Bag OrdSet Sequence  < OCL-Type . 
+   op null    : -> OCL-Type .
+  
+     op Set_ : ItemList -> Set [ctor] .
+   op Bag_ : ItemList -> Bag [ctor] .
+   op OrderedSet_ : ItemListOrd -> OrdSet [ctor] .
+   op Sequence_   : ItemListOrd -> Sequence [ctor] .
+   
+      sorts ItemList List .
+   subsort @DataTypeInstance < List .
+
+   op mt : -> List [ctor] .
+   op _#_ : List List 
+               -> List [ctor assoc comm id: mt format (d r os d) prec 120] . 
+
+   op {_} : List -> ItemList [ctor] .
+   op {} : -> ItemList [ctor] .
+  
+     sorts ItemListOrd ListOrd .
+   subsort @DataTypeInstance < ListOrd .
+
+   op mt-ord : -> ListOrd [ctor] .
+   op _;_ : ListOrd ListOrd
+                       -> ListOrd [ctor assoc id: mt-ord format (d r os d) ]  .   
+
+   op [_] : ListOrd -> ItemListOrd [ctor] .
+   op [] : -> ItemListOrd [ctor] .
+  
+  
+	--- METAMODEL ELEMENTS 
+	--- We create a sort for every (Ecore) metamodel element
+	--- We use CONFIGURATION (and mOdCL) elements renamed where possible
+	
+	sort @NamedElement .
+	subsorts @Metamodel @Package @Classifier @StructuralFeature 
+		< @NamedElement .
+	
+	sort @Metamodel .
+	
+	sort @Package .
+	
+	sort @Classifier .
+	subsorts @Class @DataType < @Classifier .
+
+	subsorts @Attribute @Reference < @StructuralFeature .
+	
+	sort @Attribute .
+	
+	sort @Reference .
+	
+	sort @DataType .
+	subsort @Enumeration < @DataType .
+	op @String : -> @DataType .
+	op @Int : -> @DataType .
+	op @Bool : -> @DataType .
+	op @Float : -> @DataType .
+	op @DataType : -> @DataType .
+	
+	sort @Enumeration .
+	
+	
+	--- MODEL ELEMENTS 	
+	
+	sort @Model .
+	op _`{_`} : @Metamodel Set{@Object} -> @Model [ctor] .
+		
+	sort Set{@Object} .
+	subsort @Object < Set{@Object} < Configuration .
+	op __ : Set{@Object} Set{@Object} -> Set{@Object} [ctor ditto] .
+	op none : -> Set{@Object} [ctor ditto] .
+	
+	subsort @AttributeInstance @ReferenceInstance 
+		< @StructuralFeatureInstance .
+	
+	sort @AttributeInstance .
+	op _:_ : @Attribute OCL-Type -> @AttributeInstance [ctor ditto] .	
+	
+	sort @ReferenceInstance .
+	--- OCL-Type includes collections defined over BasicTypes 
+	--- Oid is defined as a BasicType (and then as a DataTypeInstance)
+	op _:_ : @Reference OCL-Type -> @ReferenceInstance [ctor ditto] .
+	
+	sort Set{@AttributeInstance} .
+	subsort @AttributeInstance < Set{@AttributeInstance} 
+		< Set{@StructuralFeatureInstance} .
+	op _#_ : Set{@AttributeInstance} Set{@AttributeInstance} 
+		-> Set{@AttributeInstance} [ctor ditto] .
+	--- op empty : -> Set{@AttributeInstance} [ctor ditto] .
+	
+	sort Set{@ReferenceInstance} .
+	subsort @ReferenceInstance < Set{@ReferenceInstance} 
+		< Set{@StructuralFeatureInstance} .
+	op _#_ : Set{@ReferenceInstance} Set{@ReferenceInstance} 
+		-> Set{@ReferenceInstance} [ctor ditto] .
+	--- op empty : -> Set{@ReferenceInstance} [ctor ditto] .
+	
+	
+	sort EmptySet .
+	subsorts EmptySet < Set{@ReferenceInstance} Set{@AttributeInstance} .
+	op _#_ : EmptySet EmptySet -> EmptySet [ctor ditto] .
+	op empty : -> EmptySet [ctor ditto] .
+	
+	
+	--- Operator @Object is equivalent to (Ecore) EObject
+	op @Object : -> @Class .
+endm

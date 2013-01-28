@@ -1,0 +1,3 @@
+module test {
+	typedef short a1;
+};

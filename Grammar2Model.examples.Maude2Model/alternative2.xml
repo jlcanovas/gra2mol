@@ -1,0 +1,11 @@
+<project name="maude Extraccion" default="extract">
+
+<target name="extract">
+	<property name="sourceFilesFilter" value="nat.maude"/>
+	
+	<ant antfile="preBuild.xml" target="build"/>
+	<ant antfile="generateIslandGrammar.xml" target="build"/>
+	<ant antfile="buildIsland.xml" target="build"/>
+</target>
+
+</project>

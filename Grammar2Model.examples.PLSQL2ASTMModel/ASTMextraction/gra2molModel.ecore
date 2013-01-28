@@ -1,0 +1,2429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules name="mapProject">
+    <from name="ccompilationUnit" alias="sf"/>
+    <to name="astm::gastm::Project"/>
+    <queries variable="cu">
+      <filter type="INDIRECT">
+        <element name="CST" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="files">
+        <value type="QUERY_RESULT" value="cu"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapCompilationUnit">
+    <from name="CST" alias="cst"/>
+    <to name="astm::gastm::CompilationUnit"/>
+    <queries variable="ts">
+      <filter>
+        <element name="cst"/>
+        <next>
+          <element name="Trigger" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="language">
+        <value value="PL/SQL"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="fragments">
+        <value type="QUERY_RESULT" value="ts"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapCompilationUnit">
+    <from name="Trigger" alias="t"/>
+    <to name="astm::sastm::RDBTrigger"/>
+    <queries variable="stats">
+      <filter>
+        <element name="t"/>
+        <next>
+          <element name="seq_of_statements"/>
+          <next>
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="t" extension="trigger_name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="body">
+        <value type="QUERY_RESULT" value="stats"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapFunctionCall">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="function_call"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::ExpressionStatement"/>
+    <queries variable="f">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="function_call" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <value type="QUERY_RESULT" value="f"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBlockStatement">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="plsql_block"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::BlockStatement"/>
+    <queries variable="block">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="plsql_block" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="decls">
+      <filter>
+        <element name="block"/>
+        <next>
+          <element name="declare_spec" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="stats">
+      <filter>
+        <element name="block"/>
+        <next>
+          <element name="seq_of_statements"/>
+          <next>
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="excep">
+      <filter>
+        <element name="block"/>
+        <next>
+          <element name="exception_handler" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="subStatements">
+        <value type="QUERY_RESULT" value="stats"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapReturnStatement">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="return_statement"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::ReturnStatement"/>
+    <queries variable="exp">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="plsql_expression"/>
+          <next>
+            <element name="expr_bool" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="returnValue">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapIf">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="if_statement"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::IfStatement"/>
+    <queries variable="cond">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="if_statement"/>
+          <next>
+            <element name="plsql_condition"/>
+            <next>
+              <element name="expr_bool" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="thenSt">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="if_statement"/>
+          <next operation="POSITION">
+            <element name="seq_of_statements"/>
+            <next>
+              <element name="statement" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="elseSt">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="if_statement"/>
+          <next operation="POSITION" position="1">
+            <element name="seq_of_statements"/>
+            <next>
+              <element name="statement" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="condition">
+        <value type="QUERY_RESULT" value="cond"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="thenBody">
+        <value type="QUERY_RESULT" value="thenSt"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="elseBody">
+        <value type="QUERY_RESULT" value="elseSt"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapAssignment">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="assignment_statement"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::ExpressionStatement"/>
+    <queries variable="as">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="assignment_statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="value">
+      <filter>
+        <element name="as"/>
+        <next>
+          <element name="lvalue" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp">
+      <filter>
+        <element name="as"/>
+        <next>
+          <element name="plsql_expression"/>
+          <next>
+            <element name="expr_bool" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <value type="OPERATION_CREATION" value="astm::gastm::BinaryExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>leftOperand</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>leftOperand</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>leftOperand</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="OPERATION_EXTRACTID" value="value"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>operator</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::OperatorAssign"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>rightOperand</extension>
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapSelectStatement">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="sql_statement"/>
+          <next type="INDIRECT">
+            <element name="select_statement"/>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::sastm::RDBSelectStatement"/>
+    <queries variable="exp">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="select_statement"/>
+          <next>
+            <element name="select_expression" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="lvals">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="lvalues"/>
+          <next>
+            <element name="lvalue" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SelectExpression">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="IntoVariable">
+        <value type="QUERY_RESULT" value="lvals"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapIntoVariable">
+    <from name="lvalue" alias="l"/>
+    <to name="astm::sastm::RDBHostVariableReference"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="BaseVariable">
+        <value type="OPERATION_CREATION" value="astm::gastm::IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="BaseVariable">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="BaseVariable">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="OPERATION_EXTRACTID" value="l"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipAllBooleanRules">
+    <from name="expr_bool" alias="exp">
+      <filter>
+        <element name="expr_bool" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+        <next>
+          <element name="expr_or"/>
+          <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN"/>
+            </expressions>
+          </expression>
+          <next>
+            <element name="expr_and"/>
+            <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                <element name="TOKEN"/>
+              </expressions>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_or"/>
+          <next>
+            <element name="expr_and"/>
+            <next>
+              <element name="expr_not" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipBinaryExpressionOr">
+    <from name="expr_bool" alias="exp">
+      <filter>
+        <element name="expr_bool" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_or" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionOr">
+    <from name="expr_bool" alias="exp">
+      <filter>
+        <element name="expr_bool" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expo1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_or" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expo2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_or" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expo1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Or"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expo2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipBinaryExpressionAnd">
+    <from name="expr_or" alias="exp">
+      <filter>
+        <element name="expr_or" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_and" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionAnd">
+    <from name="expr_or" alias="exp">
+      <filter>
+        <element name="expr_or" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_and" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_and" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::And"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipUnaryExpressionNot">
+    <from name="expr_and" alias="exp">
+      <filter>
+        <element name="expr_and" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_not" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapUnaryExpressionNot">
+    <from name="expr_and" alias="exp">
+      <filter>
+        <element name="expr_and" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::UnaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_not" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Not"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionRelational">
+    <from name="expr_not" alias="exp">
+      <filter>
+        <element name="expr_not" mark="true"/>
+        <next>
+          <element name="relational_op"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="op">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="relational_op" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expl1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expl2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="eqOp">
+      <filter>
+        <element name="op" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="EQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="orOp">
+      <filter>
+        <element name="op" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="OR"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="lthOp">
+      <filter>
+        <element name="op" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="LTH"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="gthOp">
+      <filter>
+        <element name="op" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="GTH"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="notEqOp">
+      <filter>
+        <element name="op" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="NOT_EQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="leqOp">
+      <filter>
+        <element name="op" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="LEQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="geqOp">
+      <filter>
+        <element name="op" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="GEQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expl1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expl2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="astm::gastm::Equal"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="astm::gastm::Or"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                <inits xsi:type="Core:InitUnitElement" element="operator">
+                  <value type="OPERATION_CREATION" value="astm::gastm::Less"/>
+                </inits>
+                <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                  <inits xsi:type="Core:InitUnitGroup" type="IF">
+                    <inits xsi:type="Core:InitUnitElement" element="operator">
+                      <value type="OPERATION_CREATION" value="astm::gastm::Greater"/>
+                    </inits>
+                    <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                      <inits xsi:type="Core:InitUnitGroup" type="IF">
+                        <inits xsi:type="Core:InitUnitElement" element="operator">
+                          <value type="OPERATION_CREATION" value="astm::gastm::NotEqual"/>
+                        </inits>
+                        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                          <inits xsi:type="Core:InitUnitGroup" type="IF">
+                            <inits xsi:type="Core:InitUnitElement" element="operator">
+                              <value type="OPERATION_CREATION" value="astm::gastm::SpecificLessEqual"/>
+                            </inits>
+                            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                                <inits xsi:type="Core:InitUnitElement" element="operator">
+                                  <value type="OPERATION_CREATION" value="astm::gastm::SpecificGreaterEqual"/>
+                                </inits>
+                                <expression xsi:type="Query:FilterExpressionUnit"
+                                    operation="HASRESULTS">
+                                  <element name="geqOp"/>
+                                </expression>
+                              </inits>
+                            </inits>
+                            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                              <element name="leqOp"/>
+                            </expression>
+                          </inits>
+                        </inits>
+                        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                          <element name="notEqOp"/>
+                        </expression>
+                      </inits>
+                    </inits>
+                    <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                      <element name="gthOp"/>
+                    </expression>
+                  </inits>
+                </inits>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="lthOp"/>
+                </expression>
+              </inits>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="orOp"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="eqOp"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionIsNotNull">
+    <from name="expr_not" alias="exp">
+      <filter>
+        <element name="expr_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="is"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN" position="1"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN" position="1"/>
+            <parameters value="not"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Equal"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="OPERATION_CREATION" value="astm::gastm::StringLiteral"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <extension>value</extension>
+        <value value="null"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionIsNull">
+    <from name="expr_not" alias="exp">
+      <filter>
+        <element name="expr_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="is"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::NotEqual"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="OPERATION_CREATION" value="astm::gastm::StringLiteral"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <extension>value</extension>
+        <value value="null"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapNotRangeExpression">
+    <from name="expr_not" alias="exp">
+      <filter>
+        <element name="expr_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="not"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN" position="1"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN" position="1"/>
+            <parameters value="in"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::UnaryExpression"/>
+    <queries variable="expa">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="l">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="nested_expressions"/>
+          <next operation="POSITION">
+            <element name="nested_expression"/>
+            <next type="INDIRECT">
+              <element name="expr_bool" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="u">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="nested_expressions"/>
+          <next operation="POSITION" position="1">
+            <element name="nested_expression"/>
+            <next type="INDIRECT">
+              <element name="expr_bool" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Not"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="OPERATION_CREATION" value="astm::gastm::BinaryExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>leftOperand</extension>
+        <value type="QUERY_RESULT" value="expa"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>operator</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::SpecificIn"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>rightOperand</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::RangeExpresion"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>rightOperand</extension>
+        <extension>fromExpression</extension>
+        <value type="QUERY_RESULT" value="l"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>rightOperand</extension>
+        <extension>toExpression</extension>
+        <value type="QUERY_RESULT" value="u"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapRangeExpression">
+    <from name="expr_not" alias="exp">
+      <filter>
+        <element name="expr_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="in"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="l">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="nested_expressions"/>
+          <next operation="POSITION">
+            <element name="nested_expression"/>
+            <next type="INDIRECT">
+              <element name="expr_bool" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="u">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="nested_expressions"/>
+          <next operation="POSITION" position="1">
+            <element name="nested_expression"/>
+            <next type="INDIRECT">
+              <element name="expr_bool" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::SpecificIn"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="OPERATION_CREATION" value="astm::gastm::RangeExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <extension>fromExpression</extension>
+        <value type="QUERY_RESULT" value="l"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <extension>toExpression</extension>
+        <value type="QUERY_RESULT" value="u"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapLikeExpression">
+    <from name="expr_not" alias="exp">
+      <filter>
+        <element name="expr_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="NOT"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN" position="1"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN" position="1"/>
+            <parameters value="LIKE"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::UnaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Not"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="OPERATION_CREATION" value="astm::gastm::BinaryExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>leftOperand</extension>
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>operator</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::SpecificLike"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <extension>rightOperand</extension>
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapLikeExpression">
+    <from name="expr_not" alias="exp">
+      <filter>
+        <element name="expr_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="LIKE"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::SpecificLike"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipToExprAdd">
+    <from name="expr_not" alias="exp"/>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_add" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipAllArithmeticRules">
+    <from name="expr_add" alias="exp">
+      <filter>
+        <element name="expr_add" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="PLUS"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="MINUS"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="DOUBLEVERTBAR"/>
+            </expressions>
+          </expressions>
+        </expression>
+        <next>
+          <element name="expr_mul"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                <element name="ASTERISK"/>
+              </expressions>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                <element name="DIVIDE"/>
+              </expressions>
+            </expressions>
+          </expression>
+          <next>
+            <element name="expr_sign"/>
+            <expression xsi:type="Query:FilterExpressionComplex">
+              <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                  <element name="PLUS"/>
+                </expressions>
+              </expressions>
+              <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                  <element name="MINUS"/>
+                </expressions>
+              </expressions>
+            </expression>
+            <next>
+              <element name="expr_pow"/>
+              <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                  <element name="EXPONENT"/>
+                </expressions>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="expr_expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipToExprMul">
+    <from name="expr_add" alias="exp">
+      <filter>
+        <element name="expr_add" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="PLUS"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="MINUS"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="DOUBLEVERTBAR"/>
+            </expressions>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_mul" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionArithmeticPlus">
+    <from name="expr_add" alias="exp">
+      <filter>
+        <element name="expr_add" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="PLUS"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_mul" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_mul" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Add"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionArithmeticMinus">
+    <from name="expr_add" alias="exp">
+      <filter>
+        <element name="expr_add" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="MINUS"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_mul" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_mul" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Subtract"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipToExprSign">
+    <from name="expr_mul" alias="exp">
+      <filter>
+        <element name="expr_mul" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="ASTERISK"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="DIVIDE"/>
+            </expressions>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::expression::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_sign" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionArithmeticMultiply">
+    <from name="expr_mul" alias="exp">
+      <filter>
+        <element name="expr_mul" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="ASTERISK"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_sign" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_sign" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Multiply"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionArithmeticDivide">
+    <from name="expr_mul" alias="exp">
+      <filter>
+        <element name="expr_mul" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="DIVIDE"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_sign" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_sign" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Divide"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipToExprPow">
+    <from name="expr_sign" alias="exp">
+      <filter>
+        <element name="expr_sign" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="PLUS"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="MINUS"/>
+            </expressions>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_pow" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapUnaryExpressionPlus">
+    <from name="expr_sign" alias="exp">
+      <filter>
+        <element name="expr_sign" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="PLUS"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::UnaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_pow" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::UnaryPlus"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapUnaryExpressionNegate">
+    <from name="expr_sign" alias="exp">
+      <filter>
+        <element name="expr_sign" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="MINUS"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::UnaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_pow" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Negate"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipToExprExpr">
+    <from name="expr_pow" alias="exp">
+      <filter>
+        <element name="expr_pow" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="EXPONENT"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expr_expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBinaryExpressionPow">
+    <from name="expr_pow" alias="exp">
+      <filter>
+        <element name="expr_pow" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="EXPONENT"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="expa1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="expr_expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expa2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="expr_expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="expa1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Exponent"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="expa2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createFormsVariableFromExpAdd">
+    <from name="expr_expr" alias="ea">
+      <filter>
+        <element name="expr_expr" mark="true"/>
+        <next>
+          <element name="simple_expression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="COLON"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::IdentifierReference"/>
+    <queries variable="se">
+      <filter>
+        <element name="ea"/>
+        <next type="INDIRECT">
+          <element name="simple_expression" mark="true"/>
+          <next>
+            <element name="host_variable"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="OPERATION_EXTRACTID" value="se"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="createFunctionCallFromExprAddFunctionExpr">
+    <from name="expr_expr" alias="exp">
+      <filter>
+        <element name="expr_expr" mark="true"/>
+        <next>
+          <element name="function_expression"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="function_expression"/>
+          <next>
+            <element name="function_call" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="block">
+      <filter type="INDIRECT">
+        <element name="plsql_block" mark="true"/>
+        <next type="RECURSIVE">
+          <element name="expr_expr"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="iden">
+      <filter>
+        <element name="s"/>
+        <next type="INDIRECT">
+          <element name="identifier" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="dec">
+      <filter>
+        <element name="block"/>
+        <next type="INDIRECT">
+          <element name="declare_spec" mark="true"/>
+          <next>
+            <element name="variable_declaration"/>
+            <next>
+              <element name="variable_name"/>
+              <next>
+                <element name="identifier"/>
+                <expression xsi:type="Query:FilterExpressionUnit">
+                  <element name="ID"/>
+                  <parameters value="iden" valuePosition="0" extension="ID" extensionPosition="0"
+                      type="QUERY_ACCESS"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cast1" cast="variable_name">
+      <filter>
+        <element name="s"/>
+        <next type="INDIRECT">
+          <element name="sql_identifier" mark="true"/>
+          <next>
+            <element name="identifier"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cast2">
+      <filter>
+        <element name="s"/>
+        <next type="INDIRECT">
+          <element name="variable_name" mark="true"/>
+          <next>
+            <element name="identifier"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="IF">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="cast1"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+            <inits xsi:type="Core:InitUnitElement" element="SKIP">
+              <value type="SKIP" value="cast2"/>
+            </inits>
+          </inits>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+            <element name="cast1"/>
+          </expression>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="s"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="dec"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapStringLiteral">
+    <from name="expr_expr" alias="exp">
+      <filter>
+        <element name="expr_expr" mark="true"/>
+        <next>
+          <element name="simple_expression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="QUOTED_STRING"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::StringLiteral"/>
+    <queries variable="st">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="simple_expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="OPERATION_CODE" value="st"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapNullLiteral">
+    <from name="expr_expr" alias="exp">
+      <filter>
+        <element name="expr_expr" mark="true"/>
+        <next>
+          <element name="simple_expression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::StringLiteral"/>
+    <queries variable="st">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="simple_expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="OPERATION_CODE" value="st"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapIntegerLiteral">
+    <from name="expr_expr" alias="exp">
+      <filter>
+        <element name="expr_expr" mark="true"/>
+        <next>
+          <element name="simple_expression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="NUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::IntegerLiteral"/>
+    <queries variable="st">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="simple_expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="OPERATION_CODE" value="st"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createLiteralFromBooleanLiteral">
+    <from name="expr_expr" alias="exp">
+      <filter>
+        <element name="expr_expr" mark="true"/>
+        <next>
+          <element name="simple_expression"/>
+          <next>
+            <element name="boolean_literal"/>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::BooleanExpression"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="OPERATION_CODE" value="exp"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipToExprBoolFromExprParen">
+    <from name="expr_expr" alias="exp">
+      <filter>
+        <element name="expr_expr" mark="true"/>
+        <next>
+          <element name="expr_paren"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="s">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="expr_bool" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="s"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapFunctionCall">
+    <from name="function_call" alias="fc"/>
+    <to name="astm::gastm::FunctionCallExpression"/>
+    <queries variable="iden">
+      <filter>
+        <element name="fc"/>
+        <next>
+          <element name="user_defined_function"/>
+          <next type="INDIRECT">
+            <element name="identifier" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="params">
+      <filter>
+        <element name="fc"/>
+        <next>
+          <element name="call_parameters"/>
+          <next>
+            <element name="call_parameter" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp">
+      <filter>
+        <element name="fc"/>
+        <next type="INDIRECT">
+          <element name="nested_expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <value type="OPERATION_CREATION" value="astm::gastm::IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="iden" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actualParams">
+        <value type="QUERY_RESULT" value="params"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapActualParameter">
+    <from name="call_parameter" alias="cp"/>
+    <to name="astm::gastm::ActualParameterExpression"/>
+    <queries variable="iden">
+      <filter>
+        <element name="cp"/>
+        <next>
+          <element name="parameter_name"/>
+          <next>
+            <element name="identifier" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expA">
+      <filter>
+        <element name="cp"/>
+        <next type="INDIRECT">
+          <element name="plsql_expression"/>
+          <next>
+            <element name="expr_bool" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="expB">
+      <filter>
+        <element name="cp"/>
+        <next type="INDIRECT">
+          <element name="sql_expression"/>
+          <next>
+            <element name="expr_add" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="value">
+          <value type="QUERY_RESULT" value="expA"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="value">
+            <value type="QUERY_RESULT" value="expB"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="expA"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapSelectExpression">
+    <from name="select_expression" alias="sexpr"/>
+    <to name="astm::sastm::RDBSelectExpression"/>
+    <queries variable="list">
+      <filter>
+        <element name="sexpr"/>
+        <next type="INDIRECT">
+          <element name="displayed_column" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isCount">
+      <filter>
+        <element name="list"/>
+        <next type="INDIRECT">
+          <element name="keyCOUNT" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="lvals">
+      <filter>
+        <element name="sexpr"/>
+        <next type="INDIRECT">
+          <element name="lvalues"/>
+          <next>
+            <element name="lvalue" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fromn">
+      <filter>
+        <element name="sexpr"/>
+        <next>
+          <element name="table_reference_list"/>
+          <next type="INDIRECT">
+            <element name="selected_table" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fromj">
+      <filter>
+        <element name="sexpr"/>
+        <next>
+          <element name="join_clause" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="w">
+      <filter>
+        <element name="sexpr"/>
+        <next type="INDIRECT">
+          <element name="where_clause"/>
+          <next>
+            <element name="sql_condition" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="Column">
+        <value type="QUERY_RESULT" value="list"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="Where">
+        <value type="QUERY_RESULT" value="w"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="Table">
+          <value type="QUERY_RESULT" value="fromn"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="Table">
+            <value type="QUERY_RESULT" value="fromj"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="fromn"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapColumn">
+    <from name="displayed_column" alias="dc"/>
+    <to name="astm::sastm::RDBColumnReference"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="OPERATION_EXTRACTID" value="dc"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapTable">
+    <from name="selected_table" alias="st"/>
+    <to name="astm::sastm::RDBTableReference"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="OPERATION_EXTRACTID" value="st"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipToConditionOr">
+    <from name="sql_condition" alias="c"/>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="c"/>
+        <next>
+          <element name="condition_or" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipConditionOr">
+    <from name="condition_or" alias="co">
+      <filter>
+        <element name="condition_or" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="co"/>
+        <next>
+          <element name="condition_and" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapConditionOr">
+    <from name="condition_or" alias="co">
+      <filter>
+        <element name="condition_or" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="ex1">
+      <filter>
+        <element name="co"/>
+        <next operation="POSITION">
+          <element name="condition_and" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="ex2">
+      <filter>
+        <element name="co"/>
+        <next operation="POSITION" position="1">
+          <element name="condition_and" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="ex1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Or"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="ex2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipConditionAnd">
+    <from name="condition_and" alias="ca">
+      <filter>
+        <element name="condition_and" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="ca"/>
+        <next>
+          <element name="condition_not" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createConditionAnd">
+    <from name="condition_and" alias="ca">
+      <filter>
+        <element name="condition_and" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="ex1">
+      <filter>
+        <element name="ca"/>
+        <next operation="POSITION">
+          <element name="condition_not" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="ex2">
+      <filter>
+        <element name="ca"/>
+        <next operation="POSITION" position="1">
+          <element name="condition_not" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="ex1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::And"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="ex2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipConditionNot">
+    <from name="condition_not" alias="cn">
+      <filter>
+        <element name="condition_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="cn"/>
+        <next>
+          <element name="condition_expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createConditionNot">
+    <from name="condition_not" alias="cn">
+      <filter>
+        <element name="condition_not" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="astm::gastm::UnaryExpression"/>
+    <queries variable="ex1">
+      <filter>
+        <element name="cn"/>
+        <next operation="POSITION">
+          <element name="condition_expr" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="QUERY_RESULT" value="ex1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="astm::gastm::Not"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createConditionComparison">
+    <from name="condition_expr" alias="sc">
+      <filter>
+        <element name="condition_expr" mark="true"/>
+        <next>
+          <element name="condition_comparison"/>
+        </next>
+      </filter>
+    </from>
+    <to name="astm::gastm::BinaryExpression"/>
+    <queries variable="compar">
+      <filter>
+        <element name="sc"/>
+        <next type="INDIRECT">
+          <element name="condition_comparison" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp1">
+      <filter>
+        <element name="compar"/>
+        <next operation="POSITION">
+          <element name="sql_expression"/>
+          <next>
+            <element name="expr_add" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="compar"/>
+        <next operation="POSITION" position="1">
+          <element name="sql_expression"/>
+          <next>
+            <element name="expr_add" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="eqOp">
+      <filter>
+        <element name="compar" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="EQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="orOp">
+      <filter>
+        <element name="compar" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="OR"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="lthOp">
+      <filter>
+        <element name="compar" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="LTH"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="gthOp">
+      <filter>
+        <element name="compar" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="GTH"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="notEqOp">
+      <filter>
+        <element name="compar" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="NOT_EQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="leqOp">
+      <filter>
+        <element name="compar" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="LEQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="geqOp">
+      <filter>
+        <element name="compar" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="GEQ"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="astm::gastm::Equal"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="astm::gastm::Or"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                <inits xsi:type="Core:InitUnitElement" element="operator">
+                  <value type="OPERATION_CREATION" value="astm::gastm::Less"/>
+                </inits>
+                <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                  <inits xsi:type="Core:InitUnitGroup" type="IF">
+                    <inits xsi:type="Core:InitUnitElement" element="operator">
+                      <value type="OPERATION_CREATION" value="astm::gastm::Greater"/>
+                    </inits>
+                    <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                      <inits xsi:type="Core:InitUnitGroup" type="IF">
+                        <inits xsi:type="Core:InitUnitElement" element="operator">
+                          <value type="OPERATION_CREATION" value="astm::gastm::NotEqual"/>
+                        </inits>
+                        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                          <inits xsi:type="Core:InitUnitGroup" type="IF">
+                            <inits xsi:type="Core:InitUnitElement" element="operator">
+                              <value type="OPERATION_CREATION" value="astm::gastm::SpecificLessEqual"/>
+                            </inits>
+                            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                                <inits xsi:type="Core:InitUnitElement" element="operator">
+                                  <value type="OPERATION_CREATION" value="astm::gastm::SpecificGreaterEqual"/>
+                                </inits>
+                                <expression xsi:type="Query:FilterExpressionUnit"
+                                    operation="HASRESULTS">
+                                  <element name="geqOp"/>
+                                </expression>
+                              </inits>
+                            </inits>
+                            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                              <element name="leqOp"/>
+                            </expression>
+                          </inits>
+                        </inits>
+                        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                          <element name="notEqOp"/>
+                        </expression>
+                      </inits>
+                    </inits>
+                    <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                      <element name="gthOp"/>
+                    </expression>
+                  </inits>
+                </inits>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="lthOp"/>
+                </expression>
+              </inits>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="orOp"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="eqOp"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+</Core:ViewDefinition>

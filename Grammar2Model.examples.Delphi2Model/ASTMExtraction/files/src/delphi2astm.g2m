@@ -1,0 +1,530 @@
+----------------------------------------------------------------------------------
+-- Gra2MoL transformation definition for extracting ASTM models from Delphi code
+-- Author: Javier Luis Canovas Izquierdo (jlcanovas@um.es)
+--
+-- TODO:
+--   * There are several TODO within the definition
+----------------------------------------------------------------------------------
+
+
+--
+-- General Rules
+--
+rule 'mapProject'
+	from 	CST c
+	to 		astm::gastm::Project
+	queries
+		fs : //#file;
+	mappings
+		files = fs;
+		--outerScope = ;
+end_rule
+
+
+rule 'mapFileFromUnit'
+	from 	file//unit f 
+	to		astm::sastm::DelphiUnit
+	queries
+	    ident    : /f//unit/#ident;
+		intDecls : /f//#interfaceSection;
+		impDecls : /f//#implementationSection;
+	mappings
+		name            = new astm::gastm::Name;
+		name.nameString = extract ident;
+		
+		language 		= "Delphi";
+		interface 	 	= intDecls;
+		implementation 	= impDecls;
+		--openScope = -- TODO: Deals with the scope
+		
+		-- Attributes inherited from GASTMSyntaxObject
+		locationInfo 						= new astm::gastm::SourceLocation;
+		locationInfo.inSourceFile 			= new astm::gastm::SourceFile;
+		locationInfo.inSourceFile.pathName 	= f.path;
+end_rule
+
+rule 'mapInterfaceSection'
+	from 	interfaceSection is
+	to		astm::sastm::DelphiInterfaceSection
+	queries
+		uElem : /is/#usesClause;
+		cElem : /is/interfaceDecl/#constSection;
+		tElem : /is/interfaceDecl/#typeSection;
+		vElem : /is/interfaceDecl/#varSection;
+		eElem : /is/interfaceDecl/#exportedHeading;
+	mappings
+		uses 		= uElem;
+		fragments 	= cElem;
+		fragments 	= tElem;
+		fragments 	= vElem;
+		fragments 	= eElem;
+end_rule
+
+rule 'mapImplementationSection'
+	from 	implementationSection is
+	to		astm::sastm::DelphiImplementationSection
+	queries
+		uElem : /is/#usesClause;
+		eElem : /is/#exportsStmt;
+		lElem : /is/declSection/#labelDeclSection;
+		cElem : /is/declSection/#constSection;
+		tElem : /is/declSection/#typeSection;
+		vElem : /is/declSection/#varSection;
+		pElem : /is/declSection/#procedureDeclSection;
+	mappings
+		uses 		= uElem;
+		exports 	= eElem;
+		fragments 	= lElem;
+		fragments 	= cElem;
+		fragments 	= tElem;
+		fragments 	= vElem;
+		fragments 	= pElem;
+end_rule
+
+--
+-- Declarations
+--
+
+-- Label declarations
+rule 'maplabelDeclSection'
+	from 	labelDeclSection lds
+	to		astm::gastm::LabelDefinition
+	queries
+	mappings
+		--labelName =
+		--labelType =
+end_rule
+
+-- Constant declarations
+skip_rule 'skipConstSection'
+	from 	constSection cs
+	to		astm::gastm::DefinitionObject
+	queries
+		constDecls : /cs/#constantDecl;
+	mappings
+		skip constDecls;
+end_rule
+
+rule 'mapConstSection'
+	from 	constantDecl cs
+	to		astm::gastm::VariableDefinition
+	queries
+		id   : /cs/#ident;
+		cExp : /cs/#constExpr; -- TODO: Deal with "typedConstant" grammar element
+	mappings
+		identifierName            = new astm::gastm::Name;
+		identifierName.nameString = extract id;
+		initialValue              = cExp;		
+end_rule
+
+skip_rule 'skipConstExpr'
+	from 	constExpr ce
+	to		astm::gastm::VariableDefinition
+	queries
+		exp : /ce/#expression;
+	mappings
+		skip expression;
+end_rule
+
+-- Types declaration
+skip_rule 'skipTypeSection'
+	from 	typeSection cs
+	to		astm::gastm::DefinitionObject
+	queries
+		typeDecls : /cs/#typeDecl;
+	mappings
+		skip typeDecls;
+end_rule
+
+rule 'skipTypeSection'
+	from 	typeDecl td
+	to		astm::gastm::TypeDefinition
+	queries
+		id   : /cs/#ident;
+		-- TODO: Deal with the type hierarchy
+	mappings
+		name            = new astm::gastm::Name;
+		name.nameString = extract id;
+end_rule
+
+-- Variable declarations
+skip_rule 'skipVarSection'
+	from 	varSection cs
+	to		astm::gastm::DefinitionObject
+	queries
+		varDecls : /cs/#varDecl;
+	mappings
+		skip varDecls;
+end_rule
+
+rule 'mapVariable'
+	from 	varDecl vd
+	to 		astm::gastm::VariableDefinition
+	queries
+		iElem : /vd/#identList; -- TODO: Deal with more than one
+		tElem : /vd/#type;
+	mappings
+		identifierName 				= new astm::gastm::Name;
+		identifierName.nameString 	= extract iElem; 
+		definitionType 				= tElem;
+		isMutable 					= "true";
+end_rule
+
+-- Procedure declarations
+rule 'mapProcedureOrFunction'
+	from 	procedureDeclSection pd
+	to 		astm::gastm::FunctionDefinition
+	queries
+		nElem  : /pd//#ident[0];
+		pElems : /pd//formalParameters/#formalParm;
+		tElem  : /pd//#type[0];
+		bElem  : /pd//#block[0];
+	mappings
+		-- Attributes inherited from Definition
+		identifierName 				= new astm::gastm::Name;
+		identifierName.nameString 	= extractID nElem;
+		--definitionType
+		
+		-- Own attributes
+		formalParameters 	= pElems;
+		body 				= bElem;
+		returnType 			= tElem;
+end_rule
+
+--
+-- Statements and block
+--
+
+rule 'mapBlock'
+	from	block b
+	to 		astm::sastm::DelphiBlockStatement
+	queries
+		lElem : /b/declSection/#labelDeclSection;
+		cElem : /b/declSection/#constSection;
+		tElem : /b/declSection/#typeSection;
+		vElem : /b/declSection/#varSection;
+		pElem : /b/declSection/#procedureDeclSection;
+		stats : /b/compoundStmt//#statement;
+	mappings
+		declarations  = lElem;
+		declarations  = cElem;
+		declarations  = tElem;
+		declarations  = vElem;
+		declarations  = pElem;
+		subStatements = stats;
+end_rule
+
+skip_rule 'skipStatementList'
+	from stmtList stats
+	to   astm::gastm::Statement
+	queries
+		next : /stats/#statement;
+	mappings
+		skip next;
+end_rule
+
+skip_rule 'skipCorrectStatement'
+	from	statement st
+	to		astm::gastm::Statement
+	queries
+		existsSimple : /st/#simpleStatement;
+		existsStruct : /st/#structStmt;
+	mappings
+		if(existsSimple.hasResults) then
+			skip	existsSimple;
+		else
+			skip 	existsStruct;
+		end_if
+end_rule
+
+rule 'mapAssignment'
+	from	simpleStatement/expression st
+	to		astm::gastm::ExpressionStatement
+	queries
+		lElem : /st/#designator;
+		rElem : /st/#expression;
+	mappings
+		expression 				= new astm::gastm::BinaryExpression;
+		expression.leftOperand	= lElem;
+		expression.operator 	= new astm::gastm::Assign;
+		expression.rightOperand = rElem;
+end_rule
+
+rule 'mapCallFunction'
+	from	simpleStatement/exprList st
+	to		astm::gastm::ExpressionStatement
+	queries
+		nElem : /st//#ident[0];
+		dElem : /st/#designator;
+		eElem : /st//#expression;
+	mappings
+		expression 				  = new astm::gastm::FunctionCallExpression;
+		expression.calledFunction = dElem;
+		expression.actualParams   = eElem;
+end_rule
+
+rule 'mapFunctionCall'
+	from	simpleStatement/designator f
+	to		astm::gastm::FunctionCallExpression
+	queries
+		nElem : /f//#ident[0];
+		dElem : /f/#designator;
+		eElem : /f//#expression;
+	mappings
+		--expressionType =
+		calledFunction = dElem;
+		actualParams   = eElem;
+end_rule
+
+skip_rule 'skipCompoundStmt'
+	from structStmt/compoundStmt st
+	to	 astm::gastm::Statement
+	queries
+		next : /st//#statement;
+	mappings
+		skip next;
+end_rule
+
+rule 'mapWithStatement'
+	from structStmt/withStmt st
+	to	astm::sastm::DelphiWithStatement
+	queries
+		wElem : /st//identList//#ident;
+		stats : /st//#statement;
+	mappings
+		withs         = wElem;
+		subStatements = stats;
+end_rule
+
+rule 'mapIfStatement'
+	from structStmt/conditionalStmt/ifStmt st
+	to	astm::gastm::IfStatement
+	queries
+		exp       : /st//ifStmt/#expression;
+		thenElems : /st//ifStmt/#statement[0];
+		elseElems : /st//ifStmt/#statement[1];
+	mappings
+		condition = exp;
+		thenBody  = thenElems;
+		elseBody  = elseElems;
+end_rule
+
+rule 'mapCaseStatement'
+	from structStmt/conditionalStmt/caseStmt st
+	to	astm::gastm::SwitchStament
+	queries
+		exp       : /st//caseStmt/#expression;
+		caseSels  : /st//caseStmt/#caseSelector;
+		elseElems : /st//caseStmt/#stmtList;
+	mappings
+		switchExpression = exp;
+		cases            = caseSels;
+		cases            = elseElems;
+end_rule
+
+rule 'mapCaseBlock'
+	from caseSelector cs
+	to	 astm::gastm::CaseBlock
+	queries
+		exps  : /cs//constExpr/#expression; -- TODO: Deal with constExpr
+		stats : /cs/#statement;
+	mappings
+		caseExpressions = exps;
+		body            = statement;
+end_rule
+
+rule 'mapDefaultCaseBlock'
+	from stmtList st
+	to   astm::gastm::DefaultBlock
+	queries
+		stats : /st/#statement;
+	mappings
+		body = stats;
+end_rule
+
+rule 'mapTryStatement'
+	from structStmt/tryStmt st
+	to   astm::gastm::TryStatement
+	queries
+		stats  : /st//tryStmt/#stmtList[0];
+		exceps : /st//tryStmt/#exceptionBlock; -- TODO: Deal with exception blocks
+		alts   : /st//tryStmt/#stmtList[1];
+	mappings
+		guardedStatement = stats;
+		catchBlocks      = exceps;
+		finalStatement   = alts;
+end_rule
+
+--
+-- Locators
+--
+
+rule 'locateFromDesignatorNoQualified'
+	from designator{!TOKEN[0].eq(".")} d
+	to 	 astm::gastm::IdentifierReference
+	queries
+		source : /d//#designatorPart;
+		varloc : //#varDecl//ident{ID.eq(source.ID)};
+		metloc : //#procedureDeclSection//ident[0]{ID.eq(source.ID)};
+	mappings
+		name 			= new astm::gastm::Name;
+		name.nameString = extract source;	
+		if(metloc.hasResults) then
+			refersTo = metloc;
+		else 
+			refersTo = varloc;
+		end_if
+end_rule
+
+rule 'locateFromDesignatorQualified'
+	from designator{TOKEN[0].eq(".")} d
+	to 	 astm::gastm::QualifiedOverData
+	queries
+		source : /d/designatorSubPart/#designatorPart;
+		varloc : //#varDecl//ident{ID.eq(source.ID)};
+		metloc : //#procedureDeclSection//ident[0]{ID.eq(source.ID)};
+		next   : /d/#designator;
+	mappings
+		name 			= new astm::gastm::Name;
+		name.nameString = extract source;	
+		member 			= next;
+		if(metloc.hasResults) then
+			refersTo = metloc;
+		else 
+			refersTo = varloc;
+		end_if
+end_rule
+
+skip_rule 'locateFromID'
+	from ident id
+	to 	 astm::gastm::DefinitionObject
+	queries
+		varloc : //#varDecl//ident{ID.eq(id.ID)};
+		metloc : //#procedureDeclSection//ident[0]{ID.eq(id.ID)};
+	mappings
+		if(metloc.hasResults) then
+			skip metloc;
+		else 
+			skip varloc;
+		end_if
+end_rule
+
+-- 
+-- Rules for expressions
+--
+
+-- Be careful, this rule must be located here (before skipToSimpleExpression)
+rule 'mapRelOp'
+	from	expression/relOp exp
+	to		astm::gastm::BinaryExpression
+	queries
+		lElems : /exp/#simpleExpression[0];
+		rElems : /exp/#simpleExpression[1]; -- TODO: Deal with more than one
+		
+		isEquals : /exp/relOp{TOKEN.eq("=")}; -- TODO: Deal with 
+	mappings
+		leftOperand  = lElems;
+		rightOperand = rElems;
+		
+		if(isEquals.hasResults) then
+			operator = new astm::gastm::Equal;
+		end_if
+end_rule
+
+skip_rule 'skipToSimpleExpression'
+	from	expression/simpleExpression exp
+	to		astm::gastm::Expression
+	queries
+		nextNode    : /exp/#simpleExpression;
+	mappings
+		skip nextNode;
+end_rule
+
+skip_rule 'skipAddOp'
+	from 	simpleExpression se
+	to		astm::gastm::Expression
+	queries
+		existsAddOp : /se/#addOp[0];
+		nextNode    : /se/#term;
+	mappings
+		if(existsAddOp.hasResults) then
+			skip existsAddOp;
+		else
+			skip nextNode;
+		end_if
+end_rule
+
+skip_rule 'skipMulOp'
+	from 	term t
+	to		astm::gastm::Expression
+	queries
+		existsMulOp : /t/#mulOp[0];
+		nextNode2   : /t/#factor;
+	mappings
+		if(existsMulOp.hasResults) then
+			skip existsMulOp;
+		else
+			skip nextNode2;
+		end_if
+end_rule
+
+-- TODO: Fill it in!
+rule 'mulOp'
+	from 	mulOp mo
+	to		astm::gastm::BinaryExpression
+	queries
+	mappings
+end_rule
+
+rule 'mapNumber'
+	from 	factor/number f
+	to 		astm::gastm::IntegerLiteral
+	queries
+		nVal : /f//#number;
+	mappings
+		value = extract nVal;
+end_rule
+
+rule 'mapString'
+	from 	factor/string f
+	to 		astm::gastm::StringLiteral
+	queries
+		sVal : /f//#string;
+	mappings
+		value = extract sVal;
+end_rule
+
+-- TODO: This rule is coppy/paste of mapCallFunction, I hate doing this :(
+-- We need any refactor/reuse mechanism!!
+-- Take care, this rule must be located here (before of mapVariableRef rule)
+rule 'mapFunctionCall'
+	from	factor/exprList f
+	to		astm::sastm::DelphiFunctionCallExpression
+	queries
+		nElem : /f//#ident[0];
+		dElem : /f/#designator;
+		eElem : /f//#expression;
+	mappings
+		--expressionType =
+		calledFunction = dElem;
+		actualParams   = eElem;
+end_rule
+
+rule 'mapParameter'
+	from 	expression exp
+	to 		astm::gastm::ActualParameterExpression
+	queries
+		
+	mappings
+		value = exp;
+end_rule
+
+-- TODO: Dealing with complex identifiers
+skip_rule 'mapVariableRef'
+	from	factor/designator f
+	to		astm::gastm::IdentifierReference
+	queries	
+		dElem : /f/#designator;
+	mappings
+		skip dElem;
+end_rule

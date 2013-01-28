@@ -1,0 +1,425 @@
+-- *******************************************************************************
+-- * Copyright (c) 2010
+-- * All rights reserved. This program and the accompanying materials
+-- * are made available under the terms of the Eclipse Public License v1.0
+-- * which accompanies this distribution, and is available at
+-- * http://www.eclipse.org/legal/epl-v10.html
+-- *
+-- * Contributors:
+-- *    Javier Canovas (jlcanovas@um.es) 
+-- *******************************************************************************
+
+
+hash strutsClassTypeMap
+	"Action" -> "ACTION",
+	"ActionForm" -> "ACTION_FORM",
+	default -> "NORMAL_JAVA_CLASS"
+end_hash
+
+hash visibilityTypeMap
+	"public" -> "PUBLIC",
+	"private" -> "PRIVATE",
+	"protected" -> "PROTECTED",
+	default -> "PACKAGE"
+end_hash
+
+hash infixOperatorTypeMap
+	"==" -> "EQUALS",
+	"!=" -> "NOT_EQUALS",
+	"&&" -> "CONDITIONAL_AND",
+	"||" -> "CONDITIONAL_OR"
+end_hash
+
+hash assignmentOperatorTypeMap
+	"=" -> "ASSIGN",
+	"+=" -> "PLUS_ASSIGN"
+end_hash
+
+------------------------ INITIAL RULE ------------------------
+
+rule 'mainRule'
+	from compilationUnit
+	to JavaSimplified::JavaModel 
+	queries 
+		newtypes     : //compilationUnit/typeDeclaration//#type;
+		createdTypes : (type) //compilationUnit//#createdName;
+		declarations : //compilationUnit/#typeDeclaration;
+	mappings
+		types = newtypes;
+		types = createdTypes;
+		classes = declarations;
+end_rule
+
+---------------------------------------------------------------
+
+rule 'javaClass'
+	from typeDeclaration td
+	to JavaSimplified::JavaClass
+	queries 
+	    mycompUnit : //#compilationUnit/typeDeclaration{this.check(td)};
+		imp        : /mycompUnit//#importDeclaration;
+		classDecl  : /td//#normalClassDeclaration;
+		fieldDecl  : /classDecl//#classBodyDeclaration//fieldDeclaration;
+		methDecl   : /classDecl//#classBodyDeclaration;
+	mappings
+		imports = extract imp;
+		name = new JavaSimplified::Name;
+		name.identifier = classDecl.Identifier;
+		name.strValue = classDecl.Identifier;
+		fields = fieldDecl;
+		methods = methDecl;
+end_rule
+
+rule 'field'
+	from classBodyDeclaration//fieldDeclaration cbd
+	to JavaSimplified::Field
+	queries 
+		varDecl : /cbd//#variableDeclarator[0];
+		varMod  : /cbd/#modifier;
+		varType : /cbd//fieldDeclaration/#type;
+	mappings
+		name = new JavaSimplified::Name;
+		name.identifier = varDecl.Identifier;
+		name.strValue = varDecl.Identifier;
+		visibility = map visibilityTypeMap(varMod.TOKEN);
+		type = varType;
+		strValue = extract cbd;
+end_rule
+
+rule 'typedMethod'
+	from classBodyDeclaration/memberDecl/methodDeclaration cbd
+	to JavaSimplified::Method
+	queries
+		methDecl  : /cbd/memberDecl/#methodDeclaration;
+	    methType  : /methDecl/#type;
+	    methParam : /cbd//formalParameters///#formalParameterDecls;
+	    methStat  : /cbd//#blockStatement;
+	mappings
+		strValue = extract cbd;
+		name = new JavaSimplified::Name;
+		name.identifier = methDecl.Identifier;
+		name.strValue = methDecl.Identifier;
+		parameters = methParam;	
+		returnType = methType;
+		statements = methStat;
+end_rule
+
+rule 'voidMethod'
+	from classBodyDeclaration/memberDecl{Identifier.exists} cbd
+	to JavaSimplified::Method
+	queries
+		methDecl : /cbd/#memberDecl;
+		methParam : /cbd//formalParameters//#formalParameterDecls;
+		methStat : /cbd//#blockStatement;
+	mappings
+		strValue = extract cbd;
+		name = new JavaSimplified::Name;
+		name.identifier = methDecl.Identifier;
+		name.strValue = methDecl.Identifier;
+		parameters = methParam;
+		statements = methStat;
+end_rule
+
+rule 'parameter'
+	from formalParameterDecls fpd
+	to JavaSimplified::Parameter
+	queries
+		paramType : /fpd/#type;
+		paramDecl : /fpd/formalParameterDeclsRest/#variableDeclaratorId;
+	mappings
+		name = new JavaSimplified::Name;
+		name.identifier = paramDecl.Identifier;
+		name.strValue = paramDecl.Identifier;
+		type = paramType;
+end_rule
+
+
+-------------------- RULES FOR TYPES --------------------
+
+rule 'complexType'
+	from type[unique]{Identifier.exists} t
+	to JavaSimplified::Type
+	queries
+	mappings
+		type = t.Identifier;
+end_rule
+
+rule 'primitiveType'
+	from type[unique]/primitiveType t
+	to JavaSimplified::Type
+	queries
+		ptype : /t/#primitiveType;
+	mappings
+		type = ptype.TOKEN;
+end_rule
+
+
+-------------------- RULES FOR SENTENCES ---------------------
+
+rule 'returnStatement'
+	from blockStatement/statement{TOKEN.eq("return")} bst
+	to JavaSimplified::ReturnStatement
+	queries
+		retExp : /bst/statement/#expression;
+	mappings
+		expr = retExp;
+end_rule
+
+rule 'expressionStatement'
+	from blockStatement/statement/statementExpression bst
+	to JavaSimplified::ExpressionStatement
+	queries
+		e : /bst/statement/statementExpression/#expression;
+	mappings
+		strValue = extract e;
+		expr = e;
+end_rule
+
+rule 'variableDeclarationStatement'
+	from blockStatement/localVariableDeclaration bst
+	to JavaSimplified::VariableDeclarationStatement
+	queries
+		lvd : /bst/#localVariableDeclaration;
+		t   : /lvd/#type;
+		vd  : /lvd/variableDeclarators/#variableDeclarator[first];
+		e   : /vd/variableDeclaratorRest/variableInitializer/#expression;
+	mappings
+		strValue = extract bst;
+		type = t;
+		name = new JavaSimplified::Name;
+		name.identifier = vd.Identifier;
+		name.strValue = vd.Identifier;
+		expr = e;
+end_rule
+
+rule 'ifStatement'
+	from blockStatement/statement{TOKEN.exists && TOKEN.eq("if")} bst
+	to JavaSimplified::IfStatement
+	queries
+		e : /bst/statement/parExpression/#expression;
+		st : (blockStatement) /bst/#statement;
+	mappings
+		strValue = extract bst;
+		expr = e;
+		ifst = st;
+end_rule
+
+-------------------- RULES FOR EXPRESSIONS -------------
+
+rule 'methodCall'
+	from primary{Identifier.exists && TOKEN.eq(".") && Identifier[1].exists}/identifierSuffix pri
+	to JavaSimplified::MethodCall
+	queries
+	    args : /pri//arguments//#expression;
+	    unexp : //compilationUnit//#unaryExpressionNotPlusMinus/primary{this.check(pri)};
+	    child : /unexp/#selector;
+	mappings
+		arguments = args;
+		methodName = new JavaSimplified::Name;
+		methodName.identifier = pri.Identifier[1];
+		methodName.strValue = pri.Identifier[1];
+		childCall = child;
+end_rule
+
+rule 'selectorMethodCall'
+	from selector{TOKEN.eq(".") && Identifier.exists} sel
+	to JavaSimplified::MethodCall
+	queries
+	    args : /sel//arguments//#expression;
+	    unexp : //compilationUnit//#unaryExpressionNotPlusMinus/selector{this.check(sel)};
+	    child : /unexp/#selector;
+	mappings
+		arguments = args;
+		methodName = new JavaSimplified::Name;
+		methodName.identifier = sel.Identifier;
+		methodName.strValue = sel.Identifier;
+		childCall = child;
+end_rule
+
+rule 'thismethodCall'
+	from primary{Identifier.exists}/identifierSuffix pri
+	to JavaSimplified::MethodCall
+	queries
+	    args : /pri//arguments//#expression;
+	mappings
+		arguments = args;
+		methodName = new JavaSimplified::Name;
+		methodName.identifier = pri.Identifier;
+		methodName.strValue = pri.Identifier;
+end_rule
+
+rule 'auxName'
+	from primary{Identifier.exists} p
+	to JavaSimplified::Name
+	queries
+	mappings
+		identifier = p.Identifier;
+		strValue = p.Identifier;
+end_rule
+
+rule 'orExpression'
+	from expression/conditionalExpression/conditionalOrExpression{TOKEN.eq("||")} ex
+	to JavaSimplified::InfixExpression
+	queries
+		e1 : /ex/conditionalExpression/conditionalOrExpression/#conditionalAndExpression[0];
+		e2 : /ex/conditionalExpression/conditionalOrExpression/#conditionalAndExpression[1];
+	mappings
+		operator = "CONDITIONAL_OR";
+		expr1 = e1;
+		expr2 = e2;
+end_rule
+
+rule 'parenmethodInvocationExpr'
+	from expression//parExpression{TOKEN.eq("(")}//primary{TOKEN.eq(".")}/identifierSuffix expr
+	to JavaSimplified::MethodInvocation
+	queries
+		pri : /expr//parExpression{TOKEN.eq("(")}//#primary;
+	mappings
+		strValue = extract expr;
+		object = pri;
+		method = pri;
+end_rule
+
+rule 'normalmethodInvocationExpr'
+	from expression//primary{TOKEN.eq(".")}/identifierSuffix expr
+	to JavaSimplified::MethodInvocation
+	queries
+		pri : /expr///#primary[0];
+	mappings
+		strValue = extract expr;
+		object = pri;
+		method = pri;
+end_rule
+
+rule 'normalmethodInvocationExprSpecial'
+	from conditionalAndExpression//primary{TOKEN.eq(".")}/identifierSuffix ce
+	to JavaSimplified::MethodInvocation
+	queries
+		pri : /ce//#primary;
+	mappings
+		strValue = extract ce;
+		object = pri;
+		method = pri;
+end_rule
+
+rule 'thismethodInvocationExpr'
+	from expression//primary/identifierSuffix expr
+	to JavaSimplified::MethodInvocation
+	queries
+		pri : /expr//#primary;
+	mappings
+		strValue = extract expr;
+		method = pri;
+end_rule
+
+rule 'classInstanceCreationExpr'
+	from expression//creator expr
+	to JavaSimplified::ClassInstanceCreation
+	queries
+		crn : (type) /cr/#createdName;
+		arg : /expr//arguments//#expression;
+	mappings
+		strValue = extract expr;
+		className = crn;
+		arguments = arg;
+end_rule
+
+rule 'assignmentExpr'
+	from expression/assignmentOperator expr
+	to JavaSimplified::Assignment
+	queries
+		e1 : /expr/#conditionalExpression;
+		e2 : /expr/#expression;
+		op : /expr/#assignmentOperator;
+	mappings
+		operator = map assignmentOperatorTypeMap(op.TOKEN);
+		expr1 = e1;
+		expr2 = e2;
+end_rule
+
+rule 'castExpression'
+	from expression//castExpression expr
+	to JavaSimplified::CastExpression
+	queries
+		cast : /expr//#castExpression;
+		t : /cast/#type;
+		e : (expression) /cast/#unaryExpressionNotPlusMinus; 
+	mappings
+		strValue = extract cast;
+		expr = e;
+		type = t;
+end_rule
+
+rule 'leftThisExpr'
+	from conditionalExpression//primary{Identifier.exists && TOKEN.exists && TOKEN[0].eq("this")} expr
+	to JavaSimplified::FieldAccess
+	queries
+		pri: /expr//#primary{Identifier.exists && TOKEN.exists && TOKEN[0].eq("this")};
+	mappings
+		expr = new JavaSimplified::ThisExpression;
+		name = new JavaSimplified::Name;
+		name.identifier = pri.Identifier;
+		name.strValue = pri.Identifier;
+end_rule
+
+rule 'nameCondExpr'
+	from conditionalExpression//primary{Identifier.exists} expr
+	to JavaSimplified::Name
+	queries
+		pri: /expr//#primary{Identifier.exists};
+	mappings
+		identifier = pri.Identifier;
+		strValue = pri.Identifier;
+end_rule
+
+rule 'nameExpr'
+	from expression//primary{Identifier.exists && !TOKEN.exists} expr
+	to JavaSimplified::Name
+	queries
+		pri: /expr//#primary{Identifier.exists && !TOKEN.exists};
+	mappings
+		identifier = pri.Identifier;
+		strValue = pri.Identifier;
+end_rule
+
+rule 'constantExpr'
+	from expression//primary{Identifier.exists} expr
+	to JavaSimplified::Name
+	queries
+	mappings
+		identifier = extract expr;
+		strValue = extract expr;
+end_rule
+
+
+-------------------- REGLAS PARA LITERALES -----------------------------
+
+rule 'booleanLiteralExpr'
+	from expression//booleanLiteral{TOKEN.exists} expr
+	to JavaSimplified::Literal
+	queries
+		bool : /expr//#booleanLiteral{TOKEN.exists};
+	mappings
+		type = "BOOLEAN";
+		value = bool.TOKEN;
+		strValue = bool.TOKEN;
+end_rule
+
+rule 'stringLiteralExpr'
+	from expression//literal{StringLiteral.exists} expr
+	to JavaSimplified::Literal
+	queries
+		strl : /expr//#literal{StringLiteral.exists};
+	mappings
+		type = "STRING";
+		value = removeQuotes strl.StringLiteral;
+		strValue = removeQuotes strl.StringLiteral;
+end_rule
+
+rule 'nullLiteralExpr'
+	from expression//literal{TOKEN.exists && TOKEN.eq("null")} expr
+	to JavaSimplified::Literal
+	queries
+	mappings
+		type = "NULL";
+end_rule

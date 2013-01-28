@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<simpleLanguage:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simpleLanguage="http://modelum.es/gra2mol/examples/simpleLanguage">
+  <definitions>
+    <statements xsi:type="simpleLanguage:PrintStatement" message="Hello, World!"/>
+  </definitions>
+  <definitions>
+    <statements xsi:type="simpleLanguage:PrintStatement" message="Hello again!"/>
+  </definitions>
+</simpleLanguage:Module>

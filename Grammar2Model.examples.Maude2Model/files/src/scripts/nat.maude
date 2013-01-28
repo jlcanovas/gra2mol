@@ -1,0 +1,9 @@
+mod SIMPLE is
+  sort Nat .
+  op zero  :         -> Nat .
+  op _plus_   : Nat Nat -> Nat .
+  
+  vars N : Nat .
+
+  eq zero plus N = N .
+endm

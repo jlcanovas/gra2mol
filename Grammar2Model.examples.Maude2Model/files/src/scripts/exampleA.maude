@@ -1,0 +1,19 @@
+  ---- Probando probando
+  
+mod @ECORE@ is
+    sort @Package @BasicType @Classifier @DataType @Class @Metamodel @ERROR@ @Attribute @Reference .
+    sort Int Nat Bool String List @Enumeration @EnumerationInstance ListOrd OclVoid .
+endm 
+  
+mod @MPNS@ is
+  protecting @ECORE@
+  .
+  op @MPNs@ : -> @Metamodel
+  .
+  eq name( @MPNs@ ) =
+    "MPNs"
+  .
+  eq packages( @MPNs@ ) =
+    MPNs
+  .
+endm

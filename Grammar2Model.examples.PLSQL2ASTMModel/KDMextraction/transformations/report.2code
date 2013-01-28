@@ -1,0 +1,44 @@
+# *******************************************************************************
+# * Copyright (c) 2010
+# * All rights reserved. This program and the accompanying materials
+# * are made available under the terms of the Eclipse Public License v1.0
+# * which accompanies this distribution, and is available at
+# * http://www.eclipse.org/legal/epl-v10.html
+# *
+# * Contributors:
+# *    Javier Canovas (jlcanovas@um.es) 
+# *******************************************************************************
+
+class ::Array 
+  def sum
+    self.inject(0) { |tmp, v| tmp + v}
+  end
+end
+
+main do
+  Metrics::ComplexMeasurement.all_objects.select{|cm| cm.tag == "resume"}.each do |resume|
+    compose_file('report.txt') do
+      println "R/W Imperative;R/W Declarative;Reflective;"
+      
+      total = resume.measurements.select { |m| m.kind_of?(Metrics::ValueMeasurement) }.map { |m| m.value.to_i }.sum
+      apply_rule :category_results, resume.measurements, :total => total
+    end
+  end
+end
+
+rule 'category_results' do
+  param :total
+  
+  from Metrics::ValueMeasurement do
+    text do
+      value = ((self.value.to_i * 100) / total) 
+      self.print "#{value}%;"
+    end
+  end
+  
+  from Metrics::ComplexMeasurement do
+    text do
+    
+    end
+  end
+end

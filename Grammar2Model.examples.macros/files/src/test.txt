@@ -1,0 +1,4 @@
+VERSION BUILD = 0.1 
+TAB 
+ TYPE = myType
+  

@@ -1,0 +1,2355 @@
+--- ------------------------------------------------------------------------------------ 
+--- Limite de columnas impresas correctamente en papel usando enscript 
+--- ------------------------------------------------------------------------------------ 
+--- Fichero: mOdCL09.maude
+--- Tested on Maude 2.4 built: Nov  6 2008 17:14:50
+--- Version: mOdCL 1.7.1
+--- Documentacion adicional: mOdCL.cromo contiene documentacion cronologica de cambios.
+--- Creacion: 26-11-2009
+--- Ultima modificacion: 16-12-2009
+--- Estado: 	Version abierta para introducir cambios
+--- 				 
+--- Origen. Parto de la version 1.7.0, que es la enviada a PD junto con el informe de
+--- 	    tecnico
+---
+--- PENDIENTE
+---	- Revisar la precedencia y asociatividad de los operadores.
+---
+--- Cambios.  
+---	* Permito que floor sea aplicable a Rat
+---	* Soluciono bug reportado por Troya. CollectNested devolvia las secuencias
+---	  en orden inverso. Cambio include por insert
+---	* Segun comenta Troya, es posible hacer llamadas a funciones sin que
+---	  aparezca un objeto relacionado con ellas, por ejemplo
+---    		 red << Sequence[1] -> collect(ITER | mas(ITER) ) >> .
+---       En tal caso, dado que mOdCL convierte estas llamadas en self . mas(ITER), 
+---	  es necesario que exista algun self en en entorno de variables. Por tanto, 
+---	  siempre incluire un self inicial, aunque sea ficticio.  
+---	  Cambio los operadores << >> para que siempre aparezca este foo-self
+---	  OJO. Deberia aparecer esto en el manual de usuario??
+
+
+--- ERRATA.  
+--- Hay una errata en el Benchmark B5. prueba 512. Parece que no funciona porque
+--- collect sobre una Secuencia, produce una secuencia con los elementos en orden
+--- inverso al original. Aunque ello esta mal, de todas formas, no encuentro en
+--- ningun sitio que diga como deben quedat los elementos en la secuencia resultante
+--- Ademas, en la p. 155 de la especificacion dice que collect opera sober Sets
+--- ------------------------------------------------------------------------------------ 
+
+--- %I --------------------------------------------------------------------------------- 
+--- Esquema de resolucion de conflictos. 
+--- Debido a que la jerarquia de subsorts utilizada situa todos los sorts predefinidos
+--- de Maude como subsorts de un mismo sort BasicType
+---	   subsort Oid Int Float String Bool Enum < BasicType .
+--- maude no puede determinar sort adecuado de los operandos usados en operadores 
+--- sobrecargados. Como consecuencia se generan numeros errores.
+--- SOLUCION: Renombrar los operadores que planteen conflictos.
+--- Para facilitar el uso de los sorts predefinidos con operadores renombrados, defino
+--- versiones adaptadas a mOdCL de los modulos que definen los sorts predefinidos en
+--- Maude, especificando OCL-FLOAT, OCL-INT Y OCL-STRING, que deberan ser utilizados 
+--- siempre en lugar de FLOAT, INT y STRING (incluso por el usuario que define e 
+--- implementa el sistema UML mediante reglas Maude)
+--- %F ---------------------------------------------------------------------------------
+---
+--- Conflictos de RAT
+---     xor con BOOL
+---     + - * > < >= <= y | son renombrados para dejar libre su uso como operadores OCL
+fmod OCL-RAT is
+   pr RAT * (op _xor_ : Nat Nat -> Nat  to _nxor_,
+             op _|_   : Nat Nat -> Nat  to _|N_,     
+             op _<_   : Nat Nat -> Bool to _<N_,    
+             op _<=_  : Nat Nat -> Bool to _<=N_,   
+             op _>_   : Nat Nat -> Bool to _>N_,    
+             op _>=_  : Nat Nat -> Bool to _>=N_,   
+             op _-_   : Nat Nat -> Nat  to _-N_,    
+             op _*_   : Nat Nat -> Nat  to _*N_,    
+             op _+_   : Nat Nat -> Nat  to _+N_,
+             op -_ : Int -> Int to -I_,
+             
+             --- Maudeling usa Rat. Sin embargo, el operador / esta reservado para 
+             --- division entre enteros o reales, por lo que lo renombro a //
+             op _/_   : Rat Rat -> Rat  to _//_,         
+             op floor : PosRat -> Nat to floorR,
+             op ceiling : PosRat -> Nat to ceilingR) .
+endfm
+--- ------------------------------------------------------------------------------------ 
+--- Conflictos de STRING
+---  - STRING importa NAT, por lo que los renombramientos efectuados para NAT deben
+---    ser mantenidos al definir STRING. En concreto:
+---		. xor
+---		. <, >, <=, >=, * y +
+---  - Operadores propios de String. Por conflicto con Float
+---             . <, >, <=, >=, +
+fmod OCL-STRING is
+   pr STRING * (op _|_   : Nat Nat -> Nat  to _|N_,    
+                op _xor_ : Nat Nat -> Nat to _nxor_,   
+                op _<_   : Nat Nat -> Bool to _<N_,    
+                op _<=_  : Nat Nat -> Bool to _<=N_,   
+                op _>_   : Nat Nat -> Bool to _>N_,    
+                op _>=_  : Nat Nat -> Bool to _>=N_,   
+                op _*_   : Nat Nat -> Nat to _*N_,     
+                op _+_   : Nat Nat -> Nat to _+N_,
+ 
+                op _<_  : String String -> Bool to _lt_,   
+                op _<=_ : String String -> Bool to _leq_,   
+                op _>_  : String String -> Bool to _gt_,   
+                op _>=_ : String String -> Bool to _geq_,  
+                op _+_  : String String -> String to _++_) .   
+endfm
+--- ------------------------------------------------------------------------------------ 
+--- Conflictos con FLOAT
+---   Los conflictos con FLOAT han sido resueltos indirectamente al renombrar los 
+---   operadores implicados en los modulos que entran en conflicto con este.
+---   No obstante, renombro para dejar libres los simbolos de operacion tipicos para su
+---   uso como operadores OCL
+fmod OCL-FLOAT is
+   pr FLOAT * (op abs   : Float -> Float to absF,
+               op -_    : Float -> Float  to -F_,
+               op _+_   : Float Float -> Float to _+F_,
+               op _-_   : Float Float -> Float to _-F_,
+               op _/_   : Float Float -> Float to _/F_,
+               op _*_   : Float Float -> Float to _*F_,
+               op min   : Float Float -> Float to minF,
+               op max   : Float Float -> Float to maxF,
+               op _rem_ : Float Float -> Float to _remF_,
+               op _^_   : Float Float -> Float to _^F_,
+               op _<_   : Float Float -> Bool  to _<F_,
+               op _<=_  : Float Float -> Bool  to _<=F_,
+               op _>_   : Float Float -> Bool  to _>F_,
+               op _>=_  : Float Float -> Bool  to _>=F_, 
+
+               op floor : Float -> Float to floorF,
+               op ceiling : Float -> Float to ceilingF) .
+endfm
+ 
+--- %I --------------------------------------------------------------------------------- 
+--- OCL-CONFIGURATION es el modulo CONFIGURATION de prelude. Unicamente se ha renombrado
+--- para evitar conflictos con Real Time Maude cuando es usado desde Maudeling
+--- %F --------------------------------------------------------------------------------- 
+mod OCL-CONFIGURATION is
+  sorts Attribute AttributeSet .
+  subsort Attribute < AttributeSet .
+  op none : -> AttributeSet  [ctor] .
+  op _,_ : AttributeSet AttributeSet -> AttributeSet [ctor assoc comm id: none] .
+
+  sorts Oid Cid Object Msg Portal Configuration .
+  subsort Object Msg Portal < Configuration .
+  op <_:_|_> : Oid Cid AttributeSet -> Object [ctor object] .
+  op none : -> Configuration [ctor] .
+  op __ : Configuration Configuration -> Configuration [ctor config assoc comm id: none] .
+  op <> : -> Portal [ctor] .
+endm
+ 
+--- ------------------------------------------------------------------------------------ 
+fmod OCL-CONVERSION is
+   pr CONVERSION
+            * (--- Renombramientos en FLOAT
+               op abs   : Float -> Float to absF,
+               op -_    : Float -> Float  to -F_,
+               op _+_   : Float Float -> Float to _+F_,
+               op _-_   : Float Float -> Float to _-F_,
+               op _/_   : Float Float -> Float to _/F_,
+               op _*_   : Float Float -> Float to _*F_,
+
+               op min   : Float Float -> Float to minF,
+               op max   : Float Float -> Float to maxF,
+               op _rem_ : Float Float -> Float to _remF_,
+               op _^_   : Float Float -> Float to _^F_,
+               op _<_   : Float Float -> Bool  to _<F_,
+               op _<=_  : Float Float -> Bool  to _<=F_,
+               op _>_   : Float Float -> Bool  to _>F_,
+               op _>=_  : Float Float -> Bool  to _>=F_,
+               op floor : Float -> Float to floorF,
+               op ceiling : Float -> Float to ceilingF,
+
+               --- Renombramientos en RAT
+               op _xor_ : Nat Nat -> Nat  to _nxor_,
+               op _|_   : Nat Nat -> Nat  to _|N_,
+               op _<_   : Nat Nat -> Bool to _<N_,
+               op _<=_  : Nat Nat -> Bool to _<=N_,
+               op _>_   : Nat Nat -> Bool to _>N_,
+               op _>=_  : Nat Nat -> Bool to _>=N_,
+               op _-_   : Nat Nat -> Nat  to _-N_,
+               op _*_   : Nat Nat -> Nat  to _*N_,
+               op _+_   : Nat Nat -> Nat  to _+N_,
+               op -_ : Int -> Int to -I_,
+               op _/_   : Rat Rat -> Rat  to _//_,
+               op floor : PosRat -> Nat to floorR,
+               op ceiling : PosRat -> Nat to ceilingR,
+               
+                --- Renombramientos en STRING
+               op _<_  : String String -> Bool to _lt_,
+               op _<=_ : String String -> Bool to _leq_,
+               op _>_  : String String -> Bool to _gt_,
+               op _>=_ : String String -> Bool to _geq_,
+               op _+_  : String String -> String to _++_,  
+               op float : Rat -> Float to rat2float,
+               op float : String ~> Float to string2float,
+               op rat : String NzNat ~> Rat to string2rat ) .
+endfm
+
+--- %I --------------------------------------------------------------------------------- 
+--- Implementacion de los tipos simples predefinidos en OCL. 
+--- Los operadores de los modulos basicos INT FLOAT y STRING han sido renombrados. 
+--- Defino nuevos operadores sobrecargados .op. para facilitar su uso de los operadores 
+--- basicos
+--- %F --------------------------------------------------------------------------------- 
+mod BASIC-TYPE is 
+endm
+
+mod OCL-TYPE is   
+   pr BASIC-TYPE .
+   pr OCL-CONFIGURATION .
+   pr OCL-RAT .  --- pr OCL-INT . Sustituyo INT por RAT para facilitar uso de Maudeling
+   pr OCL-STRING .
+   pr OCL-FLOAT .
+   pr OCL-CONVERSION .
+
+   sort OCL-Type . 
+   sort  BasicType .  
+   sorts Set Bag OrdSet Sequence . 
+
+   --- Los tipos enumerados en OCL deben ser definidos como subsort de Enum
+   sort Enum .
+
+   subsort Oid Int Rat Float String Bool Enum < BasicType .
+   subsort BasicType < OCL-Type . 
+   subsort Set Bag OrdSet Sequence  < OCL-Type . 
+
+
+   --- Invalid conforma con todos los tipos predefinidos
+   op invalid : -> OCL-Type .
+   op null    : -> OCL-Type .
+
+   --- Int
+   --- Ahora sustituyo los Int por los Rat
+   --- DUDA. Como consecuencia 3/2 es un rat y no se evalua a 1.5
+---   op _./._  : Int Int -> Float .
+---   eq O1:Int ./.  O2:Int = rat2float(O1:Int) /F rat2float(O2:Int) . 
+
+   --- Rat
+   --- 
+   op .-._   : Rat -> Rat .
+   op _.+._  : Rat Rat -> Rat .
+   op _.-._  : Rat Rat -> Rat .
+   op _.*._  : Rat Rat -> Rat .
+   op _./._  : Rat Rat -> Rat .
+
+   op _.>._  : Rat Rat -> Rat .
+   op _.<._  : Rat Rat -> Rat .
+   op _.>=._ : Rat Rat -> Rat .
+   op _.<=._ : Rat Rat -> Rat .
+
+   op .max.  : Rat Rat -> Rat .
+   op .min.  : Rat Rat -> Rat .
+
+   eq .-. O1:Rat  = -I O1:Rat .
+   eq O1:Rat .+. O2:Rat  = O1:Rat +N O2:Rat .
+   eq O1:Rat .-. O2:Rat  = O1:Rat -N O2:Rat .
+   eq O1:Rat .*. O2:Rat  = O1:Rat *N O2:Rat .
+   eq O1:Rat ./. O2:Rat  = O1:Rat // O2:Rat .
+
+   eq O1:Rat .<. O2:Rat  = O1:Rat <N O2:Rat .
+   eq O1:Rat .>. O2:Rat  = O1:Rat >N O2:Rat .
+   eq O1:Rat .<=. O2:Rat  = O1:Rat <=N O2:Rat .
+   eq O1:Rat .>=. O2:Rat  = O1:Rat >=N O2:Rat .
+   eq .abs.(O1:Rat) = abs(O1:Rat) .
+   eq .max.(O1:Rat, O2:Rat) = max(O1:Rat, O2:Rat) .
+   eq .min.(O1:Rat, O2:Rat) = min(O1:Rat, O2:Rat) .
+
+   --- Float
+   --- 
+   op .abs._ : Float -> Float .
+   op -._    : Float -> Float .
+   op .max. : Float Float -> Float . 
+   op .min. : Float Float -> Float . 
+   op _.+._ : Float Float -> Float . 
+   op _.-._ : Float Float -> Float .
+   op _.*._ : Float Float -> Float .
+   op _./._ : Float Float -> Float .
+   op _.<._ : Float Float -> Bool .
+   op _.>._ : Float Float -> Bool .
+   op _.<=._ : Float Float -> Bool .
+   op _.>=._ : Float Float -> Bool .
+
+   eq .abs. O1:Float =  absF(O1:Float) . 
+   eq .-. O1:Float   =  -F O1:Float . 
+   eq .max.(O1:Float,O2:Float) = maxF(O1:Float, O2:Float) .
+   eq .min.(O1:Float,O2:Float) = minF(O1:Float, O2:Float) .
+   eq O1:Float .+. O2:Float  = O1:Float +F O2:Float .
+   eq O1:Float .-. O2:Float  = O1:Float -F O2:Float . 
+   eq O1:Float .*. O2:Float  = O1:Float *F O2:Float .
+   eq O1:Float ./. O2:Float  = O1:Float /F O2:Float .
+   eq O1:Float .<. O2:Float  = O1:Float <F O2:Float .
+   eq O1:Float .>. O2:Float  = O1:Float >F O2:Float .
+   eq O1:Float .<=. O2:Float = O1:Float <=F O2:Float .
+   eq O1:Float .>=. O2:Float = O1:Float >=F O2:Float .
+
+   --- String
+   --- 
+   op _.+._  : String String -> String .
+   op _.<._  : String String -> Bool .
+   op _.>._  : String String -> Bool .
+   op _.<=._ : String String -> Bool .
+   op _.>=._ : String String -> Bool .
+ 
+   eq O1:String .+.  O2:String = O1:String ++  O2:String .
+   eq O1:String .<.  O2:String = O1:String lt  O2:String .
+   eq O1:String .>.  O2:String = O1:String gt  O2:String .
+   eq O1:String .<=. O2:String = O1:String leq O2:String .
+   eq O1:String .>=. O2:String = O1:String geq O2:String .
+endm
+
+--- ---------------------------------------------------------------------------------
+--- El modulo OCL-BOOL no se crea para solucionar conflictos de preregularidad, sino
+--- para aislar la semantica de OCL para los operadores logicos. En OCL las expr
+--- logicas admiten el uso de invalid. como consecuencia, una expresion no reducida 
+--- puede ser un argumento valido para una expresion logica.  
+---
+--- Segun la nueva version de la especificacion (pag 14) "En general, una expresion
+--- donde alguna de sus partes undefined es a su vez undefined". 
+--- La regla anterior tiene EXCEPCIONES
+---		True or anything is True
+---		False and anything is False
+---		False implies anything is True
+---		anything implies True is True
+--- Las reglas para or y and se aplican independientemente del orden de los 
+--- argumentos. Es decir NO HAY CORTOCIRCUITO, sino que hay que buscar valores
+--- que permitan dar la respuesta independientemente de si el otro argumento es
+--- undefined o no
+--- CONCLUSION: Si se puede dar el resultado, independientemente de que alguno de
+---		   los operandos este undefined, se da, y si ambos estan undefined
+---		   o no se puede dar respuesta, se devuelve undefined 
+mod OCL-BOOL is
+   pr OCL-TYPE .
+
+   op eval-or : [OCL-Type] [OCL-Type] -> [OCL-Type] . 
+   eq eval-or(true, O:[OCL-Type]) = true .
+   eq eval-or(O:[OCL-Type], true) = true .
+   eq eval-or(O1:OCL-Type, O2:OCL-Type) =  false 
+   [owise] .
+
+   op eval-and : [OCL-Type] [OCL-Type] -> [OCL-Type] . 
+   eq eval-and(false, O:[OCL-Type]) = false .
+   eq eval-and(O:[OCL-Type], false) = false .
+   eq eval-and(O1:OCL-Type, O2:OCL-Type) = true
+   [owise] .
+
+   op eval-implies :  [OCL-Type] [OCL-Type] -> [OCL-Type] . 
+   eq eval-implies(true, false) = false .
+   eq eval-implies(false, O:[OCL-Type]) = true .
+   eq eval-implies(O:[OCL-Type], true) = true .
+
+   --- NOTA. La especificacion no dice nada explicitamente acerca del 
+   ---       tratamiento de expresiones no definidas con xor, por lo que supongo
+   ---	     que ambos operandos estan instanciados 
+   op eval-xor : Bool Bool -> Bool . 
+   eq eval-xor(false, true) = true .
+   eq eval-xor(true, false) = true .
+   eq eval-xor(V1:Bool, V1:Bool) = false .
+endm
+
+--- ------------------------------------------------------------------------------------ 
+--- Declaracion del sort OCL-Exp. No se hace en OCL-SYNTAX porque se usa para instanciar
+--- los modulos parametrizados que soportan la especificacion de COLLECTION
+mod OCL-EXP is   
+   pr OCL-TYPE .
+
+   sort OCL-Exp . 
+   subsort OCL-Type < OCL-Exp .
+endm
+
+--- %I --------------------------------------------------------------------------------- 
+--- Vista Base. Usada para instanciar OCL-LIST y OCL-ORDL-LIST 
+--- Se instancia con OCL-Exp en lugar de con OCL-Type para permitir que los elementos 
+--- de sean expresiones OCL evaluables
+--- 	Ejemplo Set{2 .. V . last, Vuelos . allInstances -> size(), 4, 5}
+--- %F --------------------------------------------------------------------------------- 
+view Base from TRIV to OCL-EXP is
+  sort Elt to OCL-Exp .
+endv
+
+--- %I --------------------------------------------------------------------------------- 
+--- Tipos de datos utilizados como apoyo a implementacion de colecciones
+--- OCL-LIST define estructura asociativa y conmutativa
+---	List:		Elementos entre comas
+---	ItemList	{List}
+---			Introduzco {} en ItemList para facilitar la resolucion de 
+---			conflictos por colecciones anidadas
+--- OCL-ORD-LIST define estructura asociativa y NO conmutativa
+---	ListOrd:	Elementos entre punto y coma
+---	ItemListOrd	[ListOrd]
+--- POR HACER.  Repasar operaciones desde punto de vista de eficiencia.
+--- %F --------------------------------------------------------------------------------- 
+mod OCL-LIST{X :: TRIV} is
+   protecting OCL-RAT .
+
+   sorts ItemList{X} List{X} .
+   subsort X$Elt < List{X} .
+
+   --- He ajustando la precedencia para evitar parentesis innecesarios.
+   --- Inicialmente habia dejado las listas con la precedencia por defecto (41), pero al
+   --- introducir listas de asignadores de variables en let (que tambien van entre 
+   --- comas) se producen conflictos.
+   --- La precedencia de List{X} debe ser menor que la de VbleDeclList
+   --- Asimismo, dado que un elemento de list puede ser una expresion OCL, la 
+   --- precedencia de List debe ser menor que la de cualquier operador que pueda 
+   --- apareceren una expresion que calcule un valor de la lista (implies 61).
+
+   op mt : -> List{X} [ctor] .
+   op _,_ : List{X} List{X} 
+               -> List{X} [ctor assoc comm id: mt format (d r os d) prec 120] . 
+
+   op {_} : List{X} -> ItemList{X} [ctor] .
+   op {} : -> ItemList{X} [ctor] .
+
+   vars L L1 L2 : List{X} .
+   vars I I' : X$Elt . --- I1 I2
+ 
+   op get-first : ItemList{X} ~> X$Elt .
+   eq get-first({I, L}) = I .
+
+   op get-rest : ItemList{X} -> ItemList{X} .
+   eq get-rest({I, L}) = {L} .
+
+   op occurs : X$Elt ItemList{X} -> Bool .
+   eq occurs(I, {I, L}) = true .
+   eq occurs(I, {L}) = false 
+   [owise] .
+
+   op is-empty : ItemList{X} -> Bool .
+   eq is-empty({L}) = L == mt .
+
+   op insert : X$Elt ItemList{X}  -> ItemList{X} .
+   eq insert(I, {L}) = {I, L} .
+   eq insert(I, {}) = {I} .
+
+   op delete : X$Elt ItemList{X}  -> ItemList{X} .
+   eq delete(I, {I, L}) =  {L} .
+   eq delete(I, {L}) =  {L} 
+   [owise] .
+
+   op delete-all : X$Elt ItemList{X}  -> ItemList{X} .
+   eq delete-all(I, {I, L}) =  delete-all(I, {L}) .
+   eq delete-all(I, {L}) =  {L} 
+   [owise] .
+
+   op size : ItemList{X} -> Nat .
+   eq size({I, L}) = 1 +N size({L}) .
+   eq size({L}) = 0 
+   [owise] .
+
+   op append : ItemList{X} ItemList{X} -> ItemList{X} .
+   eq append({L1}, {L2}) = {L1 , L2} .
+
+   --- La interseccion de dos listas es otra, donde cada elemento comun a ambas
+   --- contiene el numero ocurrencias menor posible entre ambas.
+   op intersection : ItemList{X} ItemList{X} -> ItemList{X} .
+   eq intersection({I, L1}, {I, L2}) = insert(I, intersection({L1}, {L2})) . 
+   eq intersection({L1}, {L2}) = {mt} 
+   [owise] . 
+
+   --- La diferencia de dos listas es el resultado de eliminar de la primera los  
+   --- elementos que esten en la segunda
+   op minus : ItemList{X} ItemList{X} -> ItemList{X} .
+   eq minus({I, L1}, {I, L2}) = minus({L1}, {L2}) . 
+   eq minus({L1}, {L2}) = {L1} 
+   [owise] . 
+
+   --- True si todos los elementos de la primera estan en la segunda
+   op is-included : ItemList{X} ItemList{X} -> Bool .
+   eq is-included({mt}, {L}) = true .
+   eq is-included({I, L1}, {I, L2}) = is-included({L1}, {L2}) . 
+   eq is-included({L1}, {L2}) = false
+   [owise] .
+
+   op repeated-elements : ItemList{X} -> Bool .
+   eq repeated-elements({I, I , L}) = true .
+   eq repeated-elements({L}) = false 
+   [owise] .
+
+   op count : X$Elt ItemList{X} -> Nat .
+   eq count(I, {I, L}) = 1 +N count(I, {L}) .
+   eq count(I, {L}) = 0 
+   [owise]. 
+endm
+
+--- ------------------------------------------------------------------------------------ 
+mod OCL-ORD-LIST{X :: TRIV} is
+   pr OCL-RAT .
+
+   sorts ItemListOrd{X} ListOrd{X} .
+   subsort X$Elt < ListOrd{X} .
+
+   --- Al estar los elementos separador por ; no es posible que se produzcan conflictos,
+   --- por lo que dejo la precedencia por defecto.
+   op mt-ord : -> ListOrd{X} [ctor] .
+   op _;_ : ListOrd{X} ListOrd{X} 
+                       -> ListOrd{X} [ctor assoc id: mt-ord format (d r os d) ]  .   
+
+   op [_] : ListOrd{X} -> ItemListOrd{X} [ctor] .
+   op [] : -> ItemListOrd{X} [ctor] .
+
+   vars L L1 L2 : ListOrd{X} .
+   vars I I' I1 I2 : X$Elt .
+
+   op get-first : ItemListOrd{X} -> X$Elt .
+   eq get-first([I ; L]) = I .
+
+   --- Lista con todos los elementos menos el primero
+   op get-rest : ItemListOrd{X} -> ItemListOrd{X} .
+   eq get-rest([I ; L]) = [L] .
+
+   op occurs : X$Elt ItemListOrd{X} -> Bool .
+   eq occurs(I, [mt-ord]) = false .
+   eq occurs(I, [I' ; L]) = if I == I' then true else occurs(I, [L]) fi .
+
+   op is-empty : ItemListOrd{X} -> Bool .
+   eq is-empty([L]) = L == mt-ord .
+
+   op insert-first : X$Elt ItemListOrd{X} -> ItemListOrd{X} .
+   eq insert-first(I, [L]) = [I ; L] .
+
+   op insert-last : X$Elt ItemListOrd{X} -> ItemListOrd{X} .
+   eq insert-last(I, [L]) = [L ; I] .
+
+   op delete-aux : X$Elt ListOrd{X} -> ListOrd{X} .
+   eq delete-aux(I, mt-ord) = mt-ord . 
+   eq delete-aux(I, (I' ; L:ListOrd{X})) 
+     = if I == I' then L:ListOrd{X} else (I' ; delete-aux(I, L:ListOrd{X})) fi .
+
+   op delete : X$Elt ItemListOrd{X}  -> ItemListOrd{X} .
+   eq delete(I, [L]) = [delete-aux(I, L)] .
+
+   op delete-all-aux : X$Elt ListOrd{X} -> ListOrd{X} .
+   eq delete-all-aux(I, mt-ord) = mt-ord . 
+   eq delete-all-aux(I, I) = mt-ord . 
+   eq delete-all-aux(I, (I' ; L:ListOrd{X})) 
+     = if I == I' 
+       then delete-all-aux(I, L:ListOrd{X}) 
+       else (I' ; delete-all-aux(I, L:ListOrd{X})) 
+       fi .
+
+   op delete-all : X$Elt ItemListOrd{X}  -> ItemListOrd{X} .
+   eq delete-all(I, [L]) = [delete-all-aux(I, L)] .
+
+   op size : ItemListOrd{X} -> Nat .
+   eq size([I ; L]) = 1 +N size([L]) .
+   eq size([L]) = 0 [owise] .
+  
+   --- Une dos listas, la primera delante de la segunda
+   op append : ItemListOrd{X} ItemListOrd{X} -> ItemListOrd{X} .
+   eq append([L1], [L2]) = [L1 ; L2] .
+
+   op count : X$Elt ItemListOrd{X} -> Nat .
+   eq count(I, [I' ; L]) = count(I, [L]) +N if I == I' then 1 else 0 fi .
+   eq count(I, [mt-ord]) = 0 . 
+
+   op insertAt-aux : Int X$Elt ListOrd{X}  -> ListOrd{X} .
+   eq insertAt-aux(1, I, L:ListOrd{X}) = I ; L:ListOrd{X} .
+   eq insertAt-aux(P:Int, I, (I' ; L)) = I' ; insertAt-aux(P:Int -N 1, I, L)
+   [owise] .
+
+   --- Situa Item en la posicion indicada de la lista ordenada
+   op insertAt : Int X$Elt ItemListOrd{X} -> ItemListOrd{X} .
+   eq insertAt(P:Int, I, [L:ListOrd{X}]) = [insertAt-aux(P:Int, I , L:ListOrd{X})] .
+
+   op subList-aux : ListOrd{X} Nat Nat -> ListOrd{X} .
+   eq subList-aux(L, 1, 0) = mt-ord .
+   eq subList-aux((I ; L), Lw:Nat, T:Nat) 
+     = if Lw:Nat == 1 then I ; subList-aux(L, 1, sd(T:Nat, 1))
+       else subList-aux(L, sd(Lw:Nat, 1), T:Nat)
+       fi 
+   [owise] .
+
+   --- Devuelve la sublista entre las posiciones Lw y Up de lista ordenada
+   --- Si Lw > Up devuelve mt-ord
+   op subListOrd : ItemListOrd{X} Nat Nat -> ItemListOrd{X} .
+   eq subListOrd([L:ListOrd{X}], Lw:Nat, Up:Nat) 
+     = if Lw:Nat >N Up:Nat then [mt-ord]
+       else [subList-aux(L:ListOrd{X}, Lw:Nat, sd(Up:Nat, Lw:Nat) +N 1)] 
+       fi .
+
+   op get-item-at : Nat ItemListOrd{X} -> X$Elt .
+   eq get-item-at(P:Nat, [I ; L]) 
+     = if P:Nat == 1 
+       then I
+       else get-item-at(sd(P:Nat, 1), [L])
+       fi .
+
+   op getPos-item : X$Elt ItemListOrd{X} -> Nat .
+   eq getPos-item(I, [I ; L]) = 1 .
+   eq getPos-item(I, [I' ; L]) = 1 +N getPos-item(I, [L]) 
+   [owise] .
+
+   op getLast : ItemListOrd{X} -> X$Elt .
+   eq getLast([L ; I]) = I .
+
+   --- True si todos los elementos de la primera estan en la segunda
+   --- Por ahora no me ocupo de la eficiencia. Despues cambiar al estilo  "divideL"
+   op is-included : ItemListOrd{X} ItemListOrd{X} -> Bool .
+   eq is-included([mt-ord], [L]) = true .
+   eq is-included([I ; L1], [L2]) 
+     = if occurs(I, [L2]) then is-included([L1], [L2]) else false fi . 
+
+   --- Por ahora no me preocupo de eficiencia
+   op repeated-elements : ItemListOrd{X} -> Bool .
+   eq repeated-elements([mt-ord]) = false .
+   eq repeated-elements([I ; L]) 
+    = if occurs(I, [L]) then true else repeated-elements([L]) fi .
+
+   --- Criba la lista eliminando las repeticiones de elementos
+   --- Permanecen los mas antiguos
+   op filter : ItemListOrd{X} -> ItemListOrd{X} .
+   eq filter([mt-ord]) = [mt-ord] .
+   eq filter([I]) = [I] .
+   eq filter([L ; I])
+     = if occurs(I, [L]) then filter([L])
+       else append(filter([L]),[I])
+       fi .
+endm
+
+
+--- ------------------------------------------------------------------------------------ 
+--- ArgPair define un par formado por el nombre de un argumento y su valor en una 
+---         llamada a una operacion
+--- ------------------------------------------------------------------------------------ 
+mod ARG-PAIR is
+   pr OCL-TYPE .
+
+   sort Arg ArgPair .
+   op arg : Arg OCL-Type -> ArgPair [ctor] .
+endm 
+
+view ArgPair from TRIV to ARG-PAIR is
+   sort Elt to ArgPair .
+endv
+
+mod ARGS is
+   pr (SET  * (op _xor_ : Nat Nat -> Nat to _nxor_,
+              op _|_   : Nat Nat -> Nat  to _|N_,    
+              op _+_   : Nat Nat -> Nat to _+N_,
+              op _-_   : Nat Nat -> Nat to _-N_,
+              op _*_   : Nat Nat -> Nat to _*N_,
+              op _<_   : Nat Nat -> Bool to _<N_,
+              op _<=_  : Nat Nat -> Bool to _<=N_,
+              op _>=_  : Nat Nat -> Bool to _>=N_,
+              op _>_   : Nat Nat -> Bool to _>N_)) {ArgPair}
+                     * (sort Set{ArgPair} to ArgsList) .
+endm
+
+--- ------------------------------------------------------------------------------------ 
+--- EnvPair define un par formado por una variable iteradora y su valor en
+--- 	    el momento de la evaluacion de la expresion OCL
+--- PDTE. Renombrar en version final. EnvPair se llamara VarPair. No lo hago ahora 
+---	  porque VarPair es un sort definido en Stack, y se producen conflictos.
+---	  VarPair es el nombre del sort elegido para definir las variables temporales
+---	  que permiten al usuario espeficidar las operaciones parciales. Ahora que
+---	  todo esta desacoplado, lo mejor es definir aque VarPair como var(nombre,valor)
+---	  y hacer que en la estrategia, o bien se reutilice este modulo, o bien defina
+---	  otros independientes. En todo caso, se plantea la posibilidad de que el 
+---	  el usuario defina modulos y sorts con nombres que entren en conflicto con los
+---	  de mOdCL. ¿Que criterio se usa en Maude para ello. Ej. En full maude?. 
+---	  Posibildad. Prefijar todas mis definiciones, de X a  OCL-X
+--- ------------------------------------------------------------------------------------ 
+mod OCL-VAR-PAIR is
+   pr OCL-TYPE .
+   sorts EnvPair Vid .
+
+   op ctx : Vid OCL-Type -> EnvPair [ctor] .
+endm 
+
+view EnvPair from TRIV to OCL-VAR-PAIR is
+   sort Elt to EnvPair .
+endv
+
+mod OCL-VARS is
+   pr (SET * (op _xor_ : Nat Nat -> Nat to _nxor_,
+              op _|_   : Nat Nat -> Nat  to _|N_,    
+              op _+_   : Nat Nat -> Nat to _+N_,
+              op _-_   : Nat Nat -> Nat to _-N_,
+              op _*_   : Nat Nat -> Nat to _*N_,
+              op _<_   : Nat Nat -> Bool to _<N_,
+              op _<=_  : Nat Nat -> Bool to _<=N_,
+              op _>=_  : Nat Nat -> Bool to _>=N_,
+              op _>_   : Nat Nat -> Bool to _>N_)) {EnvPair} 
+                      * (sort Set{EnvPair} to VarList) .
+   op env : VarList -> Msg [msg] .
+endm
+
+--- ------------------------------------------------------------------------------------ 
+--- EVAL-SGNT
+--- Definicion adelantada de la signatura del operador eval, para ser utilizado en
+--- la especificacion de los iteradores
+mod EVAL-SGNT is
+   pr OCL-EXP .
+
+   op eval : OCL-Exp Configuration Configuration -> OCL-Exp .
+endm
+
+--- ------------------------------------------------------------------------------------ 
+--- Especificacion colecciones OCL
+--- Usa OCL-LIST para apoyar la especificacion de Set y Bag
+---     OCL-ORD-LIST para apoyar la especificacion de Sequence y OrderedSet
+--- Nota-1. 
+---     La especificacion de OrderedSet esta hecha en base a lo que parece querer Edu.
+---	El unicamente insiste en que se traten como Sequence con la diferencia 
+---	de que las operaciones que incluyen elementos no lo hacen si ya estaban. El que 
+---	habia permanece en su posicion
+--- Nota-2
+---	Un Oid puede ser utilizado como si fuera una coleccion. en tal caso es Set{Oid}
+---	Por ese motivo, las cuaciones contemplam como caso especial que los argumentos
+---	de tipo coleccion sean un Oid
+---	Asimismo, dado que null representa un Oid no inicializado, es tratado como una
+---	coleccion vacía Set{}
+---	Por tanto, 
+---		null -> size() 		se evalua a cero
+---		O:Oid -> size()		se evalua a 1
+---	Se procede analogamente con el resto de operadores
+mod COLLECTION is
+   pr OCL-LIST {Base} * (sort ItemList{Base} to ItemList,
+                         sort List{Base} to List) .
+   pr OCL-ORD-LIST {Base} * (sort ItemListOrd{Base} to ItemListOrd,
+                             sort ListOrd{Base} to ListOrd) .
+
+   pr OCL-VARS .       
+   pr EVAL-SGNT .
+
+   sort Collection .
+   subsort Set Bag OrdSet Sequence < Collection .
+
+   --- Wrappers. Cada tipo OCL se construye rodeando los elementos con el identificador
+   ---           adecuado. 
+   op Set_ : ItemList -> Set [ctor] .
+   op Bag_ : ItemList -> Bag [ctor] .
+   op OrderedSet_ : ItemListOrd -> OrdSet [ctor] .
+   op Sequence_   : ItemListOrd -> Sequence [ctor] .
+
+   --- Eliminacion de repeticiones en Set
+   eq Set{I:OCL-Exp, I:OCL-Exp, S:List} = Set{I:OCL-Exp, S:List} .
+
+   --- Para homogeneizar todos los Sets con el formato Set/Bag{List}. El usuario
+   --- puede usar llaves y corchetes vacios
+   eq Set{} = Set{mt} .
+   eq Bag{} = Bag{mt} .
+   eq Sequence[]   = Sequence[mt-ord] .
+   eq OrderedSet[] = OrderedSet[mt-ord] .
+
+   --- ---------------------------------------------------------------------------------
+   --- Operaciones basicas sobre Collection
+   --- COLLECTION ofrece operaciones basicas de tratamiento de colecciones. 
+   --- Los operadores genéricos sobre todas las colecciones son definidos en Collection
+   --- y aquellos casos particulares que afecten a un tipo de colección, mediante una
+   --- ecuacion especifica. Agrupo el las ecuaciones por tipo de coleccion
+   --- Ejemplo
+   --- 		op get-item : Collection -> OCL-Type .
+   ---		eq get-item(null) = get-item(Set{}) .
+   ---		eq get-item(O:Oid) = get-item(Set{O:Oid}) .
+   ---		eq get-item(Set(L:ItemList)) = get-first(L:ItemList) .
+   ---		eq get-item(Bag(L:ItemList)) = get-first(L:ItemList) .
+   ---		eq get-item(OrderedSet(L:ItemListOrd)) = get-first(L:ItemListOrd) .
+   ---		eq get-item(Sequence(L:ItemListOrd)) = get-first(L:ItemListOrd) .
+
+   --- NOTA-1. Inicialmente me resultaba raro que, habiendo definido un operando de
+   ---         sort Collection, no se produjeran errores al utilizar como argumentos
+   ---         valores de sort Oid (que no es subsort de Collection). Sin embargo PD
+   ---	       dice que es normal. No hay que esperar que los argumentos sean como los 
+   ---         declarados en el operador (las declaraciones de operadores desaparecen 
+   ---         internamente). Donde en realidad se definen es en el kind, y aunque Oid
+   ---         no es subsort de Collection, esta en el kind. 
+   ---    Por ejemplo 
+   ---        op _in_ : OCL-Type Collection : -> Bool . 
+   ---    en realidad es 
+   ---        op _in_ : [OCL-Type] [Collection] -> [Bool] .
+   ---     por lo que se admite 
+   ---        eq O:OCL-Type in O:Oid = I:OCL-Type == O:Oid .
+   ---    Si no fuera asi, bastaria con definir el interfaz como
+   ---        op _in_ : OCL-Type OCL-Type : -> Bool .
+   ---     aunque esto ultimo no me gusta
+
+   --- ---------------------------------------------------------------------------------
+   --- Definicion de operadores y tratamiento de casos especiales
+   --- ---------------------------------------------------------------------------------
+   op get-item : Collection -> OCL-Type .
+   eq get-item(null) = get-item(Set{}) .
+   eq get-item(O:Oid) = get-item(Set{O:Oid}) .
+
+   op get-tail : Collection -> Collection .
+   eq get-tail(null) = get-tail(Set{}) .
+   eq get-tail(O:Oid) = get-tail(Set{O:Oid}) .
+
+   op |_| : Collection -> Nat .
+   eq | null | = 0 .
+   eq | O:Oid | = 1 [owise] .
+
+   op _in_ : OCL-Type Collection -> OCL-Type .
+   eq I:OCL-Type in null = false .
+   eq I:OCL-Type in O:Oid = I:OCL-Type == O:Oid .  
+
+   op is-empty : Collection -> OCL-Type .
+   eq is-empty(null) = true .
+   eq is-empty(O:Oid) = false .
+
+   --- Se debe devolver un Nat o un Float?
+   op sum : Collection -> OCL-Type .
+   eq sum(null) = 0 .
+
+   --- Incluyo put en 1.7.1 para que al procesar colecciones se respete el orden de
+   --- los elementos. Ello es necesario si la colecciones es Sequence. 
+   --- Obviamente se podria haber hecho directamente, evitanto llamadas innecesarias
+   --- pero por ahora lo dejare asi, y cuando necesite optimizar, lo hare.
+   op put : OCL-Type Collection -> Collection .
+
+   op count : OCL-Type Collection -> Nat .
+   eq count(I:OCL-Type, null) = 0 .
+   eq count(I:OCL-Type, O:Oid) = if I:OCL-Type == O:Oid then 1 else 0 fi .
+
+   op union : Collection Collection -> Collection .
+   eq union(null, C:Collection) = union(Set{}, C:Collection) .
+   eq union(C:Collection, null) = union(C:Collection, Set{}) .
+   eq union(O:Oid, C:Collection) = union(Set{O:Oid}, C:Collection) .
+   eq union(C:Collection, O:Oid) = union(C:Collection, Set{O:Oid}) .
+   eq union(S:Set, B:Bag) = union(set-to-bag(S:Set), B:Bag) .
+   eq union(B:Bag, S:Set) = union(B:Bag, set-to-bag(S:Set)) .
+
+   op intersection : Collection Collection -> Collection .
+   eq intersection(null, C:Collection) = intersection(Set{}, C:Collection) .
+   eq intersection(C:Collection, null) = intersection(C:Collection, Set{}) .
+   eq intersection(O:Oid, C:Collection) = intersection(Set{O:Oid}, C:Collection) .
+   eq intersection(C:Collection, O:Oid) = intersection(C:Collection, Set{O:Oid}) .
+   eq intersection(S:Set, B:Bag) = intersection(set-to-bag(S:Set), B:Bag) .
+   eq intersection(B:Bag, S:Set) = intersection(B:Bag, set-to-bag(S:Set)) .
+
+   --- La diferencia simetrica solo esta definida sobre Set
+   op symDiff : Set Set -> Set .
+   eq symDiff(null, S:Set) = symDiff(Set{}, S:Set) .
+   eq symDiff(S:Set, null) = symDiff(S:Set, Set{}) .
+   eq symDiff(O:Oid, S:Set) = symDiff(Set{O:Oid}, S:Set) .
+   eq symDiff(S:Set, O:Oid) = symDiff(S:Set, Set{O:Oid}) .
+   
+   op include : OCL-Type Collection -> Collection .
+   eq include(I:OCL-Type, null) = include(I:OCL-Type, Set{}) .
+   eq include(I:OCL-Type, O:Oid) = include(I:OCL-Type, Set{O:Oid}) .
+
+   op exclude : OCL-Type Collection -> Collection .
+   eq exclude(I:OCL-Type, null)  = exclude(I:OCL-Type, Set{}) .
+   eq exclude(I:OCL-Type, O:Oid) = exclude(I:OCL-Type, Set{O:Oid}) .
+
+   op asSet : Collection -> Set .
+   eq asSet(null) = Set{} .                      
+   eq asSet(O:Oid) = Set{O:Oid} . 
+
+   op asBag : Collection -> Bag .
+   eq asBag(null) = Bag{} .              
+   eq asBag(O:Oid) = Bag{O:Oid} .   
+
+   op asOrderedSet : Collection -> OrdSet .
+   eq asOrderedSet(null) = OrderedSet[] .                      
+   eq asOrderedSet(O:Oid) = OrderedSet[O:Oid] . 
+
+   op asSequence : Collection -> Sequence .
+   eq asSequence(null) = Sequence[] .     
+   eq asSequence(O:Oid) = Sequence[O:Oid] .   
+
+   op flatten : Collection -> Collection .
+   eq flatten(null) = Set{} . 
+   eq flatten(O:Oid) = Set{O:Oid} . 
+
+   --- Definicion generica, no particularizada en Set, Bag, Sequence y OrdSet 
+   --- Dado que  includesAll es true si todos los elementos de la segunda estan en 
+   --- la primera, basta con convertir ambas colecciones a set y trabajar a nivel
+   --- de sets.
+   --- MEJORAR eficiencia haciendo una definicion ajustada a este caso.
+   op includesAll : Collection Collection -> Bool .
+   eq includesAll(C:Collection, null) = includesAll(asSet(C:Collection), Set{}) .
+   eq includesAll(null, C:Collection) = includesAll(Set{}, asSet(C:Collection)) .
+   eq includesAll(C:Collection, O:Oid) = includesAll(asSet(C:Collection), Set{O:Oid}) .
+   eq includesAll(O:Oid, C:Collection) = includesAll(Set{O:Oid}, asSet(C:Collection)) .
+   eq includesAll(S1:Set, S2:Set) = intersection(S1:Set, S2:Set) == S2:Set .
+   eq includesAll(C1:Collection, C2:Collection) 
+     = includesAll(asSet(C1:Collection), asSet(C2:Collection)) 
+   [owise] .
+
+   --- Ningun elemento de la segunda se encuentra en la primera
+   --- Definicion analoga a la de includesAll.
+   op excludesAll : Collection Collection -> Bool .
+   eq excludesAll(C:Collection, null) = excludesAll(asSet(C:Collection), Set{}) .
+   eq excludesAll(null, C:Collection) = excludesAll(Set{}, asSet(C:Collection)) .
+   eq excludesAll(C:Collection, O:Oid) = excludesAll(asSet(C:Collection), Set{O:Oid}) .
+   eq excludesAll(O:Oid, C:Collection) = excludesAll(Set{O:Oid}, asSet(C:Collection)) .
+   eq excludesAll(S1:Set, S2:Set) = intersection(S1:Set, S2:Set) == Set{} .
+   eq excludesAll(C1:Collection, C2:Collection) 
+     = excludesAll(asSet(C1:Collection), asSet(C2:Collection)) 
+   [owise] .
+
+   --- Diferencia de conjuntos
+   --- El operador .-. Esta sobrecargado BASIC-TYPE para todos los tipos basicos en 
+   --- los que "-" ha sido renombrado. Dado que en OCL "-" tambien se usa para  
+   --- diferencia de conjuntos, incluyo una nueva posibilidad mas en la sobrecarga. 
+   --- De esta forma permito una especificacion mas uniforme de la evaluacion del 
+   --- operador OCL "-"
+   op _.-._ : Set Set -> Set .
+   eq null .-. S2:Set = minus(Set{}, S2:Set) .
+   eq S1:Set .-. null = minus(S1:Set, Set{}) .
+   eq O:Oid .-. S2:Set = minus(Set{O:Oid}, S2:Set) .
+   eq S1:Set .-. O:Oid = minus(S1:Set, Set{O:Oid}) .
+
+   --- ---------------------------------------------------------------------------------
+   --- Operaciones basicas sobre conjuntos OCL. Set
+   --- ---------------------------------------------------------------------------------
+   eq get-item(Set(L:ItemList)) = get-first(L:ItemList) .
+   eq get-tail(Set(L:ItemList)) = Set(get-rest(L:ItemList)) .
+   eq is-empty(Set(L:ItemList)) = is-empty(L:ItemList) .
+   eq include(I:OCL-Type, Set(L:ItemList)) = Set(insert(I:OCL-Type, L:ItemList)) .
+   eq exclude(I:OCL-Type, Set(L:ItemList)) = Set(delete(I:OCL-Type, L:ItemList)) .
+   eq put(I:OCL-Type, Set(L:ItemList)) = Set(insert(I:OCL-Type, L:ItemList)) .
+   eq I:OCL-Type in Set(L:ItemList) = occurs(I:OCL-Type, L:ItemList) .
+   eq | Set(L:ItemList) | = size(L:ItemList) .
+   eq count(I:OCL-Type, S:Set) = if I:OCL-Type in S:Set then 1 else 0 fi .
+   eq union(Set(L1:ItemList), Set(L2:ItemList)) = Set(append(L1:ItemList,L2:ItemList)) .
+   eq intersection(Set(L1:ItemList), Set(L2:ItemList)) 
+     = Set(intersection(L1:ItemList, L2:ItemList)) . 
+   eq asSet(S:Set) = S:Set .
+   eq asBag(S:Set) = set-to-bag(S:Set) .
+   eq asOrderedSet(Set{L:List}) = OrderedSet[to-ListOrd(L:List)] .
+   eq asSequence(Set{L:List}) = Sequence[to-ListOrd(L:List)] .
+   eq sum(Set{S:List}) = sum(S:List) . 
+
+   --- Operador especifico sobre Set
+   op minus : Set Set -> Set .
+   eq minus(Set(L1:ItemList), Set(L2:ItemList)) = Set(minus(L1:ItemList, L2:ItemList)) .
+
+   eq symDiff(S1:Set, S2:Set) 
+     = minus(union(S1:Set, S2:Set), intersection(S1:Set, S2:Set)) .
+
+   eq S1:Set .-. S2:Set = minus(S1:Set, S2:Set) .
+
+   op set-to-bag : Set -> Bag .
+   eq set-to-bag(Set(L:ItemList)) = Bag(L:ItemList) .
+
+   --- ---------------------------------------------------------------------------------
+   --- Operaciones basicas sobre Bag
+   --- --------------------------------------------------------------------------------- 
+   eq get-item(Bag(L:ItemList)) = get-first(L:ItemList) .
+   eq get-tail(Bag(L:ItemList)) = Bag(get-rest(L:ItemList)) .
+   eq is-empty(Bag(L:ItemList)) = is-empty(L:ItemList) .
+   eq include(I:OCL-Type, Bag(L:ItemList)) = Bag(insert(I:OCL-Type, L:ItemList)) .
+   eq exclude(I:OCL-Type, Bag(L:ItemList)) = Bag(delete-all(I:OCL-Type, L:ItemList)) .
+   eq put(I:OCL-Type, Bag(L:ItemList)) = Bag(insert(I:OCL-Type, L:ItemList)) .
+   eq I:OCL-Type in Bag(L:ItemList) = occurs(I:OCL-Type, L:ItemList) .
+   eq | Bag(L:ItemList) | = size(L:ItemList) .
+   eq count(I:OCL-Type, Bag(L:ItemList)) = count(I:OCL-Type, L:ItemList) .
+   eq union(Bag(L1:ItemList), Bag(L2:ItemList)) = Bag(append(L1:ItemList, L2:ItemList)) .
+   eq asSet(Bag{L:List}) = Set{L:List} .
+   eq asBag(B:Bag) = B:Bag .
+   eq asOrderedSet(Bag{L:List}) = OrderedSet[to-ListOrd(L:List)] .
+   eq asSequence(Bag{L:List}) = Sequence[to-ListOrd(L:List)] .
+   eq sum(Bag{S:List}) = sum(S:List) . 
+   --- La interseccion de dos Bag es otra bag donde cada elemento comun a ambas contiene 
+   --- el numero ocurrencias menor posible entre ambas.  El orden no importa
+   eq intersection(Bag(L1:ItemList), Bag(L2:ItemList))
+     = Bag(intersection(L1:ItemList, L2:ItemList)) . 
+
+   op repeated-elements : Bag -> Bool .
+   eq repeated-elements(Bag(L:ItemList)) = repeated-elements(L:ItemList) . 
+
+   --- ---------------------------------------------------------------------------------
+   --- Operaciones basicas sobre OrderedSet
+   --- ---------------------------------------------------------------------------------
+   --- DUDA. La especificacion de OCL2.0 contiene a mi juicio muchos elementos erroneos. 
+   ---       Define las operaciones sobre orderedSet como si fueran secuencias y, por
+   ---	     ejemplo, no define que hacer si hay elementos repetidos. De hecho me parece
+   --- 	     que han hecho un copy/paste, pero sin darle semantica a las operaciones. 
+   ---       Buscar un documento de la especificacion que sea correcto antes de seguir
+   --- OrderedSet 
+   ---       Implementado a peticion de Edu atendiendo a su definicion "informal", segun
+   --- 	     la cual un orderedset es como un Sequence en la que las operaciones de 
+   ---	     insercion evitan incluir un elemento si ya estaba. El elemento que ya 
+   ---	     estaba, permanece en su posicion.
+   ---	     No especifica con claridad en base a que se ordenan los elementos, por lo 
+   --- 	     asumo que se ordenan por la posicion, igual que las Sequence. Ello permite
+   ---	     cualquier tipo base y no solo los tipos predefinidos 
+
+   eq get-item(OrderedSet(L:ItemListOrd)) = get-first(L:ItemListOrd) .
+   eq get-tail(OrderedSet(L:ItemListOrd)) = Sequence(get-rest(L:ItemListOrd)) .
+   eq is-empty(OrderedSet(L:ItemListOrd)) = is-empty(L:ItemListOrd) .
+   eq I:OCL-Type in OrderedSet(L:ItemListOrd) = occurs(I:OCL-Type, L:ItemListOrd) .
+   eq | OrderedSet(L:ItemListOrd) | = size(L:ItemListOrd) .
+   eq count(I:OCL-Type, OrderedSet(L:ItemListOrd)) = count(I:OCL-Type,L:ItemListOrd) .
+   eq asSet(OrderedSet[L:ListOrd]) = Set{to-List(L:ListOrd)} .
+
+   op append-item : OCL-Type OrdSet -> OrdSet .
+   eq append-item(I:OCL-Type, OrderedSet(L:ItemListOrd)) 
+     = if occurs(I:OCL-Type, L:ItemListOrd) 
+       then OrderedSet(L:ItemListOrd)
+       else OrderedSet(insert-last(I:OCL-Type, L:ItemListOrd))
+       fi .
+
+   eq sum(OrderedSet[L:ListOrd]) = sum(L:ListOrd) . 
+
+   op prepend-item : OCL-Type OrdSet -> OrdSet .
+   eq prepend-item(I:OCL-Type, OrderedSet(L:ItemListOrd)) 
+     = if occurs(I:OCL-Type, L:ItemListOrd) 
+       then OrderedSet(L:ItemListOrd)
+       else OrderedSet(insert-first(I:OCL-Type, L:ItemListOrd))
+       fi .
+
+   op insertAt : Int OCL-Type OrdSet -> OrdSet .
+   eq insertAt(Pos:Int, I:OCL-Type, OrderedSet(L:ItemListOrd))
+     = if occurs(I:OCL-Type, L:ItemListOrd) 
+       then OrderedSet(L:ItemListOrd)
+       else OrderedSet(insertAt(Pos:Int, I:OCL-Type, L:ItemListOrd))
+       fi .
+
+   op subOrderedSet : OrdSet Nat Nat -> OrdSet .
+   eq subOrderedSet(OrderedSet(L:ItemListOrd), Lw:Nat, Up:Nat) 
+      =  OrderedSet(subListOrd(L:ItemListOrd, Lw:Nat, Up:Nat)) .
+
+   op item-at :  Nat OrdSet -> OCL-Type .
+   eq item-at(P:Nat, OrderedSet(L:ItemListOrd)) = get-item-at(P:Nat, L:ItemListOrd) .
+
+   op item-pos : OCL-Type OrdSet -> OCL-Type .
+   eq item-pos(I:OCL-Type, OrderedSet(L:ItemListOrd)) 
+     = getPos-item(I:OCL-Type, L:ItemListOrd) .
+
+   op get-last : OrdSet -> OCL-Type .
+   eq get-last(OrderedSet(L:ItemListOrd)) = getLast(L:ItemListOrd) .
+
+   --- NOTA. IMP.
+   --- La union de OrderedSet no esta definida en OCL. Esta funcion se utiliza 
+   --- como soporte a la evaluacion de OrderedSet (ver funcion eval para evaluar
+   --- colecciones -> eval(OrderedSet[E ; L])), apoyando
+   --- la construccion de un OrderedSet despues de evaluar sus subexpresiones componentes
+   --- Dado que no puede haber repeticiones, en caso de aparecer elementos repetidos, 
+   --- permanecen los mas antiguos
+   eq union(OrderedSet(L1:ItemListOrd), OrderedSet(L2:ItemListOrd)) 
+     = OrderedSet(filter(append(L1:ItemListOrd, L2:ItemListOrd))) .
+
+   --- ---------------------------------------------------------------------------------
+   --- Operaciones basicas sobre Sequence
+   --- ---------------------------------------------------------------------------------
+   eq get-item(Sequence(L:ItemListOrd)) = get-first(L:ItemListOrd) .
+   eq get-tail(Sequence(L:ItemListOrd)) = Sequence(get-rest(L:ItemListOrd)) .
+   eq is-empty(Sequence(L:ItemListOrd)) = is-empty(L:ItemListOrd) .
+
+   --- Insert y append tienen la misma semantica en OCL
+   eq include(I:OCL-Type, S:Sequence) = append-item(I:OCL-Type, S:Sequence) .
+   eq exclude(I:OCL-Type, Sequence(L:ItemListOrd))
+     = Sequence(delete-all(I:OCL-Type, L:ItemListOrd)) .
+   eq put(I:OCL-Type, Sequence(L:ItemListOrd)) 
+     = Sequence(insert-first(I:OCL-Type, L:ItemListOrd)) .
+
+   eq I:OCL-Type in Sequence(L:ItemListOrd) = occurs(I:OCL-Type, L:ItemListOrd) .
+   eq | Sequence(L:ItemListOrd) | = size(L:ItemListOrd) .
+   eq count(I:OCL-Type, Sequence(L:ItemListOrd)) = count(I:OCL-Type,L:ItemListOrd) .
+   eq asSet(Sequence[L:ListOrd]) = Set{to-List(L:ListOrd)} .
+   eq asBag(Sequence[L:ListOrd]) = Bag{to-List(L:ListOrd)} .
+   eq asOrderedSet(Sequence[L:ListOrd]) = OrderedSet(filter([L:ListOrd])) .
+   eq asSequence(S:Sequence) = S:Sequence .
+   --- Los elementos de la primera seguidos de los de la segunda
+   eq union(Sequence(L1:ItemListOrd), Sequence(L2:ItemListOrd)) 
+     = Sequence(append(L1:ItemListOrd, L2:ItemListOrd)) .
+   --- insert y append tienen la misma semantica en OCL
+   eq append-item(I:OCL-Type, Sequence(L:ItemListOrd)) 
+     = Sequence(insert-last(I:OCL-Type, L:ItemListOrd)) .
+   eq sum(Sequence[L:ListOrd]) = sum(L:ListOrd) . 
+   eq prepend-item(I:OCL-Type, Sequence(L:ItemListOrd)) 
+     = Sequence(insert-first(I:OCL-Type, L:ItemListOrd)) .
+
+   op insertAt : Int OCL-Type Sequence -> Sequence .
+   eq insertAt(Pos:Int, I:OCL-Type, Sequence(L:ItemListOrd))
+     = Sequence(insertAt(Pos:Int, I:OCL-Type, L:ItemListOrd)) .
+
+   op subSequence : Sequence Nat Nat -> Sequence .
+   eq subSequence(Sequence(L:ItemListOrd), Lw:Nat, Up:Nat) 
+     = Sequence(subListOrd(L:ItemListOrd, Lw:Nat, Up:Nat)) .
+
+   op item-at :  Nat Sequence -> OCL-Type .
+   eq item-at(P:Nat, Sequence(L:ItemListOrd)) =  get-item-at(P:Nat, L:ItemListOrd) .
+
+   op get-last : Sequence -> OCL-Type .
+   eq get-last(Sequence(L:ItemListOrd)) = getLast(L:ItemListOrd) .
+
+   op item-pos : OCL-Type Sequence  -> Nat .
+   eq item-pos(I:OCL-Type, Sequence(L:ItemListOrd)) 
+     = getPos-item(I:OCL-Type, L:ItemListOrd) .
+
+   op repeated-elements : Sequence -> Bool .
+   eq repeated-elements(Sequence(L:ItemListOrd)) = repeated-elements(L:ItemListOrd) . 
+
+   op to-ListOrd : List -> ListOrd .
+   eq to-ListOrd(mt) = mt-ord .
+   eq to-ListOrd((I:OCL-Type , L:List)) = I:OCL-Type ; to-ListOrd(L:List) .
+
+   op to-ListOrd : ListOrd -> ListOrd . 
+   eq to-ListOrd(L:ListOrd) = L:ListOrd .
+ 
+   op to-List : ListOrd -> List .
+   eq to-List(mt-ord) = mt .
+   eq to-List((I:OCL-Type ; L:ListOrd)) = I:OCL-Type , to-List(L:ListOrd) .
+
+   op to-List : List -> List . 
+   eq to-List(L:List) = L:List .
+
+   op remove-syntax : Collection -> List .
+   eq remove-syntax(Set{L:List}) = L:List .
+   eq remove-syntax(Bag{L:List}) = L:List .
+   eq remove-syntax(Sequence[L:ListOrd]) = L:ListOrd .
+   eq remove-syntax(OrderedSet[L:ListOrd]) = L:ListOrd .
+   eq remove-syntax(I:OCL-Type) = I:OCL-Type [owise] .
+
+   op flat-List : List -> List .
+   eq flat-List(mt) = mt .
+   eq flat-List(I:OCL-Type) = to-List(remove-syntax(I:OCL-Type)) .
+   eq flat-List((I:OCL-Type , L:List)) 
+     = to-List(remove-syntax(I:OCL-Type)), flat-List(L:List) .
+   
+   op flat-ListOrd : ListOrd -> ListOrd .
+   eq flat-ListOrd(mt-ord) = mt-ord .
+   eq flat-ListOrd(I:OCL-Type) = to-ListOrd(remove-syntax(I:OCL-Type)) .
+   eq flat-ListOrd((I:OCL-Type ; L:ListOrd)) 
+     = to-ListOrd(remove-syntax(I:OCL-Type)) ; flat-ListOrd(L:ListOrd) .
+
+   op flat : Collection -> Collection .
+   eq flat(Set({L:List})) = Set{flat-List(L:List)} .
+   eq flat(Bag({L:List})) = Bag{flat-List(L:List)} .
+   eq flat(Sequence[L:ListOrd]) = Sequence[flat-ListOrd(L:ListOrd)] .
+
+   op flatten : Collection -> Collection .
+   eq flatten(C:Collection) = flat(C:Collection) .
+   eq flatten(I:OCL-Type) = I:OCL-Type [owise] .
+
+   --- Para expandir valores en expresiones subrango
+   op itera : Int Int  -> List .
+   eq itera(I:Int, I:Int) = I:Int .
+   eq itera(I1:Int, I2:Int) 
+     = if I1:Int <N I2:Int
+       then I1:Int , itera(I1:Int +N 1, I2:Int) 
+       else mt
+       fi
+   [owise] .
+
+   --- --------------------------------------------------------------------------------- 
+   --- Situar este operador en LIST.
+   --- Problema. Si lo situo alli, no puedo devolver BasicType, sino Nat. En todo caso
+   --- aun qui sigue habiendo un problema.
+   --- Problema. Cual es el sort del resultado de sumas un List vacio? 0 o 0.0?
+   op sum : List -> BasicType .
+   eq sum(mt) = 0 .
+   eq sum((I:Int, S:List)) = I:Int .+. sum(S:List) . 
+
+   eq sum(I:Float) = I:Float . 
+   eq sum((I:Float, S:List)) = I:Float .+. sum(S:List) . 
+
+   --- Problema. Idem que en sum de List
+   op sum : ListOrd -> BasicType .
+   eq sum(mt-ord) = 0 .
+   eq sum((I:Int ; S:ListOrd)) = I:Int .+. sum(S:ListOrd) . 
+
+   eq sum(I:Float) = I:Float . 
+   eq sum((I:Float ; S:ListOrd)) = I:Float .+. sum(S:ListOrd) . 
+
+   --- --------------------------------------------------------------------------------- 
+   ---
+   --- Iteradores
+   ---
+   --- --------------------------------------------------------------------------------- 
+   --- Introduzco vbles globales en version final, por legibilidad al codigo listado
+   --- Variables globales
+   var Cf : Configuration .
+   var Cf' : Configuration .
+   var V : Vid .
+   vars E E1 E2 E3 : OCL-Exp .
+
+   --- -> Select             
+   ---              
+   op eval-select : OCL-Type OCL-Exp Vid Configuration Configuration -> Collection . 
+   eq eval-select(null, E, V, Cf, Cf') = eval-select(Set{}, E, V, Cf, Cf') .
+   eq eval-select(O:Oid, E, V, Cf, Cf') = eval-select(Set{O:Oid},E,V,Cf,Cf') .
+   ceq eval-select(C:Collection, E, V, Cf, Cf') = C:Collection
+   if is-empty(C:Collection) . 
+   ceq eval-select(C:Collection, E, V, env(VL:VarList) Cf, Cf')
+     = if eval(E, env(insert(ctx(V, I:OCL-Type), VL:VarList)) Cf, Cf')
+       then put(I:OCL-Type, eval-select(newC:Collection, E, V, env(VL:VarList) Cf, Cf'))
+       else eval-select(newC:Collection, E, V, env(VL:VarList) Cf, Cf')
+       fi 
+   if I:OCL-Type  := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection) .
+
+   --- -> Reject
+   --- 
+   op eval-reject : OCL-Type OCL-Exp Vid Configuration Configuration -> Collection .  
+   eq eval-reject(null, E, V, Cf, Cf') = eval-reject(Set{}, E, V, Cf, Cf') .
+   eq eval-reject(O:Oid, E, V, Cf, Cf') = eval-reject(Set{O:Oid},E,V,Cf,Cf') .
+   ceq eval-reject(C:Collection, E, V, Cf, Cf') = C:Collection
+   if is-empty(C:Collection) . 
+   ceq eval-reject(C:Collection, E, V, env(VL:VarList) Cf, Cf')
+     = if eval(E, env(insert(ctx(V, I:OCL-Type), VL:VarList)) Cf, Cf')
+       then eval-reject(newC:Collection, E, V, env(VL:VarList) Cf, Cf')
+       else put(I:OCL-Type, eval-reject(newC:Collection, E, V, env(VL:VarList) Cf, Cf'))
+       fi 
+   if I:OCL-Type  := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection) .
+
+   --- -> Any. Devuelve un elemento que cumpla la condicion. 
+   ---         Si hay mas de uno no importa cual
+   ---	       Si no hay ninguno, devuelve undefined		              
+   op eval-any : OCL-Type OCL-Exp Vid Configuration Configuration -> OCL-Type . 
+   eq eval-any(null, E, V, Cf, Cf') = eval-any(Set{}, E, V, Cf, Cf') .
+   eq eval-any(O:Oid, E, V, Cf, Cf') = eval-any(Set{O:Oid}, E, V, Cf, Cf') .
+   ceq eval-any(C:Collection, E, V, Cf, Cf') = null
+   if is-empty(C:Collection) . 
+   ceq eval-any(C:Collection, E, V, env(VL:VarList) Cf, Cf')
+     = if eval(E, env(insert(ctx(V, I:OCL-Type), VL:VarList)) Cf, Cf')  
+       then I:OCL-Type
+       else eval-any(newC:Collection, E, V, env(VL:VarList) Cf, Cf')
+       fi 
+   if I:OCL-Type  := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection) .
+
+   ---  ->collectNested Genera coleccion con los objetos resultantes de evaluar
+   ---		        la expresion en cada elemento de la coleccion
+   ---  
+   ---  El resultado NO debe ser Flattened. 
+   op eval-collectNested : OCL-Type OCL-Exp Vid Configuration Configuration 
+                                                                       -> Collection . 
+   eq eval-collectNested(null, E, V, Cf, Cf') 
+     = eval-collectNested(Set{}, E, V, Cf, Cf')  .
+   eq eval-collectNested(O:Oid, E, V, Cf, Cf') 
+     = eval-collectNested(Set{O:Oid}, E, V, Cf, Cf')  .
+   eq eval-collectNested(Set{mt}, E, V, Cf, Cf') = Bag{} .
+   eq eval-collectNested(Bag{mt}, E, V, Cf, Cf') = Bag{} .
+   eq eval-collectNested(Sequence[mt-ord], E, V, Cf, Cf') = Sequence[] .
+   eq eval-collectNested(OrderedSet[mt-ord], E, V, Cf, Cf') = OrderedSet[] .
+   ceq eval-collectNested(C:Collection, E, V, env(VL:VarList) Cf, Cf')
+     = put(eval(E, env(insert(ctx(V, I:OCL-Type), VL:VarList)) Cf, Cf'),
+               eval-collectNested(newC:Collection, E, V, env(VL:VarList) Cf, Cf'))
+   if I:OCL-Type  := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection) .
+
+   ---  ->iterate
+   ---  
+   op eval-iterate : OCL-Type Vid Vid OCL-Exp OCL-Exp  
+                                              Configuration Configuration -> OCL-Exp .
+   eq eval-iterate(null, V, W:Vid, Rst:OCL-Exp, E, Cf, Cf')
+     =  eval-iterate(Set{}, V, W:Vid, Rst:OCL-Exp, E, Cf, Cf') .
+   eq eval-iterate(O:Oid, V, W:Vid, Rst:OCL-Exp, E, Cf, Cf')
+     =  eval-iterate(Set{O:Oid}, V, W:Vid, Rst:OCL-Exp, E, Cf, Cf') .
+   ceq eval-iterate(C:Collection, V, W:Vid, Rst:OCL-Exp, E, Cf, Cf') = Rst:OCL-Exp   
+   if is-empty(C:Collection) . 
+   ceq eval-iterate(C:Collection, V, W:Vid, Rst:OCL-Exp, E, env(VL:VarList) Cf, Cf')
+     = eval-iterate(newC:Collection, V, W:Vid, newRst:OCL-Exp, E, env(VL:VarList) Cf, Cf')
+   if I:OCL-Type  := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection)
+      /\ newRst:OCL-Exp := eval(E, env(insert(ctx(W:Vid, Rst:OCL-Exp), 
+                                       insert(ctx(V, I:OCL-Type), VL:VarList))) Cf, Cf') .
+
+   --- ->forAll
+   ---
+   op eval-forAll : OCL-Type OCL-Exp  Vid Configuration Configuration -> Bool . 
+   eq eval-forAll(null, E, V, Cf, Cf') = eval-forAll(Set{}, E, V, Cf, Cf') . 
+   eq eval-forAll(O:Oid, E, V, Cf, Cf') 
+     = eval-forAll(Set{O:Oid}, E, V, Cf, Cf') .    
+   ceq eval-forAll(C:Collection, E, V, Cf, Cf') = true 
+   if is-empty(C:Collection) . 
+   ceq eval-forAll(C:Collection, E,  V, env(VL:VarList) Cf, Cf') 
+     = if eval(E, env(insert(ctx(V, O:OCL-Type), VL:VarList)) Cf, Cf')
+       then eval-forAll(newC:Collection, E, V, env(VL:VarList) Cf, Cf')
+       else false
+       fi
+   if O:OCL-Type := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection) .
+ 
+   --- ->exists
+   ---
+   op eval-exists : OCL-Type OCL-Exp  Vid Configuration Configuration -> Bool . 
+   eq eval-exists(null, E, V, Cf, Cf') = eval-exists(Set{}, E, V, Cf, Cf') .
+   eq eval-exists(O:Oid, E, V, Cf, Cf') 
+     = eval-exists(Set{O:Oid}, E, V, Cf, Cf') .
+   ceq eval-exists(C:Collection, E, V, Cf, Cf') = false 
+   if is-empty(C:Collection) . 
+   ceq eval-exists(C:Collection, E, V, env(VL:VarList) Cf, Cf') 
+     = if eval(E, env(insert(ctx(V, O:OCL-Type), VL:VarList)) Cf, Cf')
+       then true
+       else eval-exists(newC:Collection, E, V, env(VL:VarList) Cf, Cf')
+       fi
+    if O:OCL-Type := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection) .
+
+   --- ->one
+   ---
+   op eval-one : OCL-Type OCL-Exp  Vid Configuration Configuration -> Bool .
+   eq eval-one(null, E, V, Cf, Cf') = eval-one(Set{}, E, V, Cf, Cf') .
+   eq eval-one(O:Oid, E, V, Cf, Cf') = eval-one(Set{O:Oid}, E, V, Cf, Cf') .
+   ceq eval-one(C:Collection, E, V, Cf, Cf') = false 
+   if is-empty(C:Collection) . 
+   ceq eval-one(C:Collection, E, V, env(VL:VarList) Cf, Cf') 
+     = if eval(E, env(insert(ctx(V, O:OCL-Type),VL:VarList)) Cf, Cf')
+       then not eval-exists(newC:Collection, E, V, env(VL:VarList) Cf, Cf')
+       else eval-one(newC:Collection, E, V, env(VL:VarList) Cf, Cf')
+       fi
+    if O:OCL-Type := get-item(C:Collection) 
+      /\ newC:Collection := get-tail(C:Collection) .
+
+   --- ->isUnique
+   ---
+   op eval-isUnique : OCL-Type  OCL-Exp  Vid Configuration Configuration -> Bool .
+   eq eval-isUnique(null, E, V, Cf, Cf') = eval-isUnique(Set{},E,V,Cf,Cf') .
+   eq eval-isUnique(O:Oid, E, V, Cf, Cf') 
+     = eval-isUnique(Set{O:Oid}, E, V, Cf, Cf') .
+   ceq eval-isUnique(C:Collection, E, V, Cf, Cf') = true 
+   if is-empty(C:Collection) . 
+   ceq eval-isUnique(C:Collection, E, V, Cf, Cf') 
+     = not repeated-elements(eval-collectNested(C:Collection, E, V, Cf, Cf'))   
+   if O:OCL-Type := get-item(C:Collection) . --- Solo para saber que C es una collection 
+                                             --- ya construida
+endm
+
+--- ------------------------------------------------------------------------------------ 
+--- Asociaciones cualificadas
+--- Se han incluido asociaciones cualificadas, aunque son prescindibles. Se han
+--- implementado sin restricciones, pudiendose usar tantos cualificadores como se
+--- desee.
+--- 
+--- A nivel de usuario  
+---	Una asociacion cualificada 
+---	   Debe ser definida de sort Q-Assoc
+---    	   Usar el formato 
+---	        qasE(val1,Q-Assoc) ... $$ qasE(valn,Q-Assoc) (varios qualif)
+---		qas(val1,OCL-Type) ... $$ qas(valn,OCL-Type) (unico cualif)
+--- ------------------------------------------------------------------------------------ 
+mod Q-ASSOC is
+   pr OCL-TYPE .
+
+   sort Q-AssocPair Q-Assoc .
+   subsort Q-AssocPair < Q-Assoc .
+
+   subsort Q-Assoc < OCL-Type .
+
+   op qas  : BasicType OCL-Type -> Q-AssocPair .
+   op qasE : BasicType Q-Assoc -> Q-AssocPair .
+
+   op mt-assoc : -> Q-Assoc  .
+   op _$$_ : Q-Assoc Q-Assoc 
+               -> Q-Assoc [ctor assoc comm id: mt-assoc format (d r os d)] .  
+endm
+
+
+--- Declaraciones utilizables para definir los elementos del modelo UML
+--- Algunas ya has sido adelantadas
+---	Arg
+mod CLASSES-SGNT is
+   pr ARGS .
+   pr OCL-TYPE .
+
+   --- AttributeName. Define los nombres de atributos y  asociaciones de las clases del 
+   ---                modelo.
+   sort AttributeName .
+
+   --- Sintaxis para la definicion de atributos en objetos
+   op _:_ : AttributeName OCL-Type -> Attribute [prec 20 gather (& &)] .
+
+   --- OpName. Define el nombre de una operacion de usuario o de una funcion.
+   sort OpName . 
+
+   --- Arg. Define los nombres de los parametros formales de operaciones de usuario.
+   ---      Definido en ARG-PAIR
+   --- sort Arg .
+
+   --- En 1.5.4. prescindo de AttributeOp y en su lugar uso de forma generica 
+   --- AttributeName, hago que este sea OCL-Exp y lo evaluo, tomando la instancia
+   --- contextual de donde corresponda, segun el contexto sea de una pre-post cond,
+   --- una funcion de usuario o un invariante.
+   --- Al hacerlo, en caso de que se definan constantes iguales para Arg y AttributeName
+   --- se produce error por no haber un sort minimo. Considerando que en caso de que ambas
+   --- constantes existan, la el Arg oculta al nombre de atributo, soluciono el problema
+   --- haciendo que Arg sea subsort de AttributeName.
+   subsort Arg < AttributeName .
+
+   --- Entorno de ejecucion de una operacion de usuario. 
+   --- Contiene
+   ---		El objeto self
+   ---		Pares con (argumento, valor)
+   ---          Si existe, el resultado de la opercion como un par mas (result, valor)
+   op OpEnv : Oid ArgsList -> Msg [msg] .
+
+
+   --- InvName. Define el nombre "inv" de los invariantes usados en las expresiones OCL
+   ---          "context C inv nombre OCL-Exp"
+   sort InvName .
+
+   --- Para definir las relaciones de herencia del diagrama de clases. Es necesario para
+   --- especificar el operador allInstances
+   op isSubClass : Cid Cid -> Bool .
+   --- Temporalmente situo esto aqui para facilitar la gestion de versiones de test
+   eq isSubClass(C1:Cid, C1:Cid) = true .
+   eq isSubClass(C1:Cid, C2:Cid) = false [owise] .
+endm
+
+--- ------------------------------------------------------------------------------------ 
+--- OCL-SYNTAX. Define la sintaxis de cada expresion OCL valida mediante la 
+---		especificacion del sort OCL-Exp
+---
+--- El sort OCL-Exp ha sido definido en el modulo OCL-EXP para poder utilizarlo  
+--- como base para instanciar OCL-LIST y OCL-ORD-LIST al construir colecciones.
+---
+--- Este modulo define OCL-Exp mediante la definicion de todas las expresiones
+--- y subexpresiones validas en OCL. Las subexpresiones definidas seran capturadas
+--- y evaluadas por la funcion eval, definida en el modulo OCL-LIB.
+--- Todo elemento evaluable debe ser subsort de OCL-EXP
+---
+--- Reglas de precedencia OCL
+--- 	- @pre
+--- 	- dot and arrow operations: '.' and '->'
+--- 	- not and minus
+--- 	- * and /
+--- 	- + and binary -
+--- 	- if-then-else-endif
+--- 	- = <>
+--- 	- 'and' 'or' 'xor'
+--- 	- 'implies'
+--- ------------------------------------------------------------------------------------ 
+mod OCL-SYNTAX is
+   pr Q-ASSOC .
+   pr ARGS .
+   pr OCL-VARS .
+   pr COLLECTION .
+   inc CLASSES-SGNT .   
+
+   --- 
+   --- Uso de asociaciones cualificadas
+   --- Una asociacion cualificada puede usarse sin cualificadores o con una lista de
+   --- cualificadores. 
+   --- QF-List define una lista de expresiones OCL para acceder a una asociacion
+   ---         cualificada. Reutilizo ItemListOrd.
+   sorts QF-List .                       
+   subsort ItemListOrd < QF-List .
+
+   ---
+   --- OCL-Exp 
+   ---
+   --- El sort OCL-Exp define cualquier subexpresion OCL evaluable mediante la 
+   --- metafuncion eval
+   ---     Cualquier elemento directamente evaluable sera subsort de OCL-Exp 
+   ---	   Cualquier expresion valida en OCL debe tener su sintaxis en OCL-Exp
+   --- 
+   --- Definiciones ya hechas (En OCL-TYPE)
+   ---   	subsort OclVoid < BasicType Collection < OCL-Type < OCL-Exp .
+
+   --- Vid. Variables utilizadas para iterar en colecciones.
+   --- Arg. Nombres de los parametros formales de operaciones de usuario.
+   subsorts Vid Arg < OCL-Exp .
+
+   ---
+   --- Navegacion sobre atributos/asociaciones
+   ---    Puede ser explicita, implicita.
+   ---       * Explicita. A la izda aparece una expresion que produce un Oid.
+   ---	     * Implicita. Aparece directamente el nombre del atributo/asociacio
+
+   --- --------------------------------------------------------------------------------- 
+   --- Navegacion explicita sobre atributos/asociaciones
+   --- 
+   --- OCL-Attr. Define la sintaxis basica para navegar desde un objeto a uno de sus
+   ---           atributos/asociaciones.
+   sort OCL-Attr .
+   op ._ : AttributeName -> OCL-Attr [prec 14] .    
+
+   --- NavStep. Define un paso valido de navegacion a partir de una expresion que
+   ---          produzca un Oid.
+   ---		Posibilidades
+   ---		   1.- El nombre del atributo/asociacion
+   ---		   2.- El nombre del atributo/operacion cobn cualificadores
+   ---		   3.- Los casos 1 y 2 con operador @pre en postcondiciones
+   sort NavStep .
+   subsorts OCL-Attr  < NavStep  . 
+
+   op __ : OCL-Attr QF-List -> NavStep [prec 21] .
+
+   op __@pre : OCL-Attr QF-List -> NavStep [prec 15] . 
+   op _@pre  : OCL-Attr -> NavStep .                   
+
+   op __ : OCL-Exp NavStep -> OCL-Exp [prec 21] . 
+
+   --- --------------------------------------------------------------------------------- 
+   --- Navegacion implicita sobre atributos/asociaciones
+   --- 
+
+   --- Un AttributeName debe ser directamente evaluable por eval, ya que puede usarse
+   --- en las funciones de usuario asumendo el objeto implicito
+   subsorts AttributeName < OCL-Exp .
+
+   --- Posibilidades de uso de AttributeName tomando contexto implicito
+   ---		   1.- Directa
+   ---		   2.- Con cualificadores
+   ---		   3.- Los casos 1 y 2 con operador @pre en postcondiciones
+   op __ : AttributeName QF-List -> OCL-Exp [prec 20] .
+   op __@pre : AttributeName QF-List -> OCL-Exp [prec 15] .  
+   op _@pre  : AttributeName -> OCL-Exp .                      
+
+   --- Operadores aritmeticos, logicos y relacionales
+   --- PENDIENTE. Cambiar .=. por =
+   ---MRC. No definitivo, verificar relaciones de precdedencia al introducir menos unario
+   op -_         : OCL-Exp  -> OCL-Exp [prec 53] . 
+   op _+_        : OCL-Exp OCL-Exp -> OCL-Exp [gather (E e) prec 33] . 
+   op _-_        : OCL-Exp OCL-Exp -> OCL-Exp [gather (E e) prec 33] . 
+   op _*_        : OCL-Exp OCL-Exp -> OCL-Exp [gather (E e) prec 31] .  
+   op _/_        : OCL-Exp OCL-Exp -> OCL-Exp [gather (E e) prec 31] . 
+
+   --- Conflicto con Vble = expresion en let. Dejo puntos
+   op _.=._      : OCL-Exp OCL-Exp -> OCL-Exp [prec 51] . 
+   op _<>_       : OCL-Exp OCL-Exp -> OCL-Exp [prec 51] . 
+
+   op _<_        : OCL-Exp OCL-Exp -> OCL-Exp [prec 37] . 
+   op _>_        : OCL-Exp OCL-Exp -> OCL-Exp [prec 37] .  
+   op _<=_       : OCL-Exp OCL-Exp -> OCL-Exp [prec 37] . 
+   op _>=_       : OCL-Exp OCL-Exp -> OCL-Exp [prec 37] . 
+   op _>_        : OCL-Exp OCL-Exp -> OCL-Exp [prec 37] . 
+
+   op _and_     : OCL-Exp OCL-Exp -> OCL-Exp [ditto] . 
+   op _or_      : OCL-Exp OCL-Exp -> OCL-Exp [ditto] . 
+   op _xor_     : OCL-Exp OCL-Exp -> OCL-Exp [ditto] . 
+   op _implies_ : OCL-Exp OCL-Exp -> OCL-Exp [ditto] . 
+   op not_      : OCL-Exp -> OCL-Exp [ditto] .         
+   op if_then_else_endif : OCL-Exp OCL-Exp OCL-Exp -> OCL-Exp [prec 35] .    
+
+   --- Operadores predefinidos sobre String
+   op _.`size`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`concat`(_`) : OCL-Exp OCL-Exp  -> OCL-Exp [prec 25] .
+   op _.`substring`(_,_`) : OCL-Exp OCL-Exp OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`toInteger`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`toReal`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+
+   --- Operadores predefinidos no infijos (sobrecargados)
+   op _.`abs`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`max`(_`) : OCL-Exp OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`min`(_`) : OCL-Exp OCL-Exp -> OCL-Exp [prec 25] .
+
+   --- Sobre Integer
+   op _.`div`(_`) : OCL-Exp OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`mod`(_`) : OCL-Exp OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`floor`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`round`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+
+   ---  
+   op _.`oclIsUndefined`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`oclIsInvalid`(`) : OCL-Exp -> OCL-Exp [prec 25] .
+   op _.`allInstances : Cid -> OCL-Exp . 
+
+   ---  
+   op _.`oclIsKindOf`(_`) : OCL-Exp Cid -> OCL-Exp [prec 25] .
+   op _.`oclIsTypeOf`(_`) : OCL-Exp Cid -> OCL-Exp [prec 25] .
+
+
+   --- Operadores sobre colecciones
+   ---
+   op _->`size`(`)                 : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`isEmpty`(`)              : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`notEmpty`(`)             : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`sum`(`)                  : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`includes`(_`)            : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`excludes`(_`)            : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`includesAll`(_`)         : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`excludesAll`(_`)         : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`count`(_`)               : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`including`(_`)           : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`excluding`(_`)           : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`union`(_`)               : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`intersection`(_`)        : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`symmetricDifference`(_`) : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`append`(_`)              : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`prepend`(_`)             : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`at`(_`)                  : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`indexOf`(_`)             : OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`first`(`)                : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`last`(`)                 : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`asSet`(`)                : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`asBag`(`)                : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`asSequence`(`)           : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`asOrderedSet`(`)         : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`flatten`(`)              : OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`insertAt`(_,_`)          : OCL-Exp OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`subSequence`(_,_`)       : OCL-Exp OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+   op _->`subOrderedSet`(_,_`)     : OCL-Exp OCL-Exp OCL-Exp -> OCL-Exp [prec 21] .
+
+   --- Iteradores sobre colecciones
+   ---
+   --- iter-vble debe tener minima precedencia para permitir cualquier combinacion de 
+   --- expresiones como expresion iteradora
+   sort iter-vble .
+   op _|_ :  Vid OCL-Exp -> iter-vble [prec 90] .  
+
+   op _->`forAll_        : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`exists_        : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`select_        : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`reject_        : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`any_           : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`one_           : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`isUnique_      : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`collect_       : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+   op _->`collectNested_ : OCL-Exp iter-vble -> OCL-Exp [prec 21] .
+
+   sort iterate-exp .
+   op _,_|_ : Vid VbleDecl OCL-Exp -> iterate-exp .   
+
+   --- Inicializacion de variables
+   --- Debe tener menor precedencia que cualquier operador que pudiera formar 
+   --- parte de la expresion que da valor (implies 61)
+   --- Usado en "iterate" y "let"     
+   op _=_ : Vid OCL-Exp -> VbleDecl [prec 64] . 
+
+   op _->`iterate_       : OCL-Exp iterate-exp -> OCL-Exp [prec 21] .
+
+   --- let
+   sort LetExp .
+   subsort LetExp < OCL-Exp .
+
+   op let_in_ : VbleDeclList OCL-Exp -> LetExp [prec 41] .  
+
+   sorts VbleDecl VbleDeclList . 
+   subsort  VbleDecl < VbleDeclList .  
+
+   --- Las listas de declaraciones de variables deben tener menor precedencia que
+   --- que la de una VbleDecl (64) y menor que la de la listas de expresiones OCL
+   --- List (68)
+   op _,_ : VbleDeclList VbleDeclList -> VbleDeclList [ctor assoc  prec 65] .
+
+   --- Subrangos
+   op _.._  : OCL-Exp OCL-Exp -> OCL-Exp [prec 41] . 
+
+   --- --------------------------------------------------------------------------------- 
+   --- Invariantes. Dos formatos, con y sin nombre definido
+   op context_inv_   : Cid OCL-Exp -> OCL-Exp [prec 80] .
+   op context_inv_ _ : Cid InvName OCL-Exp -> OCL-Exp [prec 80] .
+
+   --- --------------------------------------------------------------------------------- 
+   --- Funciones de usuario
+   --- --------------------------------------------------------------------------------- 
+   --- Navegacion usando llamadas a funciones, tanto normales como @pre
+   sorts UserOpNav UserOpNav-Pre . 
+   subsorts UserOpNav UserOpNav-Pre < NavStep .
+
+   --- Para efectuar las llamadas
+   op ._@pre`(_`) : OpName List -> UserOpNav-Pre .
+   op _@pre`(_`)  : OpName List -> OCL-Exp [prec 15] .
+   op ._`(_`) : OpName List -> UserOpNav .
+
+   --- Para definir la funcion de usuario
+   op _`(_`)  : OpName List -> OCL-Exp [prec 15] .
+
+   --- Version especial para el caso de llamadas sin argumentos. Permite que sean validas
+   --- sin necesidad de incluir la constante empty. 
+   --- Supongo que esto se puede evitar. Reconsiderar y PD
+   op ._@pre`(`) : OpName  -> UserOpNav-Pre  .
+   op _@pre`(`)  : OpName  -> OCL-Exp [prec 15] .
+   op ._`(`)     : OpName  -> UserOpNav . 
+   op _`(`)      : OpName  -> OCL-Exp [prec 15] .
+
+   --- Acceso al resultado devuelto por una operacion d eusuario
+   --- Almacenare el resultado de la operacion en la lista de argumentos, como uno mas,
+   --- ya que entiendo que no tienen sentido que haya un argumento con dicho nombre
+   op result : -> Arg .
+endm
+ 
+--- ------------------------------------------------------------------------------------ 
+--- OCL-EVAL Especifica la metafuncion eval, que evalua una expresion o subexpresion OCL
+---	     en su contexto, dado por una configuracion de objetos y mensajes.
+---
+--- Toda expresion simple se evalua de forma directa
+---       eq eval(V:BasicType,  Cf, Cf') = V:BasicType .
+---	  eq eval(C:Collection, Cf, Cf') = C:Collection .
+---
+--- Una expresion compuesta con semantica simple se evalua directamente
+---	  eq eval(E1 and E2, Cf, Cf') = eval(E1, Cf, Cf') and eval(E2, Cf, Cf') .
+---
+--- Una expresion compuesta con semantica compleja se evalua a traves de funciones 
+--- auxiliares
+---   eq eval((E1 -> iterate(V:Vid, W:Vid = E2 | E3)), Cf, Cf') 
+---     = eval-iterate(eval(E1, Cf, Cf'), V:Vid, W:Vid, eval(E2,Cf, Cf'), E3, Cf, Cf') .
+--- ------------------------------------------------------------------------------------
+mod EVAL is
+   pr CLASSES-SGNT .  
+   pr OCL-SYNTAX .
+   pr OCL-CONVERSION .
+   pr OCL-BOOL .
+
+   --- Introduzco vbles globales en version final, por legibilidad del codigo listado
+   --- Variables globales
+   vars Cf Cf' : Configuration .                  
+   var V : Vid .
+   vars E E1 E2 E3 : OCL-Exp .
+
+   --- DOCUMENTAR. Lo siguiente debe aparecer en la documentacion para el usuario.
+   --- Para la implementacion de la abreviatura de collect en funcion del collect 
+   --- generico, necesito una constante de sort Vid.
+   --- Defino $V$ como una variable de sort Vid. Dicho identificador esta reservado por
+   --- mOdCL y no podra ser utilizado por el usuario para definir sus variables 
+   --- iteradoras.
+   op $V$ : -> Vid . 
+
+   --- Se define una constante self de sort Vid para procesar el la instancia 
+   --- contextual. Dicha instancia se almacena como una variable mas del entorno de
+   --- variables temporales.
+   --- A partir de 1.7.0 se homogeneiza su tratamiento en todos los casos posibles
+   --- invariantes, pre/post y funciones de usuario. Ahora siempre esta en el entorno
+   --- de variables temporales.
+   op self : -> Vid . 
+
+   --- ---------------------------------------------------------------------------------
+   --- Funcion fltr.  (filter)
+   --- Monitoriza la evaluacion de expresiones OCL. En caso de algun tip de error, se
+   --- captura el fallo y se devuelve invalid. De esta forma se hace un tratamiento 
+   --- homogeneo de errores
+   --- ---------------------------------------------------------------------------------
+   op fltr : [OCL-Type] -> OCL-Type .
+   eq fltr(V:OCL-Type) = V:OCL-Type .
+   eq fltr(V:[OCL-Type]) = invalid [owise] .  
+
+   --- ---------------------------------------------------------------------------------
+   --- Funcion eval-aux.
+   --- Evalua una expresion o subexpresion OCL en la configuracion de objetos que 
+   --- define su contexto de ejecucion.
+   --- Se introduce sobre la funcion eval para poder filtrar el resultado de la 
+   --- evaluacion, generando la constante invalid en caso de error.
+   --- ---------------------------------------------------------------------------------
+   op eval-aux : OCL-Exp Configuration Configuration -> OCL-Type .
+   eq eval-aux(E, Cf, Cf') = fltr(eval(E, Cf, Cf')) .
+
+   --- NOTA. La definicion de eval en EVAL-SGNT debe hacerse de sort OCL-Exp. 
+   --- De esta forma, si una expresion  OCL no tiene una ecuacion eval que la evalue, el 
+   --- error es capturado por fltr. 
+   --- Si la hubiera definido de sort OCL-Type no se capturaria, por ejemplo, el error
+   --- red << if 3 then 999 else 888 endif >>
+
+   --- ---------------------------------------------------------------------------------
+   --- Evaluacion de tipos primitivos. Directa.
+   --- NOTA. Si hubiera definido la sintaxis especificando que los operadores basicos
+   ---       producen BasicType en lugar de OCL-Exp
+   ---            op _+_ : OCL-Exp OCL-Exp -> BasicType [...]
+   ---       necesitaria usar [owise] en esta ecuacion.
+   eq eval(V:BasicType, Cf, Cf') = V:BasicType .
+
+   --- ---------------------------------------------------------------------------------
+   --- Operadores relacionales  .=. <> > < >= <=
+   --- Utiliza operadores .op. que son operadores sobrecargados sobre los tipos basicos
+   --- de Maude, especificados usando los renombramientos efectuados para resover
+   --- conflictos. 
+
+   --- NOTA. Como == esta definido en Maude para cualquier sort, solo lo uso cuando 
+   --- estoy seguro de que los operandos son validos (de sort OCL-Type). Si no lo 
+   --- hiciera asi, la igualdad entre subexpresiones no reducidas correctamente
+   --- no daria invalid. Por este motivo no utiliza directamente == sino una funcion
+   --- auxiliar ocl-equal.
+   op ocl-equal : OCL-Type OCL-Type -> Bool .
+   eq ocl-equal(O1:OCL-Type,O2:OCL-Type) = O1:OCL-Type == O2:OCL-Type .
+
+   eq eval(E1 .=. E2, Cf, Cf') 
+     = ocl-equal(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 <>  E2, Cf, Cf') 
+     = not ocl-equal(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 >   E2,Cf,Cf') = eval(E1, Cf, Cf') .>.  eval(E2, Cf, Cf') .
+   eq eval(E1 <   E2,Cf,Cf') = eval(E1, Cf, Cf') .<.  eval(E2, Cf, Cf') .
+   eq eval(E1 >=  E2,Cf,Cf') = eval(E1, Cf, Cf') .>=. eval(E2, Cf, Cf') .
+   eq eval(E1 <=  E2,Cf,Cf') = eval(E1, Cf, Cf') .<=. eval(E2, Cf, Cf') .
+
+   --- Aritmeticos OCL + - * . 
+   ---
+   eq eval(- E1, Cf, Cf') = .-. eval(E1, Cf, Cf') .
+   eq eval(E1 + E2, Cf, Cf') = eval(E1, Cf, Cf') .+. eval(E2, Cf, Cf') .
+   eq eval(E1 * E2, Cf, Cf') = eval(E1, Cf, Cf') .*. eval(E2, Cf, Cf') .
+   eq eval(E1 / E2, Cf, Cf') = eval(E1, Cf, Cf') ./. eval(E2, Cf, Cf') .
+   --- El operador "-" tambien esta sobrecargado en Set
+   eq eval(E1 - E2, Cf, Cf') = eval(E1, Cf, Cf') .-. eval(E2, Cf, Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Constantes null e invalid
+   --- Mantengo la evaluación de null pero elimino la de invalid. 
+   --- Invalid puede aparecer como consecuencia de la ejecucion, pero no explicitamente
+   --- en una expresion literal. Si aparece como parte de la ejecucion, el mecanismo de
+   --- control de errores en el kind se encarga de propagarla, sin necesitar una 
+   --- ecuacion para evaluarla
+   eq eval(null, Cf, Cf') = null .
+   ---   eq eval(invalid, Cf, Cf') = invalid .
+
+   --- Logicos 
+   ---
+   eq eval(not E1, Cf, Cf') = not eval(E1, Cf, Cf') .
+   eq eval(E1 or E2, Cf, Cf') = eval-or(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 and E2, Cf, Cf') = eval-and(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 xor E2, Cf, Cf') = eval-xor(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 implies E2, Cf, Cf') = eval-implies(eval(E1, Cf, Cf'),eval(E2, Cf, Cf')) .
+   ceq eval(if E1 then E2 else E3 endif, Cf, Cf') 
+     = if RS:OCL-Type then eval(E2, Cf, Cf') else eval(E3, Cf, Cf') fi
+   if RS:OCL-Type := eval(E1, Cf, Cf')  .
+
+   --- ---------------------------------------------------------------------------------
+   --- Funciones predefinidas sobre tipos basicos 
+   --- ---------------------------------------------------------------------------------
+   ---
+   --- String
+   eq eval(E . toReal(), Cf, Cf') = string2float(eval(E, Cf, Cf')) .
+   eq eval(E . toInteger(), Cf, Cf') = string2rat(eval(E, Cf, Cf'), 10) . 
+   eq eval(E . size(), Cf, Cf') = length(eval(E, Cf, Cf')) .
+   eq eval(E1 . concat(E2),Cf,Cf') = eval(E1,Cf,Cf') .+. eval(E2,Cf,Cf') .
+   ceq eval(E . substring(L:OCL-Exp, U:OCL-Exp), Cf, Cf')
+     = substr(eval(E, Cf, Cf'), I:Nat, Tam:Nat)
+   if I:Nat := eval(L:OCL-Exp, Cf, Cf') .-. 1 
+      /\ Tam:Nat := eval(U:OCL-Exp, Cf, Cf') .-. I:Nat .
+
+   ---
+   --- Real e Integer
+   eq eval(E . abs(),Cf,Cf') = .abs.((eval(E,Cf,Cf'))) .
+   eq eval(E1 . max(E2),Cf,Cf') = .max.(eval(E1,Cf,Cf'),eval(E2,Cf,Cf')) .
+   eq eval(E1 . min(E2),Cf,Cf') = .min.(eval(E1,Cf,Cf'),eval(E2,Cf,Cf')) .
+
+   ---
+   --- Integer
+    eq eval(E1 . div(E2),Cf,Cf') = eval(E1,Cf,Cf') quo eval(E2,Cf,Cf') .
+    eq eval(E1 . mod(E2),Cf,Cf') = eval(E1,Cf,Cf') rem eval(E2,Cf,Cf') .
+
+   ---
+   --- Real    
+    op floor-aux : OCL-Type -> OCL-Type .
+    eq floor-aux(R:Rat) = floorR(R:Rat) .
+    eq floor-aux(R:Float) = rat(floorF(R:Float)) .
+    eq eval(E1 . floor(), Cf, Cf') = floor-aux(eval(E1, Cf, Cf')) .
+
+    eq eval(E1 . round(), Cf, Cf') = rat(ceilingF(eval(E1, Cf, Cf')))  .
+
+   --- ---------------------------------------------------------------------------------
+   --- Subrangos
+   eq eval((E1 .. E2),Cf,Cf') = itera(eval(E1,Cf,Cf'), eval(E2,Cf,Cf')) .
+
+   --- ---------------------------------------------------------------------------------
+   --- Coleciones
+   --- Los elementos de una coleccion pueden ser expresiones, por lo que la evaluacion
+   --- de una coleccion requiere la evaluacion de sus elementos.
+   --- Las colecciones no pueden contener invalid (formal/06/05/05 p. 36). Como
+   --- consecuencia, interpreto que si un elemento de una coleccion genera un valor
+   --- erroneo, la coleccion misma se convierte en invalid. Ello se gestiona a nivel
+   --- del kind
+   eq eval(Set{mt}, Cf, Cf') = Set{mt} .
+   eq eval(Set{E, L:List},Cf, Cf') 
+     = union(Set{eval(E,Cf,Cf')},eval(Set{L:List},Cf,Cf')) .
+
+   eq eval(Bag{mt}, Cf, Cf') = Bag{mt} .
+   eq eval(Bag{E, L:List},Cf, Cf') 
+     = union(Bag{eval(E,Cf, Cf')},eval(Bag{L:List},Cf, Cf')) .
+ 
+   eq eval(Sequence[mt-ord], Cf, Cf') 
+     = Sequence[mt-ord] .
+   eq eval(Sequence[E ; L:ListOrd],Cf, Cf') 
+     = union(Sequence[eval(E,Cf, Cf')], eval(Sequence[L:ListOrd], Cf, Cf')) .
+ 
+   eq eval(OrderedSet[mt-ord], Cf, Cf') = OrderedSet[mt-ord] .
+   eq eval(OrderedSet[E ; L:ListOrd], Cf, Cf') 
+     = union(OrderedSet[eval(E,Cf, Cf')], eval(OrderedSet[L:ListOrd],Cf, Cf')) .
+
+   --- oclIsUndefined
+   ceq eval(E . oclIsUndefined(), Cf, Cf')
+     = (RS:[OCL-Type] == null) or not (RS:[OCL-Type] :: OCL-Type) 
+   if RS:[OCL-Type] := eval(E, Cf, Cf') .
+
+   --- oclIsKindOf
+   eq eval(E1 . oclIsKindOf(C:Cid), Cf, Cf')
+     = isSubClass(getClass(eval(E1, Cf, Cf'), Cf), C:Cid) .
+
+   --- oclIsTypeOf
+   eq eval(E1 . oclIsTypeOf(C:Cid), Cf, Cf')
+     = getClass(eval(E1, Cf, Cf'), Cf) ==  C:Cid .
+
+   --- Evaluacion de operador . allInstances 
+   eq eval(C:Cid . allInstances, Cf, Cf') = eval-allInstances(C:Cid, Cf, Set{}) .
+
+   --- Evaluacion de variables iteradoras 
+   --- A partir de version 1.7.0 no necesito owise porque he homogeneizado el 
+   --- el tratamiento de self en invariantes, operaciones y funciones. 
+   ---   - La evaluacion de un invariante usa self como una variable iteradora mas en la
+   ---     que se itera sobre los objetos de la clase
+   ---	 - En la llamada a una funcion de usuario habra que introducir una nueva 
+   ---	   variable con sel valor del self (si habia llamadas previas, esta sustituye a
+   ---	   una existente
+   ---	 - La evaluacion de una pre/post requiere que el self se encuentre en en 
+   ---	   entorno de variables activas
+   eq eval(V, env((ctx(V, Obj:OCL-Type), VL:VarList)) Cf, Cf') =  Obj:OCL-Type .
+
+   --- ---------------------------------------------------------------------------------
+   --- Operadores generales sobre sobre colecciones. Usan COLLECTION
+   eq eval(E1 -> size(), Cf, Cf') = | eval(E1, Cf, Cf') | .
+   eq eval(E1 -> isEmpty(), Cf, Cf') = is-empty(eval(E1, Cf, Cf')) .
+   eq eval(E1 -> notEmpty(), Cf, Cf') = not is-empty(eval(E1, Cf, Cf')) .
+   eq eval(E1 -> sum(), Cf, Cf') = sum(eval(E1, Cf, Cf')) .
+   eq eval(E1 -> includes(E2), Cf, Cf') = eval(E2, Cf, Cf') in  eval(E1, Cf, Cf') .
+   eq eval(E1 -> excludes(E2), Cf, Cf') = not eval(E2, Cf, Cf') in eval(E1, Cf, Cf') .
+   eq eval(E1 -> includesAll(E2), Cf, Cf') 
+     = includesAll(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 -> excludesAll(E2), Cf, Cf') 
+     = excludesAll(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 -> count(E2), Cf, Cf') = count(eval(E2, Cf, Cf'), eval(E1, Cf, Cf')) .
+   eq eval(E1 -> including(E2), Cf, Cf') = include(eval(E2,Cf, Cf'),eval(E1, Cf, Cf')) .
+   eq eval(E1 -> excluding(E2), Cf, Cf')= exclude(eval(E2, Cf, Cf'),eval(E1, Cf, Cf')) .
+   eq eval(E1 -> union(E2), Cf, Cf') = union(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 -> intersection(E2), Cf, Cf')
+     = intersection(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 -> symmetricDifference(E2), Cf, Cf') 
+     = symDiff(eval(E1, Cf, Cf'), eval(E2, Cf, Cf')) .
+   eq eval(E1 -> append(E2), Cf, Cf') = append-item(eval(E2,Cf, Cf'),eval(E1,Cf, Cf')) .
+   eq eval(E1 -> prepend(E2), Cf, Cf') = prepend-item(eval(E2,Cf,Cf'),eval(E1,Cf,Cf')) .
+   eq eval(E1 -> at(E2), Cf, Cf') = item-at(eval(E2, Cf, Cf'), eval(E1, Cf, Cf')) .
+   eq eval(E1 -> indexOf(E2), Cf, Cf') = item-pos(eval(E2, Cf, Cf'),eval(E1, Cf, Cf')) .
+   eq eval(E1 -> first(), Cf, Cf') = item-at(1, eval(E1, Cf, Cf')) .
+   eq eval(E1 -> last(), Cf, Cf') = get-last(eval(E1, Cf, Cf')) .
+   eq eval(E1 -> asSet(), Cf, Cf') = asSet(eval(E1,Cf, Cf')) .
+   eq eval(E1 -> asBag(), Cf, Cf') = asBag(eval(E1,Cf, Cf')) . 
+   eq eval(E1 -> asSequence(), Cf, Cf') = asSequence(eval(E1,Cf, Cf')) .
+   eq eval(E1 -> asOrderedSet(), Cf, Cf') = asOrderedSet(eval(E1,Cf, Cf')) .
+   eq eval(E1 -> flatten(), Cf, Cf') = flatten(eval(E1,Cf, Cf')) .
+   eq eval(E1 -> insertAt(E2, E3), Cf, Cf') 
+     = insertAt(eval(E2, Cf, Cf'),eval(E3, Cf, Cf'), eval(E1, Cf, Cf')) .
+   eq eval(E1 -> subSequence(E2, E3), Cf, Cf') 
+     = subSequence(eval(E1,Cf,Cf'), eval(E2,Cf,Cf'), eval(E3,Cf,Cf')) .
+   eq eval(E1 -> subOrderedSet(E2, E3), Cf, Cf') 
+     = subOrderedSet(eval(E1,Cf,Cf'), eval(E2,Cf,Cf'), eval(E3,Cf,Cf')) .
+
+   ---
+   --- Iteradores sobre colecciones. Usan OCL-ITERATOR
+   eq eval(E1 -> forAll (V | E2), Cf, Cf') = eval-forAll(eval(E1,Cf, Cf'),E2,V,Cf, Cf') .
+   eq eval(E1 -> exists (V | E2), Cf, Cf') = eval-exists(eval(E1,Cf, Cf'),E2,V,Cf, Cf') .
+   eq eval(E1 -> select (V | E2), Cf, Cf') = eval-select(eval(E1,Cf, Cf'),E2,V,Cf, Cf') .
+   eq eval(E1 -> reject (V | E2),Cf, Cf') = eval-reject(eval(E1,Cf, Cf'),E2,V,Cf, Cf') .
+   eq eval(E1 -> any (V | E2), Cf, Cf') = eval-any(eval(E1, Cf, Cf'), E2, V, Cf, Cf') .
+   eq eval(E1 -> one (V | E2), Cf, Cf') = eval-one(eval(E1,Cf, Cf'),E2,V,Cf, Cf') .
+   eq eval(E1 -> isUnique (V | E2),Cf, Cf') = eval-isUnique(eval(E1,Cf, Cf'),E2,V,Cf, Cf') .
+   eq eval(E1 -> collect (V | E2), Cf, Cf') 
+     = flatten(eval-collectNested(eval(E1, Cf, Cf'), E2, V, Cf, Cf')) .
+   eq eval(E1 -> collectNested (V | E2), Cf, Cf')
+     = eval-collectNested(eval(E1, Cf, Cf'), E2, V, Cf, Cf') .
+   eq eval((E1 -> iterate(V , W:Vid = E2 | E3)), Cf, Cf') 
+     = eval-iterate(eval(E1,Cf,Cf'), V, W:Vid, eval(E2,Cf,Cf'),E3,Cf,Cf') .
+
+   --- Expresiones let. 
+   --- Se incluye en el entorno de variables activas las variables definidas en let, con
+   --- su valor inicial y se evalua la expresion del cuerpo como cualquier otra 
+   --- subexpresion OCL
+   eq eval(let L:VbleDeclList in E, Cf, Cf') 
+     = eval(E, include-decl-list(L:VbleDeclList, Cf, Cf'), Cf') .
+
+   --- Nueva version tras 1.7.0
+   --- Recibe el entorno de vbles activas y una lista de pares con variables y expresion 
+   --- inicial. 
+   --- Evalua las expresiones e incluye nuevos pares en el entorno de vbles activas
+   op include-decl-list : VbleDeclList Configuration Configuration -> Configuration .
+   eq include-decl-list((V = E), env(VL:VarList) Cf, Cf') 
+     = env((VL:VarList, ctx(V, eval(E, env(VL:VarList) Cf, Cf')))) Cf .
+
+   eq include-decl-list((V:VbleDecl , VDL:VbleDeclList), Cf, Cf')
+     = include-decl-list(VDL:VbleDeclList, include-decl-list(V:VbleDecl, Cf, Cf'), Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Navegacion
+   --- Un paso de navegacion puede ser un acceso a un atributo o una llamada a una 
+   --- funcion definida por el usuario. Ademas, hay diferentes situaciones en las que
+   --- pueden utilizad expresiones de navegacion
+   ---    * En un estado normal
+   ---    * En una postcondicion, accediendo al estado previo
+   ---    * En el cuerpo de una funcion de usuario
+   --- Dependiendo de cada situacion se puede utilizar una sintaxis en la que el objeto
+   --- por el que se navega apareaca explitamente, "acceso explicito", o bien
+   --- que se omita "acceso implicito"
+   --- Por cuestiones de legibilidad, organizo las ecuaciones en funcion de que el 
+   --- acceso sea explicito, o explicito
+   --- ---------------------------------------------------------------------------------
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso explicito en expresiones de navegacion en el estado actual
+   --- ---------------------------------------------------------------------------------
+   --- Acceso explícito a atributo en  el estado actual. SIN cualificadores 
+   --- Si E es una coleccion, implementa la abreviatura de collect.
+   --- Uso getAttr-Qf para procesar el resultado obtenido, ya que en caso de 
+   --- asociaciones cualificadas accedidas por su nombre, sin indicar cualificadores, el 
+   --- resultado debe ser el conjunto de objetos almacenados en la misma
+   ceq eval(E W:OCL-Attr, Cf, Cf') 
+     = if RS:OCL-Exp :: Collection
+       then eval(RS:OCL-Exp -> collect ($V$ | ($V$  W:OCL-Attr)), env(empty) Cf, Cf')
+       else getAttr-Qf(RS:OCL-Exp, W:OCL-Attr, Cf)
+       fi
+   if RS:OCL-Exp := eval(E, Cf, Cf') .
+
+   --- Acceso explicito a atributo en  el estado actual. CON cualificadores
+   --- Acceso a asociacion cualificada usando los cualificadores
+   --- getValue extrae el valor adecuado en funcion de los cualificadores
+   eq eval(E (W:OCL-Attr QL:QF-List), Cf, Cf') 
+     = getValue(getAttr(eval(E,Cf,Cf') W:OCL-Attr,Cf),QL:QF-List,Cf,Cf') .
+
+   --- Llamada a una funcion definida por el usuario (acceso explicito). Dos casos.
+   --- Introduce el objeto en el entorno y ejecuta la funcion de usuario. A partir de
+   --- 1.7.0 se hace gestion homogenea de self, incluyendo self como vble del entorno
+   --- por lo que no se requiere ningun procesamiento adicional
+   eq eval(E . Op:OpName(), Cf, Cf') 
+     = eval(Op:OpName(), putEnv(self, eval(E,Cf, Cf'), Cf), Cf') .
+
+   eq eval(E . Op:OpName(L:List), Cf, Cf') 
+     = eval(Op:OpName(eval-EL(L:List,Cf, Cf')),putEnv(self, eval(E,Cf, Cf'), Cf), Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso implicito en expresiones de navegacion en el estado actual
+   --- Completo con objeto self y propago la llamada a eval
+   --- ---------------------------------------------------------------------------------
+
+   --- Acceso con objeto implicito a atributo o asociacion SIN  cualificadores. 
+   --- Desde 1.7.0 una ecuacion recoge todas las posibilidades. Con ello elimino
+   --- el uso de owise
+---   eq eval(V:AttributeName, Cf, Cf') = eval(self . V:AttributeName, Cf, Cf') .
+---MRC. Parece que ahora si hay igual nombre para Arg y AttributeName, lo considera
+---     AttributeName. comprobar
+---     Funciona en estrategia, pero no en prueba TEST-CINE-2. ???
+---Por ahora: Defino funcion isArg
+
+   ceq eval(V:AttributeName, Cf, Cf') = eval(self . V:AttributeName, Cf, Cf') 
+   if not isArg(V:AttributeName, Cf) .
+
+op isArg : AttributeName Configuration -> Bool .
+eq isArg(result,  Cf) = true .
+eq isArg(A:AttributeName, OpEnv(O:Oid, (arg(A:AttributeName,V:OCL-Type), L:ArgsList)) Cf)
+   = true .
+eq isArg(A:AttributeName, Cf)
+   = false 
+[owise] .
+
+   --- Acceso con objeto implicito a atributo o asociacion CON  cualificadores. 
+   eq eval(V:AttributeName QL:QF-List, Cf, Cf') 
+     = eval(self . V:AttributeName QL:QF-List, Cf, Cf') .
+
+   --- Llamada, con objeto implicito a una funcion de usuario en el estado actual
+   --- Tambien unifico ecuaciones y elimino owise
+   eq eval(W:OpName(), Cf, Cf') = eval(self . W:OpName(), Cf, Cf') .
+
+   eq eval(W:OpName(EL:List),  Cf, Cf') = eval(self . W:OpName(EL:List), Cf, Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Operador @pre
+   --- El operador @pre es el de mayor precedencia. Inicialmente pense en implementarlo
+   --- unicamente en base a eval, sustituyendo la configuracion actual por la previa y
+   --- propagando la llamada. 
+   ---   op _@pre  : OCL-Exp -> OCL-Exp [prec 1] .                      
+   ---   eq eval(E:OCL-Exp @pre, Cf, Cf') = eval(E:OCL-Exp, Cf', Cf') .
+   --- Sin embargo, este enfoque no es valido porque haria que en la evaluacion de la
+   --- subexpresion que precede a la propiedad aludida por @pre se hiciera uso del
+   --- estado previo en lugar el actual.
+   --- Ejemplo. La expresion socio.amigo@pre obtiene  
+   ---          debe obtener el amigo que tenia antes de llamar el socio actual
+   ---          y obtendria el amigo del socio que tenia antes de llamar.
+   --- Como consecuencia, debo aportar sintaxis para cada uso de @pre con los distintos
+   --- tipos de propiedades y evaluar @pre individualmente en cada caso.
+   --- ---------------------------------------------------------------------------------
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso explicito en expresiones de navegacion en el estado @pre
+   --- ---------------------------------------------------------------------------------
+   --- Acceso explícito a atributo en  el estado @pre. SIN cualificadores 
+   eq eval(E W:OCL-Attr @pre, Cf, Cf') 
+     = eval(eval(E, Cf, Cf') W:OCL-Attr, Cf', Cf) .
+
+   --- Acceso explícito a atributo en  el estado @pre. CON cualificadores 
+   eq eval(E (W:OCL-Attr QL:QF-List) @pre, Cf, Cf') 
+     = eval(eval(E, Cf, Cf') W:OCL-Attr QL:QF-List, Cf', Cf) .
+
+   --- Llamada, a una funcion de usuario que se ejecutara en estado @pre. 
+   --- OCL-Exp . name @pre (args). Dos casos, con y sin argumentos en la llamada
+   eq eval(E . Op:OpName @pre (), Cf, Cf') 
+     = eval(eval(E, Cf, Cf') . Op:OpName(), Cf', Cf') .
+
+   --- DUDA. ¿Los parametros actuales son evaluados en el estado actual p en el previo?
+   --- AHORA se evaluan en el previo, pero puede ser erroneo. CONSULTAR PD
+   eq eval(E . Op:OpName @pre (L:List), Cf, Cf') 
+     = eval(eval(E, Cf, Cf') . Op:OpName(L:List), Cf', Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso implicito en expresiones de navegacion en el estado @pre
+   --- ---------------------------------------------------------------------------------
+   --- Acceso a un atributo o asociacion @pre. Se usa esquema general para expresiones
+   --- implicitas: completar con self y propagar
+
+   --- Acceso con objeto implicito a atributo o asociacion SIN  cualificadores
+   --- en el estado @pre.
+   eq eval(V:AttributeName @pre, Cf, Cf') 
+     = eval(self . V:AttributeName @pre, Cf, Cf') .
+
+   --- Acceso con objeto implicito a atributo o asociacion CON  cualificadores
+   --- en el estado @pre.  
+   eq eval((V:AttributeName QL:QF-List) @pre, Cf, Cf')
+     = eval(self . (V:AttributeName QL:QF-List) @pre, Cf, Cf') .
+
+   --- Llamada, con objeto implicito a una funcion de usuario en el estado @pre
+   --- Dos casos. Con y sin argumentos en la llamada
+   eq eval(W:OpName @pre (), Cf, Cf') 
+     = eval(self . W:OpName @pre (), Cf, Cf') .
+
+   eq eval(W:OpName @pre (EL:List), Cf, Cf') 
+     = eval(self . W:OpName @pre (EL:List), Cf, Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso a un argumento en una pre/postcondicion
+   --- Por ahora lo tomo de mensaje OpEnv, pero dado que desde 1.7.0 situo self en env()
+   --- mas adelante se puede plantear la inclusion de los argumentos en el env()
+   --- ---------------------------------------------------------------------------------
+   eq eval(V:Arg, OpEnv(Self:Oid, (arg(V:Arg, R:OCL-Type), L:ArgsList)) Cf, Cf') 
+     = R:OCL-Type .
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso a resultado desde postcondicion. Palabra reservada "result"
+   --- Con el esquema de implementacion actual de result, no es necesario considerar una
+   --- ecuacion especial para evaluar la palabra reservada result, porque tratamos
+   --- a result como a un argumento mas, por lo que se evaluar con la ecuacion general de
+   --- evaluacion de argumentos de la operacion
+   --- Mantengo el caso para documentacion
+   --- eq eval(result, OpEnv(Self:Oid, (arg(result, R:OCL-Type), L:ArgsList)) Cf, Cf') 
+   ---   = R:OCL-Type .
+
+   --- ---------------------------------------------------------------------------------
+   --- -------- Funciones auxiliares  --------------------------------------------------
+   --- ---------------------------------------------------------------------------------
+   --- allInstances genera un Set con los Oid de las instancias de la clase 
+   op eval-allInstances : Cid Configuration Set -> Set . 
+
+   eq eval-allInstances(C:Cid, < O:Oid : C:Cid | AS:AttributeSet > Cf, S:Set) 
+     = eval-allInstances(C:Cid, Cf, include(O:Oid, S:Set)) .
+   eq eval-allInstances(C1:Cid, < O:Oid : C2:Cid | AS:AttributeSet > Cf, S:Set) 
+     = if (C1:Cid == C2:Cid) or isSubClass(C2:Cid, C1:Cid)
+       then eval-allInstances(C1:Cid, Cf, include(O:Oid, S:Set)) 
+       else eval-allInstances(C1:Cid, Cf, S:Set)
+       fi .
+   eq eval-allInstances(C:Cid, Cf, S:Set) = S:Set [owise] .
+
+   --- Evaluacion de parametros actuales en llamadas a funciones de usuario
+   op eval-EL : List Configuration Configuration -> List .
+   eq eval-EL(mt, Cf, Cf') = mt .
+   --- OJO. Con el nuevo esquema de tratamiento de errores en el kind necesito que la
+   ---      ecuacion sea condicional. Al definir RS:[OCL-Type], la ecuacion se reduce
+   ---	    siempre, con error o sin el. Si hay error, se propaga con normalidad. Si
+   ---      no la usara, eval-El no se reduciría en caso de error, pero dicho error
+   ---	    tampoco seria capturado.
+   ---		eq eval-EL((E, L:List), Cf) 
+   ---  	  = eval(E, Cf), eval-EL(L:List, Cf) .
+   ceq eval-EL((E, L:List), Cf, Cf') 
+     =  RS:[OCL-Type] , eval-EL(L:List, Cf, Cf')
+   if RS:[OCL-Type] := eval(E, Cf, Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso a un atributo de un objeto dado por su Oid
+   op getAttr : Universal Configuration -> Universal [poly (1 0)] .
+   eq getAttr(O:Oid . A:AttributeName, 
+              < O:Oid : C:Cid | A:AttributeName : I:OCL-Type, AS:AttributeSet > 
+              Cf:Configuration) = I:OCL-Type . 
+
+   --- ---------------------------------------------------------------------------------
+   --- Acceso a la clase de un objeto dado por su Oid
+   op getClass : Oid Configuration -> Cid .
+   eq getClass(O:Oid , < O:Oid : C:Cid | AS:AttributeSet > Cf:Configuration) = C:Cid . 
+
+   --- ---------------------------------------------------------------------------------
+   --- putEnv.
+   --- Mete el objeto self en el env, para ser recuperado en futuros accceso implicitos
+   --- o para la evaluacion de la palabra self. 
+   --- Antes de 1.7.0 self se tomaba o bien de la vble iteradora (si se trataba
+   --- de un invariante) o del mensaje OpEnv (si se trataba de una pre o postcondicion
+   --- o de una funcion de usuario)
+   --- Hay que usar owise. Si self no estaba en el entorno, se mete nuevo, y si estaba
+   --- se sustituye. Podria estar si se llama a una funcion desde una pre/post o desde
+   --- otra funcion
+
+   op putEnv : Vid Oid Configuration -> Configuration .
+   eq putEnv(self, O:Oid, env((ctx(self, X:Oid), VL:VarList)) Cf) 
+     = env((ctx(self, O:Oid), VL:VarList)) Cf .
+
+   eq putEnv(self, O:Oid, env(VL:VarList) Cf) =  env((ctx(self,O:Oid), VL:VarList)) Cf 
+   [owise] .
+
+   --- ---------------------------------------------------------------------------------
+   --- Nueva version tras 1.7.0
+   --- Recibe el entorno de vbles activas y una lista de pares con variables y expresion 
+   --- inicial. 
+   --- Evalua las expresiones e incluye nuevos pares en el entorno de vbles activas
+   op include-decl-list : VbleDeclList Configuration Configuration -> Configuration .
+   eq include-decl-list((V = E), env(VL:VarList) Cf, Cf') 
+     = env((VL:VarList, ctx(V, eval(E, env(VL:VarList) Cf, Cf')))) Cf .
+
+   eq include-decl-list((V:VbleDecl , VDL:VbleDeclList), Cf, Cf')
+     = include-decl-list(VDL:VbleDeclList, include-decl-list(V:VbleDecl, Cf, Cf'), Cf') .
+
+   --- ---------------------------------------------------------------------------------
+   --- Funciones auxiliares para tratamiento de asociaciones cualificadas
+   --- ---------------------------------------------------------------------------------
+   op getItemQ-Assoc : Q-AssocPair -> OCL-Type .
+   eq getItemQ-Assoc(qas(E, I:OCL-Type)) = I:OCL-Type .
+
+   --- Dada una lista de pares Q-AssocPair, devuelve el que contiene como cualificador
+   --- el indicado en el segundo argumento
+   --- Debido al conflicto de tipos, tengo qas y qasE. 
+   op getQ-AssocPair : Q-Assoc OCL-Exp -> Q-AssocPair .
+   eq getQ-AssocPair(qas(E, I:OCL-Type) $$ L:Q-Assoc, E) =  qas(E, I:OCL-Type) .
+   eq getQ-AssocPair(qasE(E, AA:Q-Assoc) $$ L:Q-Assoc, E) =  AA:Q-Assoc .
+
+   --- Dada una asociacion cualificada y la lista de cualificadores con lo que acceder
+   --- a la misma, devuelve el OCL-Type accedido con los cualificadores.
+   --- Supongo que cuando se usan asociaciones cualificadas, debe haber tantas
+   --- expresiones de cualificacion como cualificadores
+   --- He contemplado que las expresiones  puedan ser tan complejas como se quiera, 
+   --- pudiendo por tanto, estar formadas por operadores @pre, asi pues, desde una 
+   --- postcondicion, pasare al getValue TODA la configuracion recibida 
+   op getValue : OCL-Exp QF-List Configuration Configuration -> OCL-Type .
+
+   eq getValue(AS:Q-Assoc, [ E1 ], Cf, Cf')
+     = getItemQ-Assoc(getQ-AssocPair(AS:Q-Assoc, eval(E1, Cf, Cf'))) .
+
+   eq getValue(AS:Q-Assoc, [ E1 ; L:ListOrd ], Cf, Cf')
+     = getValue(getQ-AssocPair(AS:Q-Assoc,eval(E1,Cf,Cf')),[L:ListOrd],Cf,Cf') . 
+
+   --- Dada una asociacion cualificada extrae todos los objetos contenidos en la misma
+   --- Segun PG las herramientas solo permiten un nivel. De todas formas, yo contemplo
+   --- cualquier grado de anidamiento
+   op extract-Oid-assoc : Q-Assoc -> Set .
+   eq extract-Oid-assoc(qas(E, OO:Oid)) = Set{OO:Oid} .
+
+   eq extract-Oid-assoc(qas(E, OO:Oid) $$ L:Q-Assoc)
+      = include(OO:Oid,extract-Oid-assoc(L:Q-Assoc)) 
+   [owise] .  
+
+   --- Segun PD, debo incluir la posibilidad de que una asociacion cualificada asocie
+   --- un cualificador con varios objetos. En tal caso, asociado al cualificador puede 
+   --- ir un Set{Oid}. Como resultado extraigo los Oid y los mezclo en un unico Set 
+   eq extract-Oid-assoc(qas(E, S:Set)) = S:Set .
+   eq extract-Oid-assoc(qas(E, S:Set) $$ L:Q-Assoc)
+     = union(S:Set,extract-Oid-assoc(L:Q-Assoc)) 
+   [owise] .  
+
+   eq extract-Oid-assoc(qasE(E, AA:Q-Assoc)) = extract-Oid-assoc(AA:Q-Assoc) .
+   eq extract-Oid-assoc(qasE(E, AA:Q-Assoc) $$ L:Q-Assoc)
+     = union(extract-Oid-assoc(AA:Q-Assoc), extract-Oid-assoc(L:Q-Assoc)) 
+   [owise] .  
+
+
+   --- Dado un Oid y un nombre de atributo o asociacion, devuelve el valor del mismo
+   --- pero antes analiza si se trata de una asociacion cualificada, en cuyo caso,
+   --- antes de devolver el valor, reune todos los Oids almacenadas construyendo un
+   --- Set con ellos
+   op getAttr-Qf : Oid OCL-Attr Configuration -> OCL-Exp .
+   ceq getAttr-Qf(O:Oid, W:OCL-Attr, Cf)
+     = if RS:OCL-Exp :: Q-Assoc
+       then extract-Oid-assoc(RS:OCL-Exp) --- Aqui habra que poner llamada a aplanar
+       else RS:OCL-Exp
+       fi
+   if RS:OCL-Exp := getAttr(O:Oid W:OCL-Attr, Cf) .
+endm
+
+--- ---------------------------------------------------------------------------------
+--- Modulo: mOdCL
+--- Define operadores para actuar de interfaz con el usuario y operadores para 
+--- ocultar al usuario los renombramientos de los tipos predefinidos en mOdCL
+--- Ahora
+---	OCL-Exp ? Configuration		Para benchmark
+---	eval(OCL-Exp, Configuration+)	Para estrategia por FASE
+---	OCL-Exp ; Env ; Configuration   Por compatibilidad con Test antiguos  
+---	<< OCL-Exp >> 			Evaluacion de expresion sin contexto
+---	<< OCL-Exp : estado >> 		Evaluacion de expresion en estado actual
+---	<< llamada: OCL-Exp : estado : estado-pre >> Evaluacion de pre/post
+--- ---------------------------------------------------------------------------------
+--- CONSUTAR PD. Nombres de funciones
+---	Definir que operadores se ofrecen al usuario y como llamamos a las funciones
+---	basicas. Ahora tengo
+---	  eval:     evaluacion de cada subexpresion. No trata errores
+---	  eval-aux: uso del kind para tratar errores. Llama a eval y filtra
+---	  eval':    Eal antiguo, renombrado para FASE y mantenido para Edu. Quitar
+---     ¿Como llamo a la funcion evaluadora? eval, que llama a eval'?	
+--- De cara al usuario, pueden quedar
+---	eval
+---	<< >>
+---	<<_:_>>
+---	<<_:_:_:_>>
+--- ---------------------------------------------------------------------------------
+mod mOdCL is
+   --- Renombro por errata en articulo FASE. 
+   --- Mantengo el renombtramiento para no tener que modificar las pruebas 
+   pr EVAL . 
+
+   var Cf  : Configuration .
+   var Cf' : Configuration . 
+   var E   : OCL-Exp .
+   var C   : Cid .
+
+   --- Renombro por errata en articulo FASE. 
+   --- Mantengo el renombtramiento para no tener que modificar las pruebas 
+   op eval' : OCL-Exp Configuration Configuration -> OCL-Exp .
+   eq eval'(E, Cf, Cf') = eval(E, Cf, Cf') .
+
+   --- Uso de eval sin estrategia. Solo requiere una Configuration normal.
+   --- Se introduce el Env inicial de forma transparente al usuario y se evalua la
+   --- expresion
+   op eval : OCL-Exp Configuration -> OCL-Exp .
+   eq eval(E, Cf) = eval-aux(E, env(empty) Cf, none) .
+
+   --- Wrapper para evaluacion de expresiones usado en TEST.
+   --- Se mantiene por compatibilidad hacia atras. Eliminar cuando se rehaga el TEST
+   op _;_;_ : OCL-Exp VarList Configuration -> OCL-Exp [prec 90 gather (E & &)] .
+   eq E ; VL:VarList ; Cf = eval-aux(E, env(VL:VarList) Cf, none) .
+
+   --- Wrapper para evaluacion de expresiones usado en Benchmark.
+   op _?_ : OCL-Exp Configuration -> OCL-Exp [prec 90 gather (E e) ] .
+   eq E ? Cf = eval-aux(E, env(empty) Cf, none) .
+
+--- Segun troya, es posible evaluar funciones que no estan referidas a ningun objeto
+--- en concreto, por ejemplo
+---    		 red << Sequence[1] -> collect(ITER | mas(ITER) ) >> .
+--- En tal caso, dado que mOdCL convierte estas llamadas en self . mas(ITER), es 
+--- necesario que exista algun self en en entorno de variables. Por tanto, siempre
+--- incluire un self inicial, aunque sea ficticio.  
+   op foo-self : -> Oid .
+
+   --- Wrapper para evaluacion de expresiones independientes, sin contexto ni Env
+   --- Ejemplo red << "hola" .size() >>   op <<_>> : OCL-Exp -> OCL-Exp .
+   op <<_>> : OCL-Exp -> OCL-Exp .
+   eq << E >> = eval-aux(E, env(ctx(self, foo-self)) , none) .
+
+   op <<_:_>> : OCL-Exp Configuration -> OCL-Exp .
+   eq << E : Cf >> = eval-aux(E, env(ctx(self, foo-self)) Cf, none) .
+
+   op <<_:_:_:_>> : Msg OCL-Exp Configuration Configuration -> OCL-Exp .
+   eq << OpEnv(O:Oid, A:ArgsList) : E : Cf : Cf' >> 
+     = eval-aux(E, env(ctx(self, O:Oid)) OpEnv(O:Oid, A:ArgsList) Cf,
+                   env(ctx(self, O:Oid)) OpEnv(O:Oid, A:ArgsList) Cf') .
+
+   --- Invariantes OCL. allInstances implicito.
+   --- Transformo la abreviatura en su valor explicito.
+   --- Ejemplo. La expresion 
+   ---                        context Cinema inv capacity > 0
+   --- 		en realidad es 
+   ---                       Cinema.allInstances -> forAll(S | C.capacity>0)
+   --- DECIDIR donde situar estas definiciones.
+
+   eq context C inv E = (C . allInstances) -> forAll (self | E) .
+   eq context C inv I:InvName E = (C . allInstances) -> forAll (self | E) .
+
+   --- ---------------------------------------------------------------------------------
+   --- Ocultacion de los renombramientos efectuados al usuario de modulos de
+   --- sistema Maude
+   --- Cuando un usuario utiliza reglas Maude para expecificar su sistema en Maude, usa
+   --- los sorts predefinidos en Maude Int, Float, etc. Dado que mOdCL renombra los 
+   --- operadores sobrecargados para evitar conflictos, el usuario debería mantener
+   --- dichos renombramientos en la especificacion de sus sistema.
+   --- Para evitar este inconveniente, enmascaro los operadores Maude con los operadores
+   --- OCL y defino ecuaciones que permiten evaluar directamente, (sin eval) los 
+   --- operadores OCL (+, *, etc.). De esta forma, cuando el usuario creo que esta 
+   --- utilizando un operador sobre un sort predefinido Maude, en realidad esta usando
+   --- el mismo operador, pero sobre el sort OCL-Exp, que es capturado y evaluado con el
+   --- operador predefinido renombrado.
+   --- ---------------------------------------------------------------------------------
+   eq O1:BasicType + O2:BasicType  = O1:BasicType .+. O2:BasicType .
+   eq O1:BasicType - O2:BasicType  = O1:BasicType .-. O2:BasicType .
+   eq O1:BasicType * O2:BasicType  = O1:BasicType .*. O2:BasicType .
+   eq O1:BasicType / O2:BasicType  = O1:BasicType ./. O2:BasicType .
+   eq O1:BasicType > O2:BasicType  = O1:BasicType .>. O2:BasicType .
+   eq O1:BasicType < O2:BasicType  = O1:BasicType .<. O2:BasicType .
+   eq O1:BasicType >= O2:BasicType = O1:BasicType .>=. O2:BasicType .
+   eq O1:BasicType <= O2:BasicType = O1:BasicType .<=. O2:BasicType .
+endm
+

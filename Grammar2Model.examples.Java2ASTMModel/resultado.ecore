@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<astm:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:astm="http://modelum.es/modernization/astm">
+  <files language="Java">
+    <fragments xsi:type="astm:AggregateTypeDefinition">
+      <name nameString="ActionLogin"/>
+      <aggregateType xsi:type="astm:SpecificClassType" package="actionsstruts ">
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="execute"/>
+          <returnType xsi:type="astm:NamedTypeReference">
+            <name nameString="ActionForward"/>
+          </returnType>
+          <formalParameters>
+            <identifierName nameString="actionMapping"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="ActionMapping"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="actionForm"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="ActionForm"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="request"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="HttpServletRequest"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="response"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="HttpServletResponse"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:DeclarationOrDefinitionStatement">
+            <declOrDefn xsi:type="astm:VariableDefinition">
+              <identifierName nameString="bean"/>
+              <definitionType xsi:type="astm:NamedTypeReference">
+                <name nameString="BeanLogin"/>
+              </definitionType>
+              <initialValue xsi:type="astm:CastExpression">
+                <expression xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.0/@aggregateType/@members.0/@formalParameters.1">
+                  <name nameString="actionForm"/>
+                </expression>
+              </initialValue>
+            </declOrDefn>
+          </body>
+          <body xsi:type="astm:IfStatement">
+            <condition xsi:type="astm:BinaryExpression">
+              <operator xsi:type="astm:And"/>
+              <leftOperand xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="bean"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="getUsuario"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="equals"/>
+                    </expressionType>
+                    <actualParams xsi:type="astm:ActualParameterExpression">
+                      <value xsi:type="astm:Literal" value="&quot;user&quot; "/>
+                    </actualParams>
+                  </calledFunction>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="bean"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="getClave"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="equals"/>
+                    </expressionType>
+                    <actualParams xsi:type="astm:ActualParameterExpression">
+                      <value xsi:type="astm:Literal" value="&quot;user&quot; "/>
+                    </actualParams>
+                  </calledFunction>
+                </calledFunction>
+              </rightOperand>
+            </condition>
+            <thenBody xsi:type="astm:BlockStatement">
+              <subStatements xsi:type="astm:ExpressionStatement">
+                <expression xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="System"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="out"/>
+                    </expressionType>
+                    <calledFunction xsi:type="astm:FunctionCallExpression">
+                      <expressionType xsi:type="astm:NamedTypeReference">
+                        <name nameString="println"/>
+                      </expressionType>
+                      <actualParams xsi:type="astm:ActualParameterExpression">
+                        <value xsi:type="astm:Literal" value="&quot;Usuario logged-in&quot; "/>
+                      </actualParams>
+                    </calledFunction>
+                  </calledFunction>
+                </expression>
+              </subStatements>
+            </thenBody>
+          </body>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="request"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="getSession"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="setAttribute"/>
+                  </expressionType>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:Literal" value="&quot;usuario&quot; "/>
+                  </actualParams>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:Literal" value="&quot;invitado&quot; "/>
+                  </actualParams>
+                </calledFunction>
+              </calledFunction>
+            </expression>
+          </body>
+          <body xsi:type="astm:IfStatement">
+            <condition xsi:type="astm:BinaryExpression">
+              <leftOperand xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="request"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="getSession"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="getAttribute"/>
+                    </expressionType>
+                    <actualParams xsi:type="astm:ActualParameterExpression">
+                      <value xsi:type="astm:Literal" value="&quot;datosPublicacion&quot; "/>
+                    </actualParams>
+                  </calledFunction>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="astm:Literal" value="null "/>
+            </condition>
+            <thenBody xsi:type="astm:ReturnStatement">
+              <returnValue xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="actionMapping"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="findForward"/>
+                  </expressionType>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:Literal" value="&quot;publicar&quot; "/>
+                  </actualParams>
+                </calledFunction>
+              </returnValue>
+            </thenBody>
+            <elseBody xsi:type="astm:ReturnStatement">
+              <returnValue xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="actionMapping"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="findForward"/>
+                  </expressionType>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:Literal" value="&quot;exito&quot; "/>
+                  </actualParams>
+                </calledFunction>
+              </returnValue>
+            </elseBody>
+          </body>
+        </members>
+        <imports>import beansstruts . BeanLogin ; </imports>
+        <imports>import javax . servlet . http . HttpServletRequest ; </imports>
+        <imports>import javax . servlet . http . HttpServletResponse ; </imports>
+        <imports>import org . apache . struts . action . Action ; </imports>
+        <imports>import org . apache . struts . action . ActionForm ; </imports>
+        <imports>import org . apache . struts . action . ActionForward ; </imports>
+        <imports>import org . apache . struts . action . ActionMapping ; </imports>
+      </aggregateType>
+    </fragments>
+    <fragments xsi:type="astm:AggregateTypeDefinition">
+      <name nameString="ActionPublicarNoticia"/>
+      <aggregateType xsi:type="astm:SpecificClassType" package="actionsstruts ">
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="execute"/>
+          <returnType xsi:type="astm:NamedTypeReference">
+            <name nameString="ActionForward"/>
+          </returnType>
+          <formalParameters>
+            <identifierName nameString="actionMapping"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="ActionMapping"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="actionForm"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="ActionForm"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="request"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="HttpServletRequest"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="response"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="HttpServletResponse"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:DeclarationOrDefinitionStatement">
+            <declOrDefn xsi:type="astm:VariableDefinition">
+              <identifierName nameString="bean"/>
+              <definitionType xsi:type="astm:NamedTypeReference" type="//@files.0/@fragments.3">
+                <name nameString="BeanTablon"/>
+              </definitionType>
+              <initialValue xsi:type="astm:CastExpression">
+                <expression xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.1/@aggregateType/@members.0/@formalParameters.1">
+                  <name nameString="actionForm"/>
+                </expression>
+              </initialValue>
+            </declOrDefn>
+          </body>
+          <body xsi:type="astm:IfStatement">
+            <condition xsi:type="astm:BinaryExpression">
+              <leftOperand xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="request"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="getSession"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="getAttribute"/>
+                    </expressionType>
+                    <actualParams xsi:type="astm:ActualParameterExpression">
+                      <value xsi:type="astm:Literal" value="&quot;usuario&quot; "/>
+                    </actualParams>
+                  </calledFunction>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="astm:Literal" value="null "/>
+            </condition>
+            <thenBody xsi:type="astm:BlockStatement">
+              <subStatements xsi:type="astm:ExpressionStatement">
+                <expression xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="request"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="getSession"/>
+                    </expressionType>
+                    <calledFunction xsi:type="astm:FunctionCallExpression">
+                      <expressionType xsi:type="astm:NamedTypeReference">
+                        <name nameString="setAttribute"/>
+                      </expressionType>
+                      <actualParams xsi:type="astm:ActualParameterExpression">
+                        <value xsi:type="astm:Literal" value="&quot;datosPublicacion&quot; "/>
+                      </actualParams>
+                      <actualParams xsi:type="astm:ActualParameterExpression">
+                        <value xsi:type="astm:IdentifierReference">
+                          <name nameString="bean"/>
+                        </value>
+                      </actualParams>
+                    </calledFunction>
+                  </calledFunction>
+                </expression>
+              </subStatements>
+              <subStatements xsi:type="astm:ReturnStatement">
+                <returnValue xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="actionMapping"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="findForward"/>
+                    </expressionType>
+                    <actualParams xsi:type="astm:ActualParameterExpression">
+                      <value xsi:type="astm:Literal" value="&quot;login&quot; "/>
+                    </actualParams>
+                  </calledFunction>
+                </returnValue>
+              </subStatements>
+            </thenBody>
+          </body>
+          <body xsi:type="astm:DeclarationOrDefinitionStatement">
+            <declOrDefn xsi:type="astm:VariableDefinition">
+              <identifierName nameString="datos"/>
+              <definitionType xsi:type="astm:NamedTypeReference" type="//@files.0/@fragments.3">
+                <name nameString="BeanTablon"/>
+              </definitionType>
+              <initialValue xsi:type="astm:CastExpression">
+                <expression xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="request"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="getSession"/>
+                    </expressionType>
+                    <calledFunction xsi:type="astm:FunctionCallExpression">
+                      <expressionType xsi:type="astm:NamedTypeReference">
+                        <name nameString="getAttribute"/>
+                      </expressionType>
+                      <actualParams xsi:type="astm:ActualParameterExpression">
+                        <value xsi:type="astm:Literal" value="&quot;datosPublicacion&quot; "/>
+                      </actualParams>
+                    </calledFunction>
+                  </calledFunction>
+                </expression>
+              </initialValue>
+            </declOrDefn>
+          </body>
+          <body xsi:type="astm:IfStatement">
+            <condition xsi:type="astm:BinaryExpression">
+              <leftOperand xsi:type="astm:IdentifierReference">
+                <name nameString="datos"/>
+              </leftOperand>
+              <rightOperand xsi:type="astm:Literal" value="null "/>
+            </condition>
+            <thenBody xsi:type="astm:BlockStatement">
+              <subStatements xsi:type="astm:ExpressionStatement">
+                <expression xsi:type="astm:BinaryExpression">
+                  <operator xsi:type="astm:Assign"/>
+                  <leftOperand xsi:type="astm:IdentifierReference">
+                    <name nameString="bean"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="astm:IdentifierReference">
+                    <name nameString="datos"/>
+                  </rightOperand>
+                </expression>
+              </subStatements>
+              <subStatements xsi:type="astm:ExpressionStatement">
+                <expression xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="request"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="getSession"/>
+                    </expressionType>
+                    <calledFunction xsi:type="astm:FunctionCallExpression">
+                      <expressionType xsi:type="astm:NamedTypeReference">
+                        <name nameString="setAttribute"/>
+                      </expressionType>
+                      <actualParams xsi:type="astm:ActualParameterExpression">
+                        <value xsi:type="astm:Literal" value="&quot;datosPublicacion&quot; "/>
+                      </actualParams>
+                      <actualParams xsi:type="astm:ActualParameterExpression">
+                        <value xsi:type="astm:Literal" value="null "/>
+                      </actualParams>
+                    </calledFunction>
+                  </calledFunction>
+                </expression>
+              </subStatements>
+            </thenBody>
+          </body>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="ControladorNoticias"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="getInstancia"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="addNoticia"/>
+                  </expressionType>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:FunctionCallExpression">
+                      <expressionType xsi:type="astm:NamedTypeReference">
+                        <name nameString="bean"/>
+                      </expressionType>
+                      <calledFunction xsi:type="astm:FunctionCallExpression">
+                        <expressionType xsi:type="astm:NamedTypeReference">
+                          <name nameString="getTitulo"/>
+                        </expressionType>
+                      </calledFunction>
+                    </value>
+                  </actualParams>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:FunctionCallExpression">
+                      <expressionType xsi:type="astm:NamedTypeReference">
+                        <name nameString="bean"/>
+                      </expressionType>
+                      <calledFunction xsi:type="astm:FunctionCallExpression">
+                        <expressionType xsi:type="astm:NamedTypeReference">
+                          <name nameString="getContenido"/>
+                        </expressionType>
+                      </calledFunction>
+                    </value>
+                  </actualParams>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:FunctionCallExpression">
+                      <expressionType xsi:type="astm:NamedTypeReference">
+                        <name nameString="bean"/>
+                      </expressionType>
+                      <calledFunction xsi:type="astm:FunctionCallExpression">
+                        <expressionType xsi:type="astm:NamedTypeReference">
+                          <name nameString="getAutor"/>
+                        </expressionType>
+                      </calledFunction>
+                    </value>
+                  </actualParams>
+                </calledFunction>
+              </calledFunction>
+            </expression>
+          </body>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="actionMapping"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="findForward"/>
+                </expressionType>
+                <actualParams xsi:type="astm:ActualParameterExpression">
+                  <value xsi:type="astm:Literal" value="&quot;exito&quot; "/>
+                </actualParams>
+              </calledFunction>
+            </returnValue>
+          </body>
+        </members>
+        <imports>import beansstruts . BeanTablon ; </imports>
+        <imports>import controladores . ControladorNoticias ; </imports>
+        <imports>import javax . servlet . http . HttpServletRequest ; </imports>
+        <imports>import javax . servlet . http . HttpServletResponse ; </imports>
+        <imports>import org . apache . struts . action . * ; </imports>
+      </aggregateType>
+    </fragments>
+    <fragments xsi:type="astm:AggregateTypeDefinition">
+      <name nameString="ActionVerNoticia"/>
+      <aggregateType xsi:type="astm:SpecificClassType" package="actionsstruts ">
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="execute"/>
+          <returnType xsi:type="astm:NamedTypeReference">
+            <name nameString="ActionForward"/>
+          </returnType>
+          <formalParameters>
+            <identifierName nameString="actionMapping"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="ActionMapping"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="actionForm"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="ActionForm"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="request"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="HttpServletRequest"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="response"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="HttpServletResponse"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:DeclarationOrDefinitionStatement">
+            <declOrDefn xsi:type="astm:VariableDefinition">
+              <identifierName nameString="bean"/>
+              <definitionType xsi:type="astm:NamedTypeReference" type="//@files.0/@fragments.3">
+                <name nameString="BeanTablon"/>
+              </definitionType>
+              <initialValue xsi:type="astm:CastExpression">
+                <expression xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.2/@aggregateType/@members.0/@formalParameters.1">
+                  <name nameString="actionForm"/>
+                </expression>
+              </initialValue>
+            </declOrDefn>
+          </body>
+          <body xsi:type="astm:DeclarationOrDefinitionStatement">
+            <declOrDefn xsi:type="astm:VariableDefinition">
+              <identifierName nameString="noticia"/>
+              <definitionType xsi:type="astm:NamedTypeReference">
+                <name nameString="Noticia"/>
+              </definitionType>
+              <initialValue xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="ControladorNoticias"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="getInstancia"/>
+                  </expressionType>
+                  <calledFunction xsi:type="astm:FunctionCallExpression">
+                    <expressionType xsi:type="astm:NamedTypeReference">
+                      <name nameString="findNoticia"/>
+                    </expressionType>
+                    <actualParams xsi:type="astm:ActualParameterExpression">
+                      <value xsi:type="astm:FunctionCallExpression">
+                        <expressionType xsi:type="astm:NamedTypeReference">
+                          <name nameString="bean"/>
+                        </expressionType>
+                        <calledFunction xsi:type="astm:FunctionCallExpression">
+                          <expressionType xsi:type="astm:NamedTypeReference">
+                            <name nameString="getTituloSeleccionado"/>
+                          </expressionType>
+                        </calledFunction>
+                      </value>
+                    </actualParams>
+                  </calledFunction>
+                </calledFunction>
+              </initialValue>
+            </declOrDefn>
+          </body>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="bean"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="setTitulo"/>
+                </expressionType>
+                <actualParams xsi:type="astm:ActualParameterExpression">
+                  <value xsi:type="astm:Literal" value="&quot;&quot; "/>
+                </actualParams>
+              </calledFunction>
+            </expression>
+          </body>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="bean"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="setContenido"/>
+                </expressionType>
+                <actualParams xsi:type="astm:ActualParameterExpression">
+                  <value xsi:type="astm:Literal" value="&quot;&quot; "/>
+                </actualParams>
+              </calledFunction>
+            </expression>
+          </body>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="bean"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="setAutor"/>
+                </expressionType>
+                <actualParams xsi:type="astm:ActualParameterExpression">
+                  <value xsi:type="astm:Literal" value="&quot;&quot; "/>
+                </actualParams>
+              </calledFunction>
+            </expression>
+          </body>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="request"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="setAttribute"/>
+                </expressionType>
+                <actualParams xsi:type="astm:ActualParameterExpression">
+                  <value xsi:type="astm:Literal" value="&quot;noticia&quot; "/>
+                </actualParams>
+                <actualParams xsi:type="astm:ActualParameterExpression">
+                  <value xsi:type="astm:IdentifierReference">
+                    <name nameString="noticia"/>
+                  </value>
+                </actualParams>
+              </calledFunction>
+            </expression>
+          </body>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:NamedTypeReference">
+                <name nameString="actionMapping"/>
+              </expressionType>
+              <calledFunction xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="findForward"/>
+                </expressionType>
+                <actualParams xsi:type="astm:ActualParameterExpression">
+                  <value xsi:type="astm:Literal" value="&quot;verNoticia&quot; "/>
+                </actualParams>
+              </calledFunction>
+            </returnValue>
+          </body>
+        </members>
+        <imports>import beansstruts . BeanTablon ; </imports>
+        <imports>import controladores . ControladorNoticias ; </imports>
+        <imports>import javax . servlet . http . * ; </imports>
+        <imports>import logicaNegocio . Noticia ; </imports>
+        <imports>import org . apache . struts . action . * ; </imports>
+      </aggregateType>
+    </fragments>
+    <fragments xsi:type="astm:AggregateTypeDefinition">
+      <name nameString="BeanTablon"/>
+      <aggregateType xsi:type="astm:SpecificClassType" package="beansstruts ">
+        <members xsi:type="astm:VariableDefinition">
+          <identifierName nameString="tituloSeleccionado"/>
+          <definitionType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </definitionType>
+          <initialValue xsi:type="astm:Literal" value="&quot;&quot; "/>
+        </members>
+        <members xsi:type="astm:VariableDefinition">
+          <identifierName nameString="titulo"/>
+          <definitionType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </definitionType>
+          <initialValue xsi:type="astm:Literal" value="&quot;&quot; "/>
+        </members>
+        <members xsi:type="astm:VariableDefinition">
+          <identifierName nameString="contenido"/>
+          <definitionType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </definitionType>
+          <initialValue xsi:type="astm:Literal" value="&quot;&quot; "/>
+        </members>
+        <members xsi:type="astm:VariableDefinition">
+          <identifierName nameString="autor"/>
+          <definitionType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </definitionType>
+          <initialValue xsi:type="astm:Literal" value="&quot;&quot; "/>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="validate"/>
+          <returnType xsi:type="astm:NamedTypeReference">
+            <name nameString="ActionErrors"/>
+          </returnType>
+          <formalParameters>
+            <identifierName nameString="mapping"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="ActionMapping"/>
+            </definitionType>
+          </formalParameters>
+          <formalParameters>
+            <identifierName nameString="request"/>
+            <definitionType xsi:type="astm:NamedTypeReference">
+              <name nameString="HttpServletRequest"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:DeclarationOrDefinitionStatement">
+            <declOrDefn xsi:type="astm:VariableDefinition">
+              <identifierName nameString="errores"/>
+              <definitionType xsi:type="astm:NamedTypeReference">
+                <name nameString="ActionErrors"/>
+              </definitionType>
+              <initialValue xsi:type="astm:NewExpression">
+                <newType xsi:type="astm:NamedTypeReference">
+                  <name nameString="ActionErrors"/>
+                </newType>
+              </initialValue>
+            </declOrDefn>
+          </body>
+          <body xsi:type="astm:IfStatement">
+            <condition xsi:type="astm:FunctionCallExpression">
+              <expressionType xsi:type="astm:UnnamedTypeReference">
+                <type xsi:type="astm:UnnamedTypeReference">
+                  <type xsi:type="astm:Boolean"/>
+                </type>
+              </expressionType>
+              <calledFunction xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.5">
+                <name nameString="isTituloNoValido"/>
+              </calledFunction>
+              <actualParams xsi:type="astm:ActualParameterExpression">
+                <value xsi:type="astm:FunctionCallExpression">
+                  <calledFunction xsi:type="astm:IdentifierReference">
+                    <name nameString="getTitulo"/>
+                  </calledFunction>
+                </value>
+              </actualParams>
+            </condition>
+            <thenBody xsi:type="astm:ExpressionStatement">
+              <expression xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="errores"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="add"/>
+                  </expressionType>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:QualifiedOverData">
+                      <qualifiers xsi:type="astm:IdentifierReference">
+                        <name nameString="ActionErrors"/>
+                      </qualifiers>
+                      <member>
+                        <name nameString="GLOBAL_ERROR"/>
+                      </member>
+                    </value>
+                  </actualParams>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:NewExpression">
+                      <newType xsi:type="astm:NamedTypeReference">
+                        <name nameString="ActionError"/>
+                      </newType>
+                      <actualParams xsi:type="astm:ActualParameterExpression">
+                        <value xsi:type="astm:Literal" value="&quot;tablon.error&quot; "/>
+                      </actualParams>
+                    </value>
+                  </actualParams>
+                </calledFunction>
+              </expression>
+            </thenBody>
+          </body>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:IdentifierReference">
+              <name nameString="errores"/>
+            </returnValue>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="isTituloNoValido"/>
+          <formalParameters>
+            <identifierName nameString="t"/>
+            <definitionType xsi:type="astm:UnnamedTypeReference">
+              <type xsi:type="astm:String"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:IfStatement">
+            <condition xsi:type="astm:BinaryExpression">
+              <operator xsi:type="astm:Or"/>
+              <leftOperand xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="t"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="contains"/>
+                  </expressionType>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:Literal" value="&quot;$&quot; "/>
+                  </actualParams>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="astm:FunctionCallExpression">
+                <expressionType xsi:type="astm:NamedTypeReference">
+                  <name nameString="t"/>
+                </expressionType>
+                <calledFunction xsi:type="astm:FunctionCallExpression">
+                  <expressionType xsi:type="astm:NamedTypeReference">
+                    <name nameString="contains"/>
+                  </expressionType>
+                  <actualParams xsi:type="astm:ActualParameterExpression">
+                    <value xsi:type="astm:Literal" value="&quot;#&quot; "/>
+                  </actualParams>
+                </calledFunction>
+              </rightOperand>
+            </condition>
+            <thenBody xsi:type="astm:ReturnStatement">
+              <returnValue xsi:type="astm:Literal" value="true "/>
+            </thenBody>
+          </body>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:Literal" value="false "/>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="setTituloSeleccionado"/>
+          <formalParameters>
+            <identifierName nameString="tituloSeleccionado"/>
+            <definitionType xsi:type="astm:UnnamedTypeReference">
+              <type xsi:type="astm:String"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:BinaryExpression">
+              <operator xsi:type="astm:Assign"/>
+              <leftOperand xsi:type="astm:QualifiedOverData">
+                <qualifiers xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3">
+                  <name nameString="this"/>
+                </qualifiers>
+                <member refersTo="//@files.0/@fragments.3/@aggregateType/@members.6/@formalParameters.0">
+                  <name nameString="tituloSeleccionado"/>
+                </member>
+              </leftOperand>
+              <rightOperand xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.6/@formalParameters.0">
+                <name nameString="tituloSeleccionado"/>
+              </rightOperand>
+            </expression>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="getTituloSeleccionado"/>
+          <returnType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </returnType>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.0">
+              <name nameString="tituloSeleccionado"/>
+            </returnValue>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="setTitulo"/>
+          <formalParameters>
+            <identifierName nameString="titulo"/>
+            <definitionType xsi:type="astm:UnnamedTypeReference">
+              <type xsi:type="astm:String"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:BinaryExpression">
+              <operator xsi:type="astm:Assign"/>
+              <leftOperand xsi:type="astm:QualifiedOverData">
+                <qualifiers xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3">
+                  <name nameString="this"/>
+                </qualifiers>
+                <member refersTo="//@files.0/@fragments.3/@aggregateType/@members.8/@formalParameters.0">
+                  <name nameString="titulo"/>
+                </member>
+              </leftOperand>
+              <rightOperand xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.8/@formalParameters.0">
+                <name nameString="titulo"/>
+              </rightOperand>
+            </expression>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="getTitulo"/>
+          <returnType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </returnType>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.1">
+              <name nameString="titulo"/>
+            </returnValue>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="setContenido"/>
+          <formalParameters>
+            <identifierName nameString="contenido"/>
+            <definitionType xsi:type="astm:UnnamedTypeReference">
+              <type xsi:type="astm:String"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:BinaryExpression">
+              <operator xsi:type="astm:Assign"/>
+              <leftOperand xsi:type="astm:QualifiedOverData">
+                <qualifiers xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3">
+                  <name nameString="this"/>
+                </qualifiers>
+                <member refersTo="//@files.0/@fragments.3/@aggregateType/@members.10/@formalParameters.0">
+                  <name nameString="contenido"/>
+                </member>
+              </leftOperand>
+              <rightOperand xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.10/@formalParameters.0">
+                <name nameString="contenido"/>
+              </rightOperand>
+            </expression>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="getContenido"/>
+          <returnType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </returnType>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.2">
+              <name nameString="contenido"/>
+            </returnValue>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="setAutor"/>
+          <formalParameters>
+            <identifierName nameString="autor"/>
+            <definitionType xsi:type="astm:UnnamedTypeReference">
+              <type xsi:type="astm:String"/>
+            </definitionType>
+          </formalParameters>
+          <body xsi:type="astm:ExpressionStatement">
+            <expression xsi:type="astm:BinaryExpression">
+              <operator xsi:type="astm:Assign"/>
+              <leftOperand xsi:type="astm:QualifiedOverData">
+                <qualifiers xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3">
+                  <name nameString="this"/>
+                </qualifiers>
+                <member refersTo="//@files.0/@fragments.3/@aggregateType/@members.12/@formalParameters.0">
+                  <name nameString="autor"/>
+                </member>
+              </leftOperand>
+              <rightOperand xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.12/@formalParameters.0">
+                <name nameString="autor"/>
+              </rightOperand>
+            </expression>
+          </body>
+        </members>
+        <members xsi:type="astm:FunctionDefinition">
+          <identifierName nameString="getAutor"/>
+          <returnType xsi:type="astm:UnnamedTypeReference">
+            <type xsi:type="astm:String"/>
+          </returnType>
+          <body xsi:type="astm:ReturnStatement">
+            <returnValue xsi:type="astm:IdentifierReference" refersTo="//@files.0/@fragments.3/@aggregateType/@members.3">
+              <name nameString="autor"/>
+            </returnValue>
+          </body>
+        </members>
+        <imports>import javax . servlet . http . HttpServletRequest ; </imports>
+        <imports>import org . apache . struts . action . * ; </imports>
+      </aggregateType>
+    </fragments>
+  </files>
+</astm:Project>

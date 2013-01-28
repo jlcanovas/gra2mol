@@ -1,0 +1,113 @@
+
+mod MPNSMODEL is
+    pr @MPNS@ .
+  op mpnsModel : -> @Model
+  .
+  eq mpnsModel =
+  	@MPNs@{
+  	< '/ : MPN@MPNs | antennas@MPN@MPNs : OrderedSet ['//@antennas.0] # phones@MPN@MPNs : OrderedSet ['1111 ; '2222 ; '3333] > 
+  	< '//@antennas.0 : Antenna@MPNs | xPos@Antenna@MPNs : 100 # yPos@Antenna@MPNs : 50 > 
+  	< '1111 : Phone@MPNs | dialedCalls@Phone@MPNs : OrderedSet [mt-ord] # receivedCalls@Phone@MPNs : OrderedSet [mt-ord] # contacts@Phone@MPNs : OrderedSet ['2222 ; '3333] # missedCalls@Phone@MPNs : OrderedSet [mt-ord] # currentCall@Phone@MPNs : null # number@Phone@MPNs : 1111 # on@Phone@MPNs : false # battery@Phone@MPNs : 75 # coverage@Phone@MPNs : 0 # standbyBps@Phone@MPNs : 1 # talkBps@Phone@MPNs : 2 # xPos@Phone@MPNs : 25 # yPos@Phone@MPNs : 25 > < '2222 : Phone@MPNs | dialedCalls@Phone@MPNs : OrderedSet [mt-ord] # receivedCalls@Phone@MPNs : OrderedSet [mt-ord] # contacts@Phone@MPNs : OrderedSet ['1111 ; '3333] # missedCalls@Phone@MPNs : OrderedSet [mt-ord] # currentCall@Phone@MPNs : null # number@Phone@MPNs : 2222 # on@Phone@MPNs : false # battery@Phone@MPNs : 75 # coverage@Phone@MPNs : 0 # standbyBps@Phone@MPNs : 1 # talkBps@Phone@MPNs : 2 # xPos@Phone@MPNs : 100 # yPos@Phone@MPNs : 100 > 
+  	< '3333 : Phone@MPNs | dialedCalls@Phone@MPNs : OrderedSet [mt-ord] # receivedCalls@Phone@MPNs : OrderedSet [mt-ord] # contacts@Phone@MPNs : OrderedSet ['1111 ; '2222] # missedCalls@Phone@MPNs : OrderedSet [mt-ord] # currentCall@Phone@MPNs : null # number@Phone@MPNs : 3333 # on@Phone@MPNs : false # battery@Phone@MPNs : 50 # coverage@Phone@MPNs : 0 # standbyBps@Phone@MPNs : 1 # talkBps@Phone@MPNs : 2 # xPos@Phone@MPNs : 175 # yPos@Phone@MPNs : 50 >
+  	}
+  .	
+
+	op mpnsModelTerm : -> GroundTerm .
+	eq mpnsModelTerm = 
+	'_`{_`}['@MPNs@.@Metamodel,'__['<_:_|_>[''/.Sort,
+    'MPN@MPNs.MPN@MPNs,'_#_['_:_['antennas@MPN@MPNs.@Reference,'OrderedSet_[
+    '`[_`][''//@antennas.0.Constant]]],'_:_['phones@MPN@MPNs.@Reference,
+    'OrderedSet_['`[_`]['_;_[''1111.Sort,''2222.Sort,''3333.Sort]]]]]],
+    '<_:_|_>[''//@antennas.0.Constant,'Antenna@MPNs.Antenna@MPNs,'_#_['_:_[
+    'xPos@Antenna@MPNs.@Attribute,'s_^100['0.Zero]],'_:_[
+    'yPos@Antenna@MPNs.@Attribute,'s_^50['0.Zero]]]],'<_:_|_>[''1111.Sort,
+    'Phone@MPNs.Phone@MPNs,'_#_['_:_['dialedCalls@Phone@MPNs.@Reference,
+    'OrderedSet_['`[_`]['mt-ord.ListOrd]]],'_:_[
+    'receivedCalls@Phone@MPNs.@Reference,'OrderedSet_['`[_`][
+    'mt-ord.ListOrd]]],'_:_['contacts@Phone@MPNs.@Reference,'OrderedSet_[
+    '`[_`]['_;_[''2222.Sort,''3333.Sort]]]],'_:_[
+    'missedCalls@Phone@MPNs.@Reference,'OrderedSet_['`[_`]['mt-ord.ListOrd]]],
+    '_:_['currentCall@Phone@MPNs.@Reference,'null.NullMaybe],'_:_[
+    'number@Phone@MPNs.@Attribute,'s_^1111['0.Zero]],'_:_[
+    'on@Phone@MPNs.@Attribute,'false.Bool],'_:_['battery@Phone@MPNs.@Attribute,
+    's_^75['0.Zero]],'_:_['coverage@Phone@MPNs.@Attribute,'0.Zero],'_:_[
+    'standbyBps@Phone@MPNs.@Attribute,'s_['0.Zero]],'_:_[
+    'talkBps@Phone@MPNs.@Attribute,'s_^2['0.Zero]],'_:_[
+    'xPos@Phone@MPNs.@Attribute,'s_^25['0.Zero]],'_:_[
+    'yPos@Phone@MPNs.@Attribute,'s_^25['0.Zero]]]],'<_:_|_>[''2222.Sort,
+    'Phone@MPNs.Phone@MPNs,'_#_['_:_['dialedCalls@Phone@MPNs.@Reference,
+    'OrderedSet_['`[_`]['mt-ord.ListOrd]]],'_:_[
+    'receivedCalls@Phone@MPNs.@Reference,'OrderedSet_['`[_`][
+    'mt-ord.ListOrd]]],'_:_['contacts@Phone@MPNs.@Reference,'OrderedSet_[
+    '`[_`]['_;_[''1111.Sort,''3333.Sort]]]],'_:_[
+    'missedCalls@Phone@MPNs.@Reference,'OrderedSet_['`[_`]['mt-ord.ListOrd]]],
+    '_:_['currentCall@Phone@MPNs.@Reference,'null.NullMaybe],'_:_[
+    'number@Phone@MPNs.@Attribute,'s_^2222['0.Zero]],'_:_[
+    'on@Phone@MPNs.@Attribute,'false.Bool],'_:_['battery@Phone@MPNs.@Attribute,
+    's_^75['0.Zero]],'_:_['coverage@Phone@MPNs.@Attribute,'0.Zero],'_:_[
+    'standbyBps@Phone@MPNs.@Attribute,'s_['0.Zero]],'_:_[
+    'talkBps@Phone@MPNs.@Attribute,'s_^2['0.Zero]],'_:_[
+    'xPos@Phone@MPNs.@Attribute,'s_^100['0.Zero]],'_:_[
+    'yPos@Phone@MPNs.@Attribute,'s_^100['0.Zero]]]],'<_:_|_>[''3333.Sort,
+    'Phone@MPNs.Phone@MPNs,'_#_['_:_['dialedCalls@Phone@MPNs.@Reference,
+    'OrderedSet_['`[_`]['mt-ord.ListOrd]]],'_:_[
+    'receivedCalls@Phone@MPNs.@Reference,'OrderedSet_['`[_`][
+    'mt-ord.ListOrd]]],'_:_['contacts@Phone@MPNs.@Reference,'OrderedSet_[
+    '`[_`]['_;_[''1111.Sort,''2222.Sort]]]],'_:_[
+    'missedCalls@Phone@MPNs.@Reference,'OrderedSet_['`[_`]['mt-ord.ListOrd]]],
+    '_:_['currentCall@Phone@MPNs.@Reference,'null.NullMaybe],'_:_[
+    'number@Phone@MPNs.@Attribute,'s_^3333['0.Zero]],'_:_[
+    'on@Phone@MPNs.@Attribute,'false.Bool],'_:_['battery@Phone@MPNs.@Attribute,
+    's_^50['0.Zero]],'_:_['coverage@Phone@MPNs.@Attribute,'0.Zero],'_:_[
+    'standbyBps@Phone@MPNs.@Attribute,'s_['0.Zero]],'_:_[
+    'talkBps@Phone@MPNs.@Attribute,'s_^2['0.Zero]],'_:_[
+    'xPos@Phone@MPNs.@Attribute,'s_^175['0.Zero]],'_:_[
+    'yPos@Phone@MPNs.@Attribute,'s_^50['0.Zero]]]]]] .
+endm
+
+***(
+
+--- Simulation
+--- [14]
+(trew {mpnsModel} in time <= 17 .)
+rew {mpnsModel} in time zero .
+red parseModel(getTerm( metaRewrite( upModule('MPNSMODEL, false), 
+									upTerm({mpnsModel} in time zero), 
+									unbounded)), 'MPNSMODEL) .
+
+red filterModel(downTerm(getTerm( metaRewrite( upModule('MPNSMODEL, false), 
+									upTerm({mpnsModel} in time zero), 
+									unbounded)),clockedSystemKind)) .
+
+red getTerm( metaReduce(upModule('MPNSMODEL, false),
+				_`[_`]('filterModel,getTerm( metaRewrite( upModule('MPNSMODEL, false), 
+									upTerm({mpnsModel} in time zero), 
+									unbounded))))) .
+									
+red parseModel(getTerm( metaReduce(upModule('MPNSMODEL, false),
+				_`[_`]('filterModel,getTerm( metaRewrite( upModule('MPNSMODEL, false), 
+									upTerm({mpnsModel} in time zero), 
+									unbounded))))), 'MPNSMODEL) .
+
+(red eval((if (a . distance(p) > 100) then 0 else 5 - (a . distance(p) . div(20)) endif), 
+	      			(ctx(p, '1111), ctx(a, '//@antennas.0), ctx(self, '1111)), mpnsModel). )
+(red eval(((a . distance(p) > 100) ), 
+	      			(ctx(p, '1111), ctx(a, '//@antennas.0), ctx(self, '1111)), mpnsModel). )
+
+--- Add Link Operation
+(red addLink('2, null, 2) .)
+ 
+--- Mte
+(red mte(result2) .)
+ 
+ --- ApplyOngoingRule
+( red applyOngoingRules(result2, 2) . )
+ 
+ --- Readjust
+ (red readjust(Set{'1111} , mt-ord , mpnsModel) .)
+
+ (red readjust(Set{'/} , mt-ord, mpnsModel) .)
+ (red getContainedOids(< '/ : MPN@MPNs | antennas@MPN@MPNs : OrderedSet [
+     '//@antennas.0],phones@MPN@MPNs : OrderedSet ['1111 ; '2222 ; '3333] > ) .)
+
+)

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kdm:Segment xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:action="http://www.eclipse.org/MoDisco/kdm/action" xmlns:code="http://www.eclipse.org/MoDisco/kdm/code"
+    xmlns:event="http://www.eclipse.org/MoDisco/kdm/event" xmlns:kdm="http://www.eclipse.org/MoDisco/kdm/kdm"
+    xmlns:platform="http://www.eclipse.org/MoDisco/kdm/platform" xmlns:source="http://www.eclipse.org/MoDisco/kdm/source"
+    xmlns:ui="http://www.eclipse.org/MoDisco/kdm/ui" xsi:schemaLocation="http://www.eclipse.org/MoDisco/kdm/action files/metamodels/kdm.ecore#//action http://www.eclipse.org/MoDisco/kdm/code files/metamodels/kdm.ecore#//code http://www.eclipse.org/MoDisco/kdm/event files/metamodels/kdm.ecore#//event http://www.eclipse.org/MoDisco/kdm/kdm files/metamodels/kdm.ecore#//kdm http://www.eclipse.org/MoDisco/kdm/platform files/metamodels/kdm.ecore#//platform http://www.eclipse.org/MoDisco/kdm/source files/metamodels/kdm.ecore#//source http://www.eclipse.org/MoDisco/kdm/ui files/metamodels/kdm.ecore#//ui">
+  <audit description="Origin: Struts2JSF case study" author="Javier Canovas" date="20/08/2009"/>
+  <model xsi:type="code:CodeModel" name="CodeModel">
+    <codeElement xsi:type="code:LanguageUnit" name="Java Datatypes">
+      <codeElement xsi:type="code:BooleanType"/>
+      <codeElement xsi:type="code:StringType"/>
+    </codeElement>
+    <codeElement xsi:type="code:Package" name="actionstruts">
+      <codeElement xsi:type="code:CompilationUnit" name="ActionPublicarNoticia">
+        <codeElement xsi:type="code:ClassUnit" name="ActionPublicarNoticia">
+          <codeElement xsi:type="code:MethodUnit" name="execute">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="actionMapping"/>
+              <parameterUnit name="actionForm"/>
+              <parameterUnit name="request"/>
+              <parameterUnit name="response"/>
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2"
+                from="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0"/>
+            <codeElement xsi:type="action:ActionElement" name="variableDeclaration"
+                kind="declaration">
+              <codeElement xsi:type="code:StorableUnit" name="bean"/>
+              <codeElement xsi:type="action:Writes" to="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0"
+                  from="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2"/>
+              <codeElement xsi:type="action:ActionElement"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+              <codeElement xsi:type="action:TrueFlow" to="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.1"
+                  from="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3"/>
+              <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+                <codeElement xsi:type="action:ActionElement" kind="block"/>
+              </codeElement>
+              <codeElement xsi:type="action:FalseFlow" to="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.3"
+                  from="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3"/>
+              <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="variableDeclaration"
+                kind="declaration">
+              <codeElement xsi:type="code:StorableUnit" name="datos"/>
+              <codeElement xsi:type="action:Writes" to="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.0"
+                  from="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.4"/>
+              <codeElement xsi:type="action:ActionElement"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+              <codeElement xsi:type="action:TrueFlow" to="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.1"
+                  from="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.5"/>
+              <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+                <codeElement xsi:type="action:ActionElement" kind="block"/>
+              </codeElement>
+              <codeElement xsi:type="action:FalseFlow" to="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.3"
+                  from="#//@model.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.5"/>
+              <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CompilationUnit" name="ActionVerNoticia">
+        <codeElement xsi:type="code:ClassUnit" name="ActionVerNoticia">
+          <codeElement xsi:type="code:MethodUnit" name="execute">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="actionMapping"/>
+              <parameterUnit name="actionForm"/>
+              <parameterUnit name="request"/>
+              <parameterUnit name="response"/>
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.1/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2"
+                from="#//@model.0/@codeElement.1/@codeElement.1/@codeElement.0/@codeElement.0"/>
+            <codeElement xsi:type="action:ActionElement" name="variableDeclaration"
+                kind="declaration">
+              <codeElement xsi:type="code:StorableUnit" name="bean"/>
+              <codeElement xsi:type="action:Writes" to="#//@model.0/@codeElement.1/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0"
+                  from="#//@model.0/@codeElement.1/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2"/>
+              <codeElement xsi:type="action:ActionElement"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="variableDeclaration"
+                kind="declaration">
+              <codeElement xsi:type="code:StorableUnit" name="noticia"/>
+              <codeElement xsi:type="action:Writes" to="#//@model.0/@codeElement.1/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0"
+                  from="#//@model.0/@codeElement.1/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.3"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CompilationUnit" name="ActionLogin">
+        <codeElement xsi:type="code:ClassUnit" name="ActionLogin">
+          <codeElement xsi:type="code:MethodUnit" name="execute">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="actionMapping"/>
+              <parameterUnit name="actionForm"/>
+              <parameterUnit name="request"/>
+              <parameterUnit name="response"/>
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.2"
+                from="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0"/>
+            <codeElement xsi:type="action:ActionElement" name="variableDeclaration"
+                kind="declaration">
+              <codeElement xsi:type="code:StorableUnit" name="bean"/>
+              <codeElement xsi:type="action:Writes" to="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0"
+                  from="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.2"/>
+              <codeElement xsi:type="action:ActionElement"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+              <codeElement xsi:type="action:TrueFlow" to="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.1"
+                  from="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.3"/>
+              <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+                <codeElement xsi:type="action:ActionElement" kind="block"/>
+              </codeElement>
+              <codeElement xsi:type="action:FalseFlow" to="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.3"
+                  from="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.3"/>
+              <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+            <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+              <codeElement xsi:type="action:TrueFlow" to="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.1"
+                  from="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5"/>
+              <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+                <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+              </codeElement>
+              <codeElement xsi:type="action:FalseFlow" to="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.3"
+                  from="#//@model.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5"/>
+              <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow">
+                <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+    </codeElement>
+    <codeElement xsi:type="code:Package" name="beansstruts">
+      <codeElement xsi:type="code:CompilationUnit" name="BeanTablon">
+        <codeElement xsi:type="code:ClassUnit" name="BeanTablon">
+          <codeElement xsi:type="code:StorableUnit" name="tituloSeleccionado"/>
+          <codeElement xsi:type="code:StorableUnit" name="titulo"/>
+          <codeElement xsi:type="code:StorableUnit" name="contenido"/>
+          <codeElement xsi:type="code:StorableUnit" name="autor"/>
+          <codeElement xsi:type="code:MethodUnit" name="validate">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="mapping"/>
+              <parameterUnit name="request"/>
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4"/>
+            <codeElement xsi:type="action:ActionElement" name="variableDeclaration"
+                kind="declaration">
+              <codeElement xsi:type="code:StorableUnit" name="errores"/>
+              <codeElement xsi:type="action:Writes" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.2/@codeElement.0"
+                  from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.2"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+              <codeElement xsi:type="action:TrueFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3/@codeElement.1"
+                  from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3"/>
+              <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+                <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+              </codeElement>
+              <codeElement xsi:type="action:FalseFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3/@codeElement.3"
+                  from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.4/@codeElement.3"/>
+              <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="isTituloNoValido">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="t"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5"/>
+            <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+              <codeElement xsi:type="action:TrueFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2/@codeElement.1"
+                  from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2"/>
+              <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+                <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+              </codeElement>
+              <codeElement xsi:type="action:FalseFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2/@codeElement.3"
+                  from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.5/@codeElement.2"/>
+              <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+            </codeElement>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="setTituloSeleccionado">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="tituloSeleccionado"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.6/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.6"/>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="getTituloSeleccionado">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.7/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.7"/>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="setTitulo">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="titulo"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.8/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.8"/>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="getTitulo">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.9/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.9"/>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="setContenido">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="contenido"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.10/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.10"/>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="getContenido">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.11/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.11"/>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="setAutor">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit name="autor"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.12/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.12"/>
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression"/>
+          </codeElement>
+          <codeElement xsi:type="code:MethodUnit" name="getAutor">
+            <codeElement xsi:type="code:Signature">
+              <parameterUnit kind="return"/>
+            </codeElement>
+            <codeElement xsi:type="action:EntryFlow" to="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.13/@codeElement.2"
+                from="#//@model.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.13"/>
+            <codeElement xsi:type="action:ActionElement" name="return" kind="return"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+    </codeElement>
+  </model>
+  <model xsi:type="source:InventoryModel" name="">
+    <inventoryElement xsi:type="source:Project" name="StrutsApplication">
+      <inventoryElement xsi:type="source:Directory" name="src" path="/">
+        <inventoryElement xsi:type="source:SourceFile" name="ActionLogin.java" version=""
+            path="src\ActionLogin.java" language="java" encoding="">
+          <inventoryRelation xsi:type="source:InventoryRelationship" to="#//@model.0/@codeElement.1/@codeElement.2"
+              from="#//@model.1/@inventoryElement.0/@inventoryElement.0/@inventoryElement.0"/>
+        </inventoryElement>
+        <inventoryElement xsi:type="source:SourceFile" name="ActionPublicarNoticia.java"
+            path="src\ActionPUblicarNoticia.java" language="java">
+          <inventoryRelation xsi:type="source:InventoryRelationship" to="#//@model.0/@codeElement.1/@codeElement.0"
+              from="#//@model.1/@inventoryElement.0/@inventoryElement.0/@inventoryElement.1"/>
+        </inventoryElement>
+        <inventoryElement xsi:type="source:SourceFile" name="ActionVerNoticia.java"
+            path="src\ActionVerNoticia.java" language="java">
+          <inventoryRelation xsi:type="source:InventoryRelationship" to="#//@model.0/@codeElement.1/@codeElement.1/@codeElement.0"
+              from="#//@model.1/@inventoryElement.0/@inventoryElement.0/@inventoryElement.2"/>
+        </inventoryElement>
+        <inventoryElement xsi:type="source:SourceFile" name="BeanTablon.java" path="src\BeanTablon.java"
+            language="java">
+          <inventoryRelation xsi:type="source:InventoryRelationship" to="#//@model.0/@codeElement.2/@codeElement.0"
+              from="#//@model.1/@inventoryElement.0/@inventoryElement.0/@inventoryElement.3"/>
+        </inventoryElement>
+      </inventoryElement>
+      <inventoryElement xsi:type="source:Directory" name="config" path="/">
+        <inventoryElement xsi:type="source:Configuration" name="struts-config.xml"
+            path="config\struts-config.xml"/>
+      </inventoryElement>
+      <inventoryElement xsi:type="source:Directory" name="jsps" path="/">
+        <inventoryElement xsi:type="source:SourceFile" name="login.jsp" path="jsps/login.jsp"
+            language="jsp"/>
+        <inventoryElement xsi:type="source:SourceFile" name="tablon.jsp" path="jsps/tablon.jsp"
+            language="jsp"/>
+        <inventoryElement xsi:type="source:SourceFile" name="tablon2.jsp" path="jsps/tablon2.jsp"
+            language="jsp"/>
+        <inventoryElement xsi:type="source:SourceFile" name="mostrarNoticia.jsp" path="jsps/mostrarNoticia.jsp"
+            language="jsp"/>
+        <inventoryElement xsi:type="source:SourceFile" name="msg.jsp" path="jsps/msg.jsp"
+            language="jsp"/>
+      </inventoryElement>
+    </inventoryElement>
+  </model>
+  <model xsi:type="platform:PlatformModel">
+    <extensionFamily name="LogicStrutsExtension">
+      <stereotype name="Action" type=""/>
+      <stereotype name="ActionServlet" type=""/>
+      <stereotype name="ActionForm"/>
+    </extensionFamily>
+    <platformElement xsi:type="platform:DeployedSoftwareSystem" name="TablonApplication"
+        implementation="#//@model.0/@codeElement.1/@codeElement.0 #//@model.0/@codeElement.1/@codeElement.1 #//@model.0/@codeElement.1/@codeElement.2 #//@model.0/@codeElement.2/@codeElement.0"
+        groupedComponent="#//@model.2/@platformElement.4 #//@model.2/@platformElement.5 #//@model.2/@platformElement.6 #//@model.2/@platformElement.7"/>
+    <platformElement xsi:type="platform:ResourceType" stereotype="#//@model.2/@extensionFamily.0/@stereotype.1"
+        name="ActionServlet"/>
+    <platformElement xsi:type="platform:ResourceType" name="ActionMapping"/>
+    <platformElement xsi:type="platform:ResourceType" name="ActionForward"/>
+    <platformElement xsi:type="platform:DeployedComponent" stereotype="#//@model.2/@extensionFamily.0/@stereotype.0"
+        name="ActionPublicarNoticia" implementation="#//@model.0/@codeElement.1/@codeElement.0"
+        groupedCode="#//@model.0/@codeElement.1/@codeElement.0">
+      <abstraction name="findForward">
+        <codeElement xsi:type="code:Value" name="login"/>
+        <codeElement xsi:type="code:Value" name="exito"/>
+        <actionRelation xsi:type="platform:ReadsResource" to="#//@model.2/@platformElement.3"
+            from="#//@model.2/@platformElement.5/@abstraction.0"/>
+      </abstraction>
+    </platformElement>
+    <platformElement xsi:type="platform:DeployedComponent" stereotype="#//@model.2/@extensionFamily.0/@stereotype.0"
+        name="ActionVerNoticia" implementation="#//@model.0/@codeElement.1/@codeElement.1"
+        groupedCode="#//@model.0/@codeElement.1/@codeElement.1">
+      <abstraction name="findForward">
+        <codeElement xsi:type="code:Value" name="verNoticia"/>
+        <actionRelation xsi:type="platform:ReadsResource" to="#//@model.2/@platformElement.3"
+            from="#//@model.2/@platformElement.5/@abstraction.0"/>
+      </abstraction>
+    </platformElement>
+    <platformElement xsi:type="platform:DeployedComponent" stereotype="#//@model.2/@extensionFamily.0/@stereotype.0"
+        name="ActionLogin" implementation="#//@model.0/@codeElement.1/@codeElement.2"
+        groupedCode="#//@model.0/@codeElement.1/@codeElement.2">
+      <abstraction name="findForward">
+        <codeElement xsi:type="code:Value" name="publicar"/>
+        <codeElement xsi:type="code:Value" name="exito"/>
+        <actionRelation xsi:type="platform:ReadsResource" to="#//@model.2/@platformElement.3"
+            from="#//@model.2/@platformElement.5/@abstraction.0"/>
+      </abstraction>
+    </platformElement>
+    <platformElement xsi:type="platform:DeployedComponent" stereotype="#//@model.2/@extensionFamily.0/@stereotype.2"
+        name="BeanTablon" implementation="#//@model.0/@codeElement.2/@codeElement.0"
+        groupedCode="#//@model.0/@codeElement.2/@codeElement.0"/>
+  </model>
+  <model xsi:type="ui:UIModel">
+    <extensionFamily name="WebStrutsExtension">
+      <stereotype name="JSP page"/>
+      <stereotype name="Web form"/>
+      <stereotype name="Text Form Field" type=""/>
+      <stereotype name="InputText Form Field"/>
+      <stereotype name="Submit Form Field"/>
+      <stereotype name="Textarea Form Field"/>
+      <stereotype name="Web link"/>
+    </extensionFamily>
+    <UIElement xsi:type="ui:UIResource" stereotype="#//@model.3/@extensionFamily.0/@stereotype.0"
+        name="tablon">
+      <annotation text="Al ser paginas scriptlet con uso de tags de struts, se modela como HTML puro o se supone Struts?"/>
+      <UIElement xsi:type="ui:Screen" name="tablon">
+        <UIElement xsi:type="ui:UIField" name="header"/>
+        <UIElement xsi:type="ui:UIResource" stereotype="#//@model.3/@extensionFamily.0/@stereotype.1"
+            name="ver">
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.2"
+              name="tablon.noticia"/>
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.3"
+              name="tituloSeleccionado"/>
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.4"
+              name="ver noticia">
+            <abstraction name="verNoticia">
+              <annotation text="Submit se representa como una llamada a ActionServlet o resolvemos a quien se llamara (AccionVerNoticia)?"/>
+              <actionRelation xsi:type="platform:WritesResource" to="#//@model.2/@platformElement.1"
+                  from="#//@model.3/@UIElement.0/@UIElement.0/@UIElement.1/@UIElement.2/@abstraction.0"/>
+            </abstraction>
+          </UIElement>
+        </UIElement>
+        <UIElement xsi:type="ui:UIResource" stereotype="#//@model.3/@extensionFamily.0/@stereotype.1"
+            name="publicar">
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.2"
+              name="tablon.titulo"/>
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.3"
+              name="titulo"/>
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.5"
+              name="contenido"/>
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.2"
+              name="tablon.autor"/>
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.3"
+              name="autor"/>
+          <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.4"
+              name="añadir noticia">
+            <abstraction name="publicarNoticia">
+              <actionRelation xsi:type="platform:WritesResource" to="#//@model.2/@platformElement.1"
+                  from="#//@model.3/@UIElement.0/@UIElement.0/@UIElement.2/@UIElement.5/@abstraction.0"/>
+            </abstraction>
+          </UIElement>
+        </UIElement>
+        <UIElement xsi:type="ui:UIField" name="aviso"/>
+        <UIElement xsi:type="ui:UIField" stereotype="#//@model.3/@extensionFamily.0/@stereotype.6"
+            name="login">
+          <UIRelation xsi:type="ui:UIFlow" to="#//@model.3/@UIElement.2" from="#//@model.3/@UIElement.0/@UIElement.0/@UIElement.4"/>
+        </UIElement>
+      </UIElement>
+    </UIElement>
+    <UIElement xsi:type="ui:UIResource" stereotype="#//@model.3/@extensionFamily.0/@stereotype.0"
+        name="tablon2"/>
+    <UIElement xsi:type="ui:UIResource" stereotype="#//@model.3/@extensionFamily.0/@stereotype.0"
+        name="login"/>
+    <UIElement xsi:type="ui:UIResource" stereotype="#//@model.3/@extensionFamily.0/@stereotype.0"
+        name="mostrarNoticia"/>
+    <UIElement xsi:type="ui:UIResource" stereotype="#//@model.3/@extensionFamily.0/@stereotype.0"
+        name="message"/>
+  </model>
+  <model xsi:type="event:EventModel">
+    <eventElement xsi:type="event:EventResource" name="ActionServlet Execution">
+      <annotation text="Esto es de Struts, demasiado específico? Contar solo lo de la aplicacion?"/>
+      <eventElement xsi:type="event:InitialState">
+        <eventRelation xsi:type="event:ConsumesEvent" to="#//@model.4/@eventElement.0/@eventElement.0/@eventElement.1"
+            from="#//@model.4/@eventElement.0/@eventElement.0/@eventElement.0"/>
+        <eventElement xsi:type="event:OnExit" name="exitInitialState">
+          <eventRelation xsi:type="event:NextState" to="#//@model.4/@eventElement.0/@eventElement.1"
+              from="#//@model.4/@eventElement.0/@eventElement.0/@eventElement.0"/>
+        </eventElement>
+        <eventElement xsi:type="event:Event" name="Request received"/>
+      </eventElement>
+      <eventElement xsi:type="event:State" name="Locate ActionForm">
+        <eventRelation xsi:type="event:ConsumesEvent" to="#//@model.4/@eventElement.0/@eventElement.1/@eventElement.1"
+            from="#//@model.4/@eventElement.0/@eventElement.1/@eventElement.0"/>
+        <eventElement xsi:type="event:OnExit" name="exitLocateActionForm">
+          <eventRelation xsi:type="event:NextState" to="#//@model.4/@eventElement.0/@eventElement.2"/>
+        </eventElement>
+        <eventElement xsi:type="event:Event" name="Located ActionForm"/>
+      </eventElement>
+      <eventElement xsi:type="event:State" name="Locate Action">
+        <annotation text="Ejemplo de bifurcación"/>
+        <eventRelation xsi:type="event:ConsumesEvent" to="#//@model.4/@eventElement.0/@eventElement.2/@eventElement.2"
+            from="#//@model.4/@eventElement.0/@eventElement.2/@eventElement.0"/>
+        <eventRelation xsi:type="event:ConsumesEvent" to="#//@model.4/@eventElement.0/@eventElement.2/@eventElement.3"
+            from="#//@model.4/@eventElement.0/@eventElement.2/@eventElement.1"/>
+        <eventElement xsi:type="event:OnExit" name="exitLocateAction">
+          <eventRelation xsi:type="event:NextState" to="#//@model.4/@eventElement.0/@eventElement.3"/>
+        </eventElement>
+        <eventElement xsi:type="event:OnExit" name="exitUnlocatedAction">
+          <eventRelation xsi:type="event:NextState" to="#//@model.4/@eventElement.0/@eventElement.5"
+              from="#//@model.4/@eventElement.0/@eventElement.2/@eventElement.1"/>
+        </eventElement>
+        <eventElement xsi:type="event:Event" name="LocatedAction"/>
+        <eventElement xsi:type="event:Event" name="UnlocatedAction"/>
+      </eventElement>
+      <eventElement xsi:type="event:State" name="Create Action">
+        <eventRelation xsi:type="event:ConsumesEvent" to="#//@model.4/@eventElement.0/@eventElement.3/@eventElement.1"
+            from="#//@model.4/@eventElement.0/@eventElement.3/@eventElement.0"/>
+        <eventElement xsi:type="event:OnExit" name="exitCreateAction">
+          <eventRelation xsi:type="event:NextState" to="#//@model.4/@eventElement.0/@eventElement.4"/>
+        </eventElement>
+        <eventElement xsi:type="event:Event" name="createdAction"/>
+      </eventElement>
+      <eventElement xsi:type="event:State" name="Execute Action"/>
+      <eventElement xsi:type="event:State" name="Error"/>
+    </eventElement>
+  </model>
+</kdm:Segment>

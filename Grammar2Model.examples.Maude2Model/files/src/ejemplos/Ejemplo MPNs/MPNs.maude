@@ -1,0 +1,805 @@
+
+
+mod @MPNS@ is
+  protecting @ECORE@
+  .
+  op @MPNs@ : -> @Metamodel
+  .
+  eq name( @MPNs@ ) =
+    "MPNs"
+  .
+  eq packages( @MPNs@ ) =
+    MPNs
+  .
+  op MPNs : -> @Package
+  .
+  eq name( MPNs ) =
+    "MPNs"
+  .
+  eq metamodel( MPNs ) =
+    @MPNs@
+  .
+  eq superPackage( MPNs ) =
+    null
+  .
+  eq subPackages( MPNs ) =
+    nil
+  .
+  eq classes( MPNs ) =
+    __( Phone@MPNs , CallRecord@MPNs , Call@MPNs , Antenna@MPNs , MPN@MPNs )
+  .
+  sort Phone@MPNs
+  .
+  subsorts Phone@MPNs < @Class
+  .
+  op Phone@MPNs : -> Phone@MPNs
+  .
+  eq name( Phone@MPNs ) =
+    "Phone"
+  .
+  eq isAbstract( Phone@MPNs ) =
+    false
+  .
+  eq package( Phone@MPNs ) =
+    MPNs
+  .
+  eq superTypes( Phone@MPNs ) =
+    nil
+  .
+  eq references( Phone@MPNs ) =
+    __( dialedCalls@Phone@MPNs , receivedCalls@Phone@MPNs , contacts@Phone@MPNs , missedCalls@Phone@MPNs , currentCall@Phone@MPNs , antenaConectada@Phone@MPNs )
+  .
+  eq attributes( Phone@MPNs ) =
+    __( number@Phone@MPNs , on@Phone@MPNs , battery@Phone@MPNs , coverage@Phone@MPNs , standbyBps@Phone@MPNs , talkBps@Phone@MPNs , xPos@Phone@MPNs , yPos@Phone@MPNs , numerosGuia@Phone@MPNs )
+  .
+  sort CallRecord@MPNs
+  .
+  subsorts CallRecord@MPNs < @Class
+  .
+  op CallRecord@MPNs : -> CallRecord@MPNs
+  .
+  eq name( CallRecord@MPNs ) =
+    "CallRecord"
+  .
+  eq isAbstract( CallRecord@MPNs ) =
+    false
+  .
+  eq package( CallRecord@MPNs ) =
+    MPNs
+  .
+  eq superTypes( CallRecord@MPNs ) =
+    nil
+  .
+  eq references( CallRecord@MPNs ) =
+    contact@CallRecord@MPNs
+  .
+  eq attributes( CallRecord@MPNs ) =
+    __( startingTime@CallRecord@MPNs , duration@CallRecord@MPNs )
+  .
+  sort Call@MPNs
+  .
+  subsorts Call@MPNs < @Class
+  .
+  op Call@MPNs : -> Call@MPNs
+  .
+  eq name( Call@MPNs ) =
+    "Call"
+  .
+  eq isAbstract( Call@MPNs ) =
+    false
+  .
+  eq package( Call@MPNs ) =
+    MPNs
+  .
+  eq superTypes( Call@MPNs ) =
+    nil
+  .
+  eq references( Call@MPNs ) =
+    to@Call@MPNs
+  .
+  eq attributes( Call@MPNs ) =
+    startingTime@Call@MPNs
+  .
+  sort Antenna@MPNs
+  .
+  subsorts Antenna@MPNs < @Class
+  .
+  op Antenna@MPNs : -> Antenna@MPNs
+  .
+  eq name( Antenna@MPNs ) =
+    "Antenna"
+  .
+  eq isAbstract( Antenna@MPNs ) =
+    false
+  .
+  eq package( Antenna@MPNs ) =
+    MPNs
+  .
+  eq superTypes( Antenna@MPNs ) =
+    nil
+  .
+  eq references( Antenna@MPNs ) =
+    nil
+  .
+  eq attributes( Antenna@MPNs ) =
+    __( xPos@Antenna@MPNs , yPos@Antenna@MPNs )
+  .
+  sort MPN@MPNs
+  .
+  subsorts MPN@MPNs < @Class
+  .
+  op MPN@MPNs : -> MPN@MPNs
+  .
+  eq name( MPN@MPNs ) =
+    "MPN"
+  .
+  eq isAbstract( MPN@MPNs ) =
+    false
+  .
+  eq package( MPN@MPNs ) =
+    MPNs
+  .
+  eq superTypes( MPN@MPNs ) =
+    nil
+  .
+  eq references( MPN@MPNs ) =
+    __( antennas@MPN@MPNs , phones@MPN@MPNs )
+  .
+  eq attributes( MPN@MPNs ) =
+    nil
+  .
+  op dialedCalls@Phone@MPNs : -> @Reference
+  .
+  eq name( dialedCalls@Phone@MPNs ) =
+    "dialedCalls"
+  .
+  eq type( dialedCalls@Phone@MPNs ) =
+    CallRecord@MPNs
+  .
+  eq opposite( dialedCalls@Phone@MPNs ) =
+    null
+  .
+  eq lowerBound( dialedCalls@Phone@MPNs ) =
+    0
+  .
+  eq upperBound( dialedCalls@Phone@MPNs ) =
+    *
+  .
+  eq containingClass( dialedCalls@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isContainment( dialedCalls@Phone@MPNs ) =
+    true
+  .
+  eq isOrdered( dialedCalls@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( dialedCalls@Phone@MPNs ) =
+    true
+  .
+  op receivedCalls@Phone@MPNs : -> @Reference
+  .
+  eq name( receivedCalls@Phone@MPNs ) =
+    "receivedCalls"
+  .
+  eq type( receivedCalls@Phone@MPNs ) =
+    CallRecord@MPNs
+  .
+  eq opposite( receivedCalls@Phone@MPNs ) =
+    null
+  .
+  eq lowerBound( receivedCalls@Phone@MPNs ) =
+    0
+  .
+  eq upperBound( receivedCalls@Phone@MPNs ) =
+    *
+  .
+  eq containingClass( receivedCalls@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isContainment( receivedCalls@Phone@MPNs ) =
+    true
+  .
+  eq isOrdered( receivedCalls@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( receivedCalls@Phone@MPNs ) =
+    true
+  .
+  op contacts@Phone@MPNs : -> @Reference
+  .
+  eq name( contacts@Phone@MPNs ) =
+    "contacts"
+  .
+  eq type( contacts@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq opposite( contacts@Phone@MPNs ) =
+    null
+  .
+  eq lowerBound( contacts@Phone@MPNs ) =
+    0
+  .
+  eq upperBound( contacts@Phone@MPNs ) =
+    *
+  .
+  eq containingClass( contacts@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isContainment( contacts@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( contacts@Phone@MPNs ) =
+    false
+  .
+  eq isUnique( contacts@Phone@MPNs ) =
+    false
+  .
+  op missedCalls@Phone@MPNs : -> @Reference
+  .
+  eq name( missedCalls@Phone@MPNs ) =
+    "missedCalls"
+  .
+  eq type( missedCalls@Phone@MPNs ) =
+    CallRecord@MPNs
+  .
+  eq opposite( missedCalls@Phone@MPNs ) =
+    null
+  .
+  eq lowerBound( missedCalls@Phone@MPNs ) =
+    0
+  .
+  eq upperBound( missedCalls@Phone@MPNs ) =
+    *
+  .
+  eq containingClass( missedCalls@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isContainment( missedCalls@Phone@MPNs ) =
+    true
+  .
+  eq isOrdered( missedCalls@Phone@MPNs ) =
+    false
+  .
+  eq isUnique( missedCalls@Phone@MPNs ) =
+    true
+  .
+  op currentCall@Phone@MPNs : -> @Reference
+  .
+  eq name( currentCall@Phone@MPNs ) =
+    "currentCall"
+  .
+  eq type( currentCall@Phone@MPNs ) =
+    Call@MPNs
+  .
+  eq opposite( currentCall@Phone@MPNs ) =
+    null
+  .
+  eq lowerBound( currentCall@Phone@MPNs ) =
+    0
+  .
+  eq upperBound( currentCall@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( currentCall@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isContainment( currentCall@Phone@MPNs ) =
+    true
+  .
+  eq isOrdered( currentCall@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( currentCall@Phone@MPNs ) =
+    true
+  .
+  op antenaConectada@Phone@MPNs : -> @Reference
+  .
+  eq name( antenaConectada@Phone@MPNs ) =
+    "antenaConectada"
+  .
+  eq type( antenaConectada@Phone@MPNs ) =
+    Antenna@MPNs
+  .
+  eq opposite( antenaConectada@Phone@MPNs ) =
+    null
+  .
+  eq lowerBound( antenaConectada@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( antenaConectada@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( antenaConectada@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isContainment( antenaConectada@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( antenaConectada@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( antenaConectada@Phone@MPNs ) =
+    true
+  .
+  op contact@CallRecord@MPNs : -> @Reference
+  .
+  eq name( contact@CallRecord@MPNs ) =
+    "contact"
+  .
+  eq type( contact@CallRecord@MPNs ) =
+    Phone@MPNs
+  .
+  eq opposite( contact@CallRecord@MPNs ) =
+    null
+  .
+  eq lowerBound( contact@CallRecord@MPNs ) =
+    1
+  .
+  eq upperBound( contact@CallRecord@MPNs ) =
+    1
+  .
+  eq containingClass( contact@CallRecord@MPNs ) =
+    CallRecord@MPNs
+  .
+  eq isContainment( contact@CallRecord@MPNs ) =
+    false
+  .
+  eq isOrdered( contact@CallRecord@MPNs ) =
+    true
+  .
+  eq isUnique( contact@CallRecord@MPNs ) =
+    true
+  .
+  op to@Call@MPNs : -> @Reference
+  .
+  eq name( to@Call@MPNs ) =
+    "to"
+  .
+  eq type( to@Call@MPNs ) =
+    Phone@MPNs
+  .
+  eq opposite( to@Call@MPNs ) =
+    null
+  .
+  eq lowerBound( to@Call@MPNs ) =
+    1
+  .
+  eq upperBound( to@Call@MPNs ) =
+    1
+  .
+  eq containingClass( to@Call@MPNs ) =
+    Call@MPNs
+  .
+  eq isContainment( to@Call@MPNs ) =
+    false
+  .
+  eq isOrdered( to@Call@MPNs ) =
+    true
+  .
+  eq isUnique( to@Call@MPNs ) =
+    true
+  .
+  op antennas@MPN@MPNs : -> @Reference
+  .
+  eq name( antennas@MPN@MPNs ) =
+    "antennas"
+  .
+  eq type( antennas@MPN@MPNs ) =
+    Antenna@MPNs
+  .
+  eq opposite( antennas@MPN@MPNs ) =
+    null
+  .
+  eq lowerBound( antennas@MPN@MPNs ) =
+    0
+  .
+  eq upperBound( antennas@MPN@MPNs ) =
+    *
+  .
+  eq containingClass( antennas@MPN@MPNs ) =
+    MPN@MPNs
+  .
+  eq isContainment( antennas@MPN@MPNs ) =
+    true
+  .
+  eq isOrdered( antennas@MPN@MPNs ) =
+    true
+  .
+  eq isUnique( antennas@MPN@MPNs ) =
+    true
+  .
+  op phones@MPN@MPNs : -> @Reference
+  .
+  eq name( phones@MPN@MPNs ) =
+    "phones"
+  .
+  eq type( phones@MPN@MPNs ) =
+    Phone@MPNs
+  .
+  eq opposite( phones@MPN@MPNs ) =
+    null
+  .
+  eq lowerBound( phones@MPN@MPNs ) =
+    0
+  .
+  eq upperBound( phones@MPN@MPNs ) =
+    *
+  .
+  eq containingClass( phones@MPN@MPNs ) =
+    MPN@MPNs
+  .
+  eq isContainment( phones@MPN@MPNs ) =
+    true
+  .
+  eq isOrdered( phones@MPN@MPNs ) =
+    true
+  .
+  eq isUnique( phones@MPN@MPNs ) =
+    true
+  .
+  op number@Phone@MPNs : -> @Attribute
+  .
+  eq name( number@Phone@MPNs ) =
+    "number"
+  .
+  eq type( number@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( number@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( number@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( number@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( number@Phone@MPNs ) =
+    true
+  .
+  eq isOrdered( number@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( number@Phone@MPNs ) =
+    true
+  .
+  op on@Phone@MPNs : -> @Attribute
+  .
+  eq name( on@Phone@MPNs ) =
+    "on"
+  .
+  eq type( on@Phone@MPNs ) =
+    @Bool
+  .
+  eq lowerBound( on@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( on@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( on@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( on@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( on@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( on@Phone@MPNs ) =
+    true
+  .
+  op battery@Phone@MPNs : -> @Attribute
+  .
+  eq name( battery@Phone@MPNs ) =
+    "battery"
+  .
+  eq type( battery@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( battery@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( battery@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( battery@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( battery@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( battery@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( battery@Phone@MPNs ) =
+    true
+  .
+  op coverage@Phone@MPNs : -> @Attribute
+  .
+  eq name( coverage@Phone@MPNs ) =
+    "coverage"
+  .
+  eq type( coverage@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( coverage@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( coverage@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( coverage@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( coverage@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( coverage@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( coverage@Phone@MPNs ) =
+    true
+  .
+  op standbyBps@Phone@MPNs : -> @Attribute
+  .
+  eq name( standbyBps@Phone@MPNs ) =
+    "standbyBps"
+  .
+  eq type( standbyBps@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( standbyBps@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( standbyBps@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( standbyBps@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( standbyBps@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( standbyBps@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( standbyBps@Phone@MPNs ) =
+    true
+  .
+  op talkBps@Phone@MPNs : -> @Attribute
+  .
+  eq name( talkBps@Phone@MPNs ) =
+    "talkBps"
+  .
+  eq type( talkBps@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( talkBps@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( talkBps@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( talkBps@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( talkBps@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( talkBps@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( talkBps@Phone@MPNs ) =
+    true
+  .
+  op xPos@Phone@MPNs : -> @Attribute
+  .
+  eq name( xPos@Phone@MPNs ) =
+    "xPos"
+  .
+  eq type( xPos@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( xPos@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( xPos@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( xPos@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( xPos@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( xPos@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( xPos@Phone@MPNs ) =
+    true
+  .
+  op yPos@Phone@MPNs : -> @Attribute
+  .
+  eq name( yPos@Phone@MPNs ) =
+    "yPos"
+  .
+  eq type( yPos@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( yPos@Phone@MPNs ) =
+    1
+  .
+  eq upperBound( yPos@Phone@MPNs ) =
+    1
+  .
+  eq containingClass( yPos@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( yPos@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( yPos@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( yPos@Phone@MPNs ) =
+    true
+  .
+  op numerosGuia@Phone@MPNs : -> @Attribute
+  .
+  eq name( numerosGuia@Phone@MPNs ) =
+    "numerosGuia"
+  .
+  eq type( numerosGuia@Phone@MPNs ) =
+    @Int
+  .
+  eq lowerBound( numerosGuia@Phone@MPNs ) =
+    0
+  .
+  eq upperBound( numerosGuia@Phone@MPNs ) =
+    *
+  .
+  eq containingClass( numerosGuia@Phone@MPNs ) =
+    Phone@MPNs
+  .
+  eq isId( numerosGuia@Phone@MPNs ) =
+    false
+  .
+  eq isOrdered( numerosGuia@Phone@MPNs ) =
+    true
+  .
+  eq isUnique( numerosGuia@Phone@MPNs ) =
+    false
+  .
+  op startingTime@CallRecord@MPNs : -> @Attribute
+  .
+  eq name( startingTime@CallRecord@MPNs ) =
+    "startingTime"
+  .
+  eq type( startingTime@CallRecord@MPNs ) =
+    @Int
+  .
+  eq lowerBound( startingTime@CallRecord@MPNs ) =
+    1
+  .
+  eq upperBound( startingTime@CallRecord@MPNs ) =
+    1
+  .
+  eq containingClass( startingTime@CallRecord@MPNs ) =
+    CallRecord@MPNs
+  .
+  eq isId( startingTime@CallRecord@MPNs ) =
+    false
+  .
+  eq isOrdered( startingTime@CallRecord@MPNs ) =
+    true
+  .
+  eq isUnique( startingTime@CallRecord@MPNs ) =
+    true
+  .
+  op duration@CallRecord@MPNs : -> @Attribute
+  .
+  eq name( duration@CallRecord@MPNs ) =
+    "duration"
+  .
+  eq type( duration@CallRecord@MPNs ) =
+    @Int
+  .
+  eq lowerBound( duration@CallRecord@MPNs ) =
+    1
+  .
+  eq upperBound( duration@CallRecord@MPNs ) =
+    1
+  .
+  eq containingClass( duration@CallRecord@MPNs ) =
+    CallRecord@MPNs
+  .
+  eq isId( duration@CallRecord@MPNs ) =
+    false
+  .
+  eq isOrdered( duration@CallRecord@MPNs ) =
+    true
+  .
+  eq isUnique( duration@CallRecord@MPNs ) =
+    true
+  .
+  op startingTime@Call@MPNs : -> @Attribute
+  .
+  eq name( startingTime@Call@MPNs ) =
+    "startingTime"
+  .
+  eq type( startingTime@Call@MPNs ) =
+    @Int
+  .
+  eq lowerBound( startingTime@Call@MPNs ) =
+    1
+  .
+  eq upperBound( startingTime@Call@MPNs ) =
+    1
+  .
+  eq containingClass( startingTime@Call@MPNs ) =
+    Call@MPNs
+  .
+  eq isId( startingTime@Call@MPNs ) =
+    false
+  .
+  eq isOrdered( startingTime@Call@MPNs ) =
+    true
+  .
+  eq isUnique( startingTime@Call@MPNs ) =
+    true
+  .
+  op xPos@Antenna@MPNs : -> @Attribute
+  .
+  eq name( xPos@Antenna@MPNs ) =
+    "xPos"
+  .
+  eq type( xPos@Antenna@MPNs ) =
+    @Int
+  .
+  eq lowerBound( xPos@Antenna@MPNs ) =
+    1
+  .
+  eq upperBound( xPos@Antenna@MPNs ) =
+    1
+  .
+  eq containingClass( xPos@Antenna@MPNs ) =
+    Antenna@MPNs
+  .
+  eq isId( xPos@Antenna@MPNs ) =
+    false
+  .
+  eq isOrdered( xPos@Antenna@MPNs ) =
+    true
+  .
+  eq isUnique( xPos@Antenna@MPNs ) =
+    true
+  .
+  op yPos@Antenna@MPNs : -> @Attribute
+  .
+  eq name( yPos@Antenna@MPNs ) =
+    "yPos"
+  .
+  eq type( yPos@Antenna@MPNs ) =
+    @Int
+  .
+  eq lowerBound( yPos@Antenna@MPNs ) =
+    0
+  .
+  eq upperBound( yPos@Antenna@MPNs ) =
+    1
+  .
+  eq containingClass( yPos@Antenna@MPNs ) =
+    Antenna@MPNs
+  .
+  eq isId( yPos@Antenna@MPNs ) =
+    false
+  .
+  eq isOrdered( yPos@Antenna@MPNs ) =
+    true
+  .
+  eq isUnique( yPos@Antenna@MPNs ) =
+    true
+  .
+endm

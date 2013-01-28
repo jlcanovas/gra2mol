@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+  <form-beans>
+    <form-bean name="beanTablon" type="beansstruts.BeanTablon"/>
+    <form-bean name="beanLogin" type="beansstruts.BeanLogin"/>
+  </form-beans>
+  <global-forwards>
+    <forward name="menu" path="/tablon2.jsp"/>
+    <forward name="formLogin" path="/login.jsp"/>
+  </global-forwards>
+  <action-mappings>
+    <action path="/ver" type="actionsstruts.ActionVerNoticia" name="beanTablon"
+            scope="request">
+      <forward name="verNoticia" path="/mostrarNoticia.jsp"/>
+    </action>
+    <action path="/publicar" type="actionsstruts.ActionPublicarNoticia" name="beanTablon"
+            scope="request" input="/tablon2.jsp">
+      <forward name="exito" path="/msg.jsp"/>
+      <forward name="login" path="/login.jsp"/>
+    </action>
+    <action path="/login" type="actionsstruts.ActionLogin" name="beanLogin"
+            scope="request">
+      <forward name="exito" path="/tablon2.jsp"/>
+      <forward name="publicar" path="/publicar.do"/>
+    </action>
+  </action-mappings>
+  <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+  <message-resources parameter="beansstruts.ApplicationResources" null="false"/>
+  <plug-in className="org.apache.struts.tiles.TilesPlugin">
+    <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+    <set-property property="moduleAware" value="true" />
+  </plug-in>
+</struts-config>

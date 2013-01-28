@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:Transformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules xsi:type="Core:StandardRule" name="mapEPackage">
+    <queries variable="elems">
+      <filter type="INDIRECT">
+        <element name="file" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="endsWith">
+          <element name="filename"/>
+          <parameters value="accessorSpecs.json"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value value="modsea"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="nsURI">
+        <value value="http://modsea/1.0"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="nsPrefix">
+        <value value="modsea"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eClassifiers">
+        <value type="QUERY_RESULT" value="elems"/>
+      </inits>
+    </inits>
+    <from name="CST" alias="tree">
+      <filter variable="tree">
+        <filter>
+          <element name="CST" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="EPackage"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapEClass">
+    <queries variable="attrs">
+      <filter type="INDIRECT">
+        <element name="file"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="endsWith">
+          <element name="filename"/>
+          <parameters value="settingSpecs.json"/>
+        </expression>
+        <next type="INDIRECT">
+          <element name="pairValue" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="refs">
+      <filter type="INDIRECT">
+        <element name="file"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="endsWith">
+          <element name="filename"/>
+          <parameters value="accessorSpecs.json"/>
+        </expression>
+        <next type="RECURSIVE">
+          <element name="pairValue" mark="true"/>
+          <next>
+            <element name="lhs"/>
+            <next>
+              <element name="value"/>
+              <expression xsi:type="Query:FilterExpressionUnit" operation="equals">
+                <element name="ID"/>
+                <parameters value="attributeName"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_EXTENSION" value="digestFilename">
+          <params value="f" type="VARIABLE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eStructuralFeatures">
+        <value type="QUERY_RESULT" value="attrs"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eStructuralFeatures">
+        <value type="QUERY_RESULT" value="refs"/>
+      </inits>
+    </inits>
+    <from name="file" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="file" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="EClass"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapEAttributes">
+    <queries variable="lhs">
+      <filter>
+        <element name="pv"/>
+        <next type="INDIRECT">
+          <element name="lhs"/>
+          <next>
+            <element name="value" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeL">
+      <filter>
+        <element name="pv"/>
+        <next type="INDIRECT">
+          <element name="rhs"/>
+          <next type="INDIRECT">
+            <element name="pairValue" mark="true"/>
+            <next>
+              <element name="lhs"/>
+              <next>
+                <element name="value"/>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+                  <element name="ID"/>
+                  <parameters value="type"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeR">
+      <filter>
+        <element name="typeL"/>
+        <next>
+          <element name="rhs"/>
+          <next>
+            <element name="value" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="defVL">
+      <filter>
+        <element name="pv"/>
+        <next type="INDIRECT">
+          <element name="rhs"/>
+          <next type="INDIRECT">
+            <element name="pairValue" mark="true"/>
+            <next>
+              <element name="lhs"/>
+              <next>
+                <element name="value"/>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="eq">
+                  <element name="ID"/>
+                  <parameters value="defaultValue"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="defVR">
+      <filter>
+        <element name="defVL"/>
+        <next>
+          <element name="rhs"/>
+          <next>
+            <element name="value" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_REMOVE_QUOTES" value="lhs" extension="DQVALUE"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eType">
+        <value type="OPERATION_EXTENSION" value="typeHelper">
+          <params value="typeR" type="VARIABLE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="defaultValueLiteral">
+        <value type="OPERATION_CODE" value="defVR"/>
+      </inits>
+    </inits>
+    <from name="pairValue" alias="pv">
+      <filter variable="pv">
+        <filter>
+          <element name="pairValue" mark="true"/>
+          <next>
+            <element name="lhs"/>
+            <next>
+              <element name="value"/>
+              <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="equals">
+                  <element name="ID"/>
+                  <parameters value="attributeName"/>
+                </expressions>
+              </expression>
+            </next>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="EAttribute"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapEReference">
+    <queries variable="rhs">
+      <filter>
+        <element name="pv"/>
+        <next>
+          <element name="rhs"/>
+          <next>
+            <element name="value" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_REMOVE_QUOTES" value="rhs" extension="DQVALUE"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eType">
+        <value type="OPERATION_EXTENSION" value="typeInitializer">
+          <params value="rhs" type="VARIABLE"/>
+        </value>
+      </inits>
+    </inits>
+    <from name="pairValue" alias="pv">
+      <filter variable="pv">
+        <filter>
+          <element name="pairValue" mark="true"/>
+          <next>
+            <element name="lhs"/>
+            <next>
+              <element name="value"/>
+              <expression xsi:type="Query:FilterExpressionUnit" operation="equals">
+                <element name="ID"/>
+                <parameters value="attributeName"/>
+              </expression>
+            </next>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="EReference"/>
+  </rules>
+</Core:Transformation>

@@ -1,0 +1,33 @@
+Gra2MoL version 0.5
+
+Executing interpreter...
+Reading configuration file...
+The configuration does not exist
+
+Initializing query operation
+[WARNING] No query operation were found!
+
+Initializing query control statement
+[WARNING] No query control statement were found!
+
+Initializing mapping extension
+[WARNING] No mapping extension were found!
+Models created.
+Initializing indexRules...
+Initializing mixinRules...
+Initializing packages...
+Initializing hashes...
+
+Executing rules...
+RULE: testing
+RULE: testing... executing!
+  Model Element Metaclass created
+  Executing queries...
+    Query cst with 1 result nodes - CONTENT : [/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.semanticWhitespaces/files/src/inputs/test.txt test.txt HOLA   <missing ' '> javi ; ]
+    Query m with 1 result nodes - CONTENT in line 1: [HOLA   <missing ' '> javi ; ]
+  Executing mappings...
+    - QUERY_ACCESS: variable: m - 
+      node: mainRule (kind) - leaf: ID (kind) - javi (value) 
+
+
+Saving...

@@ -1,0 +1,37 @@
+
+<project name="Island Grammar Generation" default="build">
+
+    <path id="path.taskdef">
+    	<pathelement location="./lib/modelumMofscriptAnt.jar"/>
+    	<pathelement location="./lib/org.eclipse.mofscript.runtime.jar"/>
+    	<pathelement location="./lib/org.eclipse.mofscript.parser.jar"/>
+    	<pathelement location="./lib/org.eclipse.mofscript.model.jar"/>
+    	<pathelement location="./lib/org.eclipse.mofscript.fileresourcemodel.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
+        <pathelement location="./lib/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
+    	<pathelement location="./lib/antlr-3.2.jar"/>
+     	<pathelement location="${binDir}/."/>
+   	</path> 
+
+	<target name="build">
+		<taskdef name="mofscript" classname="modelum.mofscript.ant.MOFScriptTask" classpathref="path.taskdef"/>
+		<mofscript template="islandGrammar.m2t" templatesDir="files/src/" outputdir="files/src">
+			<model metamodel="files/metamodels/Maude.ecore" model="preResultModel.ecore.xmi" />
+		</mofscript>
+		
+		<concat destfile="files/src/Island.g">
+			<fileset file="files/src/PreIsland.g" />
+			<fileset file="files/src/lexerRules.g" />
+		</concat>
+		
+		<mofscript template="gra2molRules.m2t" templatesDir="files/src/" outputdir="files/src">
+			<model metamodel="files/metamodels/Maude.ecore" model="preResultModel.ecore.xmi" />
+		</mofscript>
+		
+		<concat destfile="files/src/testIsland.g2m">
+		    <fileset file="files/src/testPreIsland.g2m" />
+		    <fileset file="files/src/gra2molFragment.g2m" />
+		</concat>
+	</target>
+</project>

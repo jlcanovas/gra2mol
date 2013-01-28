@@ -1,0 +1,116 @@
+texttransformation islandGrammarTransformation (in maudeMM:"http://MaudeMM/1.0") {
+	maudeMM.MaudeSpec::main() {
+		file("gra2molFragment.g2m")
+		
+		maudeMM.objectsOfType(maudeMM.Operation)->forEach(op : maudeMM.Operation | op.arity.size() > 0) {
+			'rule ' '\'mapOp' op.name '\'' newline(1)
+			tab(1) 'from modElt//' op.digestName() ' st' newline(1)
+			tab(1) 'to Equation' newline(1)
+			tab(1) 'queries' newline(1)
+			
+			tab(2) 'lab   : /st//label/#labelId;' newline(2)
+			
+			var hasParams : Integer = op.name.indexOf("_")
+			var numParams : Integer = op.getNumParams()
+			var aux : Integer = 0
+			
+			if(hasParams > -1) {
+				numParams->forEach(n) {
+					//tab(2) 'ltype' print(n)' : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq("' op.arity.first().name '")};' newline(1)
+					tab(2) 'largs' print(n)' : /st//#' digestSortName(op.arity.first().name) '[' print(aux) '];' newline(1)
+					aux = aux + 1
+				}
+				newline(1)
+			} else {	
+				tab(2) 'ltype : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq("' op.arity.first().name '")};' newline(1)
+				tab(2) 'largs : /st//#' digestSortName(op.arity.first().name) ';' newline(2)
+			}
+			
+			if(hasParams > -1) {
+				tab(2) 'rop   : /st//#' digestSortName(op.coarity.name) '[' print(aux) '];' newline(1)
+			} else {
+				tab(2) 'rop   : /st//#' digestSortName(op.coarity.name) ';' newline(1)
+			}
+			tab(2) 'rtype : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq("' op.coarity.name '")};' newline(1)
+			if(op.coarity.name.equals("ListOrd")) {
+				tab(2) 'rargs : /st//#ordSort;' newline(1)
+			}
+			
+			tab(1) 'mappings' newline(1)
+			tab(2) 'label     = lab.ID;' newline(2)
+			tab(2) 'lhs       = new RecTerm;' newline(1)
+			tab(2) 'lhs.op    = "' op.name '";' newline(1)
+			tab(2) 'lhs.type  = rtype;' newline(1)
+			if(hasParams > -1) {
+				numParams->forEach(n) {
+					tab(2) 'lhs.args  = largs' print(n) ';' newline(1)
+				}
+				newline(1)
+			} else {
+				tab(2) 'lhs.args  = largs;' newline(2)
+			}
+			
+			if(op.coarity.name.equals("ListOrd")) {
+				tab(2) 'if(rargs.hasResults) then' newline(1)
+				tab(3) 'rhs       = new RecTerm;' newline(1)
+				tab(3) 'rhs.op    = rop.TOKEN[0];' newline(1)
+				tab(3) 'rhs.type  = rtype;' newline(1)
+				tab(3) 'rhs.args  = rargs;' newline(1)
+				tab(2) 'else' newline(1)
+				tab(3) 'rhs       = new Constant;' newline(1)
+				tab(3) 'rhs.op    = extract rop;' newline(1)
+				tab(3) 'rhs.type  = rtype;' newline(1)
+				tab(2) 'end_if' newline(1)
+			} else {
+				tab(2) 'rhs       = new Constant;' newline(1)
+				tab(2) 'rhs.op    = extract rop;' newline(1)
+				tab(2) 'rhs.type  = rtype;' newline(1)
+			}
+			
+			'end_rule' newline(2)
+		}	
+		
+		'-- Rules for Sorts' newline(1)
+		maudeMM.objectsOfType(maudeMM.Sort)->forEach(s : maudeMM.Sort) {
+			'rule \'map' digestSortName(s.name) '\'' newline(1)
+			tab(1) 'from ' digestSortName(s.name) ' aps' newline(1)
+			tab(1) 'to Constant' newline(1)
+			tab(1) 'queries' newline(1)
+			tab(2) 'lop  : //#modElt{TOKEN[0].eq("op")}//opId{ID.eq(aps.ID)};' newline(1)
+			tab(2) 'rop  : /lop/rightOp//#sortId;' newline(1)
+			tab(2) 'tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};' newline(1)
+			tab(1) 'mappings' newline(1)
+			tab(2) 'op   = aps.ID;' newline(1)
+			tab(2) 'type = tt;' newline(1)
+			'end_rule' newline(2)
+		}
+		
+		'rule \'mapPackageSort\'' newline(1)
+		tab(1) 'from ordSort aps' newline(1)
+		tab(1) 'to Constant' newline(1)
+		tab(1) 'queries' newline(1)
+		tab(2) 'lop  : //#modElt{TOKEN[0].eq("op")}//opId{ID.eq(aps.ID)};' newline(1)
+		tab(2) 'rop  : /lop/rightOp//#sortId;' newline(1)
+		tab(2) 'tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};' newline(1)
+		tab(1) 'mappings' newline(1)
+		tab(2) 'op   = aps.ID;' newline(1)
+		tab(2) 'type = tt;' newline(1)
+		'end_rule' newline(1)
+	}
+	
+	maudeMM.Operation::digestName() : String {
+		result = "op" + self.name.firstToUpper().replace("@", "at").replace("_", "sub")
+	}
+	
+	maudeMM.Operation::getNumParams() : Integer {
+		var sol : Integer = 0
+		self.name->forEach(s | s.equals("_")) {
+			sol = sol + 1
+		}
+		result = sol
+	}
+	
+	module::digestSortName(value : String) : String {
+		result = value.replace("@", "at").firstToLower() + "Sort"
+	}
+}

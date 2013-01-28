@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<kdm:Segment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:action="http://www.eclipse.org/MoDisco/kdm/action" xmlns:code="http://www.eclipse.org/MoDisco/kdm/code" xmlns:kdm="http://www.eclipse.org/MoDisco/kdm/kdm" name="StrutsSegment">
+  <model xsi:type="code:CodeModel" name="codeModel">
+    <codeElement xsi:type="code:ClassUnit" name="ActionLogin">
+      <codeRelation xsi:type="code:Extends" to="//@model.0/@codeElement.1" from="//@model.0/@codeElement.0"/>
+      <codeElement xsi:type="code:MethodUnit" name="execute">
+        <entryFlow from="//@model.0/@codeElement.0/@codeElement.0"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="actionMapping"/>
+          <parameterUnit name="actionForm"/>
+          <parameterUnit name="request"/>
+          <parameterUnit name="response"/>
+          <parameterUnit kind="return"/>
+        </codeElement>
+        <codeElement xsi:type="code:StorableUnit" name="bean"/>
+      </codeElement>
+    </codeElement>
+    <codeElement xsi:type="code:ClassUnit" name="Action"/>
+  </model>
+  <model xsi:type="code:CodeModel" name="codeModel">
+    <codeElement xsi:type="code:ClassUnit" name="ActionPublicarNoticia">
+      <codeRelation xsi:type="code:Extends" to="//@model.1/@codeElement.1" from="//@model.1/@codeElement.0"/>
+      <codeElement xsi:type="code:MethodUnit" name="execute">
+        <entryFlow from="//@model.1/@codeElement.0/@codeElement.0"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="actionMapping"/>
+          <parameterUnit name="actionForm"/>
+          <parameterUnit name="request"/>
+          <parameterUnit name="response"/>
+          <parameterUnit kind="return"/>
+        </codeElement>
+        <codeElement xsi:type="code:StorableUnit" name="bean"/>
+        <codeElement xsi:type="code:StorableUnit" name="datos"/>
+      </codeElement>
+    </codeElement>
+    <codeElement xsi:type="code:ClassUnit" name="Action"/>
+  </model>
+  <model xsi:type="code:CodeModel" name="codeModel">
+    <codeElement xsi:type="code:ClassUnit" name="ActionVerNoticia">
+      <codeRelation xsi:type="code:Extends" to="//@model.2/@codeElement.1" from="//@model.2/@codeElement.0"/>
+      <codeElement xsi:type="code:MethodUnit" name="execute">
+        <entryFlow from="//@model.2/@codeElement.0/@codeElement.0"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="actionMapping"/>
+          <parameterUnit name="actionForm"/>
+          <parameterUnit name="request"/>
+          <parameterUnit name="response"/>
+          <parameterUnit kind="return"/>
+        </codeElement>
+        <codeElement xsi:type="code:StorableUnit" name="bean"/>
+        <codeElement xsi:type="code:StorableUnit" name="noticia"/>
+      </codeElement>
+    </codeElement>
+    <codeElement xsi:type="code:ClassUnit" name="Action"/>
+  </model>
+  <model xsi:type="code:CodeModel" name="codeModel">
+    <codeElement xsi:type="code:ClassUnit" name="BeanTablon">
+      <codeRelation xsi:type="code:Extends" to="//@model.3/@codeElement.1" from="//@model.3/@codeElement.0"/>
+      <codeElement xsi:type="code:MemberUnit" name="tituloSeleccionado" export="private"/>
+      <codeElement xsi:type="code:MemberUnit" name="titulo" export="private"/>
+      <codeElement xsi:type="code:MemberUnit" name="contenido" export="private"/>
+      <codeElement xsi:type="code:MemberUnit" name="autor" export="private"/>
+      <codeElement xsi:type="code:MethodUnit" name="validate">
+        <entryFlow from="//@model.3/@codeElement.0/@codeElement.4"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="mapping"/>
+          <parameterUnit name="request"/>
+          <parameterUnit kind="return"/>
+        </codeElement>
+        <codeElement xsi:type="code:StorableUnit" name="errores"/>
+        <codeElement xsi:type="action:ActionElement">
+          <actionRelation xsi:type="action:Writes" to="//@model.3/@codeElement.0/@codeElement.4/@codeElement.1" from="//@model.3/@codeElement.0/@codeElement.4/@codeElement.2"/>
+          <actionRelation xsi:type="action:Creates" from="//@model.3/@codeElement.0/@codeElement.4/@codeElement.2"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="isTituloNoValido">
+        <entryFlow from="//@model.3/@codeElement.0/@codeElement.5"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="t"/>
+          <parameterUnit kind="return"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="setTituloSeleccionado">
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="tituloSeleccionado"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="getTituloSeleccionado">
+        <entryFlow from="//@model.3/@codeElement.0/@codeElement.7"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit kind="return"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="setTitulo">
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="titulo"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="getTitulo">
+        <entryFlow from="//@model.3/@codeElement.0/@codeElement.9"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit kind="return"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="setContenido">
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="contenido"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="getContenido">
+        <entryFlow from="//@model.3/@codeElement.0/@codeElement.11"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit kind="return"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="setAutor">
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit name="autor"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:MethodUnit" name="getAutor">
+        <entryFlow from="//@model.3/@codeElement.0/@codeElement.13"/>
+        <codeElement xsi:type="code:Signature">
+          <parameterUnit kind="return"/>
+        </codeElement>
+      </codeElement>
+    </codeElement>
+    <codeElement xsi:type="code:ClassUnit" name="ActionForm"/>
+    <codeElement xsi:type="code:ClassUnit"/>
+  </model>
+</kdm:Segment>

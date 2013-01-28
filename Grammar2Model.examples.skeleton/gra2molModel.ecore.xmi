@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:Transformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core">
+  <rules xsi:type="Core:StandardRule" name="mapScriptModule">
+    <queries variable="mains">
+      <filter type="INDIRECT">
+        <element name="mainRule" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitions">
+        <value type="QUERY_RESULT" value="mains"/>
+      </inits>
+    </inits>
+    <from name="file" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="file" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Module"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapScriptDefinition">
+    <queries variable="stats">
+      <filter>
+        <element name="mr"/>
+        <next type="INDIRECT">
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="statements">
+        <value type="QUERY_RESULT" value="stats"/>
+      </inits>
+    </inits>
+    <from name="mainRule" alias="mr">
+      <filter variable="mr">
+        <filter>
+          <element name="mainRule" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Definition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapEchoStatement">
+    <queries variable="echo_st">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="print_statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="message">
+        <value type="OPERATION_REMOVE_QUOTES" value="echo_st" extension="DQVAL"/>
+      </inits>
+    </inits>
+    <from name="statement" alias="st">
+      <filter variable="st">
+        <filter>
+          <element name="statement" mark="true"/>
+          <next>
+            <element name="print_statement"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="PrintStatement"/>
+  </rules>
+</Core:Transformation>

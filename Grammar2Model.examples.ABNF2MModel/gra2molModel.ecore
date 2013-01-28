@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules name="mapEPackage">
+    <from name="abnf_definition"/>
+    <to name="EPackage"/>
+    <queries variable="classes_spec">
+      <filter type="INDIRECT">
+        <element name="specification_rule" mark="true"/>
+        <next>
+          <element name="classId"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="classes_hier">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="classes_alone">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule"/>
+        <next>
+          <element name="subclassId" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value value="astm"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="nsURI">
+        <value value="http://modelum.es/modernization/astm"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="nsPrefix">
+        <value value="astm"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eClassifiers">
+        <value type="QUERY_RESULT" value="classes_hier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eClassifiers">
+        <value type="QUERY_RESULT" value="classes_spec"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eClassifiers">
+        <value type="OPERATION_CALL" value="skipEClassAlone" extension="classes_alone"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapAloneClass">
+    <from name="subclassId" alias="cId"/>
+    <to name="EClass"/>
+    <queries variable="find_hier_rule">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule" mark="true"/>
+        <next>
+          <element name="subclassId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="cId" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="hier_rule_id">
+      <filter>
+        <element name="find_hier_rule"/>
+        <next>
+          <element name="classId" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="find_spec_rule">
+      <filter type="INDIRECT">
+        <element name="specification_rule" mark="true"/>
+        <next>
+          <element name="classId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="hier_rule_id" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isAbstract">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule" mark="true"/>
+        <next>
+          <element name="subclassId" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="ID"/>
+              <parameters value="cId" valuePosition="0" extension="ID" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="ABSTRACT"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="cId" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="eSuperTypes">
+          <value type="QUERY_RESULT" value="find_spec_rule"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="eSuperTypes">
+              <value type="QUERY_RESULT" value="find_hier_rule"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="find_hier_rule"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="find_spec_rule"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="abstract">
+          <value value="true"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isAbstract"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipEClassAlone">
+    <from name="subclassId" alias="sci"/>
+    <to name="EClass"/>
+    <queries variable="find_spec_rule">
+      <filter type="INDIRECT">
+        <element name="specification_rule" mark="true"/>
+        <next>
+          <element name="classId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="sci" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="find_hier_rule">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule" mark="true"/>
+        <next>
+          <element name="classId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="sci" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="sci"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+            <element name="find_spec_rule"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+            <element name="find_hier_rule"/>
+          </expressions>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipEClassOther">
+    <from name="hierarchy_rule" alias="hr"/>
+    <to name="EClass"/>
+    <queries variable="hier_rule_id">
+      <filter>
+        <element name="hr"/>
+        <next>
+          <element name="classId" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="find_spec_rule">
+      <filter type="INDIRECT">
+        <element name="specification_rule" mark="true"/>
+        <next>
+          <element name="classId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="hier_rule_id" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="hier_rule_id"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="find_spec_rule"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapSingleEClass">
+    <from name="classId" alias="cId"/>
+    <to name="EClass"/>
+    <queries variable="isAbstract">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule" mark="true"/>
+        <next>
+          <element name="subclassId" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="ID"/>
+              <parameters value="cId" valuePosition="0" extension="ID" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="ABSTRACT"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="cId" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="abstract">
+          <value value="true"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isAbstract"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapEClass">
+    <from name="specification_rule" alias="sr"/>
+    <to name="EClass"/>
+    <queries variable="iden">
+      <filter>
+        <element name="sr"/>
+        <next>
+          <element name="classId" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="props">
+      <filter>
+        <element name="sr"/>
+        <next>
+          <element name="attribute" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TYPE"/>
+              <parameters value="String"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TYPE"/>
+              <parameters value="Boolean"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TYPE"/>
+              <parameters value="Integer"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="refs">
+      <filter>
+        <element name="sr"/>
+        <next>
+          <element name="attribute" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit">
+                <element name="TYPE"/>
+                <parameters value="String"/>
+              </expressions>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit">
+                <element name="TYPE"/>
+                <parameters value="Boolean"/>
+              </expressions>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+              <expressions xsi:type="Query:FilterExpressionUnit">
+                <element name="TYPE"/>
+                <parameters value="Integer"/>
+              </expressions>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="find_hier_rule">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule" mark="true"/>
+        <next>
+          <element name="subclassId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="iden" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="hier_rule_id">
+      <filter>
+        <element name="find_hier_rule"/>
+        <next>
+          <element name="classId" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="find_spec_rule">
+      <filter type="INDIRECT">
+        <element name="specification_rule" mark="true"/>
+        <next>
+          <element name="classId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="hier_rule_id" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isAbstract">
+      <filter>
+        <element name="find_hier_rule"/>
+        <next>
+          <element name="subclassId" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="ID"/>
+              <parameters value="iden" valuePosition="0" extension="ID" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="ABSTRACT"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="iden" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eStructuralFeatures">
+        <value type="QUERY_RESULT" value="props"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eStructuralFeatures">
+        <value type="QUERY_RESULT" value="refs"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eAttributes">
+        <value type="QUERY_RESULT" value="props"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="eReferences">
+        <value type="QUERY_RESULT" value="refs"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="eSuperTypes">
+          <value type="QUERY_RESULT" value="find_spec_rule"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="eSuperTypes">
+              <value type="QUERY_RESULT" value="find_hier_rule"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="find_hier_rule"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="find_spec_rule"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="abstract">
+          <value value="true"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isAbstract"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapEAttribute">
+    <from name="attribute" alias="at">
+      <filter>
+        <element name="attribute" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TYPE"/>
+            <parameters value="String"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TYPE"/>
+            <parameters value="Boolean"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TYPE"/>
+            <parameters value="Integer"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="EAttribute"/>
+    <queries variable="isString">
+      <filter>
+        <element name="at" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TYPE"/>
+          <parameters value="String"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="isBoolean">
+      <filter>
+        <element name="at" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TYPE"/>
+          <parameters value="Boolean"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="isInteger">
+      <filter>
+        <element name="at" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TYPE"/>
+          <parameters value="Integer"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="idMultA">
+      <filter>
+        <element name="at" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="MULTA"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="idMultB">
+      <filter>
+        <element name="at" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="MULTB"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="idOpt">
+      <filter>
+        <element name="at" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="OPTA"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="OPTB"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="OPTC"/>
+          </expressions>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="idSem">
+      <filter>
+        <element name="at" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="SEM"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="at" extension="NAME"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="eType">
+          <value type="OPERATION_EXTENSION" value="TypeHelperExtension">
+            <params value="string"/>
+          </value>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="eType">
+              <value type="OPERATION_EXTENSION" value="TypeHelperExtension">
+                <params value="boolean"/>
+              </value>
+            </inits>
+            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                <inits xsi:type="Core:InitUnitElement" element="eType">
+                  <value type="OPERATION_EXTENSION" value="TypeHelperExtension">
+                    <params value="int"/>
+                  </value>
+                </inits>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="isInteger"/>
+                </expression>
+              </inits>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="isBoolean"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isString"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+          <value value="0"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="upperBound">
+          <value value="-1"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+              <value value="1"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="upperBound">
+              <value value="-1"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+                  <value value="0"/>
+                </inits>
+                <inits xsi:type="Core:InitUnitElement" element="upperBound">
+                  <value value="1"/>
+                </inits>
+                <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                  <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+                    <value value="0"/>
+                  </inits>
+                  <inits xsi:type="Core:InitUnitElement" element="upperBound">
+                    <value value="1"/>
+                  </inits>
+                </inits>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="idOpt"/>
+                </expression>
+              </inits>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="idMultB"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="idMultA"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="idSem"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapEReference">
+    <from name="attribute" alias="ref">
+      <filter>
+        <element name="attribute" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TYPE"/>
+              <parameters value="String"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TYPE"/>
+              <parameters value="Boolean"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TYPE"/>
+              <parameters value="Integer"/>
+            </expressions>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="EReference"/>
+    <queries variable="find_hier_rule">
+      <filter type="INDIRECT">
+        <element name="hierarchy_rule" mark="true"/>
+        <next>
+          <element name="subclassId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="ref" valuePosition="0" extension="TYPE" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="hier_rule_id">
+      <filter>
+        <element name="find_hier_rule"/>
+        <next>
+          <element name="classId" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="find_spec_rule">
+      <filter type="INDIRECT">
+        <element name="specification_rule" mark="true"/>
+        <next>
+          <element name="classId"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="ref" valuePosition="0" extension="TYPE" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="idMultA">
+      <filter>
+        <element name="ref" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="MULTA"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="idMultB">
+      <filter>
+        <element name="ref" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="MULTB"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="idOpt">
+      <filter>
+        <element name="ref" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="OPTA"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="OPTB"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="OPTC"/>
+          </expressions>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="idSem">
+      <filter>
+        <element name="ref" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="SEM"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="ref" extension="NAME"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="containment">
+        <value value="true"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="eType">
+          <value type="QUERY_RESULT" value="find_spec_rule"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="eType">
+              <value type="QUERY_RESULT" value="find_hier_rule"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="find_hier_rule"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="find_spec_rule"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+          <value value="0"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="upperBound">
+          <value value="-1"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+              <value value="0"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="upperBound">
+              <value value="-1"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+                  <value value="0"/>
+                </inits>
+                <inits xsi:type="Core:InitUnitElement" element="upperBound">
+                  <value value="1"/>
+                </inits>
+                <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+                  <inits xsi:type="Core:InitUnitElement" element="lowerBound">
+                    <value value="0"/>
+                  </inits>
+                  <inits xsi:type="Core:InitUnitElement" element="upperBound">
+                    <value value="1"/>
+                  </inits>
+                </inits>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="idOpt"/>
+                </expression>
+              </inits>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="idMultB"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="idMultA"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="idSem"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapAnnotation">
+    <from name="attribute" alias="at"/>
+    <to name="eAnnotation"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="source">
+        <value value="This a semantic attribute"/>
+      </inits>
+    </inits>
+  </rules>
+</Core:ViewDefinition>

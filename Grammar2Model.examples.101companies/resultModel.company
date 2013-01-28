@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<com:Company xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com="http://www.company.com" name="companyA">
+  <depts name="departmentA">
+    <manager name="managerA" address="streetManagerA" salary="10000.0"/>
+    <employees name="employeeA" address="streetEmployeeA" salary="5000.0"/>
+    <employees name="employeeB" address="streetEmployeeB" salary="7000.0"/>
+    <employees name="employeeC" address="streetEmployeeC" salary="9000.0" mentor="//@depts.0/@employees.1"/>
+  </depts>
+  <depts name="departmentB">
+    <manager name="managerB" address="streetManagerB" salary="10000.0" mentor="//@depts.0/@manager"/>
+    <employees name="employeeD" address="streetEmployeeD" salary="2900.0" mentor="//@depts.1/@employees.1"/>
+    <employees name="employeeE" address="streetEmployeeE" salary="6500.0"/>
+    <employees name="employeeF" address="streetEmployeeF" salary="8700.0" mentor="//@depts.0/@employees.1"/>
+  </depts>
+</com:Company>

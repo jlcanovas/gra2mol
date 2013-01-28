@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:CST="http://gts.inf.um.es/modernization/cst" kind="CST">
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.modsea/files/src/CalendarView_accessorSpecs.json"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="CalendarView_accessorSpecs.json"/>
+    <children xsi:type="CST:Node" kind="mainRule">
+      <children xsi:type="CST:Node" kind="complexElement">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="[" line="1"/>
+        <children xsi:type="CST:Node" kind="singleElement">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="4" line="2"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="accessorName" pos="8"
+                    line="2"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20" line="2"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;getProxy&quot;"
+                    pos="24" line="2"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="34" line="2"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="attributeName" pos="8"
+                    line="3"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="21" line="3"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;proxy&quot;"
+                    pos="24" line="3"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="4" line="4"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="5" line="32"/>
+        <children xsi:type="CST:Node" kind="singleElement">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="4" line="5"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="accessorName" pos="8"
+                    line="5"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20" line="5"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;getDuration&quot;"
+                    pos="22" line="5"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="35" line="5"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="bindings" pos="8" line="6"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="16" line="6"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="complexElement">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="[" pos="18" line="6"/>
+                <children xsi:type="CST:Node" kind="singleElement">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="12" line="7"/>
+                  <children xsi:type="CST:Node" kind="pairValue">
+                    <children xsi:type="CST:Node" kind="lhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="attributeName"
+                            pos="16" line="7"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="29"
+                        line="7"/>
+                    <children xsi:type="CST:Node" kind="rhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;start&quot;"
+                            pos="32" line="7"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="38" line="8"/>
+                  <children xsi:type="CST:Node" kind="pairValue">
+                    <children xsi:type="CST:Node" kind="lhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="type" pos="16"
+                            line="8"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20"
+                        line="8"/>
+                    <children xsi:type="CST:Node" kind="rhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;date&quot;"
+                            pos="32" line="8"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="38" line="8"/>
+                  <children xsi:type="CST:Node" kind="pairValue">
+                    <children xsi:type="CST:Node" kind="lhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="bindingName"
+                            pos="16" line="9"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="27"
+                        line="9"/>
+                    <children xsi:type="CST:Node" kind="rhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;start&quot;"
+                            pos="32" line="9"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="12" line="10"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="13" line="10"/>
+                <children xsi:type="CST:Node" kind="singleElement">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="12" line="11"/>
+                  <children xsi:type="CST:Node" kind="pairValue">
+                    <children xsi:type="CST:Node" kind="lhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="attributeName"
+                            pos="16" line="11"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="29"
+                        line="11"/>
+                    <children xsi:type="CST:Node" kind="rhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;end&quot;"
+                            pos="32" line="11"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="37" line="13"/>
+                  <children xsi:type="CST:Node" kind="pairValue">
+                    <children xsi:type="CST:Node" kind="lhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="type" pos="16"
+                            line="12"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20"
+                        line="12"/>
+                    <children xsi:type="CST:Node" kind="rhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;date&quot;"
+                            pos="32" line="12"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="37" line="13"/>
+                  <children xsi:type="CST:Node" kind="pairValue">
+                    <children xsi:type="CST:Node" kind="lhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="bindingName"
+                            pos="16" line="13"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="27"
+                        line="13"/>
+                    <children xsi:type="CST:Node" kind="rhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;end&quot;"
+                            pos="32" line="13"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="37" line="13"/>
+                  <children xsi:type="CST:Node" kind="pairValue">
+                    <children xsi:type="CST:Node" kind="lhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="optional" pos="16"
+                            line="14"/>
+                      </children>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="24"
+                        line="14"/>
+                    <children xsi:type="CST:Node" kind="rhs">
+                      <children xsi:type="CST:Node" kind="value">
+                        <children xsi:type="CST:Leaf" kind="ID" value="true" pos="32"
+                            line="14"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="12" line="15"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="]" pos="8" line="16"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="4" line="17"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="5" line="32"/>
+        <children xsi:type="CST:Node" kind="singleElement">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="4" line="18"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="accessorName" pos="8"
+                    line="18"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20" line="18"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;getColorKey&quot;"
+                    pos="24" line="18"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="37" line="18"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="type" pos="8" line="19"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="12" line="19"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;text&quot;"
+                    pos="24" line="19"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="4" line="20"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="5" line="32"/>
+        <children xsi:type="CST:Node" kind="singleElement">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="4" line="21"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="accessorName" pos="8"
+                    line="21"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20" line="21"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;getColorKey&quot;"
+                    pos="24" line="21"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="34" line="22"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="attributeName" pos="8"
+                    line="22"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="21" line="22"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;colorKey&quot;"
+                    pos="24" line="22"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="34" line="22"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="type" pos="8" line="23"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="12" line="23"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;text&quot;"
+                    pos="24" line="23"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="4" line="24"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="5" line="32"/>
+        <children xsi:type="CST:Node" kind="singleElement">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="4" line="25"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="accessorName" pos="8"
+                    line="25"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20" line="25"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;getIconKey&quot;"
+                    pos="24" line="25"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="33" line="26"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="attributeName" pos="8"
+                    line="26"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="21" line="26"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;iconKey&quot;"
+                    pos="24" line="26"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="33" line="26"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="type" pos="8" line="27"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="12" line="27"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;text&quot;"
+                    pos="24" line="27"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="4" line="28"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="5" line="32"/>
+        <children xsi:type="CST:Node" kind="singleElement">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="4" line="29"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="accessorName" pos="8"
+                    line="29"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20" line="29"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;getEventLabel&quot;"
+                    pos="24" line="29"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="36" line="30"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="attributeName" pos="8"
+                    line="30"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="21" line="30"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;eventLabel&quot;"
+                    pos="24" line="30"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="36" line="30"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="type" pos="8" line="31"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="12" line="31"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;text&quot;"
+                    pos="24" line="31"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="4" line="32"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="5" line="32"/>
+        <children xsi:type="CST:Node" kind="singleElement">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="4" line="33"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="accessorName" pos="8"
+                    line="34"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="20" line="34"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;getHoverText&quot;"
+                    pos="24" line="34"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="35" line="35"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="attributeName" pos="8"
+                    line="35"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="21" line="35"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;hoverText&quot;"
+                    pos="24" line="35"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="35" line="35"/>
+          <children xsi:type="CST:Node" kind="pairValue">
+            <children xsi:type="CST:Node" kind="lhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="ID" value="type" pos="8" line="36"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="12" line="36"/>
+            <children xsi:type="CST:Node" kind="rhs">
+              <children xsi:type="CST:Node" kind="value">
+                <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;text&quot;"
+                    pos="24" line="36"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="4" line="37"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="]" line="38"/>
+      </children>
+    </children>
+  </children>
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.modsea/files/src/CalendarView_settingSpecs.json"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="CalendarView_settingSpecs.json"/>
+    <children xsi:type="CST:Node" kind="mainRule">
+      <children xsi:type="CST:Node" kind="singleElement">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="{" line="1"/>
+        <children xsi:type="CST:Node" kind="pairValue">
+          <children xsi:type="CST:Node" kind="lhs">
+            <children xsi:type="CST:Node" kind="value">
+              <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;showToolbox&quot;"
+                  pos="4" line="2"/>
+            </children>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="17" line="2"/>
+          <children xsi:type="CST:Node" kind="rhs">
+            <children xsi:type="CST:Node" kind="singleElement">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="28" line="2"/>
+              <children xsi:type="CST:Node" kind="pairValue">
+                <children xsi:type="CST:Node" kind="lhs">
+                  <children xsi:type="CST:Node" kind="value">
+                    <children xsi:type="CST:Leaf" kind="ID" value="type" pos="30"
+                        line="2"/>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="34" line="2"/>
+                <children xsi:type="CST:Node" kind="rhs">
+                  <children xsi:type="CST:Node" kind="value">
+                    <children xsi:type="CST:Leaf" kind="DQVALUE" value="&quot;boolean&quot;"
+                        pos="36" line="2"/>
+                  </children>
+                </children>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="," pos="45" line="2"/>
+              <children xsi:type="CST:Node" kind="pairValue">
+                <children xsi:type="CST:Node" kind="lhs">
+                  <children xsi:type="CST:Node" kind="value">
+                    <children xsi:type="CST:Leaf" kind="ID" value="defaultValue" pos="47"
+                        line="2"/>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="59" line="2"/>
+                <children xsi:type="CST:Node" kind="rhs">
+                  <children xsi:type="CST:Node" kind="value">
+                    <children xsi:type="CST:Leaf" kind="ID" value="true" pos="61"
+                        line="2"/>
+                  </children>
+                </children>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="66" line="2"/>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="}" line="3"/>
+      </children>
+    </children>
+  </children>
+</CST:Node>

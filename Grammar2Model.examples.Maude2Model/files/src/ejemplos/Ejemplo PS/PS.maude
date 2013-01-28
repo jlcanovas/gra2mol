@@ -1,0 +1,640 @@
+
+
+mod @PS@ is
+  protecting @ECORE@
+  .
+  op @PS@ : -> @Metamodel
+  .
+  eq name( @PS@ ) =
+    "PS"
+  .
+  eq packages( @PS@ ) =
+    ps
+  .
+  op ps : -> @Package
+  .
+  eq name( ps ) =
+    "ps"
+  .
+  eq metamodel( ps ) =
+    @PS@
+  .
+  eq superPackage( ps ) =
+    null
+  .
+  eq subPackages( ps ) =
+    nil
+  .
+  eq classes( ps ) =
+    __( PositionedEl@ps , Plant@ps , Machine@ps , Container@ps , Part@ps , HandleGen@ps , HeadGen@ps , Assembler@ps , Tray@ps , Conveyor@ps , User@ps , Head@ps , Handle@ps , Hammer@ps , Generator@ps )
+  .
+  sort PositionedEl@ps
+  .
+  subsorts PositionedEl@ps < @Class
+  .
+  op PositionedEl@ps : -> PositionedEl@ps
+  .
+  eq name( PositionedEl@ps ) =
+    "PositionedEl"
+  .
+  eq isAbstract( PositionedEl@ps ) =
+    true
+  .
+  eq package( PositionedEl@ps ) =
+    ps
+  .
+  eq superTypes( PositionedEl@ps ) =
+    nil
+  .
+  eq references( PositionedEl@ps ) =
+    nil
+  .
+  eq attributes( PositionedEl@ps ) =
+    __( xPos@PositionedEl@ps , yPos@PositionedEl@ps )
+  .
+  sort Plant@ps
+  .
+  subsorts Plant@ps < @Class
+  .
+  op Plant@ps : -> Plant@ps
+  .
+  eq name( Plant@ps ) =
+    "Plant"
+  .
+  eq isAbstract( Plant@ps ) =
+    false
+  .
+  eq package( Plant@ps ) =
+    ps
+  .
+  eq superTypes( Plant@ps ) =
+    nil
+  .
+  eq references( Plant@ps ) =
+    els@Plant@ps
+  .
+  eq attributes( Plant@ps ) =
+    nil
+  .
+  sort Machine@ps
+  .
+  subsorts Machine@ps < PositionedEl@ps
+  .
+  op Machine@ps : -> Machine@ps
+  .
+  eq name( Machine@ps ) =
+    "Machine"
+  .
+  eq isAbstract( Machine@ps ) =
+    true
+  .
+  eq package( Machine@ps ) =
+    ps
+  .
+  eq superTypes( Machine@ps ) =
+    PositionedEl@ps
+  .
+  eq references( Machine@ps ) =
+    __( out@Machine@ps , in@Machine@ps )
+  .
+  eq attributes( Machine@ps ) =
+    nil
+  .
+  sort Container@ps
+  .
+  subsorts Container@ps < PositionedEl@ps
+  .
+  op Container@ps : -> Container@ps
+  .
+  eq name( Container@ps ) =
+    "Container"
+  .
+  eq isAbstract( Container@ps ) =
+    true
+  .
+  eq package( Container@ps ) =
+    ps
+  .
+  eq superTypes( Container@ps ) =
+    PositionedEl@ps
+  .
+  eq references( Container@ps ) =
+    parts@Container@ps
+  .
+  eq attributes( Container@ps ) =
+    nil
+  .
+  sort Part@ps
+  .
+  subsorts Part@ps < PositionedEl@ps
+  .
+  op Part@ps : -> Part@ps
+  .
+  eq name( Part@ps ) =
+    "Part"
+  .
+  eq isAbstract( Part@ps ) =
+    true
+  .
+  eq package( Part@ps ) =
+    ps
+  .
+  eq superTypes( Part@ps ) =
+    PositionedEl@ps
+  .
+  eq references( Part@ps ) =
+    nil
+  .
+  eq attributes( Part@ps ) =
+    nil
+  .
+  sort HandleGen@ps
+  .
+  subsorts HandleGen@ps < Generator@ps
+  .
+  op HandleGen@ps : -> HandleGen@ps
+  .
+  eq name( HandleGen@ps ) =
+    "HandleGen"
+  .
+  eq isAbstract( HandleGen@ps ) =
+    false
+  .
+  eq package( HandleGen@ps ) =
+    ps
+  .
+  eq superTypes( HandleGen@ps ) =
+    Generator@ps
+  .
+  eq references( HandleGen@ps ) =
+    nil
+  .
+  eq attributes( HandleGen@ps ) =
+    nil
+  .
+  sort HeadGen@ps
+  .
+  subsorts HeadGen@ps < Generator@ps
+  .
+  op HeadGen@ps : -> HeadGen@ps
+  .
+  eq name( HeadGen@ps ) =
+    "HeadGen"
+  .
+  eq isAbstract( HeadGen@ps ) =
+    false
+  .
+  eq package( HeadGen@ps ) =
+    ps
+  .
+  eq superTypes( HeadGen@ps ) =
+    Generator@ps
+  .
+  eq references( HeadGen@ps ) =
+    nil
+  .
+  eq attributes( HeadGen@ps ) =
+    nil
+  .
+  sort Assembler@ps
+  .
+  subsorts Assembler@ps < Machine@ps
+  .
+  op Assembler@ps : -> Assembler@ps
+  .
+  eq name( Assembler@ps ) =
+    "Assembler"
+  .
+  eq isAbstract( Assembler@ps ) =
+    false
+  .
+  eq package( Assembler@ps ) =
+    ps
+  .
+  eq superTypes( Assembler@ps ) =
+    Machine@ps
+  .
+  eq references( Assembler@ps ) =
+    nil
+  .
+  eq attributes( Assembler@ps ) =
+    nil
+  .
+  sort Tray@ps
+  .
+  subsorts Tray@ps < Container@ps
+  .
+  op Tray@ps : -> Tray@ps
+  .
+  eq name( Tray@ps ) =
+    "Tray"
+  .
+  eq isAbstract( Tray@ps ) =
+    false
+  .
+  eq package( Tray@ps ) =
+    ps
+  .
+  eq superTypes( Tray@ps ) =
+    Container@ps
+  .
+  eq references( Tray@ps ) =
+    nil
+  .
+  eq attributes( Tray@ps ) =
+    capacity@Tray@ps
+  .
+  sort Conveyor@ps
+  .
+  subsorts Conveyor@ps < Container@ps
+  .
+  op Conveyor@ps : -> Conveyor@ps
+  .
+  eq name( Conveyor@ps ) =
+    "Conveyor"
+  .
+  eq isAbstract( Conveyor@ps ) =
+    false
+  .
+  eq package( Conveyor@ps ) =
+    ps
+  .
+  eq superTypes( Conveyor@ps ) =
+    Container@ps
+  .
+  eq references( Conveyor@ps ) =
+    out@Conveyor@ps
+  .
+  eq attributes( Conveyor@ps ) =
+    nil
+  .
+  sort User@ps
+  .
+  subsorts User@ps < Container@ps
+  .
+  op User@ps : -> User@ps
+  .
+  eq name( User@ps ) =
+    "User"
+  .
+  eq isAbstract( User@ps ) =
+    false
+  .
+  eq package( User@ps ) =
+    ps
+  .
+  eq superTypes( User@ps ) =
+    Container@ps
+  .
+  eq references( User@ps ) =
+    nil
+  .
+  eq attributes( User@ps ) =
+    nil
+  .
+  sort Head@ps
+  .
+  subsorts Head@ps < Part@ps
+  .
+  op Head@ps : -> Head@ps
+  .
+  eq name( Head@ps ) =
+    "Head"
+  .
+  eq isAbstract( Head@ps ) =
+    false
+  .
+  eq package( Head@ps ) =
+    ps
+  .
+  eq superTypes( Head@ps ) =
+    Part@ps
+  .
+  eq references( Head@ps ) =
+    nil
+  .
+  eq attributes( Head@ps ) =
+    nil
+  .
+  sort Handle@ps
+  .
+  subsorts Handle@ps < Part@ps
+  .
+  op Handle@ps : -> Handle@ps
+  .
+  eq name( Handle@ps ) =
+    "Handle"
+  .
+  eq isAbstract( Handle@ps ) =
+    false
+  .
+  eq package( Handle@ps ) =
+    ps
+  .
+  eq superTypes( Handle@ps ) =
+    Part@ps
+  .
+  eq references( Handle@ps ) =
+    nil
+  .
+  eq attributes( Handle@ps ) =
+    nil
+  .
+  sort Hammer@ps
+  .
+  subsorts Hammer@ps < Part@ps
+  .
+  op Hammer@ps : -> Hammer@ps
+  .
+  eq name( Hammer@ps ) =
+    "Hammer"
+  .
+  eq isAbstract( Hammer@ps ) =
+    false
+  .
+  eq package( Hammer@ps ) =
+    ps
+  .
+  eq superTypes( Hammer@ps ) =
+    Part@ps
+  .
+  eq references( Hammer@ps ) =
+    nil
+  .
+  eq attributes( Hammer@ps ) =
+    nil
+  .
+  sort Generator@ps
+  .
+  subsorts Generator@ps < Machine@ps
+  .
+  op Generator@ps : -> Generator@ps
+  .
+  eq name( Generator@ps ) =
+    "Generator"
+  .
+  eq isAbstract( Generator@ps ) =
+    true
+  .
+  eq package( Generator@ps ) =
+    ps
+  .
+  eq superTypes( Generator@ps ) =
+    Machine@ps
+  .
+  eq references( Generator@ps ) =
+    nil
+  .
+  eq attributes( Generator@ps ) =
+    counter@Generator@ps
+  .
+  op els@Plant@ps : -> @Reference
+  .
+  eq name( els@Plant@ps ) =
+    "els"
+  .
+  eq type( els@Plant@ps ) =
+    PositionedEl@ps
+  .
+  eq opposite( els@Plant@ps ) =
+    null
+  .
+  eq lowerBound( els@Plant@ps ) =
+    0
+  .
+  eq upperBound( els@Plant@ps ) =
+    *
+  .
+  eq containingClass( els@Plant@ps ) =
+    Plant@ps
+  .
+  eq isContainment( els@Plant@ps ) =
+    true
+  .
+  eq isOrdered( els@Plant@ps ) =
+    true
+  .
+  eq isUnique( els@Plant@ps ) =
+    false
+  .
+  op out@Machine@ps : -> @Reference
+  .
+  eq name( out@Machine@ps ) =
+    "out"
+  .
+  eq type( out@Machine@ps ) =
+    Conveyor@ps
+  .
+  eq opposite( out@Machine@ps ) =
+    null
+  .
+  eq lowerBound( out@Machine@ps ) =
+    1
+  .
+  eq upperBound( out@Machine@ps ) =
+    1
+  .
+  eq containingClass( out@Machine@ps ) =
+    Machine@ps
+  .
+  eq isContainment( out@Machine@ps ) =
+    false
+  .
+  eq isOrdered( out@Machine@ps ) =
+    true
+  .
+  eq isUnique( out@Machine@ps ) =
+    false
+  .
+  op in@Machine@ps : -> @Reference
+  .
+  eq name( in@Machine@ps ) =
+    "in"
+  .
+  eq type( in@Machine@ps ) =
+    Tray@ps
+  .
+  eq opposite( in@Machine@ps ) =
+    null
+  .
+  eq lowerBound( in@Machine@ps ) =
+    0
+  .
+  eq upperBound( in@Machine@ps ) =
+    1
+  .
+  eq containingClass( in@Machine@ps ) =
+    Machine@ps
+  .
+  eq isContainment( in@Machine@ps ) =
+    false
+  .
+  eq isOrdered( in@Machine@ps ) =
+    true
+  .
+  eq isUnique( in@Machine@ps ) =
+    false
+  .
+  op parts@Container@ps : -> @Reference
+  .
+  eq name( parts@Container@ps ) =
+    "parts"
+  .
+  eq type( parts@Container@ps ) =
+    Part@ps
+  .
+  eq opposite( parts@Container@ps ) =
+    null
+  .
+  eq lowerBound( parts@Container@ps ) =
+    0
+  .
+  eq upperBound( parts@Container@ps ) =
+    *
+  .
+  eq containingClass( parts@Container@ps ) =
+    Container@ps
+  .
+  eq isContainment( parts@Container@ps ) =
+    true
+  .
+  eq isOrdered( parts@Container@ps ) =
+    true
+  .
+  eq isUnique( parts@Container@ps ) =
+    false
+  .
+  op out@Conveyor@ps : -> @Reference
+  .
+  eq name( out@Conveyor@ps ) =
+    "out"
+  .
+  eq type( out@Conveyor@ps ) =
+    Tray@ps
+  .
+  eq opposite( out@Conveyor@ps ) =
+    null
+  .
+  eq lowerBound( out@Conveyor@ps ) =
+    1
+  .
+  eq upperBound( out@Conveyor@ps ) =
+    1
+  .
+  eq containingClass( out@Conveyor@ps ) =
+    Conveyor@ps
+  .
+  eq isContainment( out@Conveyor@ps ) =
+    false
+  .
+  eq isOrdered( out@Conveyor@ps ) =
+    true
+  .
+  eq isUnique( out@Conveyor@ps ) =
+    false
+  .
+  op xPos@PositionedEl@ps : -> @Attribute
+  .
+  eq name( xPos@PositionedEl@ps ) =
+    "xPos"
+  .
+  eq type( xPos@PositionedEl@ps ) =
+    @Int
+  .
+  eq lowerBound( xPos@PositionedEl@ps ) =
+    1
+  .
+  eq upperBound( xPos@PositionedEl@ps ) =
+    1
+  .
+  eq containingClass( xPos@PositionedEl@ps ) =
+    PositionedEl@ps
+  .
+  eq isId( xPos@PositionedEl@ps ) =
+    false
+  .
+  eq isOrdered( xPos@PositionedEl@ps ) =
+    true
+  .
+  eq isUnique( xPos@PositionedEl@ps ) =
+    true
+  .
+  op yPos@PositionedEl@ps : -> @Attribute
+  .
+  eq name( yPos@PositionedEl@ps ) =
+    "yPos"
+  .
+  eq type( yPos@PositionedEl@ps ) =
+    @Int
+  .
+  eq lowerBound( yPos@PositionedEl@ps ) =
+    1
+  .
+  eq upperBound( yPos@PositionedEl@ps ) =
+    1
+  .
+  eq containingClass( yPos@PositionedEl@ps ) =
+    PositionedEl@ps
+  .
+  eq isId( yPos@PositionedEl@ps ) =
+    false
+  .
+  eq isOrdered( yPos@PositionedEl@ps ) =
+    true
+  .
+  eq isUnique( yPos@PositionedEl@ps ) =
+    true
+  .
+  op capacity@Tray@ps : -> @Attribute
+  .
+  eq name( capacity@Tray@ps ) =
+    "capacity"
+  .
+  eq type( capacity@Tray@ps ) =
+    @Int
+  .
+  eq lowerBound( capacity@Tray@ps ) =
+    1
+  .
+  eq upperBound( capacity@Tray@ps ) =
+    1
+  .
+  eq containingClass( capacity@Tray@ps ) =
+    Tray@ps
+  .
+  eq isId( capacity@Tray@ps ) =
+    false
+  .
+  eq isOrdered( capacity@Tray@ps ) =
+    true
+  .
+  eq isUnique( capacity@Tray@ps ) =
+    true
+  .
+  op counter@Generator@ps : -> @Attribute
+  .
+  eq name( counter@Generator@ps ) =
+    "counter"
+  .
+  eq type( counter@Generator@ps ) =
+    @Int
+  .
+  eq lowerBound( counter@Generator@ps ) =
+    0
+  .
+  eq upperBound( counter@Generator@ps ) =
+    1
+  .
+  eq containingClass( counter@Generator@ps ) =
+    Generator@ps
+  .
+  eq isId( counter@Generator@ps ) =
+    false
+  .
+  eq isOrdered( counter@Generator@ps ) =
+    true
+  .
+  eq isUnique( counter@Generator@ps ) =
+    true
+  .
+endm

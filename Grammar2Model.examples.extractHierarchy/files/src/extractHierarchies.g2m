@@ -1,0 +1,40 @@
+rule 'mainRule'
+	from compilationUnit
+	to ClassM::Model
+	queries 
+		declarations : //compilationUnit/#typeDeclaration;
+	mappings
+		classifiers = declarations;
+end_rule
+
+rule 'class'
+	from typeDeclaration//normalClassDeclaration td
+	to ClassM::Class
+	queries 
+	    mycompUnit   : //#compilationUnit/typeDeclaration{this.check(td)};
+		imp          : /mycompUnit//#importDeclaration;
+		classDecl    : /td//#normalClassDeclaration;
+		extClassRef  : /classDecl/#extendsClass;
+		extClass     : //compilationUnit//#typeDeclaration//normalClassDeclaration{Identifier[0].eq(extClassRef.Identifier)};
+		impClassRefs : /classDecl/implementsList/#type;
+		impClass     : {for each i in impClassRefs} //compilationUnit//#typeDeclaration//normalInterfaceDeclaration{Identifier[0].eq(impClassRefs[i].Identifier)};
+	mappings
+		name = classDecl.Identifier;
+		parents = extClass;
+		parents = impClass;
+end_rule
+
+rule 'interface'
+	from typeDeclaration//normalInterfaceDeclaration td
+	to ClassM::Class
+	queries 
+	    mycompUnit   : //#compilationUnit/typeDeclaration{this.check(td)};
+		imp          : /mycompUnit//#importDeclaration;
+		intDecl      : /td//#normalInterfaceDeclaration;
+		extClassRefs : /intDecl/extendsList/#type;      
+		extClass     : {for each i in extClassRefs} //compilationUnit//#typeDeclaration//normalInterfaceDeclaration{Identifier[0].eq(extClassRefs[i].Identifier)};	
+	mappings
+		name = intDecl.Identifier;
+		parents = extClass;
+end_rule
+

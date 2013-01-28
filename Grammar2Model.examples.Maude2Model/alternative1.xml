@@ -1,0 +1,7 @@
+<project name="maude Extraccion" default="extract">
+
+<target name="extract">
+	<ant antfile="build.xml" target="build"/>
+</target>
+
+</project>

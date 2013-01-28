@@ -1,0 +1,1580 @@
+<metrics:Observation xmlns:code='http://www.eclipse.org/MoDisco/kdm/code' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://modelums/metrics ../../metamodels/metrics.ecore http://www.eclipse.org/MoDisco/kdm/action ../../../Grammar2Model.KDM/model/kdm.ecore#//action http://www.eclipse.org/MoDisco/kdm/code ../../../Grammar2Model.KDM/model/kdm.ecore#//code' xmlns:action='http://www.eclipse.org/MoDisco/kdm/action' xmi:version='2.0' xmlns:metrics='http://modelums/metrics' xmlns:xmi='http://www.omg.org/XMI'>
+<measurements name='Coupling level' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='WHEN-WINDOW-ACTIVATED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='POST-TEXT-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='PRE-FORM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-NEW-ITEM-INSTANCE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-NEW-FORM-INSTANCE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-DOUBLECLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-WINDOW-CLOSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-CLEAR-DETAILS' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='KEY-LISTVAL' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-TAB-PAGE-CHANGED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='KEY-HELP' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='KEY-MENU' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-ERROR' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='KEY-ENTQRY' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='KEY-EXEQRY' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='KEY-EXIT' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-NEW-BLOCK-INSTANCE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='PRE-QUERY' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-NEW-RECORD-INSTANCE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-POPULATE-DETAILS' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='2'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-CHECK-DELETE-MASTER' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='POST-CHANGE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='2'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.24/@codeElement.0/@codeElement.4/@codeElement.0/@actionRelation.3'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='POST-CHANGE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='3'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.27/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Writes resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.27/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.27/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@actionRelation.0'/>
+</measurements>
+</measurements>
+<measurements name='WHEN_VALIDATE_ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.28/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='POST-CHANGE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-NEW-RECORD-INSTANCE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.34/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-POPULATE-DETAILS' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='2'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.35/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-CHECK-DELETE-MASTER' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-CHECKBOX-CHANGED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.39/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-NEW-ITEM-INSTANCE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.40/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.42/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-NEW-RECORD-INSTANCE' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='2'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.43/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='2'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Writes resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.43/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-POPULATE-DETAILS' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.44/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='ON-CHECK-DELETE-MASTER' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-VALIDATE-ITEM' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='1'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='1'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location' elements='action:Reads resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.49/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@actionRelation.0'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-DOUBLECLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='KEY-OTHERS' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-MOUSE-CLICK' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+<measurements name='WHEN-BUTTON-PRESSED' xsi:type='metrics:ComplexMeasurement' tag='trigger'>
+<measurements name='Coupling level' xsi:type='metrics:ValueMeasurement' tag='level' value='0'/>
+<measurements name='Imperative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Imperative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number imperative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of imperative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative writings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative writings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative writings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+<measurements name='Declarative readings' xsi:type='metrics:ComplexMeasurement'>
+<measurements name='Number declarative readings' xsi:type='metrics:ValueMeasurement' tag='value' value='0'/>
+<measurements name='Location of declarative readings' xsi:type='metrics:LinkMeasurement' tag='location'/>
+</measurements>
+</measurements>
+</measurements>
+<measurements name='Resume' xsi:type='metrics:ComplexMeasurement' tag='resume'>
+<measurements name='level 0' xsi:type='metrics:ComplexMeasurement' tag='level'>
+<measurements name='total' xsi:type='metrics:ValueMeasurement' tag='total' value='69'/>
+<measurements name='total' xsi:type='metrics:LinkMeasurement' tag='total' elements='code:CallableUnit resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.67'/>
+</measurements>
+<measurements name='level 1' xsi:type='metrics:ComplexMeasurement' tag='level'>
+<measurements name='total' xsi:type='metrics:ValueMeasurement' tag='total' value='12'/>
+<measurements name='total' xsi:type='metrics:LinkMeasurement' tag='total' elements='code:CallableUnit resultadoKDM.xmi#//@model.3/@codeElement.0/@codeElement.78'/>
+</measurements>
+<measurements name='level 2' xsi:type='metrics:ComplexMeasurement' tag='level'>
+<measurements name='total' xsi:type='metrics:ValueMeasurement' tag='total' value='0'/>
+<measurements name='total' xsi:type='metrics:LinkMeasurement' tag='total'/>
+</measurements>
+<measurements name='level 3' xsi:type='metrics:ComplexMeasurement' tag='level'>
+<measurements name='total' xsi:type='metrics:ValueMeasurement' tag='total' value='1'/>
+<measurements name='total' xsi:type='metrics:LinkMeasurement' tag='total'/>
+</measurements>
+</measurements>
+</metrics:Observation>

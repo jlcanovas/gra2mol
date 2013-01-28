@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mmaemilia="file://C:/Users/martina/Desktop/eclipse_indigo/workspace/textToModelTrasformation/skipRulesExample/metamodels/mmAEmilia.ecore">
+  <mmaemilia:AEmiliaSpecification>
+    <archiTypeDecl>
+      <aetDeclaration>
+        <etDeclaration>
+          <elemHeader/>
+          <behaviorDecl>
+            <equations>
+              <bHeader/>
+            </equations>
+          </behaviorDecl>
+        </etDeclaration>
+      </aetDeclaration>
+      <atDeclaration>
+        <aeiDecl TypeOf="/5"/>
+        <attDecl>
+          <end/>
+          <start/>
+        </attDecl>
+      </atDeclaration>
+      <header/>
+    </archiTypeDecl>
+  </mmaemilia:AEmiliaSpecification>
+  <mmaemilia:ElemType/>
+  <mmaemilia:ElemType/>
+  <mmaemilia:ElemType/>
+  <mmaemilia:ElemType/>
+  <mmaemilia:ElemType/>
+</xmi:XMI>

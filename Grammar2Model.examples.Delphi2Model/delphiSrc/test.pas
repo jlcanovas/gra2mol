@@ -1,0 +1,1 @@
+program myprogram begin end.

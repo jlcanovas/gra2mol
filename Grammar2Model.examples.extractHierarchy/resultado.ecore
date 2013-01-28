@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<classm:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classm="http://gts.inf.um.es/age-examples/ClassM">
+  <classifiers xsi:type="classm:Class" name="ApplicationWorkbenchAdvisor"/>
+  <classifiers xsi:type="classm:Class" name="ClassA"/>
+  <classifiers xsi:type="classm:Class" name="ClassAA" parents="//@classifiers.1"/>
+  <classifiers xsi:type="classm:Class" name="ClassAB" parents="//@classifiers.1"/>
+  <classifiers xsi:type="classm:Class" name="ClassB" parents="//@classifiers.1 //@classifiers.5 //@classifiers.6"/>
+  <classifiers xsi:type="classm:Class" name="IntB"/>
+  <classifiers xsi:type="classm:Class" name="IntBB" parents="//@classifiers.6"/>
+</classm:Model>

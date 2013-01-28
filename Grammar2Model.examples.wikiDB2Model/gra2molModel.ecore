@@ -1,0 +1,1565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules name="mapWiki">
+    <from name="compilationUnit"/>
+    <to name="Wiki"/>
+    <queries variable="name_db">
+      <filter type="INDIRECT">
+        <element name="create_database" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="all_arts">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="all_arts_redir">
+      <filter>
+        <element name="arts" mark="true"/>
+        <next operation="POSITION" position="5">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="arts">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="1">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="0"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="arts_redir">
+      <filter>
+        <element name="arts" mark="true"/>
+        <next operation="POSITION" position="5">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cats">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="1">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="14"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cats_redir">
+      <filter>
+        <element name="cats" mark="true"/>
+        <next operation="POSITION" position="5">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="index">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="1">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="8"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="index_redirA">
+      <filter>
+        <element name="index" mark="true"/>
+        <next operation="POSITION" position="5">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="index_redirB">
+      <filter>
+        <element name="all_arts" mark="true"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="HEXNUMBER"/>
+            <parameters value="0x5573657273496E646578"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="temp">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="1">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="10"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="temp_redir">
+      <filter>
+        <element name="temp" mark="true"/>
+        <next operation="POSITION" position="5">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="users">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="user"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="edges_all">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="categorylinks"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="templatelinks"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="pagelinks"/>
+          </expressions>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="edges_pages">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="pagelinks"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="revs">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="revision"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="title">
+        <value type="QUERY_ACCESS" value="name_db" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="nodes">
+        <value type="QUERY_RESULT" value="users"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="nodes">
+        <value type="QUERY_RESULT" value="all_arts"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="edges">
+        <value type="QUERY_RESULT" value="edges_all"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="revisions">
+        <value type="QUERY_RESULT" value="revs"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphArticles">
+        <value type="OPERATION_CREATION" value="ArticleGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphArticles">
+        <extension>name</extension>
+        <value value="ArticleGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphArticles">
+        <extension>noderefs</extension>
+        <value type="QUERY_RESULT" value="arts_redir"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphArticles">
+        <extension>edgerefs</extension>
+        <value type="OPERATION_CALL" value="filterArticleGraph" extension="edges_pages"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphCategories">
+        <value type="OPERATION_CREATION" value="CategoryGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphCategories">
+        <extension>name</extension>
+        <value value="CategoryGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphCategories">
+        <extension>noderefs</extension>
+        <value type="QUERY_RESULT" value="cats_redir"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphCategories">
+        <extension>edgerefs</extension>
+        <value type="OPERATION_CALL" value="filterCategoryGraph" extension="edges_all"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphIndex">
+        <value type="OPERATION_CREATION" value="IndexGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphIndex">
+        <extension>name</extension>
+        <value value="IndexGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphIndex">
+        <extension>noderefs</extension>
+        <value type="QUERY_RESULT" value="index_redirA"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphIndex">
+        <extension>noderefs</extension>
+        <value type="QUERY_RESULT" value="index_redirB"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphIndex">
+        <extension>edgerefs</extension>
+        <value type="OPERATION_CALL" value="filterIndexGraph" extension="edges_all"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphClassification">
+        <value type="OPERATION_CREATION" value="ClassificationGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphClassification">
+        <extension>name</extension>
+        <value value="ClassificationGraph"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphClassification">
+        <extension>noderefs</extension>
+        <value type="QUERY_RESULT" value="temp_redir"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphClassification">
+        <extension>noderefs</extension>
+        <value type="QUERY_RESULT" value="cats_redir"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphClassification">
+        <extension>noderefs</extension>
+        <value type="QUERY_RESULT" value="arts_redir"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="graphClassification">
+        <extension>edgerefs</extension>
+        <value type="OPERATION_CALL" value="filterClassificationGraph" extension="edges_all"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapMainNode">
+    <from name="insert_value" alias="iv">
+      <filter>
+        <element name="insert_value" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="0"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="1"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="6"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="14"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="8"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="10"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="Node"/>
+    <queries variable="id">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="namespace">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="page_title">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="counter">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="4">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="revs">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="revision"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="1">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="id" valuePosition="0" extension="NUMBER" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rev_g">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="revision"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="1">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="id" valuePosition="0" extension="NUMBER" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+      <control xsi:type="Query:QueryControlGreater" variable="HEXNUMBER" nodeId="insert_data"
+          nodePosition="6"/>
+    </queries>
+    <queries variable="is_article">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="is_deleted">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="1"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="is_image">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="6"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="is_index">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="8"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="is_template">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="10"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="is_category">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="14"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="node_id">
+        <value type="QUERY_ACCESS" value="id" extension="NUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="title">
+        <value type="OPERATION_CONVERTH2S" value="page_title" extension="HEXNUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="node_namespace">
+        <value type="QUERY_ACCESS" value="namespace" extension="NUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="visits">
+        <value type="QUERY_ACCESS" value="counter" extension="NUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="editions">
+        <value type="OPERATION_COUNT" value="revs"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="revisions">
+        <value type="QUERY_RESULT" value="revs"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="lastRevision">
+        <value type="OPERATION_EXTENSION" value="ExtractGreaterMappingExtension">
+          <params value="revs" type="VARIABLE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="Article"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="is_article"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="Deleted"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="is_deleted"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="Image"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="is_image"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="Index"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="is_index"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="Index"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="is_index"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="Template"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="is_template"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="Category"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="is_category"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapUserNode">
+    <from name="insert_value" alias="is"/>
+    <to name="Node"/>
+    <queries variable="user_name">
+      <filter>
+        <element name="is"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="node_id">
+        <value value="0"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="title">
+        <value type="OPERATION_CONVERTH2S" value="user_name" extension="HEXNUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="node_namespace">
+        <value value="2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value value="User"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="visits">
+        <value value="0"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="editions">
+        <value value="0"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapRevision">
+    <from name="insert_value" alias="iv"/>
+    <to name="Revision"/>
+    <queries variable="rev_user_text">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="5">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rev_timestamp">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="6">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rev_text_id">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rev_page">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="source_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="rev_page" valuePosition="0" extension="NUMBER" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="user">
+        <value type="OPERATION_CONVERTH2S" value="rev_user_text" extension="HEXNUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="date">
+        <value type="OPERATION_CONVERTH2S" value="rev_timestamp" extension="HEXNUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="text_id">
+        <value type="QUERY_ACCESS" value="rev_text_id" extension="NUMBER"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="node">
+        <value type="QUERY_RESULT" value="source_node"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapEdge">
+    <from name="insert_value" alias="iv"/>
+    <to name="Edge"/>
+    <queries variable="cat1">
+      <filter type="INDIRECT">
+        <element name="insert_statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="categorylinks"/>
+        </expression>
+        <next>
+          <element name="insert_value"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="iv" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat2">
+      <filter type="INDIRECT">
+        <element name="insert_statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="templatelinks"/>
+        </expression>
+        <next>
+          <element name="insert_value"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="iv" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat3">
+      <filter type="INDIRECT">
+        <element name="insert_statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="pagelinks"/>
+        </expression>
+        <next>
+          <element name="insert_value"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="iv" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_fr_data0">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_to_data1">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_to_data2">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_fr">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="cat_fr_data0" valuePosition="0" extension="NUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_to1">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="cat_to_data1" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_to2">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="cat_to_data2" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_to1_check">
+      <filter>
+        <element name="cat_to1" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="14"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cat_to2_check">
+      <filter>
+        <element name="cat_to2" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="10"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="cat_fr"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="IF">
+          <inits xsi:type="Core:InitUnitElement" element="to">
+            <value type="QUERY_RESULT" value="cat_to1_check"/>
+          </inits>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+            <element name="cat_to1"/>
+          </expression>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value value="belongsTo"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitGroup" type="IF">
+              <inits xsi:type="Core:InitUnitElement" element="to">
+                <value type="QUERY_RESULT" value="cat_to2_check"/>
+              </inits>
+              <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                <element name="cat_to2"/>
+              </expression>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="type">
+              <value value="templatedBy"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+              <inits xsi:type="Core:InitUnitGroup" type="IF">
+                <inits xsi:type="Core:InitUnitGroup" type="IF">
+                  <inits xsi:type="Core:InitUnitElement" element="to">
+                    <value type="QUERY_RESULT" value="cat_to2"/>
+                  </inits>
+                  <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                    <element name="cat_to2"/>
+                  </expression>
+                </inits>
+                <inits xsi:type="Core:InitUnitElement" element="type">
+                  <value value="relatedWith"/>
+                </inits>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="cat3"/>
+                </expression>
+              </inits>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="cat2"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="cat1"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="filterCategoryGraph">
+    <from name="insert_value" alias="iv"/>
+    <to name="Edge"/>
+    <queries variable="fr_data0">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to_data1">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="HEXNUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fr_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="fr_data0" valuePosition="0" extension="NUMBER" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="to_data1" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fr_check">
+      <filter>
+        <element name="fr_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="14"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_check">
+      <filter>
+        <element name="to1_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="14"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="IF">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="iv"/>
+          </inits>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="fr_check"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to1_check"/>
+            </expressions>
+          </expression>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="to_data1"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="filterIndexGraph">
+    <from name="insert_value" alias="iv"/>
+    <to name="Edge"/>
+    <queries variable="fr_data0">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to_data1">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="HEXNUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to_data2">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="HEXNUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fr_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="fr_data0" valuePosition="0" extension="NUMBER" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="to_data1" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="to_data2" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_checkA">
+      <filter>
+        <element name="to1_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="8"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_checkA">
+      <filter>
+        <element name="to2_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="8"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_checkB">
+      <filter>
+        <element name="to1_node" mark="true"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="HEXNUMBER"/>
+            <parameters value="0x5573657273496E646578"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_checkB">
+      <filter>
+        <element name="to2_node" mark="true"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="HEXNUMBER"/>
+            <parameters value="0x5573657273496E646578"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fr_check">
+      <filter>
+        <element name="fr_node" mark="true"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="HEXNUMBER"/>
+            <parameters value="0x5573657273496E646578"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="IF">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="iv"/>
+          </inits>
+          <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to1_checkA"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to1_checkB"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="fr_check"/>
+            </expressions>
+          </expression>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitGroup" type="IF">
+              <inits xsi:type="Core:InitUnitElement" element="SKIP">
+                <value type="SKIP" value="iv"/>
+              </inits>
+              <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="to2_checkA"/>
+                </expressions>
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="to2_checkB"/>
+                </expressions>
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="fr_check"/>
+                </expressions>
+              </expression>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to_data2"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="to_data1"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="filterArticleGraph">
+    <from name="insert_value" alias="iv"/>
+    <to name="Edge"/>
+    <queries variable="fr_data0">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION">
+          <element name="insert_data" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to_data1">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="HEXNUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to_data2">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="HEXNUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fr_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="NUMBER"/>
+              <parameters value="fr_data0" valuePosition="0" extension="NUMBER" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="to_data1" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="to_data2" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="fr_check">
+      <filter>
+        <element name="fr_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_check">
+      <filter>
+        <element name="to1_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_check">
+      <filter>
+        <element name="to2_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="IF">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="iv"/>
+          </inits>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="fr_check"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to1_check"/>
+            </expressions>
+          </expression>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitGroup" type="IF">
+              <inits xsi:type="Core:InitUnitElement" element="SKIP">
+                <value type="SKIP" value="iv"/>
+              </inits>
+              <expression xsi:type="Query:FilterExpressionComplex">
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="fr_check"/>
+                </expressions>
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="to2_check"/>
+                </expressions>
+              </expression>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to_data2"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="to_data1"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="filterClassificationGraph">
+    <from name="insert_value" alias="iv"/>
+    <to name="Edge"/>
+    <queries variable="to_data1">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="HEXNUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to_data2">
+      <filter>
+        <element name="iv"/>
+        <next operation="POSITION" position="2">
+          <element name="insert_data" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="HEXNUMBER"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="to_data1" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_node">
+      <filter type="INDIRECT">
+        <element name="insert_statement"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="ID"/>
+          <parameters value="page"/>
+        </expression>
+        <next>
+          <element name="insert_value" mark="true"/>
+          <next operation="POSITION" position="2">
+            <element name="insert_data"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="HEXNUMBER"/>
+              <parameters value="to_data2" valuePosition="0" extension="HEXNUMBER"
+                  extensionPosition="0" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_checkA">
+      <filter>
+        <element name="to1_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="14"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_checkB">
+      <filter>
+        <element name="to1_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to1_checkC">
+      <filter>
+        <element name="to1_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="10"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_checkA">
+      <filter>
+        <element name="to2_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="14"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_checkB">
+      <filter>
+        <element name="to2_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="0"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="to2_checkC">
+      <filter>
+        <element name="to2_node" mark="true"/>
+        <next operation="POSITION" position="1">
+          <element name="insert_data"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="NUMBER"/>
+            <parameters value="10"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitGroup" type="IF">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="iv"/>
+          </inits>
+          <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to1_checkA"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to1_checkB"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to1_checkC"/>
+            </expressions>
+          </expression>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitGroup" type="IF">
+              <inits xsi:type="Core:InitUnitElement" element="SKIP">
+                <value type="SKIP" value="iv"/>
+              </inits>
+              <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="to2_checkA"/>
+                </expressions>
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="to2_checkB"/>
+                </expressions>
+                <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+                  <element name="to2_checkC"/>
+                </expressions>
+              </expression>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="to_data2"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="to_data1"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+</Core:ViewDefinition>

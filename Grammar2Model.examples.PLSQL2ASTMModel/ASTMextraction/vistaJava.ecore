@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core">
+  <rules name="mapProject">
+    <from name="ccompilationUnit" alias="sf"/>
+    <to name="Project"/>
+    <queries variable="cu">
+      <filter type="INDIRECT">
+        <element name="CST" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="files">
+        <value type="QUERY_RESULT" value="cu"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapCompilationUnit">
+    <from name="CST" alias="cst"/>
+    <to name="CompilationUnit"/>
+    <queries variable="pack">
+      <filter>
+        <element name="cst"/>
+        <next type="INDIRECT">
+          <element name="package_spec" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="language">
+        <value value="PL/SQL"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="fragments">
+        <value type="QUERY_RESULT" value="pack"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapNameSpaceDefinition">
+    <from name="package_spec" alias="ps"/>
+    <to name="NameSpaceDefinition"/>
+    <queries variable="n">
+      <filter>
+        <element name="ps"/>
+        <next type="INDIRECT">
+          <element name="package_name"/>
+          <next>
+            <element name="identifier" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="specs">
+      <filter>
+        <element name="ps"/>
+        <next>
+          <element name="package_obj_spec" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="nameSpace">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="nameSpace">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="n" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="body">
+        <value type="QUERY_RESULT" value="specs"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapFunction">
+    <from name="package_obj_spec" alias="fs">
+      <filter>
+        <element name="package_obj_spec" mark="true"/>
+        <next>
+          <element name="function_spec"/>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionDeclaration"/>
+    <queries variable="n">
+      <filter>
+        <element name="fs"/>
+        <next type="INDIRECT">
+          <element name="function_name"/>
+          <next>
+            <element name="identifier" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="r">
+      <filter>
+        <element name="fs"/>
+        <next type="INDIRECT">
+          <element name="return_type"/>
+          <next>
+            <element name="datatype" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="a">
+      <filter>
+        <element name="fs"/>
+        <next type="INDIRECT">
+          <element name="argument" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="n" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="formalParameters">
+        <value type="QUERY_RESULT" value="a"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="r" extension="TOKEN"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapParameter">
+    <from name="argument" alias="a"/>
+    <to name="FormalParameterDeclaration"/>
+    <queries variable="n">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="argument_name"/>
+          <next>
+            <element name="identifier" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="t">
+      <filter>
+        <element name="a"/>
+        <next type="INDIRECT">
+          <element name="argument_type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="n" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="OPERATION_EXTRACTID" value="t"/>
+      </inits>
+    </inits>
+  </rules>
+</Core:ViewDefinition>

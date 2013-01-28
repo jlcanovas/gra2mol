@@ -1,0 +1,78 @@
+Gra2MoL version 0.5
+
+Executing interpreter...
+Reading configuration file...
+The configuration does not exist
+
+Initializing query operation
+[WARNING] No query operation were found!
+
+Initializing query control statement
+[WARNING] No query control statement were found!
+
+Initializing mapping extension
+[WARNING] No mapping extension were found!
+Models created.
+Initializing indexRules...
+Initializing mixinRules...
+Initializing packages...
+Initializing hashes...
+
+Executing rules...
+RULE: mapScriptModule
+RULE: mapScriptModule... executing!
+  Model Element Module created
+  Executing queries...
+    Query f with 1 result nodes - CONTENT : [/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.skeleton/files/src/scripts/example1 example1 print "Hello, World!" /home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.skeleton/files/src/scripts/example2 example2 print "Hello again!" ]
+    Query mains with 2 result nodes
+  Executing mappings...
+    - QUERY_RESULT: 2 bindings:
+      (1/2) result node: mainRule (kind). Rule... calling mapScriptDefinition rule
+
+      RULE: mapScriptDefinition
+      RULE: mapScriptDefinition... executing!
+        Model Element Definition created
+        Executing queries...
+          Query mr with 1 result nodes - CONTENT : [print "Hello, World!" ]
+          Query stats with 1 result nodes - CONTENT : [print "Hello, World!" ]
+        Executing mappings...
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: statement (kind). Rule... calling mapEchoStatement rule
+
+            RULE: mapEchoStatement
+            RULE: mapEchoStatement... executing!
+              Model Element PrintStatement created
+              Executing queries...
+                Query st with 1 result nodes - CONTENT : [print "Hello, World!" ]
+                Query echo_st with 1 result nodes - CONTENT in line 1: [print "Hello, World!" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: echo_st - 
+                  node: print_statement (kind) - leaf: DQVAL (kind) - "Hello, World!" (value) 
+
+
+      (2/2) result node: mainRule (kind). Rule... calling mapScriptDefinition rule
+
+      RULE: mapScriptDefinition
+      RULE: mapScriptDefinition... executing!
+        Model Element Definition created
+        Executing queries...
+          Query mr with 1 result nodes - CONTENT : [print "Hello again!" ]
+          Query stats with 1 result nodes - CONTENT : [print "Hello again!" ]
+        Executing mappings...
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: statement (kind). Rule... calling mapEchoStatement rule
+
+            RULE: mapEchoStatement
+            RULE: mapEchoStatement... executing!
+              Model Element PrintStatement created
+              Executing queries...
+                Query st with 1 result nodes - CONTENT : [print "Hello again!" ]
+                Query echo_st with 1 result nodes - CONTENT in line 1: [print "Hello again!" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: echo_st - 
+                  node: print_statement (kind) - leaf: DQVAL (kind) - "Hello again!" (value) 
+
+
+
+
+Saving...

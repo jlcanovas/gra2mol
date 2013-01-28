@@ -1,0 +1,390 @@
+-- MySQLSchema to Wikigraph Gra2MoL transformation
+-- Author: Javier Luis Canovas Izquierdo
+--
+-- Description: This transformation works with the DDLMySQL grammar and the wikiGraph 
+-- metamodel. Due to the grammar structure, all the information for extracting 
+-- metalements is contained in insert_value grammar elements. It means that there is 
+-- not a direct mapping between grammar elements and metamodel elements. In this way, 
+-- we have to play with FROM filters, rule execution order, imperative execution and 
+-- sometimes with rules which are in charge of creating several metaelement types 
+-- (i.e. in edge rule). 
+
+--------------------------
+-- Main rule (top rule) --
+--------------------------
+rule 'mapWiki'
+	from compilationUnit
+	to Wiki
+	queries
+		-- Extracts the name of the database
+		name_db        : //#create_database;
+	
+		-- Extracts all the nodes. The page_is_redirect is also checked.
+		all_arts       : //insert_statement{ID[0].eq("page")}/#insert_value;
+		all_arts_redir : /#arts/insert_data[5]{NUMBER.eq("0")};
+	
+		-- These queries extract the nodes of each category. The page_is_redirect is also checked.
+		arts          : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[1]{NUMBER.eq("0")};
+		arts_redir    : /#arts/insert_data[5]{NUMBER.eq("0")};
+				
+		cats          : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[1]{NUMBER.eq("14")};
+		cats_redir    : /#cats/insert_data[5]{NUMBER.eq("0")};	
+			
+		index         : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[1]{NUMBER.eq("8")};
+		index_redirA  : /#index/insert_data[5]{NUMBER.eq("0")};
+		index_redirB  : /#all_arts/insert_data[2]{HEXNUMBER.eq("0x5573657273496E646578")}; -- Tittle == "UsersIndex"
+				
+		temp          : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[1]{NUMBER.eq("10")};
+		temp_redir    : /#temp/insert_data[5]{NUMBER.eq("0")};
+		
+		-- The page_is_redirect id not necessary for the users
+		users         : //insert_statement{ID[0].eq("user")}/#insert_value;
+		
+		-- Queries for the edges. The three main tables are queried
+		edges_all     : //insert_statement{ID[0].eq("categorylinks") || ID[0].eq("templatelinks") || ID[0].eq("pagelinks")}/#insert_value;
+		edges_pages   : //insert_statement{ID[0].eq("pagelinks")}/#insert_value;
+		
+		
+		-- Query for all the revisions.
+		revs       : //insert_statement{ID[0].eq("revision")}/#insert_value;	
+	mappings
+		-- The title of the db
+		title = name_db.ID;
+	
+		-- Mapping for the nodes aggregation
+		nodes = users;
+		nodes = all_arts;
+		
+		-- Mapping for the nodes edges aggregation 
+		edges = edges_all;
+		
+		-- Mapping for the revision aggregation
+		revisions = revs;
+	
+		-- Mappings for the groups
+		graphArticles = new ArticleGraph;
+		graphArticles.name = "ArticleGraph";
+		graphArticles.noderefs = arts_redir;
+		graphArticles.edgerefs = execute filterArticleGraph edges_pages;
+		
+		graphCategories = new CategoryGraph;
+		graphCategories.name = "CategoryGraph";
+		graphCategories.noderefs = cats_redir;
+		graphCategories.edgerefs = execute filterCategoryGraph edges_all;
+		
+		graphIndex = new IndexGraph;
+		graphIndex.name = "IndexGraph";
+		graphIndex.noderefs = index_redirA;
+		graphIndex.noderefs = index_redirB;
+		graphIndex.edgerefs = execute filterIndexGraph edges_all;
+		
+		graphClassification = new ClassificationGraph;
+		graphClassification.name = "ClassificationGraph";
+		graphClassification.noderefs = temp_redir;
+		graphClassification.noderefs = cats_redir;
+		graphClassification.noderefs = arts_redir;
+		graphClassification.edgerefs = execute filterClassificationGraph edges_all;
+end_rule
+
+
+----------------
+-- Node rules --
+----------------
+
+-- This rule works with the nodes of the metamodel (article, template,
+-- category and index). See the FROM filter.
+rule 'mapMainNode'
+	from insert_value/insert_data[1]{NUMBER.eq("0") || NUMBER.eq("1") || NUMBER.eq("6") || NUMBER.eq("14") || NUMBER.eq("8") || NUMBER.eq("10")} iv
+	to Node
+	queries
+		-- The main information is extracted
+		id         : /iv/#insert_data[0];
+		namespace  : /iv/#insert_data[1];
+		page_title : /iv/#insert_data[2];
+		counter    : /iv/#insert_data[4];
+		
+		-- Extracts all the revisions
+		revs       : //insert_statement{ID[0].eq("revision")}/#insert_value/insert_data[1]{NUMBER.eq(id.NUMBER)};
+		-- Filter the revisions of this node in order to select the revision node with the greatest timestamp
+		rev_g      : {greater insert_data[6].HEXNUMBER} //insert_statement{ID[0].eq("revision")}/#insert_value/insert_data[1]{NUMBER.eq(id.NUMBER)};
+
+		-- Checking the category of the node
+		is_article  : /iv/#insert_data[1]{NUMBER.eq("0")};
+		is_deleted  : /iv/#insert_data[1]{NUMBER.eq("1")};
+		is_image    : /iv/#insert_data[1]{NUMBER.eq("6")};
+		is_index    : /iv/#insert_data[1]{NUMBER.eq("8")};
+		is_template : /iv/#insert_data[1]{NUMBER.eq("10")};
+		is_category : /iv/#insert_data[1]{NUMBER.eq("14")};
+		
+	mappings
+		node_id = id.NUMBER;		
+		title = convertHexToString page_title.HEXNUMBER;
+		node_namespace = namespace.NUMBER;
+		visits = counter.NUMBER;
+		editions = count revs;
+		revisions = revs;
+		--lastRevision = rev_g;
+		lastRevision = ext ExtractGreaterMappingExtension(revs);
+		
+		if (is_article.hasResults) then
+			type = "Article";
+		end_if
+		if (is_deleted.hasResults) then
+			type = "Deleted";
+		end_if
+		if (is_image.hasResults) then
+			type = "Image";
+		end_if
+		if (is_index.hasResults) then
+			type = "Index";
+		end_if
+		if (is_index.hasResults) then
+			type = "Index";
+		end_if
+		if (is_template.hasResults) then
+			type = "Template";
+		end_if
+		if (is_category.hasResults) then
+			type = "Category";
+		end_if
+end_rule
+
+-- Special processing for user nodes
+-- Take care with the location of this rule in the transformation definition, it has not
+-- FROM filter so it must be located at the end.
+rule 'mapUserNode'
+	from insert_value is
+	to Node
+	queries
+		user_name  : /is//#insert_data[1];
+	mappings
+		node_id = 0;		
+		title = convertHexToString user_name.HEXNUMBER;
+		node_namespace = 2;
+		type = "User";
+		visits = 0;
+		editions = 0; 
+end_rule
+
+--------------------
+-- Revision rules --
+--------------------
+
+-- Rule for the Revision metaelements
+rule 'mapRevision'
+	from insert_value iv
+	to Revision
+	queries
+		rev_user_text : /iv/#insert_data[5];
+		rev_timestamp : /iv/#insert_data[6];
+		rev_text_id   : /iv/#insert_data[2];
+		rev_page      : /iv/#insert_data[1];
+		source_node   : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[0]{NUMBER.eq(rev_page.NUMBER)};		
+	mappings
+		user = convertHexToString rev_user_text.HEXNUMBER;
+		date = convertHexToString rev_timestamp.HEXNUMBER;
+		text_id = rev_text_id.NUMBER;
+		node = source_node;
+end_rule
+
+----------------
+-- Edge rules --
+----------------
+
+-- This rule is in charge of mapping each insert_value node to an Edge metalement
+-- It works with the three types of Edges because there is not a way to differentiate
+-- the insert_value nodes in the grammar (at least a "normal" and instinctive way).
+rule 'mapEdge'
+	from insert_value iv
+	to Edge
+	queries
+		-- Looking for the insert_value element which contains to insert_value received in FROM part
+		cat1         : //#insert_statement{ID[0].eq("categorylinks")}/insert_value{this.check(iv)};
+		cat2         : //#insert_statement{ID[0].eq("templatelinks")}/insert_value{this.check(iv)};
+		cat3         : //#insert_statement{ID[0].eq("pagelinks")}/insert_value{this.check(iv)};
+		
+		-- The identifiers of To and From attributes are extracted
+		-- In the case of To attribute, it depends on the type of the edge, which will be
+		-- check in the mappings section
+		cat_fr_data0 : /iv/#insert_data[0]; 
+		cat_to_data1 : /iv/#insert_data[1]; 
+		cat_to_data2 : /iv/#insert_data[2]; 		
+		
+		-- The nodes are extracted from the previous identifiers
+		cat_fr       : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[0]{NUMBER.eq(cat_fr_data0.NUMBER)};
+		cat_to1      : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(cat_to_data1.HEXNUMBER)};
+		cat_to2      : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(cat_to_data2.HEXNUMBER)};
+		
+		-- Extra check for belongsTo and templatedBy edges.
+		cat_to1_check : /#cat_to1/insert_data[1]{NUMBER.eq("14")};
+		cat_to2_check : /#cat_to2/insert_data[1]{NUMBER.eq("10")};
+	mappings
+		_from = cat_fr;
+		if (cat1.hasResults) then
+			if(cat_to1.hasResults) then 
+				_to = cat_to1_check; 
+			end_if
+			type = "belongsTo";
+		else 
+			if (cat2.hasResults) then
+				if(cat_to2.hasResults) then 
+					_to = cat_to2_check; 
+				end_if
+				type = "templatedBy";
+			else 
+				if (cat3.hasResults) then
+					if(cat_to2.hasResults) then 
+						_to = cat_to2; 
+					end_if
+					type = "relatedWith";
+				end_if
+			end_if
+		end_if	
+end_rule
+
+-- The following rules deal with the edges of the wiki and filter them. 
+-- We use the new type of rule, called skip_rule, to make computations before
+-- creating a metaelement. These rules are called in a imperative way from
+-- the mapWiki rule.
+-- Take care with the order of these rules. They have not FROM filter and must be 
+-- located after the previous rule which maps the edges. 
+
+-- This rule filters the edges of the wiki and selects only those which have
+-- a category node in To and From attributes 
+skip_rule 'filterCategoryGraph'
+	from insert_value iv
+	to Edge
+	queries
+		fr_data0 : /iv/#insert_data[0]; 
+		to_data1 : /iv/#insert_data[1]{HEXNUMBER.exists}; 
+		--to_data2 : /iv/#insert_data[2]{HEXNUMBER.exists}; -- See annotation on DO part
+		
+		-- The nodes are extracted from the previous identifiers
+		fr_node      : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[0]{NUMBER.eq(fr_data0.NUMBER)};
+		to1_node     : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data1.HEXNUMBER)};
+		--to2_node     : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data2.HEXNUMBER)}; -- See annotation on DO part
+		
+		-- Checking edges conditions for CategoryGraph
+		fr_check     : /#fr_node/insert_data[1]{NUMBER.eq("14")};
+		to1_check    : /#to1_node/insert_data[1]{NUMBER.eq("14")};
+		--to2_check    : /#to2_node/insert_data[1]{NUMBER.eq("14")}; -- See annotation on DO part			 
+	do
+		if(to_data1.hasResults) then
+			if(fr_check.hasResults && to1_check.hasResults) then
+				skip iv;
+			end_if
+		-- It is not necessary to check the result for to_data2. It is the consequence of querying 
+		-- the templatelinks table and pagelinks table. 
+		--else
+		--	if(to_data2.hasResults) then
+		--		if(fr_check.hasResults && to2_check.hasResults) then
+		--			skip iv;
+		--		end_if
+		--	end_if		
+		end_if	
+end_rule
+
+-- This rule filters the edges of the wiki and selects only those which have
+-- a index node in To or From attributes 
+skip_rule 'filterIndexGraph'
+	from insert_value iv
+	to Edge
+	queries
+		fr_data0 : /iv/#insert_data[0]; 
+		to_data1 : /iv/#insert_data[1]{HEXNUMBER.exists}; 
+		to_data2 : /iv/#insert_data[2]{HEXNUMBER.exists}; 
+		
+		-- The nodes are extracted from the previous identifiers
+		fr_node       : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[0]{NUMBER.eq(fr_data0.NUMBER)};		
+		to1_node      : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data1.HEXNUMBER)};
+		to2_node      : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data2.HEXNUMBER)};
+		
+		-- Checking edges conditions for IndexGraph 
+		-- TO == Index
+		to1_checkA    : /#to1_node/insert_data[1]{NUMBER.eq("8")};
+		to2_checkA    : /#to2_node/insert_data[1]{NUMBER.eq("8")};	
+		-- TO.title = UsersIndex	
+		to1_checkB    : /#to1_node/insert_data[2]{HEXNUMBER.eq("0x5573657273496E646578")};
+		to2_checkB    : /#to2_node/insert_data[2]{HEXNUMBER.eq("0x5573657273496E646578")};		
+		-- FROM.title = UsersIndex	
+		fr_check      : /#fr_node/insert_data[2]{HEXNUMBER.eq("0x5573657273496E646578")};
+	do
+		if(to_data1.hasResults) then
+			if(to1_checkA.hasResults || to1_checkB.hasResults || fr_check.hasResults) then
+				skip iv;
+			end_if
+		else
+			if(to_data2.hasResults) then
+				if(to2_checkA.hasResults || to2_checkB.hasResults || fr_check.hasResults) then
+					skip iv;
+				end_if
+			end_if		
+		end_if	
+end_rule
+
+-- This rule filters the edges of the wiki and selects only those which have
+-- a article node in To and From attributes 
+skip_rule 'filterArticleGraph'
+	from insert_value iv
+	to Edge
+	queries
+		fr_data0 : /iv/#insert_data[0]; 
+		to_data1 : /iv/#insert_data[1]{HEXNUMBER.exists}; 
+		to_data2 : /iv/#insert_data[2]{HEXNUMBER.exists}; 
+		
+		-- The nodes are extracted from the previous identifiers
+		fr_node      : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[0]{NUMBER.eq(fr_data0.NUMBER)};
+		to1_node     : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data1.HEXNUMBER)};
+		to2_node     : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data2.HEXNUMBER)};
+		
+		-- Checking edges conditions for ArticleGraph
+		fr_check     : /#fr_node/insert_data[1]{NUMBER.eq("0")};
+		to1_check    : /#to1_node/insert_data[1]{NUMBER.eq("0")};
+		to2_check    : /#to2_node/insert_data[1]{NUMBER.eq("0")};			
+	do
+		if(to_data1.hasResults) then
+			if(fr_check.hasResults && to1_check.hasResults) then
+				skip iv;
+			end_if
+		else
+			if(to_data2.hasResults) then
+				if(fr_check.hasResults && to2_check.hasResults) then
+					skip iv;
+				end_if
+			end_if		
+		end_if	
+end_rule
+
+-- This rule filters the edges of the wiki and selects only those which have
+-- a category, template or article node in To and From attributes 
+skip_rule 'filterClassificationGraph'
+	from insert_value iv
+	to Edge
+	queries
+		to_data1 : /iv/#insert_data[1]{HEXNUMBER.exists}; 
+		to_data2 : /iv/#insert_data[2]{HEXNUMBER.exists}; 
+		
+		-- The nodes are extracted from the previous identifiers
+		to1_node     : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data1.HEXNUMBER)};
+		to2_node     : //insert_statement{ID[0].eq("page")}/#insert_value/insert_data[2]{HEXNUMBER.eq(to_data2.HEXNUMBER)};
+		
+		-- Checking edges conditions for IndexGraph
+		to1_checkA   : /#to1_node/insert_data[1]{NUMBER.eq("14")};
+		to1_checkB   : /#to1_node/insert_data[1]{NUMBER.eq("0")};
+		to1_checkC   : /#to1_node/insert_data[1]{NUMBER.eq("10")};
+		to2_checkA   : /#to2_node/insert_data[1]{NUMBER.eq("14")};	
+		to2_checkB   : /#to2_node/insert_data[1]{NUMBER.eq("0")};	
+		to2_checkC   : /#to2_node/insert_data[1]{NUMBER.eq("10")};			
+	do
+		if(to_data1.hasResults) then
+			if(to1_checkA.hasResults || to1_checkB.hasResults || to1_checkC.hasResults) then
+				skip iv;
+			end_if
+		else
+			if(to_data2.hasResults) then
+				if(to2_checkA.hasResults || to2_checkB.hasResults || to2_checkC.hasResults) then
+					skip iv;
+				end_if
+			end_if		
+		end_if	
+end_rule

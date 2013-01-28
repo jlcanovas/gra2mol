@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:Transformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core">
+  <rules xsi:type="Core:StandardRule" name="testing">
+    <queries variable="m">
+      <filter>
+        <element name="cst"/>
+        <next type="INDIRECT">
+          <element name="mainRule" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="att">
+        <value type="QUERY_ACCESS" value="m" extension="ID"/>
+      </inits>
+    </inits>
+    <from name="CST" alias="cst">
+      <filter variable="cst">
+        <filter>
+          <element name="CST" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Metaclass"/>
+  </rules>
+</Core:Transformation>

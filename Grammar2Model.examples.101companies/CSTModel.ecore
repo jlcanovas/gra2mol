@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:CST="http://gts.inf.um.es/modernization/cst" kind="CST">
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.101companies1/gra2mol/src/example1.101"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="example1.101"/>
+    <children xsi:type="CST:Node" kind="company">
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="company" line="1"/>
+      <children xsi:type="CST:Leaf" kind="STRING" value="&quot;companyA&quot;" pos="8"
+          line="1"/>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="19" line="1"/>
+      <children xsi:type="CST:Node" kind="department">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="department" pos="1" line="2"/>
+        <children xsi:type="CST:Leaf" kind="STRING" value="&quot;departmentA&quot;"
+            pos="12" line="2"/>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="26" line="2"/>
+        <children xsi:type="CST:Node" kind="department_manager">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="manager" pos="2" line="3"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;managerA&quot;"
+                pos="10" line="3"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="21" line="3"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="4"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetManagerA&quot;"
+                pos="15" line="4"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="5"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="10000.00" pos="13" line="5"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="6"/>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="department_employees">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="employee" pos="2" line="15"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeA&quot;"
+                pos="11" line="7"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="22" line="7"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="8"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetEmployeeA&quot;"
+                pos="15" line="8"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="9"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="5000.00" pos="13" line="9"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="10"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="employee" pos="2" line="15"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeB&quot;"
+                pos="11" line="11"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="22" line="11"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="12"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetEmployeeB&quot;"
+                pos="15" line="12"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="13"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="7000.00" pos="13" line="13"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="14"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="employee" pos="2" line="15"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeC&quot;"
+                pos="11" line="15"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="22" line="15"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="16"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetEmployeeC&quot;"
+                pos="15" line="16"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="17"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="9000.00" pos="13" line="17"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="mentor" pos="6" line="18"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeB&quot;"
+                pos="13" line="18"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="19"/>
+          </children>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="1" line="20"/>
+      </children>
+      <children xsi:type="CST:Node" kind="department">
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="department" pos="1" line="22"/>
+        <children xsi:type="CST:Leaf" kind="STRING" value="&quot;departmentB&quot;"
+            pos="12" line="22"/>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="26" line="22"/>
+        <children xsi:type="CST:Node" kind="department_manager">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="manager" pos="2" line="23"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;managerB&quot;"
+                pos="10" line="23"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="21" line="23"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="24"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetManagerB&quot;"
+                pos="15" line="24"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="25"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="10000.00" pos="13" line="25"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="mentor" pos="6" line="26"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;managerA&quot;"
+                pos="13" line="26"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="27"/>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="department_employees">
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="employee" pos="2" line="37"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeD&quot;"
+                pos="11" line="28"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="22" line="28"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="29"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetEmployeeD&quot;"
+                pos="15" line="29"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="30"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="2900.00" pos="13" line="30"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="mentor" pos="6" line="31"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeE&quot;"
+                pos="13" line="31"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="32"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="employee" pos="2" line="37"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeE&quot;"
+                pos="11" line="33"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="22" line="33"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="34"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetEmployeeE&quot;"
+                pos="15" line="34"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="35"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="6500.00" pos="13" line="35"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="36"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value="employee" pos="2" line="37"/>
+          <children xsi:type="CST:Node" kind="employee">
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeF&quot;"
+                pos="11" line="37"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="{" pos="22" line="37"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="address" pos="7" line="38"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;streetEmployeeF&quot;"
+                pos="15" line="38"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="salary" pos="6" line="39"/>
+            <children xsi:type="CST:Leaf" kind="FLOAT" value="8700.00" pos="13" line="39"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="mentor" pos="6" line="40"/>
+            <children xsi:type="CST:Leaf" kind="STRING" value="&quot;employeeB&quot;"
+                pos="13" line="40"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="2" line="41"/>
+          </children>
+        </children>
+        <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="1" line="42"/>
+      </children>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="}" line="43"/>
+      <children xsi:type="CST:Leaf" kind="EOF" pos="-1"/>
+    </children>
+  </children>
+</CST:Node>

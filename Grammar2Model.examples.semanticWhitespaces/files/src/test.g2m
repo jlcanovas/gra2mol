@@ -1,0 +1,8 @@
+rule 'testing'
+	from CST cst
+	to Metaclass 
+	queries
+		m : /cst//#mainRule;
+	mappings
+		att = m.ID;
+end_rule

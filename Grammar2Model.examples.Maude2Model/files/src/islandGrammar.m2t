@@ -1,0 +1,109 @@
+texttransformation islandGrammarTransformation (in maudeMM:"http://MaudeMM/1.0") {
+	maudeMM.MaudeSpec::main() {
+		file("PreIsland.g")
+		
+		'grammar Island;' newline(2)
+		
+		'options {' newline(1)
+		tab(1) 'backtrack=true;' newline(1)
+		'}' newline(2)
+		
+		'mainRule:' newline(1)
+		tab(1) '\'eq\' (label)? eqPart \'.\'' newline(1)
+		tab(1) ';' newline(2)
+
+		'label:' newline(1)
+		tab(1) '\'[\' ID \']\' COLON' newline(1)
+		tab(1) ';' newline(2)
+		
+		var control : Integer = 0
+		'eqPart:' newline(1)
+		maudeMM.objectsOfType(maudeMM.Operation)->forEach(op : maudeMM.Operation | op.arity.size() > 0) {
+			tab(1) 
+			if(control == 0) { print("  ") } else { print("| ") } 
+			print(digestOpName(op.name)) newline(1)
+			control = control + 1
+		}
+		tab(1) ';' newline(2)
+		
+		'// Rules for Sorts' newline(1)
+		maudeMM.objectsOfType(maudeMM.Sort)->forEach(s : maudeMM.Sort) {
+			digestSortName(s.name) ':' newline(1)
+			tab(1)
+			if(s.name.equals("String")) { print("STRING") } 
+			else if(s.name.equals("ListOrd")) { 
+				print("ID") newline(1) 
+				tab(1) print("| ") print("\'__\'") print(" \'(\' ordSort (\',\' ordSort)* \')\'") 
+			}
+			else { print("ID") }
+			newline(1)
+		//	maudeMM.objectsOfType(maudeMM.Operation)->forEach(o : maudeMM.Operation | o.arity.size() > 0) {
+		//		if(digestSortName(o.coarity.name).equals(digestSortName(s.name))) {
+		//			tab(1) '| ' print(digestOpName(o.name)) newline(1)
+		//		}
+		//	}
+			tab(1) ';' newline(2)
+		}
+		
+		'ordSort:' newline(1)
+		tab(1) 'ID' newline(1)
+		tab(1) ';' newline(2)
+		
+		'// Rules for Operations' newline(1)		
+		self.els->forEach(m : maudeMM.Module) {
+			m.mapModule();
+		}
+		newline(1)
+	}
+
+	maudeMM.Module::mapModule() {
+		self.els->forEach(op : maudeMM.Operation) {
+			op.mapOperation();
+		}
+	}
+	
+	maudeMM.Operation::mapOperation() {
+		var arityVar : List = self.digestArity();
+		if(arityVar.size() > 0) {
+			print(digestOpName(self.name)) ':' newline(1)
+			var coarityVar : String = digestSortName(self.coarity.name)
+			var opLocation : Integer = self.name.indexOf("_")
+			if(opLocation > -1) {
+				tab(1) print(self.digestParamOp()) ' \'=\' '
+			} else {
+				tab(1) '\'' self.name '\'' 
+		   			' \'(\' ' arityVar->forEach(a) { print(a) } ' \')\''
+		   			' \'=\' '
+		   	}
+		   	print(coarityVar)
+			newline(1) tab(1) ';'
+			newline(2)
+		}
+	}
+	
+	maudeMM.Operation::digestParamOp() : String {
+		var preDigestedRule : String = self.name.replace("_", " " + arityVar.first() + " ")
+		var opChar : String = self.name.replace("_", "")
+		var digestedRule : String = preDigestedRule.replace(opChar, "\'" + opChar + "\'")
+		result = digestedRule	
+	}
+	
+	maudeMM.Operation::digestArity() : List {
+		var solution : List
+		var aDigested : String
+		
+		self.arity->forEach(aElem : maudeMM.Type) {
+			aDigested = digestSortName(aElem.name)
+			solution.add(aDigested)
+		}
+		result = solution
+	}
+	
+	module::digestOpName(value : String) : String {
+		result = "op" + value.firstToUpper().replace("@", "at").replace("_", "sub")
+	}
+	
+	module::digestSortName(value : String) : String {
+		result = value.replace("@", "at").firstToLower() + "Sort"
+	}
+}

@@ -1,0 +1,770 @@
+-- *******************************************************************************
+-- * Copyright (c) 2010
+-- * All rights reserved. This program and the accompanying materials
+-- * are made available under the terms of the Eclipse Public License v1.0
+-- * which accompanies this distribution, and is available at
+-- * http://www.eclipse.org/legal/epl-v10.html
+-- *
+-- * Contributors:
+-- *    Javier Canovas (jlcanovas@um.es) 
+-- *******************************************************************************
+
+
+--------------------------------------------------------------------------------------
+-- Gra2MoL transformation definition for extracting ASTM models from PL/SQL Triggers
+-- Author: Javier Luis Canovas Izquierdo (jlcanovas@um.es)
+--
+-- TODO: 
+--------------------------------------------------------------------------------------
+
+rule 'mapProject'
+	from ccompilationUnit sf
+	to astm::gastm::Project
+	queries
+		cu : //#CST;
+	mappings
+		files = cu;
+end_rule
+
+rule 'mapCompilationUnit'
+	from CST cst
+	to astm::gastm::CompilationUnit
+	queries
+		ts : /cst/#Trigger;
+	mappings
+		language = "PL/SQL";
+		fragments = ts;
+end_rule
+
+rule 'mapCompilationUnit'
+	from Trigger t
+	to astm::sastm::RDBTrigger
+	queries
+		stats : /t/seq_of_statements/#statement;
+	mappings
+		identifierName = new astm::gastm::Name;
+		identifierName.nameString = t.trigger_name;
+		body = stats;
+end_rule
+
+--------------------------------------
+-- Rules for statements 
+--------------------------------------
+
+rule 'mapFunctionCall'
+	from statement/function_call st
+	to astm::gastm::ExpressionStatement
+	queries
+		f : /st/#function_call;
+	mappings
+		expression = f;
+end_rule
+
+rule 'mapBlockStatement' 
+	from statement/plsql_block st
+	to astm::gastm::BlockStatement
+	queries
+		block : /st/#plsql_block;
+		decls : /block/#declare_spec;
+		stats : /block/seq_of_statements/#statement;
+		excep : /block/#exception_handler;
+	mappings
+		--subStatements = decls;
+		subStatements = stats;
+		--subStatements = excep;
+end_rule
+
+rule 'mapReturnStatement'
+	from statement/return_statement st
+	to astm::gastm::ReturnStatement
+	queries
+		exp : /st//plsql_expression/#expr_bool;
+	mappings
+		returnValue = exp;
+end_rule
+
+rule 'mapIf'
+	from statement/if_statement st
+	to astm::gastm::IfStatement
+	queries
+		cond   : /st/if_statement/plsql_condition/#expr_bool;
+		thenSt : /st/if_statement/seq_of_statements[0]/#statement;
+		elseSt : /st/if_statement/seq_of_statements[1]/#statement;
+	mappings
+		condition = cond;
+		thenBody = thenSt;
+		elseBody = elseSt;
+end_rule
+
+rule 'mapAssignment'
+	from statement/assignment_statement st
+	to astm::gastm::ExpressionStatement
+	queries
+		as       : /st/#assignment_statement;
+		value    : /as/#lvalue;
+		exp      : /as/plsql_expression/#expr_bool;
+	mappings
+		expression = new astm::gastm::BinaryExpression;
+		expression.leftOperand = new astm::gastm::IdentifierReference;
+		expression.leftOperand.name = new astm::gastm::Name;
+		expression.leftOperand.name.nameString = extractID value;
+		expression.operator = new astm::gastm::OperatorAssign;
+		expression.rightOperand = exp;
+end_rule 
+
+rule 'mapSelectStatement' 
+	from statement/sql_statement//select_statement st
+	to astm::sastm::RDBSelectStatement
+	queries
+		exp     : /st//select_statement/#select_expression;
+		lvals   : /exp//lvalues/#lvalue;
+	mappings
+		SelectExpression = exp;
+		IntoVariable = lvals;
+end_rule
+
+rule 'mapIntoVariable'
+	from lvalue l
+	to astm::sastm::RDBHostVariableReference
+	queries
+		
+	mappings
+		BaseVariable = new astm::gastm::IdentifierReference;
+		BaseVariable.name = new astm::gastm::Name;
+		BaseVariable.name.nameString = extractID l;
+		--Indicator =
+end_rule
+
+
+--------------------------------------
+-- Rules for expressions (from expr_bool)
+--------------------------------------
+skip_rule 'skipAllBooleanRules'
+	from expr_bool{!TOKEN.exists}/expr_or{!TOKEN.exists}/expr_and{!TOKEN.exists} exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/expr_or/expr_and/#expr_not;
+	do
+		skip s;
+end_rule
+
+skip_rule 'skipBinaryExpressionOr'
+	from expr_bool{!TOKEN.exists} exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/#expr_or;
+	do
+		skip s;
+end_rule
+
+rule 'mapBinaryExpressionOr' 
+	from expr_bool{TOKEN.exists} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expo1     : /exp/#expr_or[0];
+		expo2     : /exp/#expr_or[1];
+	mappings
+		leftOperand = expo1;
+		operator = new astm::gastm::Or;
+		rightOperand = expo2;
+end_rule
+
+skip_rule 'skipBinaryExpressionAnd'
+	from expr_or{!TOKEN.exists} exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/#expr_and;
+	do
+		skip s;
+end_rule
+
+rule 'mapBinaryExpressionAnd' 
+	from expr_or{TOKEN.exists} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa1     : /exp/#expr_and[0];
+		expa2     : /exp/#expr_and[1];
+	mappings
+		leftOperand = expa1;
+		operator = new astm::gastm::And;
+		rightOperand = expa2;
+end_rule
+
+skip_rule 'skipUnaryExpressionNot' 
+	from expr_and{!TOKEN.exists} exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/#expr_not;
+	do
+		skip s;
+end_rule
+
+rule 'mapUnaryExpressionNot' 
+	from expr_and{TOKEN.exists} exp
+	to astm::gastm::UnaryExpression
+	queries
+		expa1     : /exp/#expr_not;
+	mappings
+		operand = expa1;
+		operator = new astm::gastm::Not;	
+end_rule
+
+rule 'mapBinaryExpressionRelational'
+	from expr_not/relational_op exp
+	to astm::gastm::BinaryExpression
+	queries
+		op        : /exp/#relational_op;
+		expl1     : /exp/#expr_add[0];
+		expl2     : /exp/#expr_add[1];			
+		eqOp      : /#op{EQ.exists};	
+		orOp      : /#op{OR.exists};
+		lthOp     : /#op{LTH.exists};
+		gthOp     : /#op{GTH.exists};
+		notEqOp   : /#op{NOT_EQ.exists};
+		leqOp     : /#op{LEQ.exists};
+		geqOp     : /#op{GEQ.exists};
+	mappings
+		leftOperand = expl1;
+		rightOperand = expl2;
+		if(eqOp.hasResults) then
+			operator = new astm::gastm::Equal;
+		else
+			if(orOp.hasResults) then
+				operator = new astm::gastm::Or;
+			else
+				if(lthOp.hasResults) then
+				 	operator = new astm::gastm::Less;
+				else
+					if(gthOp.hasResults) then
+						operator = new astm::gastm::Greater;
+					else
+						if(notEqOp.hasResults) then
+							operator = new astm::gastm::NotEqual;
+						else
+							if(leqOp.hasResults) then
+								operator = new astm::gastm::SpecificLessEqual;
+							else
+								if(geqOp.hasResults) then
+									operator = new astm::gastm::SpecificGreaterEqual; 
+								end_if
+							end_if
+						end_if
+					end_if
+				end_if
+			end_if
+		end_if
+end_rule
+
+rule 'mapBinaryExpressionIsNotNull'
+	from expr_not{TOKEN[0].exists && TOKEN[0].eq("is") && TOKEN[1].exists && TOKEN[1].eq("not")} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa   : /exp/#expr_add;
+	mappings
+		leftOperand = expa;
+		operator = new astm::gastm::Equal;
+		rightOperand = new astm::gastm::StringLiteral;
+		rightOperand.value = "null";
+end_rule
+
+rule 'mapBinaryExpressionIsNull'
+	from expr_not{TOKEN[0].exists && TOKEN[0].eq("is")} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa   : /exp/#expr_add;
+	mappings
+		leftOperand = expa;
+		operator = new astm::gastm::NotEqual;
+		rightOperand = new astm::gastm::StringLiteral;
+		rightOperand.value = "null";
+end_rule
+
+rule 'mapNotRangeExpression'
+	from expr_not{TOKEN[0].exists && TOKEN[0].eq("not") && TOKEN[1].exists && TOKEN[1].eq("in")} exp
+	to astm::gastm::UnaryExpression
+	queries
+		expa : /exp/#expr_add;
+		l    : /exp/nested_expressions/nested_expression[0]//#expr_bool;
+		u    : /exp/nested_expressions/nested_expression[1]//#expr_bool; 
+	mappings
+		operator = new astm::gastm::Not;
+		operand = new astm::gastm::BinaryExpression;
+		operand.leftOperand = expa;
+		operand.operator = new astm::gastm::SpecificIn;
+		operand.rightOperand = new astm::gastm::RangeExpresion;
+		operand.rightOperand.fromExpression = l;
+		operand.rightOperand.toExpression = u;
+end_rule
+
+rule 'mapRangeExpression'
+	from expr_not{TOKEN[0].exists && TOKEN[0].eq("in")} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa : /exp/#expr_add;
+		l    : /exp/nested_expressions/nested_expression[0]//#expr_bool;
+		u    : /exp/nested_expressions/nested_expression[1]//#expr_bool; 
+	mappings
+		leftOperand = expa;
+		operator = new astm::gastm::SpecificIn;
+		rightOperand = new astm::gastm::RangeExpression;
+		rightOperand.fromExpression = l;
+		rightOperand.toExpression = u;
+end_rule
+
+rule 'mapLikeExpression'
+	from expr_not{TOKEN[0].exists && TOKEN[0].eq("NOT") && TOKEN[1].exists && TOKEN[1].eq("LIKE")} exp
+	to astm::gastm::UnaryExpression
+	queries
+		expa1 : /exp/#expr_add[0];
+		expa2 : /exp/#expr_add[1];
+	mappings
+		operator = new astm::gastm::Not;
+		operand = new astm::gastm::BinaryExpression;
+		operand.leftOperand = expa1;
+		operand.operator = new astm::gastm::SpecificLike;
+		operand.rightOperand = expa2;
+end_rule
+
+rule 'mapLikeExpression'
+	from expr_not{TOKEN[0].exists && TOKEN[0].eq("LIKE")} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa1 : /exp/#expr_add[0];
+		expa2 : /exp/#expr_add[1];
+	mappings
+		leftOperand = expa1;
+		operator = new astm::gastm::SpecificLike;
+		rightOperand = expa2;
+end_rule
+
+--rule 'createFoundExpression'
+--	from expr_not{FOUND_ATTR.exists} exp
+--	to astm::gastm::expression::FoundExpression
+--	queries
+--		expa   : /exp/expr_add//#identifier;
+--		cloc   : //#declare_spec/cursor_declaration/cursor_name/identifier{ID.eq(expa.ID)};		 
+--	mappings
+--		cursor = cloc;
+--end_rule
+
+skip_rule 'skipToExprAdd'
+	from expr_not exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/#expr_add;
+	do
+		skip s;
+end_rule
+
+------------------------------------------------------------------------
+-- Expressions (FROM expr_add)
+------------------------------------------------------------------------
+
+skip_rule 'skipAllArithmeticRules'
+	from expr_add{!PLUS.exists && !MINUS.exists && !DOUBLEVERTBAR.exists}/expr_mul{!ASTERISK.exists && !DIVIDE.exists}/expr_sign{!PLUS.exists && !MINUS.exists}/expr_pow{!EXPONENT.exists} exp
+	to astm::gastm::Expression
+	queries 
+		s : /exp//#expr_expr;
+	do
+		skip s;
+end_rule
+	
+skip_rule 'skipToExprMul'
+	from expr_add{!PLUS.exists && !MINUS.exists && !DOUBLEVERTBAR.exists} exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/#expr_mul;
+	do
+		skip s;
+end_rule	
+	
+rule 'mapBinaryExpressionArithmeticPlus'
+	from expr_add{PLUS.exists} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa1 : /exp/#expr_mul[0];
+		expa2 : /exp/#expr_mul[1];
+	mappings
+		leftOperand = expa1;
+		operator = new astm::gastm::Add;
+		rightOperand = expa2;
+end_rule
+
+rule 'mapBinaryExpressionArithmeticMinus'
+	from expr_add{MINUS.exists} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa1 : /exp/#expr_mul[0];
+		expa2 : /exp/#expr_mul[1];
+	mappings
+		leftOperand = expa1;
+		operator = new astm::gastm::Subtract;
+		rightOperand = expa2;
+end_rule
+
+--rule 'createArithmeticFromAddDoubleBar'
+--	from expr_add{DOUBLEVERTBAR.exists} exp
+--	to astm::gastm::expression::ConcatString
+--	queries
+--		exps : /exp/#expr_mul;
+--	mappings
+--		exprs = exps;
+--end_rule
+
+skip_rule 'skipToExprSign'
+	from expr_mul{!ASTERISK.exists && !DIVIDE.exists} exp
+	to astm::gastm::expression::Expression
+	queries
+		s : /exp/#expr_sign;
+	do
+		skip s;
+end_rule
+
+rule 'mapBinaryExpressionArithmeticMultiply'
+	from expr_mul{ASTERISK.exists} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa1 : /exp/#expr_sign[0];
+		expa2 : /exp/#expr_sign[1];
+	mappings
+		leftOperand = expa1;
+		operator = new astm::gastm::Multiply;
+		rightOperand = expa2;
+end_rule
+
+rule 'mapBinaryExpressionArithmeticDivide'
+	from expr_mul{DIVIDE.exists} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa1 : /exp/#expr_sign[0];
+		expa2 : /exp/#expr_sign[1];
+	mappings
+		leftOperand = expa1;
+		operator = new astm::gastm::Divide;
+		rightOperand = expa2;
+end_rule
+
+skip_rule 'skipToExprPow'
+	from expr_sign{!PLUS.exists && !MINUS.exists} exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/#expr_pow;
+	do
+		skip s;
+end_rule
+
+rule 'mapUnaryExpressionPlus'
+	from expr_sign{PLUS.exists} exp
+	to astm::gastm::UnaryExpression
+	queries
+		expa1 : /exp/#expr_pow[0];
+	mappings
+		operator = new astm::gastm::UnaryPlus;
+		operand = expa1;
+end_rule
+
+rule 'mapUnaryExpressionNegate'
+	from expr_sign{MINUS.exists} exp
+	to astm::gastm::UnaryExpression
+	queries
+		expa1 : /exp/#expr_pow[0];
+	mappings
+		operator = new astm::gastm::Negate;
+		operand = expa1;
+end_rule
+
+skip_rule 'skipToExprExpr'
+	from expr_pow{!EXPONENT.exists} exp
+	to astm::gastm::Expression
+	queries
+		s : /exp/#expr_expr;
+	do
+		skip s;
+end_rule
+
+rule 'mapBinaryExpressionPow'
+	from expr_pow{EXPONENT.exists} exp
+	to astm::gastm::BinaryExpression
+	queries
+		expa1 : /exp/#expr_expr[0];
+		expa2 : /exp/#expr_expr[1];
+	mappings
+		leftOperand = expa1;
+		operator = new astm::gastm::Exponent;
+		rightOperand = expa2;
+end_rule
+
+-- TODO
+rule 'createFormsVariableFromExpAdd'
+	from expr_expr/simple_expression{COLON.exists} ea
+	to astm::gastm::IdentifierReference
+	queries
+		se : /ea//#simple_expression/host_variable;
+	mappings
+		name = new astm::gastm::Name;
+		name.nameString = extractID se;
+end_rule
+
+skip_rule 'createFunctionCallFromExprAddFunctionExpr' 
+	from expr_expr/function_expression exp
+	to astm::gastm::Expression
+	queries
+		s     : /exp//function_expression/#function_call;		
+		block : //#plsql_block///expr_expr{this.check(exp)};
+		iden  : /s//#identifier;
+		dec   : /block//#declare_spec/variable_declaration/variable_name/identifier{ID.eq(iden.ID)};
+		cast1  : (variable_name) /s//#sql_identifier/identifier;	
+		cast2  : /s//#variable_name/identifier;	
+	do
+		if(dec.hasResults) then
+			if(cast1.hasResults) then
+				skip cast1;
+			else
+				skip cast2;
+			end_if
+		else 
+			skip s;
+		end_if
+end_rule
+
+rule 'mapStringLiteral' 
+	from expr_expr/simple_expression{QUOTED_STRING.exists} exp
+	to astm::gastm::StringLiteral
+	queries
+		st           : /exp//#simple_expression; 
+	mappings
+		value = extract st;
+end_rule
+
+rule 'mapNullLiteral' 
+	from expr_expr/simple_expression{TOKEN.exists} exp
+	to astm::gastm::StringLiteral
+	queries
+		st           : /exp//#simple_expression; 
+	mappings
+		value = extract st;
+end_rule
+
+rule 'mapIntegerLiteral' 
+	from expr_expr/simple_expression{NUMBER.exists} exp
+	to astm::gastm::IntegerLiteral
+	queries
+		st           : /exp//#simple_expression; 
+	mappings
+		value = extract st;
+end_rule
+
+rule 'createLiteralFromBooleanLiteral' 
+	from expr_expr/simple_expression/boolean_literal exp
+	to astm::gastm::BooleanExpression
+	queries
+	mappings
+		value = extract exp;
+end_rule
+
+skip_rule 'skipToExprBoolFromExprParen'
+	from expr_expr/expr_paren exp
+	to astm::gastm::Expression
+	queries
+		s : /exp//#expr_bool;
+	do
+		skip s;
+end_rule
+
+------------------------------------------------------------------------
+-- Function Call 
+------------------------------------------------------------------------
+
+rule 'mapFunctionCall'
+	from function_call  fc
+	to astm::gastm::FunctionCallExpression
+	queries
+		iden   : /fc/user_defined_function//#identifier;
+		params : /fc/call_parameters/#call_parameter;
+		exp    : /fc//#nested_expression;
+	mappings
+		calledFunction = new astm::gastm::IdentifierReference;
+		calledFunction.name = new astm::gastm::Name;
+		calledFunction.name.nameString = iden.ID;
+		actualParams = params; 
+end_rule
+
+rule 'mapActualParameter'
+	from call_parameter cp
+	to astm::gastm::ActualParameterExpression
+	queries
+		iden   : /cp/parameter_name/#identifier;
+		expA   : /cp//plsql_expression/#expr_bool;
+		expB   : /cp//sql_expression/#expr_add;
+	mappings
+		--name = iden.ID;
+		if(expA.hasResults) then
+			value = expA;
+		else
+			value = expB;
+		end_if
+end_rule
+
+------------------------------------------------------------------------
+-- Select Statement
+------------------------------------------------------------------------
+
+rule 'mapSelectExpression' 
+	from select_expression sexpr
+	to astm::sastm::RDBSelectExpression
+	queries
+		list    : /sexpr//#displayed_column;
+		isCount : /list//#keyCOUNT;
+		lvals   : /sexpr//lvalues/#lvalue;
+		fromn   : /sexpr/table_reference_list//#selected_table;
+		fromj   : /sexpr/#join_clause;
+		w       : /sexpr//where_clause/#sql_condition;
+	mappings
+		Column = list;
+		Where = w;
+		if(fromn.hasResults) then
+			Table = fromn;
+		else
+			Table = fromj;
+		end_if
+end_rule
+
+rule 'mapColumn'
+	from displayed_column dc
+	to astm::sastm::RDBColumnReference
+	queries
+	mappings
+		name = new astm::gastm::Name;
+		name.nameString = extractID dc;
+end_rule
+
+rule 'mapTable'
+	from selected_table st
+	to astm::sastm::RDBTableReference
+	queries
+	mappings
+		name = new astm::gastm::Name;
+		name.nameString = extractID st;
+end_rule
+
+
+------------------------------------------------------------------------
+-- Conditions 
+------------------------------------------------------------------------
+
+skip_rule 'skipToConditionOr'
+	from sql_condition c
+	to astm::gastm::Expression
+	queries
+		next : /c/#condition_or;
+	do
+		skip next;
+end_rule
+
+skip_rule 'skipConditionOr'
+	from condition_or{!TOKEN.exists} co
+	to astm::gastm::Expression
+	queries
+		next : /co/#condition_and;
+	do
+		skip next;
+end_rule
+
+rule 'mapConditionOr'
+	from condition_or{TOKEN.exists} co
+	to astm::gastm::BinaryExpression
+	queries
+		ex1 : /co/#condition_and[0];
+		ex2 : /co/#condition_and[1];
+	mappings
+		leftOperand = ex1;
+		operator = new astm::gastm::Or;
+		rightOperand = ex2;
+end_rule
+
+skip_rule 'skipConditionAnd'
+	from condition_and{!TOKEN.exists} ca
+	to astm::gastm::Expression
+	queries
+		next : /ca/#condition_not;
+	do
+		skip next;
+end_rule
+
+rule 'createConditionAnd'
+	from condition_and{TOKEN.exists} ca
+	to astm::gastm::BinaryExpression
+	queries
+		ex1 : /ca/#condition_not[0];
+		ex2 : /ca/#condition_not[1];
+	mappings
+		leftOperand = ex1;
+		operator = new astm::gastm::And;
+		rightOperand = ex2;
+end_rule
+
+skip_rule 'skipConditionNot'
+	from condition_not{!TOKEN.exists} cn
+	to astm::gastm::Expression
+	queries
+		next : /cn/#condition_expr;
+	do
+		skip next;
+end_rule
+
+rule 'createConditionNot'
+	from condition_not{TOKEN.exists} cn
+	to astm::gastm::UnaryExpression
+	queries
+		ex1 : /cn/#condition_expr[0];
+	mappings
+		operand = ex1;
+		operator = new astm::gastm::Not;
+end_rule
+
+
+rule 'createConditionComparison' 
+	from condition_expr/condition_comparison sc
+	to astm::gastm::BinaryExpression
+	queries
+		compar    : /sc//#condition_comparison;
+		exp1      : /compar/sql_expression[0]/#expr_add;
+		exp2      : /compar/sql_expression[1]/#expr_add;		
+		eqOp      : /#compar{EQ.exists};			
+		orOp      : /#compar{OR.exists};
+		lthOp     : /#compar{LTH.exists};
+		gthOp     : /#compar{GTH.exists};
+		notEqOp   : /#compar{NOT_EQ.exists};
+		leqOp     : /#compar{LEQ.exists};
+		geqOp     : /#compar{GEQ.exists};
+	mappings
+		leftOperand = exp1;
+		rightOperand = exp2;
+		if(eqOp.hasResults) then
+			operator = new astm::gastm::Equal;
+		else
+			if(orOp.hasResults) then
+				operator = new astm::gastm::Or;
+			else
+				if(lthOp.hasResults) then
+					operator = new astm::gastm::Less;
+				else
+					if(gthOp.hasResults) then
+						operator = new astm::gastm::Greater;
+					else
+						if(notEqOp.hasResults) then
+							operator = new astm::gastm::NotEqual;
+						else
+							if(leqOp.hasResults) then
+								operator = new astm::gastm::SpecificLessEqual;
+							else
+								if(geqOp.hasResults) then
+									operator = new astm::gastm::SpecificGreaterEqual;
+								end_if
+							end_if
+						end_if
+					end_if
+				end_if
+			end_if
+		end_if
+end_rule

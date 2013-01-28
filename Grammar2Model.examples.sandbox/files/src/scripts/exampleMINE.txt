@@ -1,0 +1,19 @@
+ARCHI_TYPE
+  a (void)
+  ARCHI_ELEM_TYPES 
+    ELEM_TYPE 
+      b (void)
+    BEHAVIOR 
+      aa (void ; void) = stop;
+    INPUT_INTERACTIONS
+      void
+    OUTPUT_INTERACTIONS
+      void
+  ARCHI_TOPOLOGY
+    ARCHI_ELEM_INSTANCES
+      c : d ();
+    ARCHI_INTERACTIONS
+      e . f
+    ARCHI_ATTACHMENTS
+      FROM e . f TO g . h
+END

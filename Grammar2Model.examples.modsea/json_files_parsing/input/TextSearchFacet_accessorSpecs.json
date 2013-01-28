@@ -1,0 +1,6 @@
+[
+    {   attributeName:  "expressions", cardinality:"-1"
+    },
+    {   attributeName:  "query"
+    }
+]

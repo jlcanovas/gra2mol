@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="metrics"
+    nsURI="http://modelums/metrics" nsPrefix="metrics">
+  <eClassifiers xsi:type="ecore:EClass" name="Measurement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="error" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueMeasurement" eSuperTypes="#//Measurement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkMeasurement" eSuperTypes="#//Measurement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" eType="ecore:EClass ../../Grammar2Model.KDM/model/kdm.ecore#//core/ModelElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexMeasurement" eSuperTypes="#//Measurement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="measurements" upperBound="-1"
+        eType="#//Measurement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Observation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="measurements" upperBound="-1"
+        eType="#//Measurement" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

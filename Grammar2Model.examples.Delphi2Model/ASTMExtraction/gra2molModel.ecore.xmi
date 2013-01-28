@@ -1,0 +1,1378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:Transformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules xsi:type="Core:StandardRule" name="mapProject">
+    <queries variable="fs">
+      <filter type="INDIRECT">
+        <element name="file" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="files">
+        <value type="QUERY_RESULT" value="fs"/>
+      </inits>
+    </inits>
+    <from name="CST" alias="c">
+      <filter variable="c">
+        <filter>
+          <element name="CST" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Project"/>
+  </rules>
+  <rules xsi:type="Core:MixinRule" name="myMixin">
+    <queries variable="intDecls">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="interfaceDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="impDecls">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="implementationSection"/>
+          <next type="INDIRECT">
+            <element name="declSection" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="language">
+        <value value="Delphi"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="fragments">
+        <value type="QUERY_RESULT" value="impDecls"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="locationInfo">
+        <value type="OPERATION_CREATION" value="astm::gastm::SourceLocation"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="locationInfo">
+        <extension>inSourceFile</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::SourceFile"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="locationInfo">
+        <extension>inSourceFile</extension>
+        <extension>pathName</extension>
+        <value type="QUERY_ACCESS" value="f" extension="path"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapFileFromUnit">
+    <queries variable="intDecls">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="interfaceDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="impDecls">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="implementationSection"/>
+          <next type="INDIRECT">
+            <element name="declSection" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="language">
+        <value value="Delphi"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="fragments">
+        <value type="QUERY_RESULT" value="impDecls"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="locationInfo">
+        <value type="OPERATION_CREATION" value="astm::gastm::SourceLocation"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="locationInfo">
+        <extension>inSourceFile</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::SourceFile"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="locationInfo">
+        <extension>inSourceFile</extension>
+        <extension>pathName</extension>
+        <value type="QUERY_ACCESS" value="f" extension="path"/>
+      </inits>
+    </inits>
+    <from name="file" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="file" mark="true"/>
+          <next type="INDIRECT">
+            <element name="unit"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::CompilationUnit"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipConstDecl" type="SKIP">
+    <queries variable="cdecl">
+      <filter>
+        <element name="id"/>
+        <next type="INDIRECT">
+          <element name="constantDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="cdecl"/>
+      </inits>
+    </inits>
+    <from name="interfaceDecl" alias="id">
+      <filter variable="id">
+        <filter>
+          <element name="interfaceDecl" mark="true"/>
+          <next type="INDIRECT">
+            <element name="constSection"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::VariableDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipTypeDecl" type="SKIP">
+    <queries variable="tdecl">
+      <filter>
+        <element name="td"/>
+        <next type="INDIRECT">
+          <element name="typeDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="tdecl"/>
+      </inits>
+    </inits>
+    <from name="interfaceDecl" alias="td">
+      <filter variable="td">
+        <filter>
+          <element name="interfaceDecl" mark="true"/>
+          <next type="INDIRECT">
+            <element name="typeSection"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::NamedTypeDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipProcedureSection" type="SKIP">
+    <queries variable="pdSect">
+      <filter>
+        <element name="ds"/>
+        <next>
+          <element name="procedureDeclSection" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="pdSect"/>
+      </inits>
+    </inits>
+    <from name="declSection" alias="ds">
+      <filter variable="ds">
+        <filter>
+          <element name="declSection" mark="true"/>
+          <next>
+            <element name="procedureDeclSection"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Definition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipVarSection" type="SKIP">
+    <queries variable="varSect">
+      <filter>
+        <element name="ds"/>
+        <next type="INDIRECT">
+          <element name="varDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="varSect"/>
+      </inits>
+    </inits>
+    <from name="declSection" alias="ds">
+      <filter variable="ds">
+        <filter>
+          <element name="declSection" mark="true"/>
+          <next>
+            <element name="varSection"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Definition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapProcedureOrFunction">
+    <queries variable="nElem">
+      <filter>
+        <element name="pd"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="ident" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="pElems">
+      <filter>
+        <element name="pd"/>
+        <next type="INDIRECT">
+          <element name="formalParameters"/>
+          <next>
+            <element name="formalParm" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="tElem">
+      <filter>
+        <element name="pd"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="bElem">
+      <filter>
+        <element name="pd"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="block" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="OPERATION_EXTRACTID" value="nElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="formalParameters">
+        <value type="QUERY_RESULT" value="pElems"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="body">
+          <value type="QUERY_RESULT" value="bElem"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="bElem"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="returnType">
+          <value type="QUERY_RESULT" value="tElem"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="tElem"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="procedureDeclSection" alias="pd">
+      <filter variable="pd">
+        <filter>
+          <element name="procedureDeclSection" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::FunctionDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipParameterDefinition" type="SKIP">
+    <queries variable="ids">
+      <filter>
+        <element name="fp"/>
+        <next type="INDIRECT">
+          <element name="identList"/>
+          <next>
+            <element name="ident" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="ids"/>
+      </inits>
+    </inits>
+    <from name="formalParm" alias="fp">
+      <filter variable="fp">
+        <filter>
+          <element name="formalParm" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::FormalParameterDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapParameterDefinition">
+    <queries variable="pDecl">
+      <filter type="INDIRECT">
+        <element name="formalParm" mark="true"/>
+        <next type="INDIRECT">
+          <element name="ident"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="fp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="pType">
+      <filter>
+        <element name="pDecl"/>
+        <next type="INDIRECT">
+          <element name="parameter"/>
+          <next>
+            <element name="type" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="fp"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitionType">
+        <value type="OPERATION_CREATION" value="astm::gastm::UnnamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="pType"/>
+      </inits>
+    </inits>
+    <from name="ident" alias="fp">
+      <filter variable="fp">
+        <filter>
+          <element name="ident" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <context>skipParameterDefinition</context>
+    <to name="astm::gastm::FormalParameterDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapConstDecl">
+    <queries variable="id">
+      <filter>
+        <element name="cd"/>
+        <next type="INDIRECT">
+          <element name="ident" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp">
+      <filter>
+        <element name="cd"/>
+        <next type="INDIRECT">
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="id"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="initialValue">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="isMutable">
+        <value value="false"/>
+      </inits>
+    </inits>
+    <from name="constantDecl" alias="cd">
+      <filter variable="cd">
+        <filter>
+          <element name="constantDecl" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::VariableDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipToCorrectType">
+    <queries variable="id">
+      <filter>
+        <element name="td"/>
+        <next>
+          <element name="ident" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="nType">
+      <filter>
+        <element name="td"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rType">
+      <filter>
+        <element name="td"/>
+        <next>
+          <element name="restrictedType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="id"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitionType">
+        <value type="OPERATION_CREATION" value="astm::gastm::NamedType"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="definitionType">
+          <extension>body</extension>
+          <value type="QUERY_RESULT" value="ntype"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="definitionType">
+              <extension>body</extension>
+              <value type="QUERY_RESULT" value="rType"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="rType"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="nType"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="typeDecl" alias="td">
+      <filter variable="td">
+        <filter>
+          <element name="typeDecl" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::NamedTypeDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapClassType">
+    <queries variable="flist">
+      <filter>
+        <element name="ct"/>
+        <next type="INDIRECT">
+          <element name="classFieldList"/>
+          <next>
+            <element name="classField" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="mlist">
+      <filter>
+        <element name="ct"/>
+        <next type="INDIRECT">
+          <element name="classMethodList"/>
+          <next>
+            <element name="classMethod" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="plist">
+      <filter>
+        <element name="ct"/>
+        <next type="INDIRECT">
+          <element name="classPropertyList"/>
+          <next>
+            <element name="classProperty" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="members">
+        <value type="QUERY_RESULT" value="flist"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="members">
+        <value type="QUERY_RESULT" value="mlist"/>
+      </inits>
+    </inits>
+    <from name="restrictedType" alias="ct">
+      <filter variable="ct">
+        <filter>
+          <element name="restrictedType" mark="true"/>
+          <next>
+            <element name="classType"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::ClassType"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapString" type="COPY">
+    <inits/>
+    <from name="type" alias="t">
+      <filter variable="t">
+        <filter>
+          <element name="type" mark="true"/>
+          <next>
+            <element name="stringType"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::String"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapInteger" type="COPY">
+    <inits/>
+    <from name="type" alias="t">
+      <filter variable="t">
+        <filter>
+          <element name="type" mark="true"/>
+          <next type="INDIRECT">
+            <element name="ordIdent"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="integer"/>
+            </expression>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Integer"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapClassVariable">
+    <queries variable="idList">
+      <filter>
+        <element name="cf"/>
+        <next type="INDIRECT">
+          <element name="identList" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeRef">
+      <filter>
+        <element name="cf"/>
+        <next type="INDIRECT">
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="idList"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <value type="OPERATION_CREATION" value="astm::gastm::UnnamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="typeRef"/>
+      </inits>
+    </inits>
+    <from name="classField" alias="cf">
+      <filter variable="cf">
+        <filter>
+          <element name="classField" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::VariableDeclaration"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapFunctionOrProcedure">
+    <queries variable="idName">
+      <filter>
+        <element name="cm"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="ident" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="params">
+      <filter>
+        <element name="cm"/>
+        <next type="INDIRECT">
+          <element name="formalParameters"/>
+          <next>
+            <element name="formalParm" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="reType">
+      <filter>
+        <element name="cm"/>
+        <next type="INDIRECT">
+          <element name="functionHeading"/>
+          <next>
+            <element name="type" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="idName"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="formalParameters">
+        <value type="QUERY_RESULT" value="params"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="returnType">
+          <value type="OPERATION_CREATION" value="astm::gastm::UnnamedTypeReference"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="returnType">
+          <extension>type</extension>
+          <value type="QUERY_RESULT" value="reType"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="reType"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="classMethod" alias="cm">
+      <filter variable="cm">
+        <filter>
+          <element name="classMethod" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::FunctionDeclaration"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipParameter" type="SKIP">
+    <queries variable="ids">
+      <filter>
+        <element name="fp"/>
+        <next type="INDIRECT">
+          <element name="identList"/>
+          <next>
+            <element name="ident" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="ids"/>
+      </inits>
+    </inits>
+    <from name="formalParm" alias="fp">
+      <filter variable="fp">
+        <filter>
+          <element name="formalParm" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::FormalParameterDeclaration"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapParameter" type="COPY">
+    <queries variable="pDecl">
+      <filter type="INDIRECT">
+        <element name="formalParm" mark="true"/>
+        <next type="INDIRECT">
+          <element name="ident"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="fp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="pType">
+      <filter>
+        <element name="pDecl"/>
+        <next type="INDIRECT">
+          <element name="parameter"/>
+          <next>
+            <element name="type" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="fp"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <value type="OPERATION_CREATION" value="astm::gastm::UnnamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="declarationType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="pType"/>
+      </inits>
+    </inits>
+    <from name="ident" alias="fp">
+      <filter variable="fp">
+        <filter>
+          <element name="ident" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <context>skipParameter</context>
+    <to name="astm::gastm::FormalParameterDeclaration"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapVariable">
+    <queries variable="iElem">
+      <filter>
+        <element name="vd"/>
+        <next>
+          <element name="identList" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="tElem">
+      <filter>
+        <element name="vd"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="iElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitionType">
+        <value type="QUERY_RESULT" value="tElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="isMutable">
+        <value value="true"/>
+      </inits>
+    </inits>
+    <from name="varDecl" alias="vd">
+      <filter variable="vd">
+        <filter>
+          <element name="varDecl" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::VariableDefinition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapBlock">
+    <queries variable="vars">
+      <filter>
+        <element name="b"/>
+        <next type="INDIRECT">
+          <element name="varSection" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="stats">
+      <filter>
+        <element name="b"/>
+        <next>
+          <element name="compoundStmt"/>
+          <next type="INDIRECT">
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="subStatements">
+        <value type="QUERY_RESULT" value="vars"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="subStatements">
+        <value type="QUERY_RESULT" value="stats"/>
+      </inits>
+    </inits>
+    <from name="block" alias="b">
+      <filter variable="b">
+        <filter>
+          <element name="block" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::BlockStatement"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapVarSection" type="SKIP">
+    <queries variable="decls">
+      <filter>
+        <element name="vb"/>
+        <next type="INDIRECT">
+          <element name="varDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="decls"/>
+      </inits>
+    </inits>
+    <from name="varSection" alias="vb">
+      <filter variable="vb">
+        <filter>
+          <element name="varSection" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Statement"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapVarSection">
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="declOrDefn">
+        <value type="QUERY_RESULT" value="vd"/>
+      </inits>
+    </inits>
+    <from name="varDecl" alias="vd">
+      <filter variable="vd">
+        <filter>
+          <element name="varDecl" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::DeclarationOrDefinitionStatement"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipCorrectStatement" type="SKIP">
+    <queries variable="existsSimple">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="simpleStatement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="existsStruct">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="structStmt" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="SKIP">
+          <value type="SKIP" value="existsSimple"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="existsStruct"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="existsSimple"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="statement" alias="st">
+      <filter variable="st">
+        <filter>
+          <element name="statement" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Statement"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapAssignment">
+    <queries variable="lElem">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="designator" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rElem">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <value type="OPERATION_CREATION" value="astm::gastm::BinaryExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>leftOperand</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>leftOperand</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>leftOperand</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="lElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>leftOperand</extension>
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="lElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>operator</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::Assign"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>rightOperand</extension>
+        <value type="QUERY_RESULT" value="rElem"/>
+      </inits>
+    </inits>
+    <from name="simpleStatement" alias="st">
+      <filter variable="st">
+        <filter>
+          <element name="simpleStatement" mark="true"/>
+          <next>
+            <element name="expression"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::ExpressionStatement"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="locateVar" type="SKIP">
+    <queries variable="id">
+      <filter>
+        <element name="d"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="ident" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVar">
+      <filter type="INDIRECT">
+        <element name="varDecl" mark="true"/>
+        <next type="INDIRECT">
+          <element name="identList"/>
+          <next>
+            <element name="ident"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="ID"/>
+              <parameters value="id" valuePosition="0" extension="ID" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="locVar"/>
+      </inits>
+    </inits>
+    <from name="designator" alias="d">
+      <filter variable="d">
+        <filter>
+          <element name="designator" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Definition"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapCallFunction">
+    <queries variable="nElem">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="ident" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locFunction">
+      <filter type="INDIRECT">
+        <element name="procedureDeclSection" mark="true"/>
+        <next type="INDIRECT">
+          <element name="ident"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="nElem" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="eElem">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <value type="OPERATION_CREATION" value="astm::gastm::FunctionCallExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>calledFunction</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>calledFunction</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>calledFunction</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="nElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <extension>calledFunction</extension>
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="locFunction"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="expression">
+          <extension>actualParams</extension>
+          <value type="QUERY_RESULT" value="eElem"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="eElem"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="simpleStatement" alias="st">
+      <filter variable="st">
+        <filter>
+          <element name="simpleStatement" mark="true"/>
+          <next>
+            <element name="exprList"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::ExpressionStatement"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapArgument">
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+    </inits>
+    <from name="expression" alias="exp">
+      <filter variable="exp">
+        <filter>
+          <element name="expression" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::ActualParameterExpression"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipRelOp" type="SKIP">
+    <queries variable="existsRelOp">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="relOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="nextNode">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="simpleExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="SKIP">
+          <value type="SKIP" value="existRelOp"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="nextNode"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="existsRelOp"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="expression" alias="exp">
+      <filter variable="exp">
+        <filter>
+          <element name="expression" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipAddOp" type="SKIP">
+    <queries variable="existsAddOp">
+      <filter>
+        <element name="se"/>
+        <next operation="POSITION">
+          <element name="addOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="nextNode">
+      <filter>
+        <element name="se"/>
+        <next>
+          <element name="term" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="SKIP">
+          <value type="SKIP" value="existsAddOp"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="nextNode"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="existsAddOp"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="simpleExpression" alias="se">
+      <filter variable="se">
+        <filter>
+          <element name="simpleExpression" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="skipMulOp" type="SKIP">
+    <queries variable="existsMulOp">
+      <filter>
+        <element name="t"/>
+        <next operation="POSITION">
+          <element name="mulOp" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="nextNode2">
+      <filter>
+        <element name="t"/>
+        <next>
+          <element name="factor" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="SKIP">
+          <value type="SKIP" value="existsMulOp"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="nextNode2"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="existsMulOp"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="term" alias="t">
+      <filter variable="t">
+        <filter>
+          <element name="term" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::Expression"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapNumber">
+    <queries variable="nVal">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="number" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="OPERATION_CODE" value="nVal"/>
+      </inits>
+    </inits>
+    <from name="factor" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="factor" mark="true"/>
+          <next>
+            <element name="number"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::IntegerLiteral"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapString">
+    <queries variable="sVal">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="string" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="OPERATION_CODE" value="sVal"/>
+      </inits>
+    </inits>
+    <from name="factor" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="factor" mark="true"/>
+          <next>
+            <element name="string"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::StringLiteral"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapFunctionCall">
+    <queries variable="nElem">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="ident" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locFunction">
+      <filter type="INDIRECT">
+        <element name="procedureDeclSection" mark="true"/>
+        <next type="INDIRECT">
+          <element name="ident"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="ID"/>
+            <parameters value="nElem" valuePosition="0" extension="ID" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="eElem">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <value type="OPERATION_CREATION" value="astm::gastm::IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="nElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="actualParams">
+          <value type="QUERY_RESULT" value="eElem"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="eElem"/>
+        </expression>
+      </inits>
+    </inits>
+    <from name="factor" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="factor" mark="true"/>
+          <next>
+            <element name="exprList"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::FunctionCallExpression"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="mapVariableRef">
+    <queries variable="nElem">
+      <filter>
+        <element name="f"/>
+        <next>
+          <element name="designator"/>
+          <next type="INDIRECT">
+            <element name="ident" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="dElem">
+      <filter>
+        <element name="f"/>
+        <next>
+          <element name="designator" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="astm::gastm::Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="OPERATION_CODE" value="nElem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="refersTo">
+        <value type="QUERY_RESULT" value="dElem"/>
+      </inits>
+    </inits>
+    <from name="factor" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="factor" mark="true"/>
+          <next>
+            <element name="designator"/>
+          </next>
+        </filter>
+      </filter>
+    </from>
+    <to name="astm::gastm::IdentifierReference"/>
+  </rules>
+</Core:Transformation>

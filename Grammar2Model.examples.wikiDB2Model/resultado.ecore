@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<wiki:Wiki xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:wiki="http://www.modelum.es/gra2mol/wiki" title="modelum_onekin">
+  <graphIndex name="IndexGraph" noderefs="//@nodes.5 //@nodes.22" edgerefs="//@edges.10 //@edges.23"/>
+  <graphCategories name="CategoryGraph" noderefs="//@nodes.10 //@nodes.12 //@nodes.13 //@nodes.14 //@nodes.16 //@nodes.18 //@nodes.20 //@nodes.24 //@nodes.25 //@nodes.28 //@nodes.29 //@nodes.30 //@nodes.32" edgerefs="//@edges.3 //@edges.4 //@edges.5 //@edges.6 //@edges.7 //@edges.12 //@edges.13 //@edges.14 //@edges.15 //@edges.16 //@edges.18"/>
+  <graphArticles name="ArticleGraph" noderefs="//@nodes.4 //@nodes.6 //@nodes.11 //@nodes.15 //@nodes.21 //@nodes.22 //@nodes.23 //@nodes.31"/>
+  <graphClassification name="ClassificationGraph" noderefs="//@nodes.17 //@nodes.19 //@nodes.10 //@nodes.12 //@nodes.13 //@nodes.14 //@nodes.16 //@nodes.18 //@nodes.20 //@nodes.24 //@nodes.25 //@nodes.28 //@nodes.29 //@nodes.30 //@nodes.32 //@nodes.4 //@nodes.6 //@nodes.11 //@nodes.15 //@nodes.21 //@nodes.22 //@nodes.23 //@nodes.31" edgerefs="//@edges.0 //@edges.1 //@edges.2 //@edges.3 //@edges.4 //@edges.5 //@edges.6 //@edges.7 //@edges.8 //@edges.9 //@edges.10 //@edges.11 //@edges.12 //@edges.13 //@edges.14 //@edges.15 //@edges.16 //@edges.17 //@edges.18 //@edges.19 //@edges.20 //@edges.21 //@edges.22 //@edges.23 //@edges.24 //@edges.25"/>
+  <nodes title="Administrador" node_namespace="2" type="User"/>
+  <nodes title="Onekin" node_namespace="2" type="User"/>
+  <nodes title="Modelum" node_namespace="2" type="User"/>
+  <nodes title="Gorka" node_namespace="2" type="User"/>
+  <nodes title="Main_Page" editions="1" node_id="1" visits="14" type="Article" lastRevision="//@revisions.0" revisions="//@revisions.0"/>
+  <nodes title="Sidebar" editions="4" node_id="2" visits="7" node_namespace="8" type="Index" lastRevision="//@revisions.4" revisions="//@revisions.1 //@revisions.2 //@revisions.3 //@revisions.4"/>
+  <nodes title="09Database2Model" editions="5" node_id="3" visits="11" type="Article" lastRevision="//@revisions.9" revisions="//@revisions.5 //@revisions.6 //@revisions.7 //@revisions.8 //@revisions.9"/>
+  <nodes title="Database2model.png" editions="1" node_id="4" visits="1" node_namespace="6" type="Image" lastRevision="//@revisions.10" revisions="//@revisions.10"/>
+  <nodes title="Schema.png" editions="1" node_id="5" visits="1" node_namespace="6" type="Image" lastRevision="//@revisions.11" revisions="//@revisions.11"/>
+  <nodes title="Graph.png" editions="1" node_id="6" visits="1" node_namespace="6" type="Image" lastRevision="//@revisions.12" revisions="//@revisions.12"/>
+  <nodes title="Collaborations" editions="1" node_id="7" visits="1" node_namespace="14" type="Category" lastRevision="//@revisions.13" revisions="//@revisions.13"/>
+  <nodes title="Article" editions="1" node_id="9" visits="3" type="Article" lastRevision="//@revisions.14" revisions="//@revisions.14"/>
+  <nodes title="Ruby" editions="2" node_id="10" visits="6" node_namespace="14" type="Category" lastRevision="//@revisions.16" revisions="//@revisions.15 //@revisions.16"/>
+  <nodes title="RubyTL" editions="1" node_id="11" visits="7" node_namespace="14" type="Category" lastRevision="//@revisions.17" revisions="//@revisions.17"/>
+  <nodes title="IDE" editions="1" node_id="12" visits="4" node_namespace="14" type="Category" lastRevision="//@revisions.18" revisions="//@revisions.18"/>
+  <nodes title="AGE" editions="1" node_id="13" visits="4" type="Article" lastRevision="//@revisions.19" revisions="//@revisions.19"/>
+  <nodes title="RubyTL_IDE" editions="1" node_id="14" visits="4" node_namespace="14" type="Category" lastRevision="//@revisions.20" revisions="//@revisions.20"/>
+  <nodes title="Uncategorized" editions="1" node_id="15" visits="2" node_namespace="10" type="Template" lastRevision="//@revisions.21" revisions="//@revisions.21"/>
+  <nodes title="Uncategorized" editions="1" node_id="16" visits="3" node_namespace="14" type="Category" lastRevision="//@revisions.22" revisions="//@revisions.22"/>
+  <nodes title="CategoriesForDeletion" editions="1" node_id="17" visits="1" node_namespace="10" type="Template" lastRevision="//@revisions.23" revisions="//@revisions.23"/>
+  <nodes title="CategoriesForDeletion" editions="1" node_id="18" visits="6" node_namespace="14" type="Category" lastRevision="//@revisions.24" revisions="//@revisions.24"/>
+  <nodes title="Onekin" editions="6" node_id="19" visits="6" type="Article" lastRevision="//@revisions.30" revisions="//@revisions.25 //@revisions.26 //@revisions.27 //@revisions.28 //@revisions.29 //@revisions.30"/>
+  <nodes title="UsersIndex" editions="1" node_id="20" visits="3" type="Article" lastRevision="//@revisions.31" revisions="//@revisions.31"/>
+  <nodes title="Modelum" editions="1" node_id="21" visits="2" type="Article" lastRevision="//@revisions.32" revisions="//@revisions.32"/>
+  <nodes title="Research" editions="1" node_id="22" visits="1" node_namespace="14" type="Category" lastRevision="//@revisions.33" revisions="//@revisions.33"/>
+  <nodes title="Tools" editions="1" node_id="23" visits="4" node_namespace="14" type="Category" lastRevision="//@revisions.34" revisions="//@revisions.34"/>
+  <nodes title="CategoriesForDeletion.png" editions="1" node_id="24" visits="1" node_namespace="6" type="Image" lastRevision="//@revisions.35" revisions="//@revisions.35"/>
+  <nodes title="Uncategorized.png" editions="1" node_id="25" visits="1" node_namespace="6" type="Image" lastRevision="//@revisions.36" revisions="//@revisions.36"/>
+  <nodes title="Java" editions="1" node_id="26" visits="5" node_namespace="14" type="Category" lastRevision="//@revisions.37" revisions="//@revisions.37"/>
+  <nodes title="J2EE" editions="3" node_id="27" visits="7" node_namespace="14" type="Category" lastRevision="//@revisions.40" revisions="//@revisions.38 //@revisions.39 //@revisions.40"/>
+  <nodes title="Eclipse" editions="3" node_id="28" visits="6" node_namespace="14" type="Category" lastRevision="//@revisions.43" revisions="//@revisions.41 //@revisions.42 //@revisions.43"/>
+  <nodes title="Ganymede" editions="1" node_id="29" visits="3" type="Article" lastRevision="//@revisions.44" revisions="//@revisions.44"/>
+  <nodes title="J2EE_Eclipse" editions="2" node_id="31" visits="2" node_namespace="14" type="Category" lastRevision="//@revisions.46" revisions="//@revisions.45 //@revisions.46"/>
+  <edges type="belongsTo" to="//@nodes.18" from="//@nodes.4"/>
+  <edges type="belongsTo" to="//@nodes.10" from="//@nodes.6"/>
+  <edges type="belongsTo" to="//@nodes.18" from="//@nodes.11"/>
+  <edges type="belongsTo" to="//@nodes.25" from="//@nodes.12"/>
+  <edges type="belongsTo" to="//@nodes.20" from="//@nodes.13"/>
+  <edges type="belongsTo" to="//@nodes.12" from="//@nodes.13"/>
+  <edges type="belongsTo" to="//@nodes.20" from="//@nodes.14"/>
+  <edges type="belongsTo" to="//@nodes.13" from="//@nodes.14"/>
+  <edges type="belongsTo" to="//@nodes.16" from="//@nodes.15"/>
+  <edges type="belongsTo" to="//@nodes.24" from="//@nodes.21"/>
+  <edges type="belongsTo" to="//@nodes.18" from="//@nodes.22"/>
+  <edges type="belongsTo" to="//@nodes.24" from="//@nodes.23"/>
+  <edges type="belongsTo" to="//@nodes.25" from="//@nodes.28"/>
+  <edges type="belongsTo" to="//@nodes.20" from="//@nodes.29"/>
+  <edges type="belongsTo" to="//@nodes.28" from="//@nodes.29"/>
+  <edges type="belongsTo" to="//@nodes.20" from="//@nodes.30"/>
+  <edges type="belongsTo" to="//@nodes.29" from="//@nodes.30"/>
+  <edges type="belongsTo" to="//@nodes.32" from="//@nodes.31"/>
+  <edges type="belongsTo" to="//@nodes.28" from="//@nodes.32"/>
+  <edges type="templatedBy" to="//@nodes.17" from="//@nodes.4"/>
+  <edges type="templatedBy" to="//@nodes.17" from="//@nodes.11"/>
+  <edges type="templatedBy" to="//@nodes.19" from="//@nodes.13"/>
+  <edges type="templatedBy" to="//@nodes.19" from="//@nodes.14"/>
+  <edges type="templatedBy" to="//@nodes.17" from="//@nodes.22"/>
+  <edges type="templatedBy" to="//@nodes.19" from="//@nodes.29"/>
+  <edges type="templatedBy" to="//@nodes.19" from="//@nodes.30"/>
+  <revisions user="MediaWiki default" date="20090406134856" text_id="1" node="//@nodes.4"/>
+  <revisions user="Administrador" date="20090406135255" text_id="2" node="//@nodes.5"/>
+  <revisions user="Administrador" date="20090406153711" text_id="14" node="//@nodes.5"/>
+  <revisions user="Administrador" date="20090407141704" text_id="29" node="//@nodes.5"/>
+  <revisions user="Administrador" date="20090407141836" text_id="31" node="//@nodes.5"/>
+  <revisions user="Administrador" date="20090406135502" text_id="3" node="//@nodes.6"/>
+  <revisions user="Administrador" date="20090406141311" text_id="7" node="//@nodes.6"/>
+  <revisions user="Administrador" date="20090406143734" text_id="9" node="//@nodes.6"/>
+  <revisions user="Administrador" date="20090406144105" text_id="10" node="//@nodes.6"/>
+  <revisions user="Gorka" date="20090408100056" text_id="49" node="//@nodes.6"/>
+  <revisions user="Administrador" date="20090406141157" text_id="4" node="//@nodes.7"/>
+  <revisions user="Administrador" date="20090406141214" text_id="5" node="//@nodes.8"/>
+  <revisions user="Administrador" date="20090406141221" text_id="6" node="//@nodes.9"/>
+  <revisions user="Administrador" date="20090406141433" text_id="8" node="//@nodes.10"/>
+  <revisions user="Administrador" date="20090407091850" text_id="15" node="//@nodes.11"/>
+  <revisions user="Administrador" date="20090407093534" text_id="16" node="//@nodes.12"/>
+  <revisions user="Modelum" date="20090407142806" text_id="36" node="//@nodes.12"/>
+  <revisions user="Administrador" date="20090407093600" text_id="17" node="//@nodes.13"/>
+  <revisions user="Administrador" date="20090407093626" text_id="18" node="//@nodes.14"/>
+  <revisions user="Administrador" date="20090407093648" text_id="19" node="//@nodes.15"/>
+  <revisions user="Administrador" date="20090407114043" text_id="20" node="//@nodes.16"/>
+  <revisions user="Administrador" date="20090407114043" text_id="21" node="//@nodes.17"/>
+  <revisions user="Administrador" date="20090407114043" text_id="22" node="//@nodes.18"/>
+  <revisions user="Administrador" date="20090407114043" text_id="23" node="//@nodes.19"/>
+  <revisions user="Administrador" date="20090407114043" text_id="24" node="//@nodes.20"/>
+  <revisions user="Onekin" date="20090407094729" text_id="25" node="//@nodes.21"/>
+  <revisions user="Administrador" date="20090407122121" text_id="25" node="//@nodes.21"/>
+  <revisions user="Administrador" date="20090407122121" text_id="26" node="//@nodes.21"/>
+  <revisions user="Administrador" date="20090407103923" text_id="27" node="//@nodes.21"/>
+  <revisions user="Administrador" date="20090407103936" text_id="28" node="//@nodes.21"/>
+  <revisions user="Modelum" date="20090407142535" text_id="33" node="//@nodes.21"/>
+  <revisions user="Administrador" date="20090407161724" text_id="30" node="//@nodes.22"/>
+  <revisions user="Modelum" date="20090407142420" text_id="32" node="//@nodes.23"/>
+  <revisions user="Modelum" date="20090407142606" text_id="34" node="//@nodes.24"/>
+  <revisions user="Modelum" date="20090407142745" text_id="35" node="//@nodes.25"/>
+  <revisions user="Modelum" date="20090407142842" text_id="37" node="//@nodes.26"/>
+  <revisions user="Modelum" date="20090407142854" text_id="38" node="//@nodes.27"/>
+  <revisions user="Onekin" date="20090407152844" text_id="39" node="//@nodes.28"/>
+  <revisions user="Onekin" date="20090407153121" text_id="40" node="//@nodes.29"/>
+  <revisions user="Onekin" date="20090407155315" text_id="45" node="//@nodes.29"/>
+  <revisions user="127.0.0.1" date="20090407155439" text_id="47" node="//@nodes.29"/>
+  <revisions user="Onekin" date="20090407153344" text_id="41" node="//@nodes.30"/>
+  <revisions user="Onekin" date="20090407155300" text_id="44" node="//@nodes.30"/>
+  <revisions user="127.0.0.1" date="20090407155426" text_id="46" node="//@nodes.30"/>
+  <revisions user="Onekin" date="20090407153433" text_id="42" node="//@nodes.31"/>
+  <revisions user="Administrador" date="20090408113245" text_id="48" node="//@nodes.32"/>
+  <revisions user="Administrador" date="20090408113246" text_id="48" node="//@nodes.32"/>
+</wiki:Wiki>

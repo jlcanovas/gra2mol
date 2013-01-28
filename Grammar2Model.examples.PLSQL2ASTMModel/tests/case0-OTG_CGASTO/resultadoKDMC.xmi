@@ -1,0 +1,1261 @@
+<kdm:Segment xmlns:code='http://www.eclipse.org/MoDisco/kdm/code' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.eclipse.org/MoDisco/kdm/source ../../../Grammar2Model.KDM/model/kdm.ecore#//source http://www.eclipse.org/MoDisco/kdm/action ../../../Grammar2Model.KDM/model/kdm.ecore#//action http://www.eclipse.org/MoDisco/kdm/data ../../../Grammar2Model.KDM/model/kdm.ecore#//data http://www.eclipse.org/MoDisco/kdm/kdm ../../../Grammar2Model.KDM/model/kdm.ecore#//kdm http://www.eclipse.org/MoDisco/kdm/code ../../../Grammar2Model.KDM/model/kdm.ecore#//code' xmlns:action='http://www.eclipse.org/MoDisco/kdm/action' xmi:version='2.0' xmlns:xmi='http://www.omg.org/XMI' xmlns:kdm='http://www.eclipse.org/MoDisco/kdm/kdm' xmlns:source='http://www.eclipse.org/MoDisco/kdm/source' xmlns:data='http://www.eclipse.org/MoDisco/kdm/data'>
+<model name='DDL Datatypes' xsi:type='code:CodeModel'>
+<codeElement name='SQL Datatypes' xsi:type='code:LanguageUnit'>
+<codeElement xsi:type='code:BooleanType'/>
+<codeElement name='sql varchar' xsi:type='code:StringType'/>
+<codeElement name='sql int' xsi:type='code:IntegerType'/>
+<codeElement name='sql decimal' xsi:type='code:DecimalType'/>
+<codeElement name='sql date' xsi:type='code:DateType'/>
+</codeElement>
+</model>
+<model name='Triggers' xsi:type='code:CodeModel'>
+<codeElement xsi:type='code:CompilationUnit'>
+<codeElement name='KEY-LISTVAL' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.36'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-MOUSE-DOUBLECLICK' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.23'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.80'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;TEXT ITEM&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.45'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.48'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.77'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;TRUE&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.65'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.3'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.77'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;DATE&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-NEW-ITEM-INSTANCE' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.6'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='POST-TEXT-ITEM' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.46'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.62'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.77'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.4'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.66'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.77'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='PRE-FORM' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='assign' kind='assign' xsi:type='action:ActionElement'>
+<codeElement name='NULL ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.76'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='assign' kind='assign' xsi:type='action:ActionElement'>
+<codeElement name='&apos;FALSE&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.1/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.72'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='assign' kind='assign' xsi:type='action:ActionElement'>
+<codeElement name='&apos;N&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.2/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.73'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.2/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.4/@codeElement.2/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-NEW-FORM-INSTANCE' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.58'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.5/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.20'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='PRE-QUERY' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.75'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='null' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='assign' kind='assign' xsi:type='action:ActionElement'>
+<codeElement name='NULL ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.75'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='KEY-HELP' kind='stored' xsi:type='code:CallableUnit'/>
+<codeElement name='KEY-MENU' kind='stored' xsi:type='code:CallableUnit'/>
+<codeElement name='ON-ERROR' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.8'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='Range Expression' kind='Range Expression' xsi:type='action:ActionElement'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.24'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='assign' kind='assign' xsi:type='action:ActionElement'>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.13'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.4'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.5'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.79'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.9/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='KEY-EXEQRY' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.33'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.32'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.77'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.44'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.22'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.77'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.10/@codeElement.2/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.35'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='KEY-ENTQRY' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.11/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.10'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='KEY-EXIT' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.71'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;ENTER-QUERY&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.57'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.31'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-VALIDATE-ITEM' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='UnaryExpression' kind='UnaryExpression' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.41'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.13/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.13/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='POST-CHANGE' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='select' kind='select' xsi:type='action:ActionElement'>
+<codeElement name='selectWhere' kind='selectWhere' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.5'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.69'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.14/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.74'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-VALIDATE-ITEM' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='UnaryExpression' kind='UnaryExpression' xsi:type='action:ActionElement'/>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.14'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.15/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.15/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-NEW-ITEM-INSTANCE' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='select' kind='select' xsi:type='action:ActionElement'>
+<codeElement name='selectWhere' kind='selectWhere' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.17'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;CA&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.52'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.68'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.81'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.16/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.29'/>
+</codeElement>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-NEW-ITEM-INSTANCE' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='select' kind='select' xsi:type='action:ActionElement'>
+<codeElement name='selectWhere' kind='selectWhere' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.55'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;OB&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.54'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.83'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.81'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.17/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.27'/>
+</codeElement>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-NEW-ITEM-INSTANCE' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='select' kind='select' xsi:type='action:ActionElement'>
+<codeElement name='selectWhere' kind='selectWhere' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.26'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;TI&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.18'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.82'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.81'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.18/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.61'/>
+</codeElement>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-NEW-ITEM-INSTANCE' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='select' kind='select' xsi:type='action:ActionElement'>
+<codeElement name='selectWhere' kind='selectWhere' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.42'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;OR&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.49'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.78'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.81'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.19/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.59'/>
+</codeElement>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.37'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.15'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.2'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.3'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.40'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.20/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.19'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.50'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.2'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.3'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.56'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.21/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-CHECKBOX-CHANGED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.73'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;S&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.7'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.16'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.3'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.30'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.12'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.2'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.3'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.43'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.1/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.22/@codeElement.2/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.1'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.23/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.63'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.23/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.23/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.24/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.25'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.24/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.24/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.71'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;ENTER-QUERY&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.9'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.26/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.53'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.26/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.26/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.27/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.51'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.28/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.67'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.29/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.47'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.29/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.29/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='assign' kind='assign' xsi:type='action:ActionElement'>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.11'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.2'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.4'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.5'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.3/@codeElement.79'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.28'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'/>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.64'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.30/@codeElement.0/@codeElement.1/@codeElement.2'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='WHEN-BUTTON-PRESSED' kind='stored' xsi:type='code:CallableUnit'>
+<codeElement name='block' kind='block' xsi:type='action:ActionElement'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<codeElement name='NameReference' kind='NameReference' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0' xsi:type='action:Reads' to='#//@model.3/@codeElement.70'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='&apos;CHANGED&apos; ' xsi:type='code:Value'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.60'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='if' kind='if' xsi:type='action:ActionElement'>
+<codeElement name='condition' xsi:type='action:ActionElement'>
+<codeElement name='BinaryExpression' kind='BinaryExpression' xsi:type='action:ActionElement'>
+<codeElement name='auxLeft' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='leftAction' kind='leftAction' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.1' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+</codeElement>
+<codeElement name='auxRight' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='rightAction' kind='rightAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.39'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.3' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<codeElement name='falseFlow' kind='falseFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<codeElement name='funcAction' kind='funcAction' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.21'/>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0' xsi:type='action:Writes' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1'/>
+</codeElement>
+<codeElement name='auxFunc' kind='global' xsi:type='code:StorableUnit'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.34'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0' xsi:type='action:Reads' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<codeElement name='trueFlow' kind='trueFlow' xsi:type='action:ActionElement'>
+<codeElement name='expression' kind='expression' xsi:type='action:ActionElement'>
+<codeElement name='FunctionCall' xsi:type='action:ActionElement'>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0' xsi:type='action:Calls' to='#//@model.3/@codeElement.38'/>
+</codeElement>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0' xsi:type='action:FalseFlow' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.1'/>
+<actionRelation from='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0' xsi:type='action:TrueFlow' to='#//@model.1/@codeElement.0/@codeElement.31/@codeElement.0/@codeElement.0/@codeElement.2'/>
+</codeElement>
+</codeElement>
+</codeElement>
+</codeElement>
+</model>
+<model name='Triggers Datatypes' xsi:type='code:CodeModel'>
+<codeElement name='Basic Datatypes' xsi:type='code:LanguageUnit'>
+<codeElement xsi:type='code:BooleanType'/>
+<codeElement xsi:type='code:StringType'/>
+</codeElement>
+</model>
+<model name='Non located elements' xsi:type='code:CodeModel'>
+<codeElement name='EXECUTE_TRIGGER' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='execute_query' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='ITEM_TYPE' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='GET_ITEM_PROPERTY' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='VISUAL_ATTRIBUTE' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='CEG_CODIGO' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='LISTA_VALORES' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='default_where' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='ERROR_CODE' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='activa_consulta' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='alerta' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='set_block_property' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='alerta' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='message' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='SET_BLOCK_PROPERTY' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='set_block_property' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_tipo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_codigo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='ORDER_BY' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='execute_query' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='NO_COMMIT' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='set_item_property' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='GET_ITEM_PROPERTY' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='message' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_tipo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='message' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='ALERT_BUTTON1' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='message' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='default_where' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cancela_consulta' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='set_item_property' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='CURRENT_RECORD_ATTRIBUTE' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='exit_form' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='ejecuta_consulta' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='LIST_VALUES' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='ORDER_BY' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='exit_form' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='ALERT_BUTTON2' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='message' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_tipo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='go_block' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='VISUAL_ATTRIBUTE' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='LIST' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='CURRENT_RECORD_ATTRIBUTE' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='GET_ITEM_PROPERTY' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_codigo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='SET_BLOCK_PROPERTY' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='previous_record' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_codigo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_codigo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='cgt_tipo' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='exit_form' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='P_CENTRAR_VENTANA' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='message' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='exit_form' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='message' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='set_item_property' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='do_key' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='DATATYPE' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='set_item_property' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name='next_record' kind='method' xsi:type='code:MethodUnit' export='public'/>
+<codeElement name=':cga_campo' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':CGA_CG' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':SYSTEM.FORM_STATUS' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':system.mode' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':global.query' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':ver' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':WCGA_CG' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':PARAMETER.CG' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':global.item' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':SYSTEM.CURSOR_ITEM' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':cga_orig' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='r' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':SYSTEM.MOUSE_ITEM' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name='descrip' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':cga_tipo' kind='global' xsi:type='code:StorableUnit'/>
+<codeElement name=':cga_objet' kind='global' xsi:type='code:StorableUnit'/>
+</model>
+<model name='Relational Schema' xsi:type='data:DataModel'>
+<dataElement xsi:type='data:RelationalSchema'>
+<dataElement name='OTG_ACTIVIDADES' xsi:type='data:RelationalTable'>
+<itemUnit name='ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_CODIGOOTRI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_DESCRIPCION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_DESTINATARIO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_OBJETIVOS' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_CONDICIONES' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_FINANCIACION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_TIPOSOLI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_MODALIDADES' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_DEDICA' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='ACT_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.0/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.0/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.6/@dataElement.0'/>
+</dataElement>
+<dataElement name='ACT_CODIGOOTRI' xsi:type='data:UniqueKey'/>
+</dataElement>
+<dataElement name='OTG_MODALIDADES' xsi:type='data:RelationalTable'>
+<itemUnit name='MOD_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_CODIGOOTRI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_DESCRIPCION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_DESTINATARIO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_OBJETIVOS' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_FINANCIACION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_CONDICIONES' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_DEDICA' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='MOD_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.1/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.1/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.0/@dataElement.0'/>
+</dataElement>
+<dataElement name='MOD_CODIGOOTRI' xsi:type='data:UniqueKey'/>
+</dataElement>
+<dataElement name='OTG_PCONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='PCO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_MOD_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FINIS' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FFINS' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FFINA' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_ANO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FJUST' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<dataElement name='PCO_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.2/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.2/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.0/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.2/@dataElement.2' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.1/@dataElement.0'/>
+</dataElement>
+</dataElement>
+<dataElement name='OTG_TCONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='TCO_CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='TCO_TER_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='TCO_PTC_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='TCO_CON_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.3/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.3/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.6/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.3/@dataElement.2' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.5/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.3/@dataElement.3' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.8/@dataElement.0'/>
+</dataElement>
+</dataElement>
+<dataElement name='OTG_SOLICITUDES' xsi:type='data:RelationalTable'>
+<itemUnit name='SOL_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MOD_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PCO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_TITULO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FENTREGA' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_ESO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FRES' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FPUB' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_DURACION' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_UOR_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMP' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPP' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPE' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_APR_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_COORDINADO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_SUP_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FANUAL' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_SOL_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PRO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_CTR_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MBE_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPS' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MON_CODIGOS' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPPS' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPES' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MON_CODIGOU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPPU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPEU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_TIPO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PER_IDT' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PER_IDB' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<dataElement name='SOL_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.4/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.4/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.0/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.4/@dataElement.2' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.6/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.4/@dataElement.3' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.1/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.4/@dataElement.4' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.2/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey' implementation='#//@model.4/@dataElement.0/@dataElement.4/@itemUnit.20'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.4/@dataElement.5' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.4/@dataElement.0'/>
+</dataElement>
+</dataElement>
+<dataElement name='OTG_PTCONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='PTC_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='PTC_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='PTC_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.5/@itemUnit.0'/>
+</dataElement>
+<dataElement name='OTG_CONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_CODIGOOTRI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FPUB' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FRES' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FCOR1' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FCOR2' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_ACCESO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_TIPO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_PUB_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_INFOR' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_DEDICA' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_TIPOWEB' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_WEB' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='CON_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.6/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.4/@dataElement.0/@dataElement.6/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.4/@dataElement.0/@dataElement.7/@dataElement.0'/>
+</dataElement>
+<dataElement name='CON_CODIGOOTRI' xsi:type='data:UniqueKey'/>
+</dataElement>
+<dataElement name='OTG_PUBLICAOFI' xsi:type='data:RelationalTable'>
+<itemUnit name='PUB_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PUB_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='PUB_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.7/@itemUnit.0'/>
+</dataElement>
+<dataElement name='OTG_TERCEROS' xsi:type='data:RelationalTable'>
+<itemUnit name='TER_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='TER_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='TER_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.4/@dataElement.0/@dataElement.8/@itemUnit.0'/>
+</dataElement>
+</dataElement>
+</model>
+<model xsi:type='source:InventoryModel'>
+<inventoryElement name='StrutsApplication' xsi:type='source:Project'>
+<inventoryElement name='src' xsi:type='source:Directory' path='/'/>
+</inventoryElement>
+</model>
+</kdm:Segment>

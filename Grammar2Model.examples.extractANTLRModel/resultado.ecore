@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ANTLRGrammar:GrammarGroup xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ANTLRGrammar="http://gts.inf.um.es/gra2mol-examples/Grammar">
+  <grammarDefs name="ANTLRv3">
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="grammarDef" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.6 //@grammarDefs.0/@rules.1 //@grammarDefs.0/@rules.3 //@grammarDefs.0/@rules.4 //@grammarDefs.0/@rules.9"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="tokensSpec" derivations="//@grammarDefs.0/@rules.2 //@grammarDefs.0/@rules.63"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="tokenSpec" derivations="//@grammarDefs.0/@rules.60 //@grammarDefs.0/@rules.46 //@grammarDefs.0/@rules.45"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="attrScope" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="action" derivations="//@grammarDefs.0/@rules.5 //@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="actionScopeName" derivations="//@grammarDefs.0/@rules.42"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="optionsSpec" derivations="//@grammarDefs.0/@rules.7 //@grammarDefs.0/@rules.62"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="option" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.8"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="optionValue" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.46 //@grammarDefs.0/@rules.45 //@grammarDefs.0/@rules.52"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rule" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.11 //@grammarDefs.0/@rules.6 //@grammarDefs.0/@rules.12 //@grammarDefs.0/@rules.10 //@grammarDefs.0/@rules.13 //@grammarDefs.0/@rules.15 //@grammarDefs.0/@rules.53"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="ruleAction" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="throwsSpec" derivations="//@grammarDefs.0/@rules.42"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="ruleScopeSpec" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="altList" derivations="//@grammarDefs.0/@rules.14 //@grammarDefs.0/@rules.28"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="alternative" derivations="//@grammarDefs.0/@rules.18"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="exceptionGroup" derivations="//@grammarDefs.0/@rules.16 //@grammarDefs.0/@rules.17"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="exceptionHandler" derivations="//@grammarDefs.0/@rules.53 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="finallyClause" derivations="//@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="element" derivations="//@grammarDefs.0/@rules.19"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="elementNoOptionSpec" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.20 //@grammarDefs.0/@rules.27 //@grammarDefs.1/@rules.79 //@grammarDefs.0/@rules.23 //@grammarDefs.0/@rules.22 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="atom" derivations="//@grammarDefs.0/@rules.24 //@grammarDefs.0/@rules.25 //@grammarDefs.0/@rules.21 //@grammarDefs.0/@rules.61 //@grammarDefs.0/@rules.53"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="notSet" derivations="//@grammarDefs.0/@rules.26 //@grammarDefs.1/@rules.79"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="treeSpec" derivations="//@grammarDefs.0/@rules.18"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="ebnf" derivations="//@grammarDefs.1/@rules.79"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="range" derivations="//@grammarDefs.0/@rules.45"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="terminal" derivations="//@grammarDefs.0/@rules.45 //@grammarDefs.0/@rules.60 //@grammarDefs.0/@rules.53 //@grammarDefs.0/@rules.46"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="notTerminal" derivations="//@grammarDefs.0/@rules.45 //@grammarDefs.0/@rules.60 //@grammarDefs.0/@rules.46"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="ebnfSuffix"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite" derivations="//@grammarDefs.0/@rules.29"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_alternative" derivations="//@grammarDefs.0/@rules.37 //@grammarDefs.0/@rules.32"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_template_block" derivations="//@grammarDefs.0/@rules.37"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_tree_block" derivations="//@grammarDefs.0/@rules.32"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_tree_alternative" derivations="//@grammarDefs.0/@rules.33"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_tree_element" derivations="//@grammarDefs.0/@rules.34 //@grammarDefs.0/@rules.27 //@grammarDefs.0/@rules.36 //@grammarDefs.0/@rules.35"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_tree_atom" derivations="//@grammarDefs.0/@rules.45 //@grammarDefs.0/@rules.60 //@grammarDefs.0/@rules.53 //@grammarDefs.0/@rules.61 //@grammarDefs.0/@rules.46 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_tree_ebnf" derivations="//@grammarDefs.0/@rules.31 //@grammarDefs.0/@rules.27"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_tree" derivations="//@grammarDefs.0/@rules.34 //@grammarDefs.0/@rules.33"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_template" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.40 //@grammarDefs.0/@rules.38 //@grammarDefs.0/@rules.39 //@grammarDefs.0/@rules.48 //@grammarDefs.0/@rules.49 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_template_ref" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.40"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_indirect_template_head" derivations="//@grammarDefs.0/@rules.40 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_template_args" derivations="//@grammarDefs.0/@rules.41"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="rewrite_template_arg" derivations="//@grammarDefs.0/@rules.42 //@grammarDefs.0/@rules.55"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="id" derivations="//@grammarDefs.0/@rules.60 //@grammarDefs.0/@rules.61"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="SL_COMMENT"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ML_COMMENT"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="CHAR_LITERAL"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="STRING_LITERAL"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="LITERAL_CHAR"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="DOUBLE_QUOTE_STRING_LITERAL"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="DOUBLE_ANGLE_STRING_LITERAL"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ESC"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="XDIGIT"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="INT"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ARG_ACTION"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="NESTED_ARG_ACTION"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ACTION"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="NESTED_ACTION"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ACTION_CHAR_LITERAL"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ACTION_STRING_LITERAL"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ACTION_ESC"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="TOKEN_REF"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="RULE_REF"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="OPTIONS"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="TOKENS"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="SRC"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="WS_LOOP"/>
+  </grammarDefs>
+  <grammarDefs name="Java">
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="compilationUnit" derivations="//@grammarDefs.1/@rules.63 //@grammarDefs.1/@rules.1 //@grammarDefs.1/@rules.2 //@grammarDefs.1/@rules.3"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="packageDeclaration" derivations="//@grammarDefs.1/@rules.59"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="importDeclaration" derivations="//@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="typeDeclaration" derivations="//@grammarDefs.1/@rules.4"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="classOrInterfaceDeclaration" derivations="//@grammarDefs.1/@rules.45 //@grammarDefs.1/@rules.5 //@grammarDefs.1/@rules.15"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="classDeclaration" derivations="//@grammarDefs.1/@rules.6 //@grammarDefs.1/@rules.10"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="normalClassDeclaration" derivations="//@grammarDefs.1/@rules.7 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.17 //@grammarDefs.1/@rules.18 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="typeParameters" derivations="//@grammarDefs.1/@rules.8"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="typeParameter" derivations="//@grammarDefs.1/@rules.9 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="bound" derivations="//@grammarDefs.1/@rules.49"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="enumDeclaration" derivations="//@grammarDefs.1/@rules.17 //@grammarDefs.1/@rules.11 //@grammarDefs.1/@rules.143 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="enumBody" derivations="//@grammarDefs.1/@rules.12 //@grammarDefs.1/@rules.14"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="enumConstants" derivations="//@grammarDefs.1/@rules.13"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="enumConstant" derivations="//@grammarDefs.1/@rules.63 //@grammarDefs.1/@rules.129 //@grammarDefs.1/@rules.18 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="enumBodyDeclarations" derivations="//@grammarDefs.1/@rules.20"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceDeclaration" derivations="//@grammarDefs.1/@rules.16 //@grammarDefs.1/@rules.70"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="normalInterfaceDeclaration" derivations="//@grammarDefs.1/@rules.7 //@grammarDefs.1/@rules.17 //@grammarDefs.1/@rules.19 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="typeList" derivations="//@grammarDefs.1/@rules.49"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="classBody" derivations="//@grammarDefs.1/@rules.20"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceBody" derivations="//@grammarDefs.1/@rules.26"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="classBodyDeclaration" derivations="//@grammarDefs.1/@rules.79 //@grammarDefs.1/@rules.45 //@grammarDefs.1/@rules.21"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="memberDecl" derivations="//@grammarDefs.1/@rules.22 //@grammarDefs.1/@rules.24 //@grammarDefs.1/@rules.25 //@grammarDefs.1/@rules.31 //@grammarDefs.1/@rules.35 //@grammarDefs.1/@rules.15 //@grammarDefs.1/@rules.5 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="genericMethodOrConstructorDecl" derivations="//@grammarDefs.1/@rules.7 //@grammarDefs.1/@rules.23"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="genericMethodOrConstructorRest" derivations="//@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.30 //@grammarDefs.1/@rules.35 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="methodDeclaration" derivations="//@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.30 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="fieldDeclaration" derivations="//@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.37"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceBodyDeclaration" derivations="//@grammarDefs.1/@rules.45 //@grammarDefs.1/@rules.27"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceMemberDecl" derivations="//@grammarDefs.1/@rules.28 //@grammarDefs.1/@rules.33 //@grammarDefs.1/@rules.34 //@grammarDefs.1/@rules.15 //@grammarDefs.1/@rules.5 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceMethodOrFieldDecl" derivations="//@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.29 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceMethodOrFieldRest" derivations="//@grammarDefs.1/@rules.40 //@grammarDefs.1/@rules.32"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="methodDeclaratorRest" derivations="//@grammarDefs.1/@rules.55 //@grammarDefs.1/@rules.54 //@grammarDefs.1/@rules.58"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="voidMethodDeclaratorRest" derivations="//@grammarDefs.1/@rules.55 //@grammarDefs.1/@rules.54 //@grammarDefs.1/@rules.58"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceMethodDeclaratorRest" derivations="//@grammarDefs.1/@rules.55 //@grammarDefs.1/@rules.54"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="interfaceGenericMethodDecl" derivations="//@grammarDefs.1/@rules.7 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.32 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="voidInterfaceMethodDeclaratorRest" derivations="//@grammarDefs.1/@rules.55 //@grammarDefs.1/@rules.54"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="constructorDeclaratorRest" derivations="//@grammarDefs.1/@rules.55 //@grammarDefs.1/@rules.54 //@grammarDefs.1/@rules.58"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="constantDeclarator" derivations="//@grammarDefs.1/@rules.41 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="variableDeclarators" derivations="//@grammarDefs.1/@rules.38"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="variableDeclarator" derivations="//@grammarDefs.1/@rules.39 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="variableDeclaratorRest" derivations="//@grammarDefs.1/@rules.43"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="constantDeclaratorsRest" derivations="//@grammarDefs.1/@rules.41 //@grammarDefs.1/@rules.36"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="constantDeclaratorRest" derivations="//@grammarDefs.1/@rules.43"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="variableDeclaratorId" derivations="//@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="variableInitializer" derivations="//@grammarDefs.1/@rules.44 //@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="arrayInitializer" derivations="//@grammarDefs.1/@rules.43"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="modifier" derivations="//@grammarDefs.1/@rules.64"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="packageOrTypeName" derivations="//@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="enumConstantName" derivations="//@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="typeName" derivations="//@grammarDefs.1/@rules.46 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="type" derivations="//@grammarDefs.1/@rules.52 //@grammarDefs.1/@rules.50 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="primitiveType"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="variableModifier" derivations="//@grammarDefs.1/@rules.64"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="typeArguments" derivations="//@grammarDefs.1/@rules.53"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="typeArgument" derivations="//@grammarDefs.1/@rules.49"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="qualifiedNameList" derivations="//@grammarDefs.1/@rules.59"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="formalParameters" derivations="//@grammarDefs.1/@rules.56"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="formalParameterDecls" derivations="//@grammarDefs.1/@rules.51 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.57"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="formalParameterDeclsRest" derivations="//@grammarDefs.1/@rules.42 //@grammarDefs.1/@rules.56"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="methodBody" derivations="//@grammarDefs.1/@rules.79"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="qualifiedName" derivations="//@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="literal" derivations="//@grammarDefs.1/@rules.61 //@grammarDefs.1/@rules.62 //@grammarDefs.1/@rules.135 //@grammarDefs.1/@rules.138 //@grammarDefs.1/@rules.139"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="integerLiteral" derivations="//@grammarDefs.1/@rules.130 //@grammarDefs.1/@rules.132 //@grammarDefs.1/@rules.131"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="booleanLiteral"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotations" derivations="//@grammarDefs.1/@rules.64"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotation" derivations="//@grammarDefs.1/@rules.65 //@grammarDefs.1/@rules.66"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationName" derivations="//@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="elementValuePairs" derivations="//@grammarDefs.1/@rules.67"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="elementValuePair" derivations="//@grammarDefs.1/@rules.68 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="elementValue" derivations="//@grammarDefs.1/@rules.100 //@grammarDefs.1/@rules.64 //@grammarDefs.1/@rules.69"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="elementValueArrayInitializer" derivations="//@grammarDefs.1/@rules.68"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationTypeDeclaration" derivations="//@grammarDefs.1/@rules.71 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationTypeBody" derivations="//@grammarDefs.1/@rules.72"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationTypeElementDeclarations" derivations="//@grammarDefs.1/@rules.73"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationTypeElementDeclaration" derivations="//@grammarDefs.1/@rules.45 //@grammarDefs.1/@rules.74"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationTypeElementRest" derivations="//@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.75 //@grammarDefs.1/@rules.5 //@grammarDefs.1/@rules.15 //@grammarDefs.1/@rules.10 //@grammarDefs.1/@rules.70"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationMethodOrConstantRest" derivations="//@grammarDefs.1/@rules.76 //@grammarDefs.1/@rules.77"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationMethodRest" derivations="//@grammarDefs.1/@rules.78 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="annotationConstantRest" derivations="//@grammarDefs.1/@rules.37"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="defaultValue" derivations="//@grammarDefs.1/@rules.68"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="block" derivations="//@grammarDefs.0/@rules.6 //@grammarDefs.0/@rules.14 //@grammarDefs.0/@rules.28 //@grammarDefs.1/@rules.80"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="blockStatement" derivations="//@grammarDefs.1/@rules.81 //@grammarDefs.1/@rules.4 //@grammarDefs.1/@rules.82"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="localVariableDeclaration" derivations="//@grammarDefs.1/@rules.51 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.37"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="statement" derivations="//@grammarDefs.1/@rules.79 //@grammarDefs.1/@rules.98 //@grammarDefs.1/@rules.94 //@grammarDefs.1/@rules.82 //@grammarDefs.1/@rules.90 //@grammarDefs.1/@rules.83 //@grammarDefs.1/@rules.86 //@grammarDefs.1/@rules.96 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="catches" derivations="//@grammarDefs.1/@rules.84"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="catchClause" derivations="//@grammarDefs.1/@rules.85 //@grammarDefs.1/@rules.79"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="formalParameter" derivations="//@grammarDefs.1/@rules.51 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.42"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="switchBlockStatementGroups" derivations="//@grammarDefs.1/@rules.87"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="switchBlockStatementGroup" derivations="//@grammarDefs.1/@rules.88 //@grammarDefs.1/@rules.80"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="switchLabel" derivations="//@grammarDefs.1/@rules.97 //@grammarDefs.1/@rules.47"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="moreStatementExpressions" derivations="//@grammarDefs.1/@rules.96"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="forControl" derivations="//@grammarDefs.1/@rules.92 //@grammarDefs.1/@rules.91 //@grammarDefs.1/@rules.98 //@grammarDefs.1/@rules.93"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="forInit" derivations="//@grammarDefs.1/@rules.51 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.37 //@grammarDefs.1/@rules.95"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="forVarControl" derivations="//@grammarDefs.1/@rules.51 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.98 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="forUpdate" derivations="//@grammarDefs.1/@rules.95"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="parExpression" derivations="//@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="expressionList" derivations="//@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="statementExpression" derivations="//@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="constantExpression" derivations="//@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="expression" derivations="//@grammarDefs.1/@rules.100 //@grammarDefs.1/@rules.99 //@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="assignmentOperator"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="conditionalExpression" derivations="//@grammarDefs.1/@rules.101 //@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="conditionalOrExpression" derivations="//@grammarDefs.1/@rules.102"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="conditionalAndExpression" derivations="//@grammarDefs.1/@rules.103"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="inclusiveOrExpression" derivations="//@grammarDefs.1/@rules.104"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="exclusiveOrExpression" derivations="//@grammarDefs.1/@rules.105"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="andExpression" derivations="//@grammarDefs.1/@rules.106"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="equalityExpression" derivations="//@grammarDefs.1/@rules.107"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="instanceOfExpression" derivations="//@grammarDefs.1/@rules.108 //@grammarDefs.1/@rules.49"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="relationalExpression" derivations="//@grammarDefs.1/@rules.110 //@grammarDefs.1/@rules.109"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="relationalOp"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="shiftExpression" derivations="//@grammarDefs.1/@rules.112 //@grammarDefs.1/@rules.111"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="shiftOp"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="additiveExpression" derivations="//@grammarDefs.1/@rules.113"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="multiplicativeExpression" derivations="//@grammarDefs.1/@rules.114"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="unaryExpression" derivations="//@grammarDefs.1/@rules.114 //@grammarDefs.1/@rules.115"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="unaryExpressionNotPlusMinus" derivations="//@grammarDefs.1/@rules.114 //@grammarDefs.1/@rules.116 //@grammarDefs.1/@rules.117 //@grammarDefs.1/@rules.127"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="castExpression" derivations="//@grammarDefs.1/@rules.50 //@grammarDefs.1/@rules.114 //@grammarDefs.1/@rules.49 //@grammarDefs.1/@rules.98 //@grammarDefs.1/@rules.115"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="primary" derivations="//@grammarDefs.1/@rules.94 //@grammarDefs.1/@rules.125 //@grammarDefs.1/@rules.126 //@grammarDefs.1/@rules.129 //@grammarDefs.1/@rules.118 //@grammarDefs.1/@rules.128 //@grammarDefs.1/@rules.60 //@grammarDefs.1/@rules.119 //@grammarDefs.1/@rules.50 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="identifierSuffix" derivations="//@grammarDefs.1/@rules.98 //@grammarDefs.1/@rules.129 //@grammarDefs.1/@rules.124 //@grammarDefs.1/@rules.125 //@grammarDefs.1/@rules.121"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="creator" derivations="//@grammarDefs.1/@rules.125 //@grammarDefs.1/@rules.120 //@grammarDefs.1/@rules.122 //@grammarDefs.1/@rules.123"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="createdName" derivations="//@grammarDefs.1/@rules.52 //@grammarDefs.1/@rules.50 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="innerCreator" derivations="//@grammarDefs.1/@rules.123 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="arrayCreatorRest" derivations="//@grammarDefs.1/@rules.44 //@grammarDefs.1/@rules.98"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="classCreatorRest" derivations="//@grammarDefs.1/@rules.129 //@grammarDefs.1/@rules.18"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="explicitGenericInvocation" derivations="//@grammarDefs.1/@rules.125 //@grammarDefs.1/@rules.126"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="nonWildcardTypeArguments" derivations="//@grammarDefs.1/@rules.17"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="explicitGenericInvocationSuffix" derivations="//@grammarDefs.1/@rules.128 //@grammarDefs.1/@rules.129 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="selector" derivations="//@grammarDefs.1/@rules.129 //@grammarDefs.1/@rules.128 //@grammarDefs.1/@rules.125 //@grammarDefs.1/@rules.121 //@grammarDefs.1/@rules.98 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="superSuffix" derivations="//@grammarDefs.1/@rules.129 //@grammarDefs.1/@rules.144"/>
+    <rules xsi:type="ANTLRGrammar:SintacticRule" name="arguments" derivations="//@grammarDefs.1/@rules.95"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="HexLiteral"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="DecimalLiteral"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="OctalLiteral"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="HexDigit"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="IntegerTypeSuffix"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="FloatingPointLiteral"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="Exponent"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="FloatTypeSuffix"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="CharacterLiteral"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="StringLiteral"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="EscapeSequence"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="OctalEscape"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="UnicodeEscape"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="ENUM"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="Identifier"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="Letter"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="JavaIDDigit"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="WS"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="COMMENT"/>
+    <rules xsi:type="ANTLRGrammar:LexicalRule" name="LINE_COMMENT"/>
+  </grammarDefs>
+</ANTLRGrammar:GrammarGroup>

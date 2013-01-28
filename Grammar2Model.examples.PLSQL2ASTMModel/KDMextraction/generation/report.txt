@@ -1,0 +1,2 @@
+R/W Imperative;R/W Declarative;Reflective;
+70%;17%;12%;

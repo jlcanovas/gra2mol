@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mancoosi"
+    nsURI="http://modelum.es/gra2mol/mancoosi" nsPrefix="mancoosi">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Package">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maintainer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="architecture" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preinstScript" upperBound="-1"
+        eType="#//PreinstScript" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postinstScript" upperBound="-1"
+        eType="#//PostinstScript" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prermScript" upperBound="-1"
+        eType="#//PrermScript" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postrmScript" upperBound="-1"
+        eType="#//PostrmScript" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configScript" upperBound="-1"
+        eType="#//ConfigScript" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Script" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PreinstScript" eSuperTypes="#//Script"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PostinstScript" eSuperTypes="#//Script"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrermScript" eSuperTypes="#//Script"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PostrmScript" eSuperTypes="#//Script"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigScript" eSuperTypes="#//Script"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvironmentStatement" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionEnvironmentStatement" eSuperTypes="#//EnvironmentStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeletionEnvironmentStatement" eSuperTypes="#//EnvironmentStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateEnvironmentStatement" eSuperTypes="#//EnvironmentStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FileSystemStatement" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionFileSystemStatement" eSuperTypes="#//FileSystemStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeletionFileSystemStatement" eSuperTypes="#//FileSystemStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateFileSystemStatement" eSuperTypes="#//FileSystemStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageSettingStatement" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionPackageSettingStatement" eSuperTypes="#//PackageSettingStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeletionPackageSettingStatement" eSuperTypes="#//PackageSettingStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdatePackageSettingStatement" eSuperTypes="#//PackageSettingStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlStatement" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#//ControlStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="#//BooleanExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" upperBound="-1" eType="#//Statement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" upperBound="-1" eType="#//Statement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Iterator" abstract="true" eSuperTypes="#//ControlStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationIterator" eSuperTypes="#//Iterator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NeutralStatement" abstract="true" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignmentStatement" eSuperTypes="#//NeutralStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assigned" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

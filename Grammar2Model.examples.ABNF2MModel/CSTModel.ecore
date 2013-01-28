@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:CST="http://gts.inf.um.es/modernization/cst" kind="CST">
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jlcanovas/workspace/Grammar2Model.examples.ABNF2MModel/files/src/sastm-RDBMS.abnf"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="sastm-RDBMS.abnf"/>
+    <children xsi:type="CST:Node" kind="abnf_definition">
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="OtherSyntaxObject" line="1"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="18" line="4"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBIndex" pos="21" line="1"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="18" line="4"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBIndexColumn" pos="21"
+                line="2"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="18" line="4"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTrigger" pos="21" line="3"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="18" line="4"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBConstraint" pos="21"
+                line="4"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="18" line="5"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="Definition" line="6"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="12"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBDatabaseDefinition"
+                pos="30" line="6"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="12"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBUserDefinition" pos="30"
+                line="7"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="12"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableSpaceDefinition"
+                pos="30" line="8"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="12"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableDefinition" pos="30"
+                line="9"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="12"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBColumnDefinition" pos="30"
+                line="10"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="12"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBViewDefinition" pos="30"
+                line="11"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="12"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCursorDefinition" pos="30"
+                line="12"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="13"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBDatabaseDefinition"
+                line="14"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="14"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="TableSpace" pos="30"
+                line="14"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="41" line="14"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTableSpaceReference"
+                pos="43" line="14"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="66" line="14"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="15"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBUserDefinition" line="16"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="16"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Owns" pos="30" line="16"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="35" line="16"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTableReference" pos="37"
+                line="16"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="55" line="16"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="57" line="16"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableSpaceDefinition"
+                line="17"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="17"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Table" pos="30" line="17"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="36" line="17"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTableReference" pos="38"
+                line="17"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="56" line="17"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="58" line="17"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableDefinition" line="18"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="18"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="PrimKey" pos="30" line="18"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="38" line="18"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="40"
+                line="18"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="59" line="18"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Column" pos="30" line="19"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="37" line="19"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnDefinition"
+                pos="39" line="19"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="59" line="19"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Constraint" pos="30"
+                line="20"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="41" line="20"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBConstraint" pos="43"
+                line="20"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="57" line="20"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Index" pos="30" line="21"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="36" line="21"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBIndex" pos="38" line="21"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="47" line="21"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Trigger" pos="30" line="22"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="38" line="22"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTrigger" pos="40"
+                line="22"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="51" line="22"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="23"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBColumnDefinition" line="24"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="24"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="SEM" value="&lt;" pos="30" line="24"/>
+            <children xsi:type="CST:Leaf" kind="NAME" value="NotNull" pos="32" line="24"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="40" line="24"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Boolean" pos="42" line="24"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="50" line="24"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="52" line="24"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBViewDefinition" line="25"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="25"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="DefinedBy" pos="30" line="25"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="40" line="25"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBSelectExpression"
+                pos="42" line="25"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="26"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCursorDefinition" line="27"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="27"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="SelectExpression" pos="30"
+                line="27"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="47" line="27"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBSelectExpression"
+                pos="49" line="27"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="69" line="27"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBIndex" line="28"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="28"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="IndexColumn" pos="30"
+                line="28"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="42" line="28"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBIndexColumn" pos="44"
+                line="28"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="58" line="28"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="SEM" value="&lt;" pos="30" line="29"/>
+            <children xsi:type="CST:Leaf" kind="NAME" value="NotNull" pos="32" line="29"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="40" line="29"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Boolean" pos="42" line="29"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="49" line="29"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="SEM" value="&lt;" pos="30" line="30"/>
+            <children xsi:type="CST:Leaf" kind="NAME" value="IsUnique" pos="32" line="30"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="41" line="30"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Boolean" pos="43" line="30"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="51" line="30"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="31"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBIndexColumn" line="32"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="32"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Column" pos="30" line="32"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="37" line="32"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="39"
+                line="32"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="SEM" value="&lt;" pos="30" line="33"/>
+            <children xsi:type="CST:Leaf" kind="NAME" value="AscendingOrDescending"
+                pos="32" line="33"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="54" line="33"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Char" pos="56" line="33"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="61" line="33"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="34"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTrigger" line="36"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="19" line="36"/>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="22" line="36"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBConstraint" line="37"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="19" line="39"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCheckConstraint" pos="22"
+                line="37"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="19" line="39"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBRefIntegrity" pos="22"
+                line="38"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="19" line="39"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBUniqueKey" pos="22"
+                line="39"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="19" line="40"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCheckConstraint" line="41"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="19" line="41"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="SEM" value="&lt;" pos="22" line="41"/>
+            <children xsi:type="CST:Leaf" kind="NAME" value="RDBConstraintText" pos="24"
+                line="41"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="42" line="41"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="String" pos="44" line="41"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="51" line="41"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="SEM" value="&lt;" pos="22" line="42"/>
+            <children xsi:type="CST:Leaf" kind="NAME" value="RDBConstraintType" pos="24"
+                line="42"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="42" line="42"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Char" pos="44" line="42"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=">" pos="49" line="42"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="19" line="43"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBRefIntegrity" line="44"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="19" line="44"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="ForeignKey" pos="22"
+                line="44"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="33" line="44"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="35"
+                line="44"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="54" line="44"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="ParentKey" pos="22" line="45"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="32" line="45"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="34"
+                line="45"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="53" line="45"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="ParentTable" pos="22"
+                line="46"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="34" line="46"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="36"
+                line="46"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="19" line="47"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBUniqueKey" line="48"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="19" line="48"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Column" pos="22" line="48"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="29" line="48"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="31"
+                line="48"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="49" line="48"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="51" line="48"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="DataType" line="49"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="55"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBDataBaseType" pos="17"
+                line="49"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="55"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBUserType" pos="17" line="50"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="55"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableSpaceType" pos="17"
+                line="51"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="55"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableType" pos="17"
+                line="52"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="55"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBViewType" pos="17" line="53"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="55"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ABSTRACT" value="!" pos="17" line="54"/>
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBColumnType" pos="19"
+                line="54"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="55"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCursorType" pos="17"
+                line="55"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="30" line="55"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBColumnType" line="56"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBInteger" pos="17" line="56"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBInt" pos="17" line="57"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBReal" pos="17" line="58"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBFloat" pos="17" line="59"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBDecimal" pos="17" line="60"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBNumber" pos="17" line="61"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBLong" pos="17" line="62"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBChar" pos="17" line="63"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBVarchar" pos="17" line="64"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBString" pos="17" line="65"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBRaw" pos="17" line="66"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBDate" pos="17" line="67"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTimestamp" pos="17"
+                line="68"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBRowid" pos="17" line="69"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBBoolean" pos="17" line="70"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBBlob" pos="17" line="71"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBClob" pos="17" line="72"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBNClob" pos="17" line="73"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="14" line="74"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBBFile" pos="17" line="74"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="14" line="75"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="Statement" line="76"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="80"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBConnectStatement" pos="27"
+                line="76"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="80"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBSelectStatement" pos="27"
+                line="77"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="80"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBInsertStatement" pos="27"
+                line="78"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="80"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ABSTRACT" value="!" pos="27" line="79"/>
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBModifyStatement" pos="29"
+                line="79"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="80"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ABSTRACT" value="!" pos="27" line="80"/>
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCursorStatement" pos="29"
+                line="80"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="81"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBConnectStatement" line="82"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="82"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="ConnectString" pos="27"
+                line="82"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="41" line="82"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBHostVariableReference"
+                pos="43" line="82"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="68" line="82"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBSelectStatement" line="83"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="83"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="SelectExpression" pos="27"
+                line="83"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="44" line="83"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBSelectExpression"
+                pos="46" line="83"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="IntoVariable" pos="27"
+                line="84"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="40" line="84"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBHostVariableReference"
+                pos="42" line="84"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="67" line="84"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="85"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBInsertStatement" line="86"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="86"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="IntoTable" pos="27" line="86"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="37" line="86"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTableReference" pos="39"
+                line="86"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="57" line="86"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Columns" pos="27" line="87"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="35" line="87"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="37"
+                line="87"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="56" line="87"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Values" pos="27" line="88"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="34" line="88"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="36"
+                line="88"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="47" line="88"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="89"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBModifyStatement" line="90"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="91"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBUpdateStatement" pos="27"
+                line="90"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="91"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBDeleteStatement" pos="27"
+                line="91"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="92"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBModifyStatement" line="93"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="93"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Table" pos="27" line="93"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="33" line="93"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTableReference" pos="35"
+                line="93"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="53" line="93"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Where" pos="27" line="94"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="33" line="94"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="35"
+                line="94"/>
+            <children xsi:type="CST:Leaf" kind="OPTB" value="?" pos="45" line="94"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="95"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBUpdateStatement" line="96"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="96"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Values" pos="27" line="96"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="34" line="96"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="36"
+                line="96"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="47" line="96"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="49" line="96"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCursorStatement" line="97"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="99"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBOpenCursorStatement"
+                pos="27" line="97"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="99"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBFetchCursorStatement"
+                pos="27" line="98"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="24" line="99"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCloseCursorStatement"
+                pos="27" line="99"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="24" line="100"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBCursorStatement" line="101"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="101"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Cursor" pos="27" line="101"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="34" line="101"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="36"
+                line="101"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="47" line="101"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBOpenCursorStatement"
+                line="102"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="102"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Values" pos="27" line="102"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="34" line="102"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="36"
+                line="102"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="47" line="102"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="49" line="102"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBFetchCursorStatement"
+                line="103"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="24" line="103"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Into" pos="27" line="103"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="32" line="103"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="HostVariableReference"
+                pos="34" line="103"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="56" line="103"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="58" line="103"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="Expression" line="104"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="25" line="105"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBHostVariableExpression"
+                pos="28" line="104"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="25" line="105"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBSelectExpression" pos="28"
+                line="105"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="25" line="106"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBHostVariableReference"
+                line="107"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="25" line="108"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="BaseVariable" pos="28"
+                line="108"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="41" line="108"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="43"
+                line="108"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Indicator" pos="28" line="109"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="38" line="109"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="40"
+                line="109"/>
+            <children xsi:type="CST:Leaf" kind="OPTB" value="?" pos="51" line="109"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="25" line="110"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBSelectExpression" line="111"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="22" line="111"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Table" pos="25" line="111"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="31" line="111"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTableReference" pos="33"
+                line="111"/>
+            <children xsi:type="CST:Leaf" kind="MULTB" value="+" pos="51" line="111"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Column" pos="28" line="112"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="35" line="112"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBColumnReference" pos="37"
+                line="112"/>
+            <children xsi:type="CST:Leaf" kind="MULTA" value="*" pos="56" line="112"/>
+          </children>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Where" pos="28" line="113"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="34" line="113"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="36"
+                line="113"/>
+            <children xsi:type="CST:Leaf" kind="OPTB" value="?" pos="46" line="113"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="20" line="114"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="hierarchy_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="IdentifierReference" line="115"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="20" line="117"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableReference" pos="26"
+                line="115"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="20" line="117"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableAlias" pos="26"
+                line="116"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="DOUBLEARROW" value="=>" pos="20" line="117"/>
+          <children xsi:type="CST:Node" kind="subclassId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBColumnReference" pos="26"
+                line="117"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="20" line="118"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableReference" line="119"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="20" line="119"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Alias" pos="26" line="119"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="32" line="119"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="RDBTableAlias" pos="34"
+                line="119"/>
+            <children xsi:type="CST:Leaf" kind="OPTB" value="?" pos="48" line="119"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="50" line="119"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBTableAlias" line="120"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="20" line="120"/>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="26" line="120"/>
+        </children>
+      </children>
+      <children xsi:type="CST:Node" kind="rule">
+        <children xsi:type="CST:Node" kind="specification_rule">
+          <children xsi:type="CST:Node" kind="classId">
+            <children xsi:type="CST:Leaf" kind="ID" value="RDBColumnReference" line="121"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="ARROW" value="->" pos="20" line="121"/>
+          <children xsi:type="CST:Node" kind="attribute">
+            <children xsi:type="CST:Leaf" kind="NAME" value="Table" pos="26" line="121"/>
+            <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="32" line="121"/>
+            <children xsi:type="CST:Leaf" kind="TYPE" value="Expression" pos="34"
+                line="121"/>
+            <children xsi:type="CST:Leaf" kind="OPTB" value="?" pos="44" line="121"/>
+          </children>
+          <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="46" line="121"/>
+        </children>
+      </children>
+    </children>
+  </children>
+</CST:Node>

@@ -1,0 +1,1404 @@
+Gra2MoL version 0.5
+
+Executing interpreter...
+Reading configuration file...
+The configuration does not exist
+
+Initializing query operation
+[WARNING] No query operation were found!
+
+Initializing query control statement
+[WARNING] No query control statement were found!
+
+Initializing mapping extension
+[WARNING] No mapping extension were found!
+Models created.
+Initializing indexRules...
+Initializing mixinRules...
+Initializing packages...
+Initializing hashes...
+
+Executing rules...
+RULE: createAemiliaSpec
+RULE: createAemiliaSpec... executing!
+  Model Element AEmiliaSpecification created
+  Executing queries...
+    Query f with 1 result nodes - CONTENT : [/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.sandbox/files/src/scripts/example.txt example.txt ARCHI_TYPE ABP_Type123asd ( const integer msg_gen_rate := , const real timeout_rate := , const rate prop_rate := , const weight delivery_prob := ) ARCHI_ELEM_TYPES ELEM_TYPE Sender_Type ( const rate msg_gen_rate , const rate timeout_rate ) BEHAVIOR Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } INPUT_INTERACTIONS OR generate_msg ; OR receive_ack_0 ; UNI receive_ack_1 OUTPUT_INTERACTIONS UNI transmit_msg_0 ; UNI transmit_msg_1 ELEM_TYPE Line_Type ( const rate prop_rate , const weight delivery_prob ) BEHAVIOR Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } INPUT_INTERACTIONS UNI receive_0 ; UNI receive_1 OUTPUT_INTERACTIONS UNI deliver_0 ; UNI deliver_1 ELEM_TYPE Receiver_Type ( void ) BEHAVIOR Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } INPUT_INTERACTIONS UNI receive_msg_0 ; UNI receive_msg_1 OUTPUT_INTERACTIONS UNI consume_msg ; UNI transmit_ack_0 ; UNI transmit_ack_1 ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES S : Sender_Type ( msg_gen_rate , timeout_rate ) ; LM : Line_Type ( prop_rate , delivery_prob ) ; LA : Line_Type ( prop_rate , delivery_prob ) ; R : Receiver_Type ( ) ARCHI_INTERACTIONS S . generate_msg ; R . consume_msg ARCHI_ATTACHMENTS FROM S . transmit_msg_0 TO LM . receive_0 ; FROM S . transmit_msg_1 TO LM . receive_1 ; FROM LM . deliver_0 TO R . receive_msg_0 ; FROM LM . deliver_1 TO R . receive_msg_1 ; FROM R . transmit_ack_0 TO LA . receive_0 ; FROM R . transmit_ack_1 TO LA . receive_1 ; FROM LA . deliver_0 TO S . receive_ack_0 ; FROM LA . deliver_1 TO S . receive_ack_1 END /home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model.examples.sandbox/files/src/scripts/exampleMINE.txt exampleMINE.txt ARCHI_TYPE a ( void ) ARCHI_ELEM_TYPES ELEM_TYPE b ( void ) BEHAVIOR aa ( void ; void ) = stop ; INPUT_INTERACTIONS void OUTPUT_INTERACTIONS void ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES c : d ( ) ; ARCHI_INTERACTIONS e . f ARCHI_ATTACHMENTS FROM e . f TO g . h END ]
+    Query mains with 2 result nodes
+  Executing mappings...
+    - QUERY_RESULT: 2 bindings:
+      (1/2) result node: archi_type (kind). Rule... calling mapArchiType rule
+
+      RULE: mapArchiType
+      RULE: mapArchiType... executing!
+        Model Element ArchiType created
+        Executing queries...
+          Query name with 0 result nodes
+          Query at with 1 result nodes - CONTENT in line 1: [ARCHI_TYPE ABP_Type123asd ( const integer msg_gen_rate := , const real timeout_rate := , const rate prop_rate := , const weight delivery_prob := ) ARCHI_ELEM_TYPES ELEM_TYPE Sender_Type ( const rate msg_gen_rate , const rate timeout_rate ) BEHAVIOR Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } INPUT_INTERACTIONS OR generate_msg ; OR receive_ack_0 ; UNI receive_ack_1 OUTPUT_INTERACTIONS UNI transmit_msg_0 ; UNI transmit_msg_1 ELEM_TYPE Line_Type ( const rate prop_rate , const weight delivery_prob ) BEHAVIOR Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } INPUT_INTERACTIONS UNI receive_0 ; UNI receive_1 OUTPUT_INTERACTIONS UNI deliver_0 ; UNI deliver_1 ELEM_TYPE Receiver_Type ( void ) BEHAVIOR Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } INPUT_INTERACTIONS UNI receive_msg_0 ; UNI receive_msg_1 OUTPUT_INTERACTIONS UNI consume_msg ; UNI transmit_ack_0 ; UNI transmit_ack_1 ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES S : Sender_Type ( msg_gen_rate , timeout_rate ) ; LM : Line_Type ( prop_rate , delivery_prob ) ; LA : Line_Type ( prop_rate , delivery_prob ) ; R : Receiver_Type ( ) ARCHI_INTERACTIONS S . generate_msg ; R . consume_msg ARCHI_ATTACHMENTS FROM S . transmit_msg_0 TO LM . receive_0 ; FROM S . transmit_msg_1 TO LM . receive_1 ; FROM LM . deliver_0 TO R . receive_msg_0 ; FROM LM . deliver_1 TO R . receive_msg_1 ; FROM R . transmit_ack_0 TO LA . receive_0 ; FROM R . transmit_ack_1 TO LA . receive_1 ; FROM LA . deliver_0 TO S . receive_ack_0 ; FROM LA . deliver_1 TO S . receive_ack_1 END ]
+          Query topology with 1 result nodes - CONTENT in line 128: [ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES S : Sender_Type ( msg_gen_rate , timeout_rate ) ; LM : Line_Type ( prop_rate , delivery_prob ) ; LA : Line_Type ( prop_rate , delivery_prob ) ; R : Receiver_Type ( ) ARCHI_INTERACTIONS S . generate_msg ; R . consume_msg ARCHI_ATTACHMENTS FROM S . transmit_msg_0 TO LM . receive_0 ; FROM S . transmit_msg_1 TO LM . receive_1 ; FROM LM . deliver_0 TO R . receive_msg_0 ; FROM LM . deliver_1 TO R . receive_msg_1 ; FROM R . transmit_ack_0 TO LA . receive_0 ; FROM R . transmit_ack_1 TO LA . receive_1 ; FROM LA . deliver_0 TO S . receive_ack_0 ; FROM LA . deliver_1 TO S . receive_ack_1 ]
+          Query aet with 1 result nodes - CONTENT in line 7: [ARCHI_ELEM_TYPES ELEM_TYPE Sender_Type ( const rate msg_gen_rate , const rate timeout_rate ) BEHAVIOR Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } INPUT_INTERACTIONS OR generate_msg ; OR receive_ack_0 ; UNI receive_ack_1 OUTPUT_INTERACTIONS UNI transmit_msg_0 ; UNI transmit_msg_1 ELEM_TYPE Line_Type ( const rate prop_rate , const weight delivery_prob ) BEHAVIOR Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } INPUT_INTERACTIONS UNI receive_0 ; UNI receive_1 OUTPUT_INTERACTIONS UNI deliver_0 ; UNI deliver_1 ELEM_TYPE Receiver_Type ( void ) BEHAVIOR Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } INPUT_INTERACTIONS UNI receive_msg_0 ; UNI receive_msg_1 OUTPUT_INTERACTIONS UNI consume_msg ; UNI transmit_ack_0 ; UNI transmit_ack_1 ]
+          Query intest with 1 result nodes - CONTENT in line 1: [( const integer msg_gen_rate := , const real timeout_rate := , const rate prop_rate := , const weight delivery_prob := ) ]
+        Executing mappings...
+          - CODE: 
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: archi_header (kind). Rule... calling mapArchiHeader rule
+
+            RULE: mapArchiHeader
+            RULE: mapArchiHeader... executing!
+              Model Element Headers::AT_Header created
+              Executing queries...
+                Query const with 4 result nodes
+                Query ah with 1 result nodes - CONTENT in line 1: [( const integer msg_gen_rate := , const real timeout_rate := , const rate prop_rate := , const weight delivery_prob := ) ]
+              Executing mappings...
+                - QUERY_RESULT: 4 bindings:
+                  (1/4) result node: init_constant (kind). Rule... calling constInitialization rule
+
+                  RULE: constInitialization
+                  RULE: constInitialization... executing!
+                    Model Element Headers::ConstInit created
+                    Executing queries...
+                      Query exp with 0 result nodes
+                      Query typeSpecial with 0 result nodes
+                      Query name with 0 result nodes
+                      Query typeNormal with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 1: [const integer msg_gen_rate := ]
+                    Executing mappings...
+                      - CODE: 
+                        - IF detected...false! executing ELSE part 
+                          - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                  (2/4) result node: init_constant (kind). Rule... calling constInitialization rule
+
+                  RULE: constInitialization
+                  RULE: constInitialization... executing!
+                    Model Element Headers::ConstInit created
+                    Executing queries...
+                      Query exp with 0 result nodes
+                      Query typeSpecial with 0 result nodes
+                      Query name with 0 result nodes
+                      Query typeNormal with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 2: [const real timeout_rate := ]
+                    Executing mappings...
+                      - CODE: 
+                        - IF detected...false! executing ELSE part 
+                          - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                  (3/4) result node: init_constant (kind). Rule... calling constInitialization rule
+
+                  RULE: constInitialization
+                  RULE: constInitialization... executing!
+                    Model Element Headers::ConstInit created
+                    Executing queries...
+                      Query exp with 0 result nodes
+                      Query typeSpecial with 0 result nodes
+                      Query name with 0 result nodes
+                      Query typeNormal with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 3: [const rate prop_rate := ]
+                    Executing mappings...
+                      - CODE: 
+                        - IF detected...false! executing ELSE part 
+                          - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                  (4/4) result node: init_constant (kind). Rule... calling constInitialization rule
+
+                  RULE: constInitialization
+                  RULE: constInitialization... executing!
+                    Model Element Headers::ConstInit created
+                    Executing queries...
+                      Query exp with 0 result nodes
+                      Query typeSpecial with 0 result nodes
+                      Query name with 0 result nodes
+                      Query typeNormal with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 4: [const weight delivery_prob := ]
+                    Executing mappings...
+                      - CODE: 
+                        - IF detected...false! executing ELSE part 
+                          - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: archi_elem_types (kind). Rule... calling mapArchiElemTypes rule
+
+            RULE: mapArchiElemTypes
+            RULE: mapArchiElemTypes... executing!
+              Model Element ArchiElemTypes created
+              Executing queries...
+                Query aet with 1 result nodes - CONTENT in line 7: [ARCHI_ELEM_TYPES ELEM_TYPE Sender_Type ( const rate msg_gen_rate , const rate timeout_rate ) BEHAVIOR Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } INPUT_INTERACTIONS OR generate_msg ; OR receive_ack_0 ; UNI receive_ack_1 OUTPUT_INTERACTIONS UNI transmit_msg_0 ; UNI transmit_msg_1 ELEM_TYPE Line_Type ( const rate prop_rate , const weight delivery_prob ) BEHAVIOR Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } INPUT_INTERACTIONS UNI receive_0 ; UNI receive_1 OUTPUT_INTERACTIONS UNI deliver_0 ; UNI deliver_1 ELEM_TYPE Receiver_Type ( void ) BEHAVIOR Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } INPUT_INTERACTIONS UNI receive_msg_0 ; UNI receive_msg_1 OUTPUT_INTERACTIONS UNI consume_msg ; UNI transmit_ack_0 ; UNI transmit_ack_1 ]
+                Query elemTypes with 3 result nodes
+              Executing mappings...
+                - QUERY_RESULT: 3 bindings:
+                  (1/3) result node: elem_type (kind). Rule... calling mapElemTypes rule
+
+                  RULE: mapElemTypes
+                  RULE: mapElemTypes... executing!
+                    Model Element ElemType created
+                    Executing queries...
+                      Query outputInt with 2 result nodes
+                      Query elemHeader with 1 result nodes - CONTENT in line 9: [( const rate msg_gen_rate , const rate timeout_rate ) ]
+                      Query behavior with 1 result nodes - CONTENT : [Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } ]
+                      Query name with 0 result nodes
+                      Query et with 1 result nodes - CONTENT in line 9: [ELEM_TYPE Sender_Type ( const rate msg_gen_rate , const rate timeout_rate ) BEHAVIOR Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } INPUT_INTERACTIONS OR generate_msg ; OR receive_ack_0 ; UNI receive_ack_1 OUTPUT_INTERACTIONS UNI transmit_msg_0 ; UNI transmit_msg_1 ]
+                      Query inputInt with 3 result nodes
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: et_header (kind). Rule... calling mapElemHeader rule
+
+                        RULE: mapElemHeader
+                        RULE: mapElemHeader... executing!
+                          Model Element Headers::ET_Header created
+                          Executing queries...
+                            Query eh with 1 result nodes - CONTENT in line 9: [( const rate msg_gen_rate , const rate timeout_rate ) ]
+                            Query const with 2 result nodes
+                          Executing mappings...
+                            - QUERY_RESULT: 2 bindings:
+                              (1/2) result node: constant (kind). Rule... calling constantDef rule
+
+                              RULE: constantDef
+                              RULE: constantDef... executing!
+                                Model Element Headers::Const created
+                                Executing queries...
+                                  Query typeSpecial with 0 result nodes
+                                  Query name with 0 result nodes
+                                  Query typeNormal with 0 result nodes
+                                  Query i with 1 result nodes - CONTENT in line 9: [const rate msg_gen_rate ]
+                                Executing mappings...
+                                  - CODE: 
+                                    - IF detected...false! executing ELSE part 
+                                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                              (2/2) result node: constant (kind). Rule... calling constantDef rule
+
+                              RULE: constantDef
+                              RULE: constantDef... executing!
+                                Model Element Headers::Const created
+                                Executing queries...
+                                  Query typeSpecial with 0 result nodes
+                                  Query name with 0 result nodes
+                                  Query typeNormal with 0 result nodes
+                                  Query i with 1 result nodes - CONTENT in line 10: [const rate timeout_rate ]
+                                Executing mappings...
+                                  - CODE: 
+                                    - IF detected...false! executing ELSE part 
+                                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+                      - QUERY_RESULT: 3 bindings:
+                        (1/3) result node: interaction (kind). Rule... calling mapInteractionListInput rule
+
+                        RULE: mapInteractionListInput
+                        RULE: mapInteractionListInput... executing!
+                          Model Element InputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [OR generate_msg ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 55: [OR ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - OR (value) 
+
+                        (2/3) result node: interaction (kind). Rule... calling mapInteractionListInput rule
+
+                        RULE: mapInteractionListInput
+                        RULE: mapInteractionListInput... executing!
+                          Model Element InputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [OR receive_ack_0 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 56: [OR ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - OR (value) 
+
+                        (3/3) result node: interaction (kind). Rule... calling mapInteractionListInput rule
+
+                        RULE: mapInteractionListInput
+                        RULE: mapInteractionListInput... executing!
+                          Model Element InputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI receive_ack_1 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 57: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                      - QUERY_RESULT: 2 bindings:
+                        (1/2) result node: interaction (kind). Rule... calling mapInteractionListOutput rule
+
+                        RULE: mapInteractionListOutput
+                        RULE: mapInteractionListOutput... executing!
+                          Model Element OutputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI transmit_msg_0 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 61: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                        (2/2) result node: interaction (kind). Rule... calling mapInteractionListOutput rule
+
+                        RULE: mapInteractionListOutput
+                        RULE: mapInteractionListOutput... executing!
+                          Model Element OutputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI transmit_msg_1 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 62: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: behavior_equation_list (kind). Rule... calling mapBehaviorEquations rule
+
+                        RULE: mapBehaviorEquations
+                        RULE: mapBehaviorEquations... executing!
+                          Model Element Behavior::Behavior created
+                          Executing queries...
+                            Query list with 5 result nodes
+                            Query first_eq with 1 result nodes - CONTENT in line 14: [Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; ]
+                            Query bel with 1 result nodes - CONTENT : [Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } ]
+                          Executing mappings...
+                            - QUERY_RESULT: 1 bindings:
+                              (1/1) result node: first_equation (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 16: [< generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ]
+                                  Query equation with 1 result nodes - CONTENT in line 14: [Sender_0 ( boolean sent_bit := starting_bit , real aaa := starting_bit ; void ) = < generate_msg , exp ( normal ( prop_delay_mean , prop_delay_st_dev ) ) > . < transmit_msg_0 , inf ( , ) > . Sender_0_Waiting ( ) ; ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 14: [boolean sent_bit := starting_bit , real aaa := starting_bit ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header_first (kind). Rule... calling mapHeaderFirstEq rule
+
+                                    RULE: mapHeaderFirstEq
+                                    RULE: mapHeaderFirstEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 1 result nodes - CONTENT in line 14: [boolean sent_bit := starting_bit , real aaa := starting_bit ]
+                                        Query bhf with 1 result nodes - CONTENT in line 14: [boolean sent_bit := starting_bit , real aaa := starting_bit ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: 1 bindings:
+                                          (1/1) result node: leftSide_first (kind). Rule... calling mapLeftSideFirst rule
+
+                                          RULE: mapLeftSideFirst
+                                          RULE: mapLeftSideFirst... executing!
+                                            Model Element Headers::LeftSide created
+                                            Executing queries...
+                                              Query var with 2 result nodes
+                                              Query lf with 1 result nodes - CONTENT in line 14: [boolean sent_bit := starting_bit , real aaa := starting_bit ]
+                                            Executing mappings...
+                                              - QUERY_RESULT: 2 bindings:
+                                                (1/2) result node: varInit (kind). Rule... calling mapVarInitialization rule
+
+                                                RULE: mapVarInitialization
+                                                RULE: mapVarInitialization... executing!
+                                                  Model Element Headers::VarInit created
+                                                  Executing queries...
+                                                    Query exp with 1 result nodes - CONTENT : [starting_bit ]
+                                                    Query vi with 1 result nodes - CONTENT in line 14: [boolean sent_bit := starting_bit ]
+                                                    Query name with 0 result nodes
+                                                    Query type with 1 result nodes - CONTENT in line 14: [boolean ]
+                                                  Executing mappings...
+                                                    - CODE: 
+                                                    - QUERY_RESULT: 1 bindings:
+                                                      (1/1) result node: normalType (kind). Rule... RULE NOT FOUND!  FROM: normalType TO: initVarType
+                                                    - QUERY_RESULT: 1 bindings:
+                                                      (1/1) result node: expr (kind). Rule... calling mapTerm rule
+
+                                                      RULE: mapTerm
+                                                      RULE: mapTerm... executing!
+                                                        Model Element Expressions::IdentExpr created
+                                                        Executing queries...
+                                                          Query typeWord with 0 result nodes
+                                                          Query t with 1 result nodes - CONTENT : [starting_bit ]
+                                                          Query name with 1 result nodes - CONTENT : [starting_bit ]
+                                                          Query typeNum with 0 result nodes
+                                                        Executing mappings...
+                                                          - CODE:  - node: expr (kind) - Result: starting_bit
+                                                            - IF detected...false! it doesn't have ELSE part 
+                                                            - IF detected...false! it doesn't have ELSE part 
+
+
+                                                (2/2) result node: varInit (kind). Rule... calling mapVarInitialization rule
+
+                                                RULE: mapVarInitialization
+                                                RULE: mapVarInitialization... executing!
+                                                  Model Element Headers::VarInit created
+                                                  Executing queries...
+                                                    Query exp with 1 result nodes - CONTENT : [starting_bit ]
+                                                    Query vi with 1 result nodes - CONTENT in line 14: [real aaa := starting_bit ]
+                                                    Query name with 0 result nodes
+                                                    Query type with 1 result nodes - CONTENT in line 14: [real ]
+                                                  Executing mappings...
+                                                    - CODE: 
+                                                    - QUERY_RESULT: 1 bindings:
+                                                      (1/1) result node: normalType (kind). Rule... RULE NOT FOUND!  FROM: normalType TO: initVarType
+                                                    - QUERY_RESULT: 1 bindings:
+                                                      (1/1) result node: expr (kind). Rule... calling mapTerm rule
+
+                                                      RULE: mapTerm
+                                                      RULE: mapTerm... executing!
+                                                        Model Element Expressions::IdentExpr created
+                                                        Executing queries...
+                                                          Query typeWord with 0 result nodes
+                                                          Query t with 1 result nodes - CONTENT : [starting_bit ]
+                                                          Query name with 1 result nodes - CONTENT : [starting_bit ]
+                                                          Query typeNum with 0 result nodes
+                                                        Executing mappings...
+                                                          - CODE:  - node: expr (kind) - Result: starting_bit
+                                                            - IF detected...false! it doesn't have ELSE part 
+                                                            - IF detected...false! it doesn't have ELSE part 
+
+
+
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+                            - QUERY_RESULT: 5 bindings:
+                              (1/5) result node: equations (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 19: [choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ]
+                                  Query equation with 1 result nodes - CONTENT in line 18: [Sender_0_Waiting ( integer asd ; local real blabla ) = choice { < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_0_Retransmitting ( ) } ; ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 18: [integer asd ; local real blabla ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header (kind). Rule... calling mapHeaderEq rule
+
+                                    RULE: mapHeaderEq
+                                    RULE: mapHeaderEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 1 result nodes - CONTENT : [integer asd ]
+                                        Query bh with 1 result nodes - CONTENT in line 18: [integer asd ; local real blabla ]
+                                        Query rightPart with 1 result nodes - CONTENT : [local real blabla ]
+                                      Executing mappings...
+                                        - QUERY_RESULT: 1 bindings:
+                                          (1/1) result node: leftSide (kind). Rule... calling mapLeftSide rule
+
+                                          RULE: mapLeftSide
+                                          RULE: mapLeftSide... executing!
+                                            Model Element Headers::LeftSide created
+                                            Executing queries...
+                                              Query var with 1 result nodes - CONTENT in line 18: [integer asd ]
+                                              Query lf with 1 result nodes - CONTENT : [integer asd ]
+                                            Executing mappings...
+                                              - QUERY_RESULT: 1 bindings:
+                                                (1/1) result node: var (kind). Rule... calling mapVar rule
+
+                                                RULE: mapVar
+                                                RULE: mapVar... executing!
+                                                  Model Element Headers::Var created
+                                                  Executing queries...
+                                                    Query v with 1 result nodes - CONTENT in line 18: [integer asd ]
+                                                    Query name with 0 result nodes
+                                                    Query type with 1 result nodes - CONTENT in line 18: [integer ]
+                                                  Executing mappings...
+                                                    - CODE: 
+                                                    - QUERY_RESULT: 1 bindings:
+                                                      (1/1) result node: normalType (kind). Rule... RULE NOT FOUND!  FROM: normalType TO: varType
+
+
+                                        - QUERY_RESULT: 1 bindings:
+                                          (1/1) result node: rightSide (kind). Rule... calling mapRightSideFirst rule
+
+                                          RULE: mapRightSideFirst
+                                          RULE: mapRightSideFirst... executing!
+                                            Model Element Headers::RightSide created
+                                            Executing queries...
+                                              Query loc with 1 result nodes - CONTENT in line 18: [local real blabla ]
+                                              Query rs with 1 result nodes - CONTENT : [local real blabla ]
+                                            Executing mappings...
+                                              - QUERY_RESULT: 1 bindings:
+                                                (1/1) result node: local (kind). Rule... calling mapLocalVar rule
+
+                                                RULE: mapLocalVar
+                                                RULE: mapLocalVar... executing!
+                                                  Model Element Headers::Local created
+                                                  Executing queries...
+                                                    Query name with 0 result nodes
+                                                    Query loc with 1 result nodes - CONTENT in line 18: [local real blabla ]
+                                                    Query type with 1 result nodes - CONTENT in line 18: [real ]
+                                                  Executing mappings...
+                                                    - CODE: 
+                                                    - QUERY_RESULT: 1 bindings:
+                                                      (1/1) result node: normalType (kind). Rule... RULE NOT FOUND!  FROM: normalType TO: localType
+
+
+
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+
+                              (2/5) result node: equations (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 27: [choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ]
+                                  Query equation with 1 result nodes - CONTENT in line 26: [Sender_0_Retransmitting ( void ; void ) = choice { < transmit_msg_0 , inf > . Sender_0_Waiting ( ) , < receive_ack_0 , _ > . Sender_1 ( ) , < receive_ack_1 , _ > . Sender_0_Retransmitting ( ) } ; ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 26: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header (kind). Rule... calling mapHeaderEq rule
+
+                                    RULE: mapHeaderEq
+                                    RULE: mapHeaderEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bh with 1 result nodes - CONTENT in line 26: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+
+                              (3/5) result node: equations (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 35: [< generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ]
+                                  Query equation with 1 result nodes - CONTENT in line 34: [Sender_1 ( void ; void ) = < generate_msg , exp ( msg_gen_rate ) > . < transmit_msg_1 , inf > . Sender_1_Waiting ( ) ; ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 34: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header (kind). Rule... calling mapHeaderEq rule
+
+                                    RULE: mapHeaderEq
+                                    RULE: mapHeaderEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bh with 1 result nodes - CONTENT in line 34: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+
+                              (4/5) result node: equations (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 38: [choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ]
+                                  Query equation with 1 result nodes - CONTENT in line 37: [Sender_1_Waiting ( void ; void ) = choice { < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Waiting ( ) , < timeout , exp ( timeout_rate ) > . Sender_1_Retransmitting ( ) } ; ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 37: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header (kind). Rule... calling mapHeaderEq rule
+
+                                    RULE: mapHeaderEq
+                                    RULE: mapHeaderEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bh with 1 result nodes - CONTENT in line 37: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+
+                              (5/5) result node: equations (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 46: [choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } ]
+                                  Query equation with 1 result nodes - CONTENT in line 45: [Sender_1_Retransmitting ( void ; void ) = choice { < transmit_msg_1 , inf > . Sender_1_Waiting ( ) , < receive_ack_1 , _ > . Sender_0 ( ) , < receive_ack_0 , _ > . Sender_1_Retransmitting ( ) } ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 45: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header (kind). Rule... calling mapHeaderEq rule
+
+                                    RULE: mapHeaderEq
+                                    RULE: mapHeaderEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bh with 1 result nodes - CONTENT in line 45: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+
+
+
+                  (2/3) result node: elem_type (kind). Rule... calling mapElemTypes rule
+
+                  RULE: mapElemTypes
+                  RULE: mapElemTypes... executing!
+                    Model Element ElemType created
+                    Executing queries...
+                      Query outputInt with 2 result nodes
+                      Query elemHeader with 1 result nodes - CONTENT in line 65: [( const rate prop_rate , const weight delivery_prob ) ]
+                      Query behavior with 1 result nodes - CONTENT : [Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } ]
+                      Query name with 0 result nodes
+                      Query et with 1 result nodes - CONTENT in line 65: [ELEM_TYPE Line_Type ( const rate prop_rate , const weight delivery_prob ) BEHAVIOR Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } INPUT_INTERACTIONS UNI receive_0 ; UNI receive_1 OUTPUT_INTERACTIONS UNI deliver_0 ; UNI deliver_1 ]
+                      Query inputInt with 2 result nodes
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: et_header (kind). Rule... calling mapElemHeader rule
+
+                        RULE: mapElemHeader
+                        RULE: mapElemHeader... executing!
+                          Model Element Headers::ET_Header created
+                          Executing queries...
+                            Query eh with 1 result nodes - CONTENT in line 65: [( const rate prop_rate , const weight delivery_prob ) ]
+                            Query const with 2 result nodes
+                          Executing mappings...
+                            - QUERY_RESULT: 2 bindings:
+                              (1/2) result node: constant (kind). Rule... calling constantDef rule
+
+                              RULE: constantDef
+                              RULE: constantDef... executing!
+                                Model Element Headers::Const created
+                                Executing queries...
+                                  Query typeSpecial with 0 result nodes
+                                  Query name with 0 result nodes
+                                  Query typeNormal with 0 result nodes
+                                  Query i with 1 result nodes - CONTENT in line 65: [const rate prop_rate ]
+                                Executing mappings...
+                                  - CODE: 
+                                    - IF detected...false! executing ELSE part 
+                                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                              (2/2) result node: constant (kind). Rule... calling constantDef rule
+
+                              RULE: constantDef
+                              RULE: constantDef... executing!
+                                Model Element Headers::Const created
+                                Executing queries...
+                                  Query typeSpecial with 0 result nodes
+                                  Query name with 0 result nodes
+                                  Query typeNormal with 0 result nodes
+                                  Query i with 1 result nodes - CONTENT in line 66: [const weight delivery_prob ]
+                                Executing mappings...
+                                  - CODE: 
+                                    - IF detected...false! executing ELSE part 
+                                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+                      - QUERY_RESULT: 2 bindings:
+                        (1/2) result node: interaction (kind). Rule... calling mapInteractionListInput rule
+
+                        RULE: mapInteractionListInput
+                        RULE: mapInteractionListInput... executing!
+                          Model Element InputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI receive_0 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 89: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                        (2/2) result node: interaction (kind). Rule... calling mapInteractionListInput rule
+
+                        RULE: mapInteractionListInput
+                        RULE: mapInteractionListInput... executing!
+                          Model Element InputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI receive_1 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 90: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                      - QUERY_RESULT: 2 bindings:
+                        (1/2) result node: interaction (kind). Rule... calling mapInteractionListOutput rule
+
+                        RULE: mapInteractionListOutput
+                        RULE: mapInteractionListOutput... executing!
+                          Model Element OutputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI deliver_0 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 94: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                        (2/2) result node: interaction (kind). Rule... calling mapInteractionListOutput rule
+
+                        RULE: mapInteractionListOutput
+                        RULE: mapInteractionListOutput... executing!
+                          Model Element OutputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI deliver_1 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 95: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: behavior_equation_list (kind). Rule... calling mapBehaviorEquations rule
+
+                        RULE: mapBehaviorEquations
+                        RULE: mapBehaviorEquations... executing!
+                          Model Element Behavior::Behavior created
+                          Executing queries...
+                            Query list with 0 result nodes
+                            Query first_eq with 1 result nodes - CONTENT in line 70: [Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } ]
+                            Query bel with 1 result nodes - CONTENT : [Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } ]
+                          Executing mappings...
+                            - QUERY_RESULT: 1 bindings:
+                              (1/1) result node: first_equation (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 71: [choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } ]
+                                  Query equation with 1 result nodes - CONTENT in line 70: [Line ( void ; void ) = choice { < receive_0 , _ > . < propagate_0 , exp ( prop_rate ) > . choice { < keep_0 , inf ( , delivery_prob ) > . < deliver_0 , inf > . Line ( ) , < lose_0 , inf ( , ) > . Line ( ) } , < receive_1 , _ > . < propagate_1 , exp ( prop_rate ) > . choice { < keep_1 , inf ( , delivery_prob ) > . < deliver_1 , inf > . Line ( ) , < lose_1 , inf ( , ) > . Line ( ) } } ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 70: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header_first (kind). Rule... calling mapHeaderFirstEq rule
+
+                                    RULE: mapHeaderFirstEq
+                                    RULE: mapHeaderFirstEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bhf with 1 result nodes - CONTENT in line 70: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+                            - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+                  (3/3) result node: elem_type (kind). Rule... calling mapElemTypes rule
+
+                  RULE: mapElemTypes
+                  RULE: mapElemTypes... executing!
+                    Model Element ElemType created
+                    Executing queries...
+                      Query outputInt with 3 result nodes
+                      Query elemHeader with 1 result nodes - CONTENT in line 98: [( void ) ]
+                      Query behavior with 1 result nodes - CONTENT : [Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } ]
+                      Query name with 0 result nodes
+                      Query et with 1 result nodes - CONTENT in line 98: [ELEM_TYPE Receiver_Type ( void ) BEHAVIOR Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } INPUT_INTERACTIONS UNI receive_msg_0 ; UNI receive_msg_1 OUTPUT_INTERACTIONS UNI consume_msg ; UNI transmit_ack_0 ; UNI transmit_ack_1 ]
+                      Query inputInt with 2 result nodes
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: et_header (kind). Rule... calling mapElemHeader rule
+
+                        RULE: mapElemHeader
+                        RULE: mapElemHeader... executing!
+                          Model Element Headers::ET_Header created
+                          Executing queries...
+                            Query eh with 1 result nodes - CONTENT in line 98: [( void ) ]
+                            Query const with 0 result nodes
+                          Executing mappings...
+                            - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                      - QUERY_RESULT: 2 bindings:
+                        (1/2) result node: interaction (kind). Rule... calling mapInteractionListInput rule
+
+                        RULE: mapInteractionListInput
+                        RULE: mapInteractionListInput... executing!
+                          Model Element InputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI receive_msg_0 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 118: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                        (2/2) result node: interaction (kind). Rule... calling mapInteractionListInput rule
+
+                        RULE: mapInteractionListInput
+                        RULE: mapInteractionListInput... executing!
+                          Model Element InputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI receive_msg_1 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 119: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                      - QUERY_RESULT: 3 bindings:
+                        (1/3) result node: interaction (kind). Rule... calling mapInteractionListOutput rule
+
+                        RULE: mapInteractionListOutput
+                        RULE: mapInteractionListOutput... executing!
+                          Model Element OutputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI consume_msg ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 123: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                        (2/3) result node: interaction (kind). Rule... calling mapInteractionListOutput rule
+
+                        RULE: mapInteractionListOutput
+                        RULE: mapInteractionListOutput... executing!
+                          Model Element OutputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI transmit_ack_0 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 124: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                        (3/3) result node: interaction (kind). Rule... calling mapInteractionListOutput rule
+
+                        RULE: mapInteractionListOutput
+                        RULE: mapInteractionListOutput... executing!
+                          Model Element OutputInteraction created
+                          Executing queries...
+                            Query int with 1 result nodes - CONTENT : [UNI transmit_ack_1 ]
+                            Query name with 0 result nodes
+                            Query type with 1 result nodes - CONTENT in line 125: [UNI ]
+                          Executing mappings...
+                            - CODE: 
+                            - QUERY_ACCESS: variable: type - 
+                              node: interaction_type (kind) - leaf: TOKEN (kind) - UNI (value) 
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: behavior_equation_list (kind). Rule... calling mapBehaviorEquations rule
+
+                        RULE: mapBehaviorEquations
+                        RULE: mapBehaviorEquations... executing!
+                          Model Element Behavior::Behavior created
+                          Executing queries...
+                            Query list with 1 result nodes - CONTENT in line 109: [Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } ]
+                            Query first_eq with 1 result nodes - CONTENT in line 102: [Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; ]
+                            Query bel with 1 result nodes - CONTENT : [Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } ]
+                          Executing mappings...
+                            - QUERY_RESULT: 1 bindings:
+                              (1/1) result node: first_equation (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 103: [choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ]
+                                  Query equation with 1 result nodes - CONTENT in line 102: [Receiver_0 ( void ; void ) = choice { < receive_msg_0 , _ > . < consume_msg , inf > . < transmit_ack_0 , inf > . Receiver_1 ( ) , < receive_msg_1 , _ > . < transmit_ack_1 , inf > . Receiver_0 ( ) } ; ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 102: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header_first (kind). Rule... calling mapHeaderFirstEq rule
+
+                                    RULE: mapHeaderFirstEq
+                                    RULE: mapHeaderFirstEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bhf with 1 result nodes - CONTENT in line 102: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+                            - QUERY_RESULT: 1 bindings:
+                              (1/1) result node: equations (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 110: [choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } ]
+                                  Query equation with 1 result nodes - CONTENT in line 109: [Receiver_1 ( void ; void ) = choice { < receive_msg_1 , _ > . < consume_msg , inf > . < transmit_ack_1 , inf > . Receiver_0 ( ) , < receive_msg_0 , _ > . < transmit_ack_0 , inf > . Receiver_1 ( ) } ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 109: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header (kind). Rule... calling mapHeaderEq rule
+
+                                    RULE: mapHeaderEq
+                                    RULE: mapHeaderEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bh with 1 result nodes - CONTENT in line 109: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+
+
+
+
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: archi_topology (kind). Rule... calling mapArchiTopology rule
+
+            RULE: mapArchiTopology
+            RULE: mapArchiTopology... executing!
+              Model Element ArchiTopology created
+              Executing queries...
+                Query istances with 4 result nodes
+                Query attach with 8 result nodes
+                Query at with 1 result nodes - CONTENT in line 128: [ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES S : Sender_Type ( msg_gen_rate , timeout_rate ) ; LM : Line_Type ( prop_rate , delivery_prob ) ; LA : Line_Type ( prop_rate , delivery_prob ) ; R : Receiver_Type ( ) ARCHI_INTERACTIONS S . generate_msg ; R . consume_msg ARCHI_ATTACHMENTS FROM S . transmit_msg_0 TO LM . receive_0 ; FROM S . transmit_msg_1 TO LM . receive_1 ; FROM LM . deliver_0 TO R . receive_msg_0 ; FROM LM . deliver_1 TO R . receive_msg_1 ; FROM R . transmit_ack_0 TO LA . receive_0 ; FROM R . transmit_ack_1 TO LA . receive_1 ; FROM LA . deliver_0 TO S . receive_ack_0 ; FROM LA . deliver_1 TO S . receive_ack_1 ]
+              Executing mappings...
+                - QUERY_RESULT: 4 bindings:
+                  (1/4) result node: instances (kind). Rule... calling mapIstances rule
+
+                  RULE: mapIstances
+                  RULE: mapIstances... executing!
+                    Model Element ArchiElemInstance created
+                    Executing queries...
+                      Query param with 0 result nodes
+                      Query name with 0 result nodes
+                      Query type with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 133: [S : Sender_Type ( msg_gen_rate , timeout_rate ) ; ]
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_ACCESS: variable: param -  VARIABLE HAS NOT RESULTS! 
+                      - OPERATION_CREATION: ElemType created
+                      - CODE: 
+
+                  (2/4) result node: instances (kind). Rule... calling mapIstances rule
+
+                  RULE: mapIstances
+                  RULE: mapIstances... executing!
+                    Model Element ArchiElemInstance created
+                    Executing queries...
+                      Query param with 0 result nodes
+                      Query name with 0 result nodes
+                      Query type with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 135: [LM : Line_Type ( prop_rate , delivery_prob ) ; ]
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_ACCESS: variable: param -  VARIABLE HAS NOT RESULTS! 
+                      - OPERATION_CREATION: ElemType created
+                      - CODE: 
+
+                  (3/4) result node: instances (kind). Rule... calling mapIstances rule
+
+                  RULE: mapIstances
+                  RULE: mapIstances... executing!
+                    Model Element ArchiElemInstance created
+                    Executing queries...
+                      Query param with 0 result nodes
+                      Query name with 0 result nodes
+                      Query type with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 137: [LA : Line_Type ( prop_rate , delivery_prob ) ; ]
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_ACCESS: variable: param -  VARIABLE HAS NOT RESULTS! 
+                      - OPERATION_CREATION: ElemType created
+                      - CODE: 
+
+                  (4/4) result node: instances (kind). Rule... calling mapIstances rule
+
+                  RULE: mapIstances
+                  RULE: mapIstances... executing!
+                    Model Element ArchiElemInstance created
+                    Executing queries...
+                      Query param with 0 result nodes
+                      Query name with 0 result nodes
+                      Query type with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 139: [R : Receiver_Type ( ) ]
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_ACCESS: variable: param -  VARIABLE HAS NOT RESULTS! 
+                      - OPERATION_CREATION: ElemType created
+                      - CODE: 
+
+                - QUERY_RESULT: 8 bindings:
+                  (1/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 150: [S ]
+                      Query att with 1 result nodes - CONTENT in line 150: [FROM S . transmit_msg_0 TO LM . receive_0 ]
+                      Query end with 1 result nodes - CONTENT in line 150: [LM ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 150: [LM ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 150: [S ]
+                          Executing mappings...
+
+
+                  (2/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 151: [S ]
+                      Query att with 1 result nodes - CONTENT in line 151: [FROM S . transmit_msg_1 TO LM . receive_1 ]
+                      Query end with 1 result nodes - CONTENT in line 151: [LM ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 151: [LM ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 151: [S ]
+                          Executing mappings...
+
+
+                  (3/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 152: [LM ]
+                      Query att with 1 result nodes - CONTENT in line 152: [FROM LM . deliver_0 TO R . receive_msg_0 ]
+                      Query end with 1 result nodes - CONTENT in line 152: [R ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 152: [R ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 152: [LM ]
+                          Executing mappings...
+
+
+                  (4/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 153: [LM ]
+                      Query att with 1 result nodes - CONTENT in line 153: [FROM LM . deliver_1 TO R . receive_msg_1 ]
+                      Query end with 1 result nodes - CONTENT in line 153: [R ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 153: [R ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 153: [LM ]
+                          Executing mappings...
+
+
+                  (5/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 154: [R ]
+                      Query att with 1 result nodes - CONTENT in line 154: [FROM R . transmit_ack_0 TO LA . receive_0 ]
+                      Query end with 1 result nodes - CONTENT in line 154: [LA ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 154: [LA ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 154: [R ]
+                          Executing mappings...
+
+
+                  (6/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 155: [R ]
+                      Query att with 1 result nodes - CONTENT in line 155: [FROM R . transmit_ack_1 TO LA . receive_1 ]
+                      Query end with 1 result nodes - CONTENT in line 155: [LA ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 155: [LA ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 155: [R ]
+                          Executing mappings...
+
+
+                  (7/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 156: [LA ]
+                      Query att with 1 result nodes - CONTENT in line 156: [FROM LA . deliver_0 TO S . receive_ack_0 ]
+                      Query end with 1 result nodes - CONTENT in line 156: [S ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 156: [S ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 156: [LA ]
+                          Executing mappings...
+
+
+                  (8/8) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 157: [LA ]
+                      Query att with 1 result nodes - CONTENT in line 157: [FROM LA . deliver_1 TO S . receive_ack_1 ]
+                      Query end with 1 result nodes - CONTENT in line 157: [S ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 157: [S ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 157: [LA ]
+                          Executing mappings...
+
+
+
+
+      (2/2) result node: archi_type (kind). Rule... calling mapArchiType rule
+
+      RULE: mapArchiType
+      RULE: mapArchiType... executing!
+        Model Element ArchiType created
+        Executing queries...
+          Query name with 0 result nodes
+          Query at with 1 result nodes - CONTENT in line 1: [ARCHI_TYPE a ( void ) ARCHI_ELEM_TYPES ELEM_TYPE b ( void ) BEHAVIOR aa ( void ; void ) = stop ; INPUT_INTERACTIONS void OUTPUT_INTERACTIONS void ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES c : d ( ) ; ARCHI_INTERACTIONS e . f ARCHI_ATTACHMENTS FROM e . f TO g . h END ]
+          Query topology with 1 result nodes - CONTENT in line 12: [ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES c : d ( ) ; ARCHI_INTERACTIONS e . f ARCHI_ATTACHMENTS FROM e . f TO g . h ]
+          Query aet with 1 result nodes - CONTENT in line 3: [ARCHI_ELEM_TYPES ELEM_TYPE b ( void ) BEHAVIOR aa ( void ; void ) = stop ; INPUT_INTERACTIONS void OUTPUT_INTERACTIONS void ]
+          Query intest with 1 result nodes - CONTENT in line 2: [( void ) ]
+        Executing mappings...
+          - CODE: 
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: archi_header (kind). Rule... calling mapArchiHeader rule
+
+            RULE: mapArchiHeader
+            RULE: mapArchiHeader... executing!
+              Model Element Headers::AT_Header created
+              Executing queries...
+                Query const with 0 result nodes
+                Query ah with 1 result nodes - CONTENT in line 2: [( void ) ]
+              Executing mappings...
+                - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: archi_elem_types (kind). Rule... calling mapArchiElemTypes rule
+
+            RULE: mapArchiElemTypes
+            RULE: mapArchiElemTypes... executing!
+              Model Element ArchiElemTypes created
+              Executing queries...
+                Query aet with 1 result nodes - CONTENT in line 3: [ARCHI_ELEM_TYPES ELEM_TYPE b ( void ) BEHAVIOR aa ( void ; void ) = stop ; INPUT_INTERACTIONS void OUTPUT_INTERACTIONS void ]
+                Query elemTypes with 1 result nodes - CONTENT in line 4: [ELEM_TYPE b ( void ) BEHAVIOR aa ( void ; void ) = stop ; INPUT_INTERACTIONS void OUTPUT_INTERACTIONS void ]
+              Executing mappings...
+                - QUERY_RESULT: 1 bindings:
+                  (1/1) result node: elem_type (kind). Rule... calling mapElemTypes rule
+
+                  RULE: mapElemTypes
+                  RULE: mapElemTypes... executing!
+                    Model Element ElemType created
+                    Executing queries...
+                      Query outputInt with 0 result nodes
+                      Query elemHeader with 1 result nodes - CONTENT in line 5: [( void ) ]
+                      Query behavior with 1 result nodes - CONTENT : [aa ( void ; void ) = stop ; ]
+                      Query name with 0 result nodes
+                      Query et with 1 result nodes - CONTENT in line 4: [ELEM_TYPE b ( void ) BEHAVIOR aa ( void ; void ) = stop ; INPUT_INTERACTIONS void OUTPUT_INTERACTIONS void ]
+                      Query inputInt with 0 result nodes
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: et_header (kind). Rule... calling mapElemHeader rule
+
+                        RULE: mapElemHeader
+                        RULE: mapElemHeader... executing!
+                          Model Element Headers::ET_Header created
+                          Executing queries...
+                            Query eh with 1 result nodes - CONTENT in line 5: [( void ) ]
+                            Query const with 0 result nodes
+                          Executing mappings...
+                            - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: behavior_equation_list (kind). Rule... calling mapBehaviorEquations rule
+
+                        RULE: mapBehaviorEquations
+                        RULE: mapBehaviorEquations... executing!
+                          Model Element Behavior::Behavior created
+                          Executing queries...
+                            Query list with 0 result nodes
+                            Query first_eq with 1 result nodes - CONTENT in line 7: [aa ( void ; void ) = stop ; ]
+                            Query bel with 1 result nodes - CONTENT : [aa ( void ; void ) = stop ; ]
+                          Executing mappings...
+                            - QUERY_RESULT: 1 bindings:
+                              (1/1) result node: first_equation (kind). Rule... calling mapEquation rule
+
+                              RULE: mapEquation
+                              RULE: mapEquation... executing!
+                                Model Element Behavior::BehavEquation created
+                                Executing queries...
+                                  Query process with 1 result nodes - CONTENT in line 7: [stop ]
+                                  Query equation with 1 result nodes - CONTENT in line 7: [aa ( void ; void ) = stop ; ]
+                                  Query name with 0 result nodes
+                                  Query h with 1 result nodes - CONTENT in line 7: [void ; void ]
+                                Executing mappings...
+                                  - CODE: 
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: processTerm (kind). Rule... RULE NOT FOUND!  FROM: processTerm TO: pt
+                                  - QUERY_RESULT: 1 bindings:
+                                    (1/1) result node: behavior_header_first (kind). Rule... calling mapHeaderFirstEq rule
+
+                                    RULE: mapHeaderFirstEq
+                                    RULE: mapHeaderFirstEq... executing!
+                                      Model Element Headers::BehavHeader created
+                                      Executing queries...
+                                        Query leftPart with 0 result nodes
+                                        Query bhf with 1 result nodes - CONTENT in line 7: [void ; void ]
+                                        Query rightPart with 0 result nodes
+                                      Executing mappings...
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+                                        - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+                            - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: archi_topology (kind). Rule... calling mapArchiTopology rule
+
+            RULE: mapArchiTopology
+            RULE: mapArchiTopology... executing!
+              Model Element ArchiTopology created
+              Executing queries...
+                Query istances with 1 result nodes - CONTENT in line 14: [c : d ( ) ; ]
+                Query attach with 1 result nodes - CONTENT in line 18: [FROM e . f TO g . h ]
+                Query at with 1 result nodes - CONTENT in line 12: [ARCHI_TOPOLOGY ARCHI_ELEM_INSTANCES c : d ( ) ; ARCHI_INTERACTIONS e . f ARCHI_ATTACHMENTS FROM e . f TO g . h ]
+              Executing mappings...
+                - QUERY_RESULT: 1 bindings:
+                  (1/1) result node: instances (kind). Rule... calling mapIstances rule
+
+                  RULE: mapIstances
+                  RULE: mapIstances... executing!
+                    Model Element ArchiElemInstance created
+                    Executing queries...
+                      Query param with 0 result nodes
+                      Query name with 0 result nodes
+                      Query type with 0 result nodes
+                      Query i with 1 result nodes - CONTENT in line 14: [c : d ( ) ; ]
+                    Executing mappings...
+                      - CODE: 
+                      - QUERY_ACCESS: variable: param -  VARIABLE HAS NOT RESULTS! 
+                      - OPERATION_CREATION: ElemType created
+                      - CODE: 
+
+                - QUERY_RESULT: 1 bindings:
+                  (1/1) result node: attachment (kind). Rule... calling mapAttachement rule
+
+                  RULE: mapAttachement
+                  RULE: mapAttachement... executing!
+                    Model Element Attachement created
+                    Executing queries...
+                      Query start with 1 result nodes - CONTENT in line 18: [e ]
+                      Query att with 1 result nodes - CONTENT in line 18: [FROM e . f TO g . h ]
+                      Query end with 1 result nodes - CONTENT in line 18: [g ]
+                    Executing mappings...
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameTo (kind). Rule... calling mapTo rule
+
+                        RULE: mapTo
+                        RULE: mapTo... executing!
+                          Model Element To created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 18: [g ]
+                          Executing mappings...
+
+                      - QUERY_RESULT: 1 bindings:
+                        (1/1) result node: istanceNameFrom (kind). Rule... calling mapFrom rule
+
+                        RULE: mapFrom
+                        RULE: mapFrom... executing!
+                          Model Element From created
+                          Executing queries...
+                            Query name with 1 result nodes - CONTENT in line 18: [e ]
+                          Executing mappings...
+
+
+
+
+
+
+Saving...

@@ -1,0 +1,42 @@
+---- Probando probando
+  
+mod @ECORE@ is
+    sort @Package @BasicType @Classifier @DataType @Class @Metamodel @ERROR@ @Attribute @Reference .
+    sort Int Nat Bool String List @Enumeration @EnumerationInstance ListOrd OclVoid .
+    op name : @Metamodel -> String .
+    op packages : @Metamodel -> @Package .
+    op subPackages : @Package -> ListOrd .
+    op metamodel : @Package -> @Metamodel . 
+    op superPackage : @Package -> OclVoid .
+    op classes : @Package -> ListOrd . 
+endm 
+  
+mod @MPNS@ is
+  protecting @ECORE@
+  .
+  op @MPNs@ : -> @Metamodel
+  .
+  eq name( @MPNs@ ) =
+    "MPNs"
+  .
+  eq packages( @MPNs@ ) =
+    MPNs
+  .
+  op MPNs : -> @Package
+  .
+  eq name( MPNs ) =
+    "MPNs"
+  .
+  eq metamodel( MPNs ) =
+    @MPNs@
+  .
+  eq superPackage( MPNs ) =
+    null
+  .
+  eq subPackages( MPNs ) =
+    nil
+  .  
+  eq classes( MPNs ) =
+    __( Phone@MPNs , CallRecord@MPNs , Call@MPNs , Antenna@MPNs , MPN@MPNs )
+  .
+endm

@@ -1,0 +1,5 @@
+{
+    "facetLabel":       { type: "text" },
+    "queryParamName":   { type: "text" },
+    "requiresEnter":    {type: "boolean", defaultValue: false}
+}

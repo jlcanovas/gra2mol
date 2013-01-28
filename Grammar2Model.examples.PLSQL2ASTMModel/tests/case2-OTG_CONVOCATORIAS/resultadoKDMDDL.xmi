@@ -1,0 +1,176 @@
+<kdm:Segment xmlns:code='http://www.eclipse.org/MoDisco/kdm/code' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.eclipse.org/MoDisco/kdm/data ../../metamodels/kdm.ecore#//data http://www.eclipse.org/MoDisco/kdm/kdm ../../metamodels/kdm.ecore#//kdm http://www.eclipse.org/MoDisco/kdm/code ../../metamodels/kdm.ecore#//code' xmi:version='2.0' xmlns:xmi='http://www.omg.org/XMI' xmlns:kdm='http://www.eclipse.org/MoDisco/kdm/kdm' xmlns:data='http://www.eclipse.org/MoDisco/kdm/data'>
+<model name='DDL Datatypes' xsi:type='code:CodeModel'>
+<codeElement name='SQL Datatypes' xsi:type='code:LanguageUnit'>
+<codeElement xsi:type='code:BooleanType'/>
+<codeElement name='sql varchar' xsi:type='code:StringType'/>
+<codeElement name='sql int' xsi:type='code:IntegerType'/>
+<codeElement name='sql decimal' xsi:type='code:DecimalType'/>
+<codeElement name='sql date' xsi:type='code:DateType'/>
+</codeElement>
+</model>
+<model name='Relational Schema' xsi:type='data:DataModel'>
+<dataElement xsi:type='data:RelationalSchema'>
+<dataElement name='OTG_ACTIVIDADES' xsi:type='data:RelationalTable'>
+<itemUnit name='ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_CODIGOOTRI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_DESCRIPCION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_DESTINATARIO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_OBJETIVOS' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_CONDICIONES' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_FINANCIACION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_TIPOSOLI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_MODALIDADES' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='ACT_DEDICA' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='ACT_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.0/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.0/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.6/@dataElement.0'/>
+</dataElement>
+<dataElement name='ACT_CODIGOOTRI' xsi:type='data:UniqueKey'/>
+</dataElement>
+<dataElement name='OTG_MODALIDADES' xsi:type='data:RelationalTable'>
+<itemUnit name='MOD_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_CODIGOOTRI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_DESCRIPCION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_DESTINATARIO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_OBJETIVOS' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_FINANCIACION' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_CONDICIONES' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='MOD_DEDICA' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='MOD_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.1/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.1/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.0/@dataElement.0'/>
+</dataElement>
+<dataElement name='MOD_CODIGOOTRI' xsi:type='data:UniqueKey'/>
+</dataElement>
+<dataElement name='OTG_PCONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='PCO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_MOD_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FINIS' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FFINS' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FFINA' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_ANO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PCO_FJUST' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<dataElement name='PCO_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.2/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.2/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.0/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.2/@dataElement.2' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.1/@dataElement.0'/>
+</dataElement>
+</dataElement>
+<dataElement name='OTG_TCONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='TCO_CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='TCO_TER_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='TCO_PTC_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='TCO_CON_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.3/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.3/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.6/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.3/@dataElement.2' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.5/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.3/@dataElement.3' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.8/@dataElement.0'/>
+</dataElement>
+</dataElement>
+<dataElement name='OTG_SOLICITUDES' xsi:type='data:RelationalTable'>
+<itemUnit name='SOL_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_ACT_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MOD_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PCO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_TITULO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FENTREGA' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_ESO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FRES' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FPUB' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_DURACION' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_UOR_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMP' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPP' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPE' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_APR_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_COORDINADO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_SUP_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_FANUAL' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_SOL_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PRO_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_CTR_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MBE_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPS' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MON_CODIGOS' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPPS' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPES' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_MON_CODIGOU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPPU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_IMPEU' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_TIPO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PER_IDT' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='SOL_PER_IDB' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<dataElement name='SOL_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.4/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.4/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.0/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.4/@dataElement.2' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.6/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.4/@dataElement.3' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.1/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.4/@dataElement.4' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.2/@dataElement.0'/>
+</dataElement>
+<dataElement xsi:type='data:ReferenceKey' implementation='#//@model.1/@dataElement.0/@dataElement.4/@itemUnit.20'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.4/@dataElement.5' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.4/@dataElement.0'/>
+</dataElement>
+</dataElement>
+<dataElement name='OTG_PTCONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='PTC_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='PTC_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='PTC_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.5/@itemUnit.0'/>
+</dataElement>
+<dataElement name='OTG_CONVOCATORIAS' xsi:type='data:RelationalTable'>
+<itemUnit name='CON_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_CODIGOOTRI' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FPUB' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FRES' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FCOR1' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_FCOR2' type='#//@model.0/@codeElement.0/@codeElement.4' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_ACCESO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_TIPO' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_PUB_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='LOG' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_INFOR' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_DEDICA' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_TIPOWEB' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<itemUnit name='CON_WEB' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='CON_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.6/@itemUnit.0'/>
+<dataElement xsi:type='data:ReferenceKey'>
+<dataRelation from='#//@model.1/@dataElement.0/@dataElement.6/@dataElement.1' xsi:type='data:KeyRelation' to='#//@model.1/@dataElement.0/@dataElement.7/@dataElement.0'/>
+</dataElement>
+<dataElement name='CON_CODIGOOTRI' xsi:type='data:UniqueKey'/>
+</dataElement>
+<dataElement name='OTG_PUBLICAOFI' xsi:type='data:RelationalTable'>
+<itemUnit name='PUB_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='PUB_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='PUB_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.7/@itemUnit.0'/>
+</dataElement>
+<dataElement name='OTG_TERCEROS' xsi:type='data:RelationalTable'>
+<itemUnit name='TER_CODIGO' type='#//@model.0/@codeElement.0/@codeElement.2' xsi:type='code:ItemUnit'/>
+<itemUnit name='TER_NOMBRE' type='#//@model.0/@codeElement.0/@codeElement.1' xsi:type='code:ItemUnit'/>
+<dataElement name='TER_CODIGO' xsi:type='data:UniqueKey' implementation='#//@model.1/@dataElement.0/@dataElement.8/@itemUnit.0'/>
+</dataElement>
+</dataElement>
+</model>
+</kdm:Segment>

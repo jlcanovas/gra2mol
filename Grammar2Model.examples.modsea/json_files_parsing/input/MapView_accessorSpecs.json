@@ -1,0 +1,61 @@
+[
+    {   accessorName:   "getProxy",
+        attributeName:  "proxy"
+    },
+    {   accessorName: "getLatlng",
+        alternatives: [
+            {   bindings: [
+                    {   attributeName:  "latlng",
+                        types:          [ "float", "float" ],
+                        bindingNames:   [ "lat", "lng" ]
+                    },
+                    {   attributeName:  "maxAutoZoom",
+                        type:           "float",
+                        bindingName:    "maxAutoZoom",
+                        optional:       true
+                    }
+                ]
+            },
+            {   bindings: [
+                    {   attributeName:  "lat",
+                        type:           "float",
+                        bindingName:    "lat"
+                    },
+                    {   attributeName:  "lng",
+                        type:           "float",
+                        bindingName:    "lng"
+                    },
+                    {   attributeName:  "maxAutoZoom",
+                        type:           "float",
+                        bindingName:    "maxAutoZoom",
+                        optional:       true
+                    }
+                ]
+            }
+        ]
+    },
+    {   accessorName:   "getPolygon",
+        attributeName:  "polygon",
+        type:           "text"
+    },
+    {   accessorName:   "getPolyline",
+        attributeName:  "polyline",
+        type:           "text"
+    },
+    {   accessorName:   "getColorKey",
+        attributeName:  "colorKey",
+        type:           "text"
+    },
+    {   accessorName:   "getSizeKey",
+        attributeName:  "sizeKey",
+        type:           "text"
+    },
+    {   accessorName:   "getIconKey",
+        attributeName:  "iconKey",
+        type:           "text"
+    },
+    {   accessorName:   "getIcon",
+        attributeName:  "icon",
+        type:           "url"
+    }
+]

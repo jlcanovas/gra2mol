@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kdm:Segment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:action="http://www.eclipse.org/MoDisco/kdm/action" xmlns:code="http://www.eclipse.org/MoDisco/kdm/code" xmlns:kdm="http://www.eclipse.org/MoDisco/kdm/kdm" xmlns:source="http://www.eclipse.org/MoDisco/kdm/source" xsi:schemaLocation="http://www.eclipse.org/MoDisco/kdm/action http://www.eclipse.org/MoDisco/kdm/ui#//action http://www.eclipse.org/MoDisco/kdm/code http://www.eclipse.org/MoDisco/kdm/ui#//code http://www.eclipse.org/MoDisco/kdm/kdm http://www.eclipse.org/MoDisco/kdm/ui#//kdm http://www.eclipse.org/MoDisco/kdm/source http://www.eclipse.org/MoDisco/kdm/ui#//source">
+  <model xsi:type="code:CodeModel" name="Non located elements">
+    <codeElement xsi:type="code:MethodUnit" name="do_key"/>
+    <codeElement xsi:type="code:MethodUnit" name="message"/>
+    <codeElement xsi:type="code:MethodUnit" name="exit_form"/>
+    <codeElement xsi:type="code:MethodUnit" name="EXECUTE_TRIGGER"/>
+    <codeElement xsi:type="code:MethodUnit" name="go_block"/>
+    <codeElement xsi:type="code:MethodUnit" name="do_key"/>
+    <codeElement xsi:type="code:MethodUnit" name="do_key"/>
+    <codeElement xsi:type="code:MethodUnit" name="execute_query"/>
+    <codeElement xsi:type="code:MethodUnit" name="message"/>
+    <codeElement xsi:type="code:MethodUnit" name="do_key"/>
+    <codeElement xsi:type="code:MethodUnit" name="LIST_VALUES"/>
+    <codeElement xsi:type="code:MethodUnit" name="do_key"/>
+    <codeElement xsi:type="code:MethodUnit" name="set_block_property"/>
+    <codeElement xsi:type="code:MethodUnit" name="cancela_consulta"/>
+    <codeElement xsi:type="code:MethodUnit" name="P_CENTRAR_VENTANA"/>
+    <codeElement xsi:type="code:MethodUnit" name="set_item_property"/>
+    <codeElement xsi:type="code:MethodUnit" name="execute_query"/>
+    <codeElement xsi:type="code:MethodUnit" name="set_item_property"/>
+    <codeElement xsi:type="code:MethodUnit" name="set_block_property"/>
+    <codeElement xsi:type="code:MethodUnit" name="SET_BLOCK_PROPERTY"/>
+    <codeElement xsi:type="code:MethodUnit" name="SET_BLOCK_PROPERTY"/>
+    <codeElement xsi:type="code:MethodUnit" name="set_item_property"/>
+    <codeElement xsi:type="code:MethodUnit" name="do_key"/>
+    <codeElement xsi:type="code:MethodUnit" name="LISTA_VALORES"/>
+    <codeElement xsi:type="code:MethodUnit" name="do_key"/>
+    <codeElement xsi:type="code:MethodUnit" name="next_record"/>
+    <codeElement xsi:type="code:MethodUnit" name="previous_record"/>
+    <codeElement xsi:type="code:MethodUnit" name="activa_consulta"/>
+    <codeElement xsi:type="code:MethodUnit" name="ejecuta_consulta"/>
+    <codeElement xsi:type="code:MethodUnit" name="set_item_property"/>
+  </model>
+  <model xsi:type="code:CodeModel" name="Triggers">
+    <codeElement xsi:type="code:CompilationUnit">
+      <codeElement xsi:type="code:CallableUnit" name="KEY-LISTVAL" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.10" from="//@model.1/@codeElement.0/@codeElement.0/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-MOUSE-DOUBLECLICK" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+          <actionRelation xsi:type="action:TrueFlow"/>
+          <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+          <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+            <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+              <codeElement xsi:type="action:FalseFlow" to="//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0"/>
+              <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+              <codeElement xsi:type="action:TrueFlow" to="//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0"/>
+              <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+                <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+                  <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                    <codeElement xsi:type="code:Value"/>
+                    <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                    <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                  </codeElement>
+                </codeElement>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-NEW-ITEM-INSTANCE" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.23" from="//@model.1/@codeElement.0/@codeElement.2/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="POST-TEXT-ITEM" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.21" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.17" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.3/@codeElement.1/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="PRE-FORM" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="BinaryExpression"/>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="BinaryExpression"/>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="BinaryExpression"/>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-NEW-FORM-INSTANCE" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.14" from="//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.5/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.16" from="//@model.1/@codeElement.0/@codeElement.5/@codeElement.1/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="PRE-QUERY" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+          <codeElement xsi:type="action:FalseFlow" to="//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.6/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+          <codeElement xsi:type="action:TrueFlow" to="//@model.1/@codeElement.0/@codeElement.6/@codeElement.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.6/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="BinaryExpression"/>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="KEY-HELP" kind="stored"/>
+      <codeElement xsi:type="code:CallableUnit" name="KEY-MENU" kind="stored"/>
+      <codeElement xsi:type="code:CallableUnit" name="ON-ERROR" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="KEY-EXEQRY" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.15" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.29" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.1/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.28" from="//@model.1/@codeElement.0/@codeElement.10/@codeElement.2/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="KEY-ENTQRY" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.27" from="//@model.1/@codeElement.0/@codeElement.11/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="KEY-EXIT" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+          <codeElement xsi:type="action:FalseFlow" to="//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.12/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+          <codeElement xsi:type="action:TrueFlow" to="//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.12/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.13" from="//@model.1/@codeElement.0/@codeElement.12/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-VALIDATE-ITEM" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+          <codeElement xsi:type="action:FalseFlow" to="//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.13/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+          <codeElement xsi:type="action:TrueFlow" to="//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.13/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                <codeElement xsi:type="code:Value"/>
+                <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.13/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="POST-CHANGE" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-VALIDATE-ITEM" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+          <codeElement xsi:type="action:FalseFlow" to="//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.15/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+          <codeElement xsi:type="action:TrueFlow" to="//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.15/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                <codeElement xsi:type="code:Value"/>
+                <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.8" from="//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.15/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-NEW-ITEM-INSTANCE" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-NEW-ITEM-INSTANCE" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-NEW-ITEM-INSTANCE" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-NEW-ITEM-INSTANCE" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.20" from="//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.20/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.6" from="//@model.1/@codeElement.0/@codeElement.20/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.20/@codeElement.1/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.20/@codeElement.1/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.19" from="//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.21/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.5" from="//@model.1/@codeElement.0/@codeElement.21/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.21/@codeElement.1/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.21/@codeElement.1/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-CHECKBOX-CHANGED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+          <codeElement xsi:type="action:FalseFlow" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                <codeElement xsi:type="code:Value"/>
+                <codeElement xsi:type="code:Value"/>
+                <codeElement xsi:type="code:Value"/>
+                <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.12" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.1/@codeElement.0/@codeElement.0"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+          <codeElement xsi:type="action:TrueFlow" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                <codeElement xsi:type="code:Value"/>
+                <codeElement xsi:type="code:Value"/>
+                <codeElement xsi:type="code:Value"/>
+                <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.18" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.2" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.4" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.1/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.22/@codeElement.1/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.1/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.7" from="//@model.1/@codeElement.0/@codeElement.22/@codeElement.2/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.9" from="//@model.1/@codeElement.0/@codeElement.23/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.23/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.23/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.11" from="//@model.1/@codeElement.0/@codeElement.24/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.24/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.24/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="if" kind="if">
+          <codeElement xsi:type="action:FalseFlow" to="//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.1" from="//@model.1/@codeElement.0/@codeElement.25/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="falseFlow" kind="falseFlow"/>
+          <codeElement xsi:type="action:TrueFlow" to="//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.3" from="//@model.1/@codeElement.0/@codeElement.25/@codeElement.0"/>
+          <codeElement xsi:type="action:ActionElement" name="trueFlow" kind="trueFlow">
+            <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+              <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+                <codeElement xsi:type="code:Value"/>
+                <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+                <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.25/@codeElement.0/@codeElement.3/@codeElement.0/@codeElement.0"/>
+              </codeElement>
+            </codeElement>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.22" from="//@model.1/@codeElement.0/@codeElement.26/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.26/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.26/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.26" from="//@model.1/@codeElement.0/@codeElement.27/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.25" from="//@model.1/@codeElement.0/@codeElement.28/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" name="expression" kind="expression">
+          <codeElement xsi:type="action:ActionElement" name="FunctionCall">
+            <codeElement xsi:type="code:Value"/>
+            <actionRelation xsi:type="action:Calls" to="//@model.0/@codeElement.24" from="//@model.1/@codeElement.0/@codeElement.29/@codeElement.0/@codeElement.0"/>
+            <actionRelation xsi:type="action:Reads" to="//@model.1/@codeElement.0/@codeElement.29/@codeElement.0/@codeElement.0/@codeElement.0" from="//@model.1/@codeElement.0/@codeElement.29/@codeElement.0/@codeElement.0"/>
+          </codeElement>
+        </codeElement>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+      <codeElement xsi:type="code:CallableUnit" name="WHEN-BUTTON-PRESSED" kind="stored">
+        <codeElement xsi:type="action:ActionElement" kind="block"/>
+      </codeElement>
+    </codeElement>
+  </model>
+  <model xsi:type="code:CodeModel" name="PL/SQL">
+    <codeElement xsi:type="code:LanguageUnit" name="Basic Datatypes">
+      <codeElement xsi:type="code:BooleanType"/>
+      <codeElement xsi:type="code:StringType"/>
+    </codeElement>
+  </model>
+  <model xsi:type="source:InventoryModel">
+    <inventoryElement xsi:type="source:Project" name="StrutsApplication">
+      <inventoryElement xsi:type="source:Directory" name="src" path="/"/>
+    </inventoryElement>
+  </model>
+</kdm:Segment>

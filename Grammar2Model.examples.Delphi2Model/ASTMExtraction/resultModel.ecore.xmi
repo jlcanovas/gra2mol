@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<gastm:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gastm="http://modelum.es/modernization/gastm" xmlns:sastm="http://modelum.es/modernization/sastm">
+  <files xsi:type="sastm:DelphiUnit" language="Delphi">
+    <locationInfo>
+      <inSourceFile pathName="/Users/jlcanovas/Desktop/eclipse-helios/workspace/Grammar2Model/../Grammar2Model.examples.Delphi2Model/delphiSrc/untClArchivo.pas"/>
+    </locationInfo>
+    <name nameString="untClArchivo"/>
+    <interface>
+      <fragments xsi:type="gastm:VariableDefinition">
+        <identifierName nameString="FILWORD"/>
+      </fragments>
+      <fragments xsi:type="gastm:VariableDefinition">
+        <identifierName nameString="FILEXCEL"/>
+      </fragments>
+      <fragments xsi:type="gastm:TypeDefinition">
+        <name/>
+      </fragments>
+    </interface>
+    <implementation>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.nuevoWord"/>
+        <body xsi:type="sastm:DelphiBlockStatement"/>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.EjercutarProg"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Assign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference" refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.1">
+                <name nameString="pInfo"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:IdentifierReference" refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                <name nameString="Info"/>
+              </rightOperand>
+            </expression>
+          </subStatements>
+          <subStatements xsi:type="sastm:DelphiWithStatement" withs="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="cbSize"/>
+                </leftOperand>
+                <rightOperand xsi:type="sastm:DelphiFunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="SizeOf"/>
+                  </calledFunction>
+                  <actualParams xsi:type="gastm:ActualParameterExpression">
+                    <value xsi:type="gastm:IdentifierReference" refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                      <name nameString="Info"/>
+                    </value>
+                  </actualParams>
+                </rightOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="fMask"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="SEE_MASK_NOCLOSEPROCESS"/>
+                </rightOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="wnd"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:QualifiedOverData">
+                  <name nameString="Application"/>
+                  <member>
+                    <name nameString="Handle"/>
+                  </member>
+                </rightOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="lpVerb"/>
+                </leftOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="lpFile"/>
+                </leftOperand>
+                <rightOperand xsi:type="sastm:DelphiFunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="PChar"/>
+                  </calledFunction>
+                  <actualParams xsi:type="gastm:ActualParameterExpression">
+                    <value xsi:type="gastm:IdentifierReference">
+                      <name nameString="Ejecutable"/>
+                    </value>
+                  </actualParams>
+                </rightOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="lpParameters"/>
+                </leftOperand>
+                <rightOperand xsi:type="sastm:DelphiFunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="Pchar"/>
+                  </calledFunction>
+                  <actualParams xsi:type="gastm:ActualParameterExpression"/>
+                </rightOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="lpDirectory"/>
+                </leftOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="nShow"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="Visibilidad"/>
+                </rightOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="hInstApp"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IntegerLiteral" value="0"/>
+              </expression>
+            </subStatements>
+          </subStatements>
+          <subStatements xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="ShellExecuteEx"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:IdentifierReference" refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.1">
+                  <name nameString="pInfo"/>
+                </value>
+              </actualParams>
+            </expression>
+          </subStatements>
+          <declarations xsi:type="gastm:VariableDefinition" isMutable="true">
+            <identifierName nameString="Info"/>
+          </declarations>
+          <declarations xsi:type="gastm:VariableDefinition" isMutable="true">
+            <identifierName nameString="pInfo"/>
+          </declarations>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.RutaReal"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Assign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString="result"/>
+              </leftOperand>
+              <rightOperand xsi:type="sastm:DelphiFunctionCallExpression">
+                <calledFunction xsi:type="gastm:QualifiedOverData">
+                  <name nameString="dmDatos"/>
+                  <member>
+                    <name nameString="RutaDoc"/>
+                  </member>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:IdentifierReference">
+                    <name nameString="idruta"/>
+                  </value>
+                </actualParams>
+              </rightOperand>
+            </expression>
+          </subStatements>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.SelecFicheroRutaRelativa"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Assign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference" refersTo="//@files.0/@implementation/@fragments.3/@body.0/@declarations.0">
+                <name nameString="f"/>
+              </leftOperand>
+              <rightOperand xsi:type="sastm:DelphiFunctionCallExpression">
+                <calledFunction xsi:type="gastm:QualifiedOverData" refersTo="//@files.0/@implementation/@fragments.3/@body.0/@declarations.0">
+                  <name nameString="TFrmSelFil"/>
+                  <member>
+                    <name nameString="Create"/>
+                  </member>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              </rightOperand>
+            </expression>
+          </subStatements>
+          <subStatements xsi:type="gastm:TryStatement">
+            <guardedStatement xsi:type="gastm:IfStatement">
+              <condition xsi:type="gastm:BinaryExpression">
+                <leftOperand xsi:type="gastm:QualifiedOverData" refersTo="//@files.0/@implementation/@fragments.3/@body.0/@declarations.0">
+                  <name nameString="f"/>
+                  <member>
+                    <name nameString="ShowModal"/>
+                  </member>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="mrOk"/>
+                </rightOperand>
+              </condition>
+              <thenBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="nombre"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:QualifiedOverData" refersTo="//@files.0/@implementation/@fragments.3/@body.0/@declarations.0">
+                    <name nameString="f"/>
+                    <member>
+                      <name nameString="fichero"/>
+                    </member>
+                  </rightOperand>
+                </expression>
+              </thenBody>
+            </guardedStatement>
+          </subStatements>
+          <declarations xsi:type="gastm:VariableDefinition" isMutable="true">
+            <identifierName nameString="f"/>
+          </declarations>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.PathRutaRelativa"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="sastm:DelphiWithStatement">
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="commandtext"/>
+                </leftOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:IfStatement">
+              <thenBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:QualifiedOverData">
+                    <name nameString="Fields"/>
+                    <member>
+                      <name nameString="AsString"/>
+                    </member>
+                  </rightOperand>
+                </expression>
+              </thenBody>
+            </subStatements>
+          </subStatements>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.RutaModulo"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="sastm:DelphiWithStatement">
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="CommandText"/>
+                </leftOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:IfStatement">
+              <thenBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:QualifiedOverData">
+                    <name nameString="Fields"/>
+                    <member>
+                      <name nameString="AsString"/>
+                    </member>
+                  </rightOperand>
+                </expression>
+              </thenBody>
+            </subStatements>
+          </subStatements>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.RutaProyecto"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="sastm:DelphiWithStatement">
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="CommandText"/>
+                </leftOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:IfStatement">
+              <thenBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:QualifiedOverData">
+                    <name nameString="Fields"/>
+                    <member>
+                      <name nameString="AsString"/>
+                    </member>
+                  </rightOperand>
+                </expression>
+              </thenBody>
+            </subStatements>
+          </subStatements>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.RutaSubMod"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="sastm:DelphiWithStatement">
+            <subStatements xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="CommandText"/>
+                </leftOperand>
+              </expression>
+            </subStatements>
+            <subStatements xsi:type="gastm:IfStatement">
+              <thenBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:QualifiedOverData">
+                    <name nameString="Fields"/>
+                    <member>
+                      <name nameString="AsString"/>
+                    </member>
+                  </rightOperand>
+                </expression>
+              </thenBody>
+            </subStatements>
+          </subStatements>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.BorraArchivo"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="gastm:IfStatement">
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="result"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IntegerLiteral" value="1"/>
+              </expression>
+            </thenBody>
+            <elseBody xsi:type="gastm:IfStatement">
+              <condition xsi:type="sastm:DelphiFunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="RenameFile"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:IdentifierReference">
+                    <name nameString="ruta"/>
+                  </value>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              </condition>
+              <thenBody xsi:type="gastm:IfStatement">
+                <condition xsi:type="sastm:DelphiFunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="deleteFile"/>
+                  </calledFunction>
+                  <actualParams xsi:type="gastm:ActualParameterExpression"/>
+                </condition>
+                <thenBody xsi:type="gastm:ExpressionStatement">
+                  <expression xsi:type="gastm:BinaryExpression">
+                    <operator xsi:type="gastm:Assign"/>
+                    <leftOperand xsi:type="gastm:IdentifierReference">
+                      <name nameString="result"/>
+                    </leftOperand>
+                    <rightOperand xsi:type="gastm:IntegerLiteral" value="0"/>
+                  </expression>
+                </thenBody>
+                <elseBody xsi:type="gastm:ExpressionStatement">
+                  <expression xsi:type="gastm:BinaryExpression">
+                    <operator xsi:type="gastm:Assign"/>
+                    <leftOperand xsi:type="gastm:IdentifierReference">
+                      <name nameString="result"/>
+                    </leftOperand>
+                    <rightOperand xsi:type="gastm:IntegerLiteral" value="3"/>
+                  </expression>
+                </elseBody>
+              </thenBody>
+              <elseBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:IntegerLiteral" value="2"/>
+                </expression>
+              </elseBody>
+            </elseBody>
+          </subStatements>
+          <subStatements xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:BinaryExpression">
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString="result"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:IntegerLiteral" value="3"/>
+            </condition>
+            <thenBody xsi:type="gastm:IfStatement">
+              <thenBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:IntegerLiteral" value="4"/>
+                </expression>
+              </thenBody>
+            </thenBody>
+          </subStatements>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.BorraArchivo"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:BinaryExpression">
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString="cds"/>
+              </leftOperand>
+            </condition>
+            <thenBody xsi:type="gastm:IfStatement">
+              <thenBody xsi:type="gastm:IfStatement">
+                <condition xsi:type="gastm:BinaryExpression">
+                  <leftOperand xsi:type="gastm:QualifiedOverData">
+                    <name nameString="cds"/>
+                    <member>
+                      <name nameString="State"/>
+                    </member>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="dsBrowse"/>
+                  </rightOperand>
+                </condition>
+                <thenBody xsi:type="gastm:TryStatement">
+                  <guardedStatement xsi:type="gastm:IfStatement">
+                    <thenBody xsi:type="gastm:IfStatement">
+                      <condition xsi:type="gastm:BinaryExpression">
+                        <leftOperand xsi:type="sastm:DelphiFunctionCallExpression">
+                          <calledFunction xsi:type="gastm:QualifiedOverData">
+                            <name nameString="cds"/>
+                            <member>
+                              <name nameString="ApplyUpdates"/>
+                            </member>
+                          </calledFunction>
+                          <actualParams xsi:type="gastm:ActualParameterExpression">
+                            <value xsi:type="gastm:IntegerLiteral" value="0"/>
+                          </actualParams>
+                        </leftOperand>
+                        <rightOperand xsi:type="gastm:IntegerLiteral" value="0"/>
+                      </condition>
+                      <thenBody xsi:type="gastm:ExpressionStatement">
+                        <expression xsi:type="gastm:BinaryExpression">
+                          <operator xsi:type="gastm:Assign"/>
+                          <leftOperand xsi:type="gastm:IdentifierReference">
+                            <name nameString="result"/>
+                          </leftOperand>
+                          <rightOperand xsi:type="gastm:IntegerLiteral" value="0"/>
+                        </expression>
+                      </thenBody>
+                      <elseBody xsi:type="gastm:ExpressionStatement">
+                        <expression xsi:type="gastm:BinaryExpression">
+                          <operator xsi:type="gastm:Assign"/>
+                          <leftOperand xsi:type="gastm:IdentifierReference">
+                            <name nameString="result"/>
+                          </leftOperand>
+                          <rightOperand xsi:type="gastm:IntegerLiteral" value="5"/>
+                        </expression>
+                      </elseBody>
+                    </thenBody>
+                    <elseBody xsi:type="gastm:ExpressionStatement">
+                      <expression xsi:type="gastm:BinaryExpression">
+                        <operator xsi:type="gastm:Assign"/>
+                        <leftOperand xsi:type="gastm:IdentifierReference">
+                          <name nameString="result"/>
+                        </leftOperand>
+                        <rightOperand xsi:type="gastm:IdentifierReference" refersTo="//@files.0/@implementation/@fragments.9/@body.0/@declarations.0">
+                          <name nameString="res"/>
+                        </rightOperand>
+                      </expression>
+                    </elseBody>
+                  </guardedStatement>
+                </thenBody>
+                <elseBody xsi:type="gastm:ExpressionStatement">
+                  <expression xsi:type="gastm:BinaryExpression">
+                    <operator xsi:type="gastm:Assign"/>
+                    <leftOperand xsi:type="gastm:IdentifierReference">
+                      <name nameString="result"/>
+                    </leftOperand>
+                    <rightOperand xsi:type="gastm:IntegerLiteral" value="9"/>
+                  </expression>
+                </elseBody>
+              </thenBody>
+              <elseBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:BinaryExpression">
+                  <operator xsi:type="gastm:Assign"/>
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:IntegerLiteral" value="8"/>
+                </expression>
+              </elseBody>
+            </thenBody>
+            <elseBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Assign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="result"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IntegerLiteral" value="7"/>
+              </expression>
+            </elseBody>
+          </subStatements>
+          <declarations xsi:type="gastm:VariableDefinition" isMutable="true">
+            <identifierName nameString="res"/>
+          </declarations>
+        </body>
+      </fragments>
+      <fragments xsi:type="gastm:FunctionDefinition">
+        <identifierName nameString="TArchivo.BorraArchivoDefecto"/>
+        <body xsi:type="sastm:DelphiBlockStatement">
+          <subStatements xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Assign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString="result"/>
+              </leftOperand>
+              <rightOperand xsi:type="sastm:DelphiFunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="BorraArchivo"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:IdentifierReference">
+                    <name nameString="ruta"/>
+                  </value>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:IdentifierReference">
+                    <name nameString="cds"/>
+                  </value>
+                </actualParams>
+              </rightOperand>
+            </expression>
+          </subStatements>
+          <subStatements xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:BinaryExpression">
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString="result"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:IntegerLiteral" value="0"/>
+            </condition>
+            <elseBody xsi:type="gastm:IfStatement">
+              <condition xsi:type="gastm:BinaryExpression">
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="result"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IntegerLiteral" value="5"/>
+              </condition>
+              <thenBody xsi:type="gastm:ExpressionStatement">
+                <expression xsi:type="gastm:FunctionCallExpression">
+                  <calledFunction xsi:type="gastm:QualifiedOverData">
+                    <name nameString="TMensa"/>
+                    <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                      <name nameString="Info"/>
+                    </member>
+                  </calledFunction>
+                  <actualParams xsi:type="gastm:ActualParameterExpression">
+                    <value xsi:type="gastm:StringLiteral" value="'Se ha borrado el archivo en disco duro pero no el registro en base de datos'"/>
+                  </actualParams>
+                </expression>
+              </thenBody>
+              <elseBody xsi:type="gastm:IfStatement">
+                <condition xsi:type="gastm:BinaryExpression">
+                  <leftOperand xsi:type="gastm:IdentifierReference">
+                    <name nameString="result"/>
+                  </leftOperand>
+                  <rightOperand xsi:type="gastm:IntegerLiteral" value="6"/>
+                </condition>
+                <thenBody xsi:type="gastm:ExpressionStatement">
+                  <expression xsi:type="gastm:FunctionCallExpression">
+                    <calledFunction xsi:type="gastm:QualifiedOverData">
+                      <name nameString="TMensa"/>
+                      <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                        <name nameString="Info"/>
+                      </member>
+                    </calledFunction>
+                    <actualParams xsi:type="gastm:ActualParameterExpression">
+                      <value xsi:type="gastm:StringLiteral" value="'Ha ocurrido un error inesperado'"/>
+                    </actualParams>
+                  </expression>
+                </thenBody>
+                <elseBody xsi:type="gastm:IfStatement">
+                  <condition xsi:type="gastm:BinaryExpression">
+                    <leftOperand xsi:type="gastm:IdentifierReference">
+                      <name nameString="result"/>
+                    </leftOperand>
+                    <rightOperand xsi:type="gastm:IntegerLiteral" value="2"/>
+                  </condition>
+                  <thenBody xsi:type="gastm:ExpressionStatement">
+                    <expression xsi:type="gastm:FunctionCallExpression">
+                      <calledFunction xsi:type="gastm:QualifiedOverData">
+                        <name nameString="TMensa"/>
+                        <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                          <name nameString="Info"/>
+                        </member>
+                      </calledFunction>
+                      <actualParams xsi:type="gastm:ActualParameterExpression">
+                        <value xsi:type="gastm:StringLiteral" value="'El archivo estÔø&#x3a9; bloqueado, no puede borrarse'"/>
+                      </actualParams>
+                    </expression>
+                  </thenBody>
+                  <elseBody xsi:type="gastm:IfStatement">
+                    <condition xsi:type="gastm:BinaryExpression">
+                      <leftOperand xsi:type="gastm:IdentifierReference">
+                        <name nameString="result"/>
+                      </leftOperand>
+                      <rightOperand xsi:type="gastm:IntegerLiteral" value="3"/>
+                    </condition>
+                    <thenBody xsi:type="gastm:ExpressionStatement">
+                      <expression xsi:type="gastm:FunctionCallExpression">
+                        <calledFunction xsi:type="gastm:QualifiedOverData">
+                          <name nameString="TMensa"/>
+                          <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                            <name nameString="Info"/>
+                          </member>
+                        </calledFunction>
+                        <actualParams xsi:type="gastm:ActualParameterExpression">
+                          <value xsi:type="gastm:StringLiteral" value="'Ha ocurrido un error inesperado borrando el archivo del disco duro'"/>
+                        </actualParams>
+                      </expression>
+                    </thenBody>
+                    <elseBody xsi:type="gastm:IfStatement">
+                      <condition xsi:type="gastm:BinaryExpression">
+                        <leftOperand xsi:type="gastm:IdentifierReference">
+                          <name nameString="result"/>
+                        </leftOperand>
+                        <rightOperand xsi:type="gastm:IntegerLiteral" value="4"/>
+                      </condition>
+                      <thenBody xsi:type="gastm:ExpressionStatement">
+                        <expression xsi:type="gastm:FunctionCallExpression">
+                          <calledFunction xsi:type="gastm:QualifiedOverData">
+                            <name nameString="TMensa"/>
+                            <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                              <name nameString="Info"/>
+                            </member>
+                          </calledFunction>
+                          <actualParams xsi:type="gastm:ActualParameterExpression">
+                            <value xsi:type="gastm:StringLiteral" value="'Ha ocurrido un error borrando el archivo este ha sido renombrado con sufijo &quot;borrado&quot;'"/>
+                          </actualParams>
+                        </expression>
+                      </thenBody>
+                      <elseBody xsi:type="gastm:IfStatement">
+                        <condition xsi:type="gastm:BinaryExpression">
+                          <leftOperand xsi:type="gastm:IdentifierReference">
+                            <name nameString="result"/>
+                          </leftOperand>
+                          <rightOperand xsi:type="gastm:IntegerLiteral" value="7"/>
+                        </condition>
+                        <thenBody xsi:type="gastm:ExpressionStatement">
+                          <expression xsi:type="gastm:FunctionCallExpression">
+                            <calledFunction xsi:type="gastm:QualifiedOverData">
+                              <name nameString="TMensa"/>
+                              <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                                <name nameString="Info"/>
+                              </member>
+                            </calledFunction>
+                            <actualParams xsi:type="gastm:ActualParameterExpression">
+                              <value xsi:type="gastm:StringLiteral" value="'Recibido Dataset nulo'"/>
+                            </actualParams>
+                          </expression>
+                        </thenBody>
+                        <elseBody xsi:type="gastm:IfStatement">
+                          <condition xsi:type="gastm:BinaryExpression">
+                            <leftOperand xsi:type="gastm:IdentifierReference">
+                              <name nameString="result"/>
+                            </leftOperand>
+                            <rightOperand xsi:type="gastm:IntegerLiteral" value="8"/>
+                          </condition>
+                          <thenBody xsi:type="gastm:ExpressionStatement">
+                            <expression xsi:type="gastm:FunctionCallExpression">
+                              <calledFunction xsi:type="gastm:QualifiedOverData">
+                                <name nameString="TMensa"/>
+                                <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                                  <name nameString="Info"/>
+                                </member>
+                              </calledFunction>
+                              <actualParams xsi:type="gastm:ActualParameterExpression">
+                                <value xsi:type="gastm:StringLiteral" value="'Dataset Vacio'"/>
+                              </actualParams>
+                            </expression>
+                          </thenBody>
+                          <elseBody xsi:type="gastm:IfStatement">
+                            <condition xsi:type="gastm:BinaryExpression">
+                              <leftOperand xsi:type="gastm:IdentifierReference">
+                                <name nameString="result"/>
+                              </leftOperand>
+                              <rightOperand xsi:type="gastm:IntegerLiteral" value="9"/>
+                            </condition>
+                            <thenBody xsi:type="gastm:ExpressionStatement">
+                              <expression xsi:type="gastm:FunctionCallExpression">
+                                <calledFunction xsi:type="gastm:QualifiedOverData">
+                                  <name nameString="TMensa"/>
+                                  <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                                    <name nameString="Info"/>
+                                  </member>
+                                </calledFunction>
+                                <actualParams xsi:type="gastm:ActualParameterExpression">
+                                  <value xsi:type="gastm:StringLiteral" value="'Dataset en estado no valido'"/>
+                                </actualParams>
+                              </expression>
+                            </thenBody>
+                            <elseBody xsi:type="gastm:ExpressionStatement">
+                              <expression xsi:type="gastm:FunctionCallExpression">
+                                <calledFunction xsi:type="gastm:QualifiedOverData">
+                                  <name nameString="TMensa"/>
+                                  <member refersTo="//@files.0/@implementation/@fragments.1/@body.0/@declarations.0">
+                                    <name nameString="Info"/>
+                                  </member>
+                                </calledFunction>
+                                <actualParams xsi:type="gastm:ActualParameterExpression">
+                                  <value xsi:type="gastm:StringLiteral" value="'Error no controlado'"/>
+                                </actualParams>
+                              </expression>
+                            </elseBody>
+                          </elseBody>
+                        </elseBody>
+                      </elseBody>
+                    </elseBody>
+                  </elseBody>
+                </elseBody>
+              </elseBody>
+            </elseBody>
+          </subStatements>
+        </body>
+      </fragments>
+    </implementation>
+  </files>
+</gastm:Project>

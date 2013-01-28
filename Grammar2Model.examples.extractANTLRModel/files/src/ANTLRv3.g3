@@ -1,0 +1,485 @@
+/** ANTLR v3 grammar written in ANTLR v3 with AST construction */ 
+grammar ANTLRv3;
+
+tokens {
+	DOC_COMMENT;
+	PARSER;	
+    LEXER;
+    RULE;
+    BLOCK;
+    OPTIONAL;
+    CLOSURE;
+    POSITIVE_CLOSURE;
+    SYNPRED;
+    RANGE;
+    CHAR_RANGE;
+    EPSILON;
+    ALT;
+    EOR;
+    EOB;
+    EOA; // end of alt
+    ID;
+    ARG;
+    ARGLIST;
+    RET;
+    LEXER_GRAMMAR;
+    PARSER_GRAMMAR;
+    TREE_GRAMMAR;
+    COMBINED_GRAMMAR;
+    INITACTION;
+    LABEL; 
+    TEMPLATE;
+    SCOPE='scope';
+    SEMPRED;
+    GATED_SEMPRED; 
+    SYN_SEMPRED; 
+    BACKTRACK_SEMPRED;
+    FRAGMENT='fragment';
+    TREE_BEGIN='^(';
+    ROOT='^';
+    BANG='!'; 
+    RANGE='..';
+    REWRITE='->';
+}
+
+@members {
+	int gtype;
+}
+
+grammarDef
+    :   DOC_COMMENT?
+    	(	'lexer' 
+    	|   'parser' 
+    	|   'tree'   
+    	|		     
+    	)
+    	'grammar' id ';' optionsSpec? tokensSpec? attrScope* action*
+    	rule+
+    	EOF
+    ;
+
+tokensSpec
+	:	TOKENS tokenSpec+ '}' 
+	;
+
+tokenSpec
+	:	TOKEN_REF
+		(	'=' (STRING_LITERAL|CHAR_LITERAL)	
+		|												
+		)
+		';'
+	;
+
+attrScope
+	:	'scope' id ACTION
+	;
+
+action
+	:	'@' (actionScopeName '::')? id ACTION 
+	;
+
+
+actionScopeName
+	:	id
+	|	'lexer'	
+    |   'parser'
+	;
+
+optionsSpec
+	:	OPTIONS (option ';')+ '}'
+	;
+
+option
+    :   id '=' optionValue 
+ 	;
+ 	
+optionValue
+    :   id
+    |   STRING_LITERAL
+    |   CHAR_LITERAL
+    |   INT
+    |	s='*' 
+    ;
+
+rule
+	:	DOC_COMMENT?
+		( ('protected'|'public'|'private'|'fragment') )?
+		ruleName=id 
+		'!'?
+		( ARG_ACTION )?
+		( 'returns' ARG_ACTION  )?
+		throwsSpec? optionsSpec? ruleScopeSpec? ruleAction*
+		':'	altList	';'
+		exceptionGroup?
+	;
+
+ruleAction
+	:	'@' id ACTION
+	;
+
+throwsSpec
+	:	'throws' id ( ',' id )* 
+	;
+
+ruleScopeSpec
+	:	'scope' ACTION 
+	|	'scope' id (',' id)* ';' 
+	|	'scope' ACTION
+		'scope' id (',' id)* ';'
+	;
+
+block
+    :   '('
+		( (optionsSpec)? ':' )?
+		alternative rewrite ( '|' alternative rewrite )*
+        ')'
+    ;
+
+altList
+    :   a1=alternative rewrite ( '|' a2=alternative rewrite )*
+    ;
+
+alternative
+    :   element+ 
+    |   
+    ;
+
+exceptionGroup
+	:	( exceptionHandler )+ ( finallyClause )?
+	|	finallyClause
+    ;
+
+exceptionHandler
+    :    'catch' ARG_ACTION ACTION 
+    ;
+
+finallyClause
+    :    'finally' ACTION 
+    ;
+
+element
+	:	elementNoOptionSpec
+	;
+
+elementNoOptionSpec
+	:	id ('='|'+=') ruleName=atom
+		(	ebnfSuffix	
+		|				
+		)
+	|	id ('='|'+=') block
+		(	ebnfSuffix	
+		|				
+		)
+	|	ruleName=atom
+		(	ebnfSuffix	
+		|				
+		)
+	|	ebnf
+	|   ACTION
+	|   SEMPRED ( '=>' |  )
+	|   treeSpec
+	;
+
+atom:   range ( ('^'|'!')  |  )
+    |   terminal
+    |	notSet ( ('^'|'!')  |  )
+    |   RULE_REF ( arg=ARG_ACTION )? ( (op='^'|op='!') )?
+    ;
+
+notSet
+	:	'~'
+		(	notTerminal	
+		|	block		
+		)
+	;
+
+treeSpec
+	:	'^(' element ( element )+ ')' 
+	;
+
+
+ebnf
+	:	block {Token op=input.LT(1);}
+		(	'?'		
+		|	'*'		
+		|	'+'		
+		|   '^'		
+		|   '!'		
+		|   '=>'	
+        |			
+		)
+	;
+
+range
+	:	CHAR_LITERAL RANGE CHAR_LITERAL
+	;
+
+terminal
+    :   (	CHAR_LITERAL				
+		|   TOKEN_REF
+			( ARG_ACTION				
+			|						
+			)
+		|   STRING_LITERAL				
+		|   '.'							
+		)	
+		(	'^'							
+		|	'!' 						
+		)?
+	;
+
+notTerminal
+	:   CHAR_LITERAL
+	|	TOKEN_REF
+	|	STRING_LITERAL
+	;
+	
+ebnfSuffix
+	:	'?'
+  	|	'*'
+   	|	'+'
+	;
+	
+
+
+// R E W R I T E  S Y N T A X
+
+rewrite
+	:	('->' SEMPRED rewrite_alternative)*
+		 '->' rewrite_alternative
+	|
+	;
+
+rewrite_alternative
+	:	rewrite_template
+	|	rewrite_tree_alternative
+   	|   /* empty rewrite */ 
+	;
+	
+rewrite_template_block
+    :   '(' rewrite_template ')'
+    ;
+
+rewrite_tree_block
+    :   '(' rewrite_tree_alternative ')'
+    ;
+
+rewrite_tree_alternative
+    :	rewrite_tree_element+ 
+    ;
+
+rewrite_tree_element
+	:	rewrite_tree_atom
+	|	rewrite_tree_atom ebnfSuffix
+	|   rewrite_tree
+		(	ebnfSuffix
+		|	
+		)
+	|   rewrite_tree_ebnf
+	;
+
+rewrite_tree_atom
+    :   CHAR_LITERAL
+	|   TOKEN_REF ARG_ACTION? 
+    |   RULE_REF
+	|   STRING_LITERAL
+	|   '$' 
+	|	ACTION
+	;
+
+rewrite_tree_ebnf
+	:	rewrite_tree_block ebnfSuffix 
+	;
+	
+rewrite_tree
+	:	'^(' rewrite_tree_atom rewrite_tree_element* ')'
+	;
+
+rewrite_template
+	:   id '(' rewrite_template_args ')'
+		( DOUBLE_QUOTE_STRING_LITERAL | DOUBLE_ANGLE_STRING_LITERAL )
+	|	rewrite_template_ref
+	|	rewrite_indirect_template_head
+	|	ACTION
+	;
+
+rewrite_template_ref
+	:	id '(' rewrite_template_args ')'
+	;
+
+rewrite_indirect_template_head
+	:	'(' ACTION ')' '(' rewrite_template_args ')'
+	;
+
+rewrite_template_args
+	:	rewrite_template_arg (',' rewrite_template_arg)*
+	|	
+	;
+
+rewrite_template_arg
+	:   id '=' ACTION 
+	;
+
+id	:	TOKEN_REF 
+	|	RULE_REF  
+	;
+
+// L E X I C A L   R U L E S
+
+SL_COMMENT
+ 	:	'//'
+ 	 	(	' $ANTLR ' SRC // src directive
+ 		|	~('\r'|'\n')*
+		)
+		'\r'? '\n'
+		{$channel=HIDDEN;}
+	;
+
+ML_COMMENT
+	:	'/*' {if (input.LA(1)=='*') $type=DOC_COMMENT; else $channel=HIDDEN;} .* '*/'
+	;
+
+CHAR_LITERAL
+	:	'\'' LITERAL_CHAR '\''
+	;
+
+STRING_LITERAL
+	:	'\'' LITERAL_CHAR LITERAL_CHAR* '\''
+	;
+
+fragment
+LITERAL_CHAR
+	:	ESC
+	|	~('\''|'\\')
+	;
+
+DOUBLE_QUOTE_STRING_LITERAL
+	:	'"' LITERAL_CHAR* '"'
+	;
+
+DOUBLE_ANGLE_STRING_LITERAL
+	:	'<<' .* '>>'
+	;
+
+fragment
+ESC	:	'\\'
+		(	'n'
+		|	'r'
+		|	't'
+		|	'b'
+		|	'f'
+		|	'"'
+		|	'\''
+		|	'\\'
+		|	'>'
+		|	'u' XDIGIT XDIGIT XDIGIT XDIGIT
+		|	. // unknown, leave as it is
+		)
+	;
+
+fragment
+XDIGIT :
+		'0' .. '9'
+	|	'a' .. 'f'
+	|	'A' .. 'F'
+	;
+
+INT	:	'0'..'9'+
+	;
+
+ARG_ACTION
+	:	NESTED_ARG_ACTION
+	;
+
+fragment
+NESTED_ARG_ACTION :
+	'['
+	(	options {greedy=false; k=1;}
+	:	NESTED_ARG_ACTION
+	|	ACTION_STRING_LITERAL
+	|	ACTION_CHAR_LITERAL
+	|	.
+	)*
+	']'
+	{setText(getText().substring(1, getText().length()-1));}
+	;
+
+ACTION
+	:	NESTED_ACTION ( '?' {$type = SEMPRED;} )?
+	;
+
+fragment
+NESTED_ACTION :
+	'{'
+	(	options {greedy=false; k=3;}
+	:	NESTED_ACTION
+	|	SL_COMMENT
+	|	ML_COMMENT
+	|	ACTION_STRING_LITERAL
+	|	ACTION_CHAR_LITERAL
+	|	.
+	)*
+	'}'
+	{$channel = DEFAULT_TOKEN_CHANNEL;}
+   ;
+
+fragment
+ACTION_CHAR_LITERAL
+	:	'\'' (ACTION_ESC|~('\\'|'\'')) '\''
+	;
+
+fragment
+ACTION_STRING_LITERAL
+	:	'"' (ACTION_ESC|~('\\'|'"'))+ '"'
+	;
+
+fragment
+ACTION_ESC
+	:	'\\\''
+	|	'\\"'
+	|	'\\' ~('\''|'"')
+	;
+
+TOKEN_REF
+	:	'A'..'Z' ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+	;
+
+RULE_REF
+	:	'a'..'z' ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+	;
+
+/** Match the start of an options section.  Don't allow normal
+ *  action processing on the {...} as it's not a action.
+ */
+OPTIONS
+	:	'options' WS_LOOP '{' {$channel=DEFAULT_TOKEN_CHANNEL;} // WS_LOOP sets channel
+	;
+	
+TOKENS
+	:	'tokens' WS_LOOP '{' {$channel=DEFAULT_TOKEN_CHANNEL;}
+	;
+
+/** Reset the file and line information; useful when the grammar
+ *  has been generated so that errors are shown relative to the
+ *  original file like the old C preprocessor used to do.
+ */
+fragment
+SRC	:	'src' ' ' file=ACTION_STRING_LITERAL ' ' line=INT {$channel=HIDDEN;}
+	;
+
+WS	:	(	' '
+		|	'\t'
+		|	'\r'? '\n'
+		)+
+		{$channel=HIDDEN;}
+	;
+
+fragment
+WS_LOOP
+	:	(	WS
+		|	SL_COMMENT
+		|	ML_COMMENT
+		)*
+		{$channel=HIDDEN;}
+	;
+

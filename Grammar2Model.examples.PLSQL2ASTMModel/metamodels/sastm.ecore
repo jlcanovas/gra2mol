@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="astm" nsURI="http://modelum.es/modernization/astm" nsPrefix="astm">
+  <eClassifiers xsi:type="ecore:EClass" name="OtherSyntaxObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Definition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBColumnType" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IdentifierReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBDatabaseDefinition" eSuperTypes="//@eClassifiers.1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="TableSpace" upperBound="-1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBUserDefinition" eSuperTypes="//@eClassifiers.1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Owns" upperBound="-1" eType="//@eClassifiers.31" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTableSpaceDefinition" eSuperTypes="//@eClassifiers.1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Table" upperBound="-1" eType="//@eClassifiers.31" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTableDefinition" eSuperTypes="//@eClassifiers.1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PrimKey" upperBound="-1" eType="//@eClassifiers.33" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Column" upperBound="-1" eType="//@eClassifiers.12" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Constraint" upperBound="-1" eType="//@eClassifiers.0" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Index" upperBound="-1" eType="//@eClassifiers.15" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Trigger" upperBound="-1" eType="//@eClassifiers.17" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBColumnDefinition" eSuperTypes="//@eClassifiers.1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="NotNull">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBViewDefinition" eSuperTypes="//@eClassifiers.1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DefinedBy" eType="//@eClassifiers.30" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBCursorDefinition" eSuperTypes="//@eClassifiers.1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SelectExpression" eType="//@eClassifiers.30" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBIndex" eSuperTypes="//@eClassifiers.0">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="NotNull">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="IsUnique">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="IndexColumn" upperBound="-1" eType="//@eClassifiers.16" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBIndexColumn" eSuperTypes="//@eClassifiers.0">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Column" eType="//@eClassifiers.33" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AscendingOrDescending" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTrigger" eSuperTypes="//@eClassifiers.0"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBCheckConstraint" eSuperTypes="//@eClassifiers.2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="RDBConstraintText">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="RDBConstraintType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBRefIntegrity" eSuperTypes="//@eClassifiers.2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ForeignKey" upperBound="-1" eType="//@eClassifiers.33" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ParentKey" upperBound="-1" eType="//@eClassifiers.33" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ParentTable" eType="//@eClassifiers.33" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBUniqueKey" eSuperTypes="//@eClassifiers.2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Column" upperBound="-1" eType="//@eClassifiers.33" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBConnectStatement" eSuperTypes="//@eClassifiers.5">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ConnectString" eType="//@eClassifiers.29" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBSelectStatement" eSuperTypes="//@eClassifiers.5">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SelectExpression" eType="//@eClassifiers.30" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="IntoVariable" upperBound="-1" eType="//@eClassifiers.29" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBInsertStatement" eSuperTypes="//@eClassifiers.5">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="IntoTable" upperBound="-1" eType="//@eClassifiers.31" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Columns" upperBound="-1" eType="//@eClassifiers.33" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Values" upperBound="-1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBModifyStatement" abstract="true" eSuperTypes="//@eClassifiers.5">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Table" upperBound="-1" eType="//@eClassifiers.31" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Where" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBUpdateStatement" eSuperTypes="//@eClassifiers.24">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Values" upperBound="-1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBCursorStatement" abstract="true" eSuperTypes="//@eClassifiers.5">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Cursor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBOpenCursorStatement" eSuperTypes="//@eClassifiers.26">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Values" upperBound="-1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBFetchCursorStatement" eSuperTypes="//@eClassifiers.26">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Into" upperBound="-1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBHostVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="BaseVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Indicator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBSelectExpression" eSuperTypes="//@eClassifiers.6">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Table" upperBound="-1" eType="//@eClassifiers.31" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Column" upperBound="-1" eType="//@eClassifiers.33" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Where" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTableReference" eSuperTypes="//@eClassifiers.7">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Alias" eType="//@eClassifiers.32" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTableAlias" eSuperTypes="//@eClassifiers.7"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBColumnReference" eSuperTypes="//@eClassifiers.7">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Table" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBDataBaseType" eSuperTypes="//@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBUserType" eSuperTypes="//@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTableSpaceType" eSuperTypes="//@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTableType" eSuperTypes="//@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBViewType" eSuperTypes="//@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBCursorType" eSuperTypes="//@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBInteger" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBInt" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBReal" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBFloat" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBDecimal" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBNumber" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBLong" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBChar" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBVarchar" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBString" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBRaw" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBDate" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBTimestamp" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBRowid" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBBoolean" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBBlob" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBClob" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBNClob" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBBFile" eSuperTypes="//@eClassifiers.4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBDeleteStatement" eSuperTypes="//@eClassifiers.24"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBCloseCursorStatement" eSuperTypes="//@eClassifiers.26"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RDBHostVariableExpression" eSuperTypes="//@eClassifiers.6"/>
+</ecore:EPackage>

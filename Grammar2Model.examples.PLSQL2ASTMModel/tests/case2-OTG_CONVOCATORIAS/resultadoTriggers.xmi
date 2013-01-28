@@ -1,0 +1,2335 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<gastm:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gastm="http://modelum.es/modernization/gastm" xmlns:sastm="http://modelum.es/modernization/sastm">
+  <files language="PL/SQL">
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-WINDOW-ACTIVATED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:OperatorAssign"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":global.item"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="NULL "/>
+        </expression>
+      </body>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:OperatorAssign"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":global.query"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'FALSE' "/>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="POST-TEXT-ITEM"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="set_item_property"/>
+          </calledFunction>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.cursor_item"/>
+            </value>
+          </actualParams>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="CURRENT_RECORD_ATTRIBUTE"/>
+              </calledFunction>
+            </value>
+          </actualParams>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:StringLiteral" value="'DEFAULT' "/>
+          </actualParams>
+        </expression>
+      </body>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="set_item_property"/>
+          </calledFunction>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.cursor_item"/>
+            </value>
+          </actualParams>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="VISUAL_ATTRIBUTE"/>
+              </calledFunction>
+            </value>
+          </actualParams>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:StringLiteral" value="'DEFAULT' "/>
+          </actualParams>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="PRE-FORM"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:OperatorAssign"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":global.item"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="NULL "/>
+        </expression>
+      </body>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:OperatorAssign"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":global.query"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'FALSE' "/>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-NEW-ITEM-INSTANCE"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="LISTA_VALORES"/>
+          </calledFunction>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-NEW-FORM-INSTANCE"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="default_value"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="null "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'global.con_codigo' "/>
+            </actualParams>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="go_block"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'otg_convocatorias' "/>
+            </actualParams>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="execute_query"/>
+            </calledFunction>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-DOUBLECLICK"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="GET_ITEM_PROPERTY"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:IdentifierReference">
+                <name nameString=":SYSTEM.MOUSE_ITEM"/>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="ITEM_TYPE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'TEXT ITEM' "/>
+        </condition>
+        <thenBody xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Or"/>
+            <leftOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="GET_ITEM_PROPERTY"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:IdentifierReference">
+                    <name nameString=":SYSTEM.CURSOR_ITEM"/>
+                  </value>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:FunctionCallExpression">
+                    <calledFunction xsi:type="gastm:IdentifierReference">
+                      <name nameString="LIST"/>
+                    </calledFunction>
+                  </value>
+                </actualParams>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'TRUE' "/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="GET_ITEM_PROPERTY"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:IdentifierReference">
+                    <name nameString=":SYSTEM.CURSOR_ITEM"/>
+                  </value>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:FunctionCallExpression">
+                    <calledFunction xsi:type="gastm:IdentifierReference">
+                      <name nameString="DATATYPE"/>
+                    </calledFunction>
+                  </value>
+                </actualParams>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'DATE' "/>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="EXECUTE_TRIGGER"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'KEY-LISTVAL' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-WINDOW-CLOSED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:OperatorAssign"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":global.con_codigo"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="null "/>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-CLEAR-DETAILS"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="Clear_All_Master_Details"/>
+            </calledFunction>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="KEY-LISTVAL"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="GET_ITEM_PROPERTY"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:FunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="DATATYPE"/>
+                  </calledFunction>
+                </value>
+              </actualParams>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'DATE' "/>
+          </condition>
+          <thenBody xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":SYSTEM.CURRENT_VALUE"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </condition>
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:OperatorAssign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="finicio"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:FunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="to_date"/>
+                  </calledFunction>
+                  <actualParams xsi:type="gastm:ActualParameterExpression">
+                    <value xsi:type="gastm:IdentifierReference">
+                      <name nameString=":SYSTEM.CURRENT_VALUE"/>
+                    </value>
+                  </actualParams>
+                  <actualParams xsi:type="gastm:ActualParameterExpression">
+                    <value xsi:type="gastm:StringLiteral" value="'DD-MON-YYYY' "/>
+                  </actualParams>
+                </rightOperand>
+              </expression>
+            </thenBody>
+            <elseBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:OperatorAssign"/>
+                <leftOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString="finicio"/>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:FunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="sysdate"/>
+                  </calledFunction>
+                </rightOperand>
+              </expression>
+            </elseBody>
+          </thenBody>
+          <elseBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="LIST_VALUES"/>
+              </calledFunction>
+            </expression>
+          </elseBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-TAB-PAGE-CHANGED"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":SYSTEM.TAB_NEW_PAGE"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'TERCEROS' "/>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="go_item"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'mod_codigootri' "/>
+            </actualParams>
+          </expression>
+        </thenBody>
+        <elseBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="go_item"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'act_codigootri' "/>
+            </actualParams>
+          </expression>
+        </elseBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="KEY-HELP"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="KEY-MENU"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-ERROR"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:SpecificIn"/>
+            <leftOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="ERROR_CODE"/>
+              </calledFunction>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:RangeExpression"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:OperatorAssign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString="r"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="alerta"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="'X' "/>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="'Error de Actualización' "/>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="'Imposible actualizar registro. Es posible que el registro esté vinculado a otro' "/>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="'Aceptar' "/>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="null "/>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="null "/>
+                </actualParams>
+              </rightOperand>
+            </expression>
+          </thenBody>
+          <elseBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="message"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+            </expression>
+          </elseBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="KEY-ENTQRY"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="activa_consulta"/>
+          </calledFunction>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="KEY-EXEQRY"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="lista_valores"/>
+          </calledFunction>
+        </expression>
+      </body>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="ejecuta_consulta"/>
+          </calledFunction>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="KEY-EXIT"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":system.mode"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'ENTER-QUERY' "/>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="cancela_consulta"/>
+            </calledFunction>
+          </expression>
+        </thenBody>
+        <elseBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="exit_form"/>
+            </calledFunction>
+          </expression>
+        </elseBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-NEW-BLOCK-INSTANCE"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":system.current_block"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'OTG_PCONVOCATORIAS' "/>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="set_item_property"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'BOTONERA.PB_DEL' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="TOOLTIP_TEXT"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="' Eliminar Convocatoria ' "/>
+            </actualParams>
+          </expression>
+        </thenBody>
+        <elseBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="set_item_property"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'BOTONERA.PB_DEL' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="TOOLTIP_TEXT"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="' Eliminar Tercero ' "/>
+            </actualParams>
+          </expression>
+        </elseBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="PRE-QUERY"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":global.con_codigo"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:OperatorAssign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":global.con_codigo"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="NULL "/>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-NEW-RECORD-INSTANCE"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":OTG_ACTIVIDADES.ACT_MODALIDADES"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'S' "/>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="SET_TAB_PAGE_PROPERTY"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'SOLAPAS.MODALIDADES' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="VISIBLE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="PROPERTY_TRUE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </expression>
+        </thenBody>
+        <elseBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="SET_TAB_PAGE_PROPERTY"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'SOLAPAS.MODALIDADES' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="VISIBLE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="PROPERTY_FALSE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </expression>
+        </elseBody>
+      </body>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="SYNCHRONIZE"/>
+          </calledFunction>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-POPULATE-DETAILS"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Or"/>
+            <leftOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="recstat"/>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'NEW' "/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="recstat"/>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ReturnStatement"/>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_CONVOCATORIAS.CON_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Query_Master_Details"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'OTG_TCONVOCATORIAS' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_CONVOCATORIAS.CON_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Query_Master_Details"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'OTG_ACTIVIDADES' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":System.cursor_item"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="startitm"/>
+              </calledFunction>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Check_Package_Failure"/>
+              </calledFunction>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-CHECK-DELETE-MASTER"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="OTG_TCONVOCATORIAS_cur"/>
+            </calledFunction>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Message"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'No puede borrar registro maestro cuando existen registros detalle coincidentes.' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="OTG_ACTIVIDADES_cur"/>
+            </calledFunction>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Message"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'No puede borrar registro maestro cuando existen registros detalle coincidentes.' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="POST-CHANGE"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="CodigoUO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="NAME_IN"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:IdentifierReference">
+                  <name nameString=":SYSTEM.TRIGGER_ITEM"/>
+                </value>
+              </actualParams>
+            </rightOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="n"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="instr"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:IdentifierReference">
+                  <name nameString=":system.trigger_item"/>
+                </value>
+              </actualParams>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'.' "/>
+              </actualParams>
+            </rightOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="NomVar"/>
+            </leftOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Copy"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="NAME_IN"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:IdentifierReference">
+                  <name nameString=":system.current_item"/>
+                </value>
+              </actualParams>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="NAME_IN"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:FunctionCallExpression">
+                    <calledFunction xsi:type="gastm:IdentifierReference">
+                      <name nameString="NomVar"/>
+                    </calledFunction>
+                  </value>
+                </actualParams>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </condition>
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="copy"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="NULL "/>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              </expression>
+            </thenBody>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":System.Form_Status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'CHANGED' "/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:OperatorAssign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":SYSTEM.MESSAGE_LEVEL"/>
+              </leftOperand>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="call"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'otg_publicaofi' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="no_hide"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="no_replace"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="pl_id"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="get_parameter_list"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'parametros' "/>
+              </actualParams>
+            </rightOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="id_null"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:FunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="pl_id"/>
+                  </calledFunction>
+                </value>
+              </actualParams>
+            </operand>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Destroy_parameter_List"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'parametros' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="pl_id"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Create_parameter_List"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'parametros' "/>
+              </actualParams>
+            </rightOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="Add_parameter"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'CONVO' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="TEXT_PARAMETER"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_CONVOCATORIAS.CON_NOMBRE"/>
+              </value>
+            </actualParams>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="Add_parameter"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'CONVO_COD' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="TEXT_PARAMETER"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_CONVOCATORIAS.CON_CODIGO"/>
+              </value>
+            </actualParams>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="CALL_FORM"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'NEW_MAIL' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="HIDE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="DO_REPLACE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="NO_QUERY_ONLY"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="NO_SHARE_LIBRARY_DATA"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="DUPLICAR_CONVOCATORIA"/>
+            </calledFunction>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_TCONVOCATORIAS.TCO_CON_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="POST-CHANGE"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":otg_tconvocatorias.tco_ter_codigo"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="sastm:RDBSelectStatement">
+            <SelectExpression>
+              <Table>
+                <name nameString="otg_terceros"/>
+              </Table>
+              <Column>
+                <name nameString="ter_nombre"/>
+              </Column>
+              <Where xsi:type="gastm:BinaryExpression">
+                <operator xsi:type="gastm:Equal"/>
+                <leftOperand xsi:type="gastm:FunctionCallExpression">
+                  <calledFunction xsi:type="gastm:IdentifierReference">
+                    <name nameString="ter_codigo"/>
+                  </calledFunction>
+                </leftOperand>
+                <rightOperand xsi:type="gastm:IdentifierReference">
+                  <name nameString=":otg_tconvocatorias.tco_ter_codigo"/>
+                </rightOperand>
+              </Where>
+            </SelectExpression>
+            <IntoVariable>
+              <BaseVariable xsi:type="gastm:IdentifierReference">
+                <name nameString=":otg_tconvocatorias.wtercero"/>
+              </BaseVariable>
+            </IntoVariable>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN_VALIDATE_ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_TCONVOCATORIAS.TCO_TER_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_TCONVOCATORIAS.TCO_TER_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:UnaryExpression">
+              <operator xsi:type="gastm:Not"/>
+              <operand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="primary_cur"/>
+                </calledFunction>
+              </operand>
+            </condition>
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="message"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="'El valor de clave ajena no existe actualmente en la tabla de claves primarias.' "/>
+                </actualParams>
+              </expression>
+            </thenBody>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":System.Form_Status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'CHANGED' "/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:OperatorAssign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":SYSTEM.MESSAGE_LEVEL"/>
+              </leftOperand>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":global.ter_codigo"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null "/>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="call"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'otg_terceros' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="no_hide"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="no_replace"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="Wter_codigo"/>
+            </leftOperand>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="POST-CHANGE"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="CodigoUO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="NAME_IN"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:IdentifierReference">
+                  <name nameString=":SYSTEM.TRIGGER_ITEM"/>
+                </value>
+              </actualParams>
+            </rightOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="n"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="instr"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:IdentifierReference">
+                  <name nameString=":system.trigger_item"/>
+                </value>
+              </actualParams>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'.' "/>
+              </actualParams>
+            </rightOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="NomVar"/>
+            </leftOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Copy"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="NAME_IN"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:IdentifierReference">
+                  <name nameString=":system.current_item"/>
+                </value>
+              </actualParams>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="NAME_IN"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:FunctionCallExpression">
+                    <calledFunction xsi:type="gastm:IdentifierReference">
+                      <name nameString="NomVar"/>
+                    </calledFunction>
+                  </value>
+                </actualParams>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </condition>
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="copy"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="NULL "/>
+                </actualParams>
+                <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              </expression>
+            </thenBody>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":System.Form_Status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'CHANGED' "/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:OperatorAssign"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":SYSTEM.MESSAGE_LEVEL"/>
+              </leftOperand>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="call"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'otg_ptconvocatorias' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="no_hide"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="no_replace"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </expression>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-NEW-RECORD-INSTANCE"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":OTG_ACTIVIDADES.ACT_MODALIDADES"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'S' "/>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="SET_TAB_PAGE_PROPERTY"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'SOLAPAS.MODALIDADES' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="VISIBLE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="PROPERTY_TRUE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </expression>
+        </thenBody>
+        <elseBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="SET_TAB_PAGE_PROPERTY"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'SOLAPAS.MODALIDADES' "/>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="VISIBLE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="PROPERTY_FALSE"/>
+                </calledFunction>
+              </value>
+            </actualParams>
+          </expression>
+        </elseBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-POPULATE-DETAILS"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Or"/>
+            <leftOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="recstat"/>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'NEW' "/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="recstat"/>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ReturnStatement"/>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_ACTIVIDADES.ACT_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Query_Master_Details"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'OTG_PCONVOCATORIAS_ACT' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_ACTIVIDADES.ACT_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Query_Master_Details"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'OTG_MODALIDADES' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":System.cursor_item"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="startitm"/>
+              </calledFunction>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Check_Package_Failure"/>
+              </calledFunction>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-CHECK-DELETE-MASTER"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="OTG_PCONVOCATORIAS_ACT_cur"/>
+            </calledFunction>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Message"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'No puede borrar registro maestro cuando existen registros detalle coincidentes.' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="OTG_MODALIDADES_cur"/>
+            </calledFunction>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Message"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'No puede borrar registro maestro cuando existen registros detalle coincidentes.' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_ACTIVIDADES.ACT_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_ACTIVIDADES.ACT_CON_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-CHECKBOX-CHANGED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":ACT_MODALIDADES"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'S' "/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="SYNCHRONIZE"/>
+              </calledFunction>
+            </expression>
+          </thenBody>
+          <elseBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="SYNCHRONIZE"/>
+              </calledFunction>
+            </expression>
+          </elseBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-NEW-ITEM-INSTANCE"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="lista_valores"/>
+          </calledFunction>
+        </expression>
+      </body>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":act_modalidades"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'S' "/>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="go_item"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'act_modalidades' "/>
+            </actualParams>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_PCONVOCATORIAS_ACT.PCO_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_PCONVOCATORIAS_ACT.PCO_MOD_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:UnaryExpression">
+              <operator xsi:type="gastm:Not"/>
+              <operand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="primary_cur"/>
+                </calledFunction>
+              </operand>
+            </condition>
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="message"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="'El valor de clave ajena no existe actualmente en la tabla de claves primarias.' "/>
+                </actualParams>
+              </expression>
+            </thenBody>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-NEW-RECORD-INSTANCE"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:OperatorAssign"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":WACT_CODIGO"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":OTG_ACTIVIDADES.ACT_CODIGOOTRI"/>
+          </rightOperand>
+        </expression>
+      </body>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:OperatorAssign"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":WACT_NOMBRE"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":OTG_ACTIVIDADES.ACT_NOMBRE"/>
+          </rightOperand>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-POPULATE-DETAILS"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Or"/>
+            <leftOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="recstat"/>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'NEW' "/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="recstat"/>
+                </calledFunction>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ReturnStatement"/>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_MODALIDADES.MOD_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Query_Master_Details"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression"/>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'OTG_PCONVOCATORIAS' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":System.cursor_item"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="startitm"/>
+              </calledFunction>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Check_Package_Failure"/>
+              </calledFunction>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="ON-CHECK-DELETE-MASTER"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="OTG_PCONVOCATORIAS_cur"/>
+            </calledFunction>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="Message"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'No puede borrar registro maestro cuando existen registros detalle coincidentes.' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_MODALIDADES.MOD_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_MODALIDADES.MOD_ACT_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:And"/>
+          <leftOperand xsi:type="gastm:UnaryExpression">
+            <operator xsi:type="gastm:Not"/>
+            <operand xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <leftOperand xsi:type="gastm:IdentifierReference">
+                <name nameString=":OTG_PCONVOCATORIAS.PCO_CODIGO"/>
+              </leftOperand>
+              <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+            </operand>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:NotEqual"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":system.record_status"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'INSERT' "/>
+          </rightOperand>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="message"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression"/>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-VALIDATE-ITEM"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":OTG_PCONVOCATORIAS.PCO_ACT_CODIGO"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="null"/>
+          </condition>
+          <thenBody xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:UnaryExpression">
+              <operator xsi:type="gastm:Not"/>
+              <operand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="primary_cur"/>
+                </calledFunction>
+              </operand>
+            </condition>
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="message"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:StringLiteral" value="'El valor de clave ajena no existe actualmente en la tabla de claves primarias.' "/>
+                </actualParams>
+              </expression>
+            </thenBody>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-DOUBLECLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="KEY-OTHERS"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:IfStatement">
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="next_item"/>
+            </calledFunction>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-MOUSE-CLICK"/>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="do_key"/>
+          </calledFunction>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:StringLiteral" value="'Enter_query' "/>
+          </actualParams>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="do_key"/>
+          </calledFunction>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:StringLiteral" value="'Execute_query' "/>
+          </actualParams>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:IfStatement">
+        <condition xsi:type="gastm:BinaryExpression">
+          <operator xsi:type="gastm:Equal"/>
+          <leftOperand xsi:type="gastm:IdentifierReference">
+            <name nameString=":system.mode"/>
+          </leftOperand>
+          <rightOperand xsi:type="gastm:StringLiteral" value="'ENTER-QUERY' "/>
+        </condition>
+        <thenBody xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:FunctionCallExpression">
+            <calledFunction xsi:type="gastm:IdentifierReference">
+              <name nameString="do_key"/>
+            </calledFunction>
+            <actualParams xsi:type="gastm:ActualParameterExpression">
+              <value xsi:type="gastm:StringLiteral" value="'Exit_form' "/>
+            </actualParams>
+          </expression>
+        </thenBody>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="do_key"/>
+          </calledFunction>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:StringLiteral" value="'commit_form' "/>
+          </actualParams>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="previous_record"/>
+          </calledFunction>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="next_record"/>
+          </calledFunction>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:ExpressionStatement">
+        <expression xsi:type="gastm:FunctionCallExpression">
+          <calledFunction xsi:type="gastm:IdentifierReference">
+            <name nameString="do_key"/>
+          </calledFunction>
+          <actualParams xsi:type="gastm:ActualParameterExpression">
+            <value xsi:type="gastm:StringLiteral" value="'create_record' "/>
+          </actualParams>
+        </expression>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:ExpressionStatement">
+          <expression xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:OperatorAssign"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString="r"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="alerta"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'?' "/>
+              </actualParams>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'Eliminar Registro' "/>
+              </actualParams>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'¿ Esta seguro de que desea eliminar el registro ?' "/>
+              </actualParams>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'Aceptar' "/>
+              </actualParams>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'Cancelar' "/>
+              </actualParams>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="null "/>
+              </actualParams>
+            </rightOperand>
+          </expression>
+        </subStatements>
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <rightOperand xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="ALERT_BUTTON1"/>
+              </calledFunction>
+            </rightOperand>
+          </condition>
+          <thenBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="do_key"/>
+              </calledFunction>
+              <actualParams xsi:type="gastm:ActualParameterExpression">
+                <value xsi:type="gastm:StringLiteral" value="'delete_record' "/>
+              </actualParams>
+            </expression>
+          </thenBody>
+        </subStatements>
+      </body>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTrigger">
+      <identifierName nameString="WHEN-BUTTON-PRESSED"/>
+      <body xsi:type="gastm:BlockStatement">
+        <subStatements xsi:type="gastm:IfStatement">
+          <condition xsi:type="gastm:BinaryExpression">
+            <operator xsi:type="gastm:Equal"/>
+            <leftOperand xsi:type="gastm:IdentifierReference">
+              <name nameString=":SYSTEM.FORM_STATUS"/>
+            </leftOperand>
+            <rightOperand xsi:type="gastm:StringLiteral" value="'CHANGED' "/>
+          </condition>
+          <thenBody xsi:type="gastm:IfStatement">
+            <condition xsi:type="gastm:BinaryExpression">
+              <operator xsi:type="gastm:Equal"/>
+              <rightOperand xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="ALERT_BUTTON2"/>
+                </calledFunction>
+              </rightOperand>
+            </condition>
+            <thenBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="exit_form"/>
+                </calledFunction>
+              </expression>
+            </thenBody>
+            <elseBody xsi:type="gastm:ExpressionStatement">
+              <expression xsi:type="gastm:FunctionCallExpression">
+                <calledFunction xsi:type="gastm:IdentifierReference">
+                  <name nameString="exit_form"/>
+                </calledFunction>
+                <actualParams xsi:type="gastm:ActualParameterExpression">
+                  <value xsi:type="gastm:FunctionCallExpression">
+                    <calledFunction xsi:type="gastm:IdentifierReference">
+                      <name nameString="NO_COMMIT"/>
+                    </calledFunction>
+                  </value>
+                </actualParams>
+              </expression>
+            </elseBody>
+          </thenBody>
+          <elseBody xsi:type="gastm:ExpressionStatement">
+            <expression xsi:type="gastm:FunctionCallExpression">
+              <calledFunction xsi:type="gastm:IdentifierReference">
+                <name nameString="exit_form"/>
+              </calledFunction>
+            </expression>
+          </elseBody>
+        </subStatements>
+      </body>
+    </fragments>
+  </files>
+</gastm:Project>

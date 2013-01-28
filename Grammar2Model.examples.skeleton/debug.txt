@@ -1,0 +1,62 @@
+GVQ Interpreter version 0.3
+
+Executing...
+Models created.
+Initializing indexRules...
+Initializing packages...
+Initializing hashes...
+
+Executing rules...
+RULE: mapScriptModule
+RULE: mapScriptModule... executing!
+  Model Element Module created
+  Executing queries...
+    Query f with 1 result nodes - CONTENT : [/home/jlcanovas/eclipses/eclipse-3.6-helios/workspace/Grammar2Model.examples.skeleton/files/src/scripts/example1 example1 print "Hello, World!" /home/jlcanovas/eclipses/eclipse-3.6-helios/workspace/Grammar2Model.examples.skeleton/files/src/scripts/example2 example2 print "Hello again!" ]
+    Query mains with 2 result nodes
+  Executing mappings...
+    - QUERY_RESULT: 2 bindings:
+      (1/2) result node: mainRule (kind). Rule... calling mapScriptDefinition rule
+
+      RULE: mapScriptDefinition... executing!
+        Model Element Definition created
+        Executing queries...
+          Query mr with 1 result nodes - CONTENT : [print "Hello, World!" ]
+          Query stats with 1 result nodes - CONTENT : [print "Hello, World!" ]
+        Executing mappings...
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: statement (kind). Rule... calling mapEchoStatement rule
+
+            RULE: mapEchoStatement... executing!
+              Model Element PrintStatement created
+              Executing queries...
+                Query st with 1 result nodes - CONTENT : [print "Hello, World!" ]
+                Query echo_st with 1 result nodes - CONTENT in line 1: [print "Hello, World!" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: echo_st - 
+                  node: print_statement (kind) - leaf: DQVAL (kind) - "Hello, World!" (value) 
+
+
+      (2/2) result node: mainRule (kind). Rule... calling mapScriptDefinition rule
+
+      RULE: mapScriptDefinition... executing!
+        Model Element Definition created
+        Executing queries...
+          Query mr with 1 result nodes - CONTENT : [print "Hello again!" ]
+          Query stats with 1 result nodes - CONTENT : [print "Hello again!" ]
+        Executing mappings...
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: statement (kind). Rule... calling mapEchoStatement rule
+
+            RULE: mapEchoStatement... executing!
+              Model Element PrintStatement created
+              Executing queries...
+                Query st with 1 result nodes - CONTENT : [print "Hello again!" ]
+                Query echo_st with 1 result nodes - CONTENT in line 1: [print "Hello again!" ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: echo_st - 
+                  node: print_statement (kind) - leaf: DQVAL (kind) - "Hello again!" (value) 
+
+
+
+
+Saving...

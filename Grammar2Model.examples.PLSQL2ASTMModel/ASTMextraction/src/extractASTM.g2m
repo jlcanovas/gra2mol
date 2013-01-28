@@ -1,0 +1,87 @@
+-- *******************************************************************************
+-- * Copyright (c) 2010
+-- * All rights reserved. This program and the accompanying materials
+-- * are made available under the terms of the Eclipse Public License v1.0
+-- * which accompanies this distribution, and is available at
+-- * http://www.eclipse.org/legal/epl-v10.html
+-- *
+-- * Contributors:
+-- *    Javier Canovas (jlcanovas@um.es) 
+-- *******************************************************************************
+
+
+--------------------------------------------------------------------------------------
+-- Gra2MoL transformation definition for extracting ASTM models from PL/SQL CST models
+-- Author: Javier Luis Canovas Izquierdo (jlcanovas@um.es)
+--
+-- TODO: 
+--------------------------------------------------------------------------------------
+
+rule 'mapProject'
+	from ccompilationUnit sf
+	to Project
+	queries
+		cu : //#CST;
+	mappings
+		files = cu;
+end_rule
+
+rule 'mapCompilationUnit'
+	from CST cst
+	to CompilationUnit
+	queries
+		pack : /cst//#package_spec;
+	mappings
+		language = "PL/SQL";
+		fragments = pack;
+end_rule
+
+rule 'mapNameSpaceDefinition'
+	from package_spec ps
+	to NameSpaceDefinition
+	queries
+		n     : /ps//package_name/#identifier;
+		specs : /ps/#package_obj_spec;
+	mappings
+		nameSpace = new Name;
+		nameSpace.nameString = n.ID;
+		body = specs;
+end_rule
+
+--------------------------------------
+-- Rules for specifications 
+--------------------------------------
+
+rule 'mapFunction'
+	from package_obj_spec/function_spec fs
+	to FunctionDeclaration
+	queries
+		n : /fs//function_name/#identifier;
+		r : /fs//return_type/#datatype;
+		a : /fs//#argument;
+	mappings
+		identifierName = new Name;
+		identifierName.nameString = n.ID;
+		-- Parameteres
+		formalParameters = a;
+		-- returnType (we need to use this attribute because FunctionDeclaraion does not include returnType)
+		declarationType = new NamedTypeReference;
+		declarationType.name = new Name;
+		declarationType.name.nameString = r.TOKEN;
+end_rule
+
+rule 'mapParameter'
+	from argument a
+	to FormalParameterDeclaration
+	queries
+		n : /a//argument_name/#identifier;
+		t : /a//#argument_type;
+	mappings
+		identifierName = new Name;
+		identifierName.nameString = n.ID;	
+		declarationType = new NamedTypeReference;
+		declarationType.name = new Name;
+		declarationType.name.nameString = extractID t;
+end_rule
+
+

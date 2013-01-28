@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diff:ComparisonResourceSnapshot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diff="http://www.eclipse.org/emf/compare/diff/1.1" xmlns:match="http://www.eclipse.org/emf/compare/match/1.1" date="2012-04-12T09:45:23.119+0200">
+  <diff>
+    <ownedElements xsi:type="diff:DiffGroup"/>
+    <leftRoots href="./test/example1.company#/"/>
+    <rightRoots href="resultModel.company#/"/>
+  </diff>
+  <match>
+    <matchedElements xsi:type="match:Match2Elements" similarity="0.2">
+      <subMatchElements xsi:type="match:Match2Elements" similarity="0.9829268292682927">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.0/@manager"/>
+          <rightElement href="resultModel.company#//@depts.0/@manager"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.0/@employees.0"/>
+          <rightElement href="resultModel.company#//@depts.0/@employees.0"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.0/@employees.1"/>
+          <rightElement href="resultModel.company#//@depts.0/@employees.1"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.0/@employees.2"/>
+          <rightElement href="resultModel.company#//@depts.0/@employees.2"/>
+        </subMatchElements>
+        <leftElement href="./test/example1.company#//@depts.0"/>
+        <rightElement href="resultModel.company#//@depts.0"/>
+      </subMatchElements>
+      <subMatchElements xsi:type="match:Match2Elements" similarity="0.9829268292682927">
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.1/@manager"/>
+          <rightElement href="resultModel.company#//@depts.1/@manager"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.1/@employees.0"/>
+          <rightElement href="resultModel.company#//@depts.1/@employees.0"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.1/@employees.1"/>
+          <rightElement href="resultModel.company#//@depts.1/@employees.1"/>
+        </subMatchElements>
+        <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+          <leftElement href="./test/example1.company#//@depts.1/@employees.2"/>
+          <rightElement href="resultModel.company#//@depts.1/@employees.2"/>
+        </subMatchElements>
+        <leftElement href="./test/example1.company#//@depts.1"/>
+        <rightElement href="resultModel.company#//@depts.1"/>
+      </subMatchElements>
+      <leftElement href="./test/example1.company#/"/>
+      <rightElement href="resultModel.company#/"/>
+    </matchedElements>
+    <leftRoots href="./test/example1.company#/"/>
+    <rightRoots href="resultModel.company#/"/>
+  </match>
+</diff:ComparisonResourceSnapshot>
