@@ -1,0 +1,642 @@
+-- *******************************************************************************
+-- * Copyright (c) 2010
+-- * All rights reserved. This program and the accompanying materials
+-- * are made available under the terms of the Eclipse Public License v1.0
+-- * which accompanies this distribution, and is available at
+-- * http://www.eclipse.org/legal/epl-v10.html
+-- *
+-- * Contributors:
+-- *    Javier Canovas (jlcanovas@um.es) 
+-- *******************************************************************************
+
+
+-- Gra2MoL transformation to extract abstract syntax models from Gra2MoL textual definitions
+-- Author: Javier Canovas (jlcanovas@um.es
+
+--
+-- Main transformation rule
+--
+
+rule 'mapTransformation'
+	from	transformation t
+	to		Gra2MoL::Core::Transformation
+	queries
+		hs : //transformation/#hDef;
+		rs : //transformation/#rDef;
+		p  : {ext gts.modernization.extension.TestControlExtension (hs)} //transformation/#hDef;
+	mappings
+		name 			= "";
+		sourceGrammar 	= t.sourceGrammar;
+		targetMetamodel = t.targetMetamodel;
+		hashes 			= hs;
+		rules 			= rs;
+end_rule
+
+
+--
+-- Rules for hash
+--
+
+rule 'mapHash' 
+	from 	hDef h
+	to		Gra2MoL::Core::Hash
+	queries
+		hvs : /h/#hashValue;
+	mappings
+		name 	= h.ID;
+		content = hvs;
+end_rule
+
+rule 'mapDefaultHashEntry'
+	from	hashValue{TOKEN[0].eq("default")} hv
+	to		Gra2MoL::Core::HashValue
+	queries
+		rv : /hv/hashValuePart[0];
+	mappings
+		fromElementType = "DEFAULT";
+		toElement 		= removeQuotes rv.DQVALUE;
+end_rule
+
+-- TODO: Considerate more hash value types!
+rule 'mapHashEntry'
+	from	hashValue hv
+	to		Gra2MoL::Core::HashValue
+	queries
+		lv : /hv/hashValuePart[0];
+		rv : /hv/hashValuePart[1];
+	mappings
+		fromElement 	= removeQuotes lv.DQVALUE;
+		fromElementType = "VALUE";
+		toElement 		= removeQuotes rv.DQVALUE;
+end_rule
+
+--
+-- Rules for rule definitions
+--
+
+rule 'mapStandardRule'
+	from 	rDef/ruleType{!TOKEN[0].eq("mixin_rule")} r
+	to 		Gra2MoL::Core::StandardRule
+	queries	
+		-- Inferring the rule type
+		isNormal : /r/#ruleType{TOKEN[0].eq("rule")};
+		isSkip   : /r/#ruleType{TOKEN[0].eq("skip_rule")};
+		isCopy   : /r/#ruleType{TOKEN[0].eq("copy_rule")};
+		
+		nElem  : /r/#ruleName;
+		fElem  : /r/#fromElement;
+		cElems : /r/#contextElem;
+		tElem  : /r/#toElement;
+		qElems : /r/queryList/#query;
+		iElems : /r/initList/#init;
+	mappings
+		if(isNormal.hasResults) then
+			type = "NORMAL";
+		else 
+			if(isSkip.hasResults) then
+				type = "SKIP";
+			else
+				if (isCopy.hasResults) then
+					type = "COPY";
+				end_if
+			end_if			
+		end_if
+
+		name 	  = nElem.ID;
+		_from 	  = fElem;
+		_context  = cElems.ID;
+		_to 	  = tElem;
+		_queries  = qElems;
+		inits 	  = iElems;		
+end_rule
+
+-- TODO: Checks if the name has the escape character "_"
+rule 'mapFromElem'
+	from	fromElement fe
+	to		Gra2MoL::Core::FromElement
+	queries
+		nElem : /fe/#id;
+		fElem : /fe/#fromQuery;
+		eElem : /fe/#filterExpression;
+		uElem : /fe/#filterUnit;
+		
+		uniqExists : /fe{TOKEN[1].eq("unique")};
+	mappings
+		name 	= extract nElem;
+		alias 	= fe.ID;
+		
+		filter 				= new Gra2MoL::Query::FilterUnit;
+		filter.type 		= "DIRECT";
+		filter.element 		= new Gra2MoL::Query::QueryElement;
+		filter.element.mark = "true";
+		filter.element.name = ext digestID(nElem); -- TODO: remove posible bar character		
+		filter.expression 	= eElem;
+		filter.next			= uElem;
+		if(uniqExists.hasResults) then 
+			filter.operation = "UNIQUE";
+		end_if
+end_rule
+
+rule 'mapToElement'
+	from	toElement te
+	to 		Gra2MoL::Core::ToElement
+	queries
+		nElem : /te/#normalName;
+	mappings
+		name  = extractID nElem;
+		alias = te.ID;
+end_rule
+
+--
+--
+-- Rules for queries
+--
+--
+
+rule 'mapQuery'
+	from	query q
+	to		Gra2MoL::Query::QueryUnit
+	queries
+		cElem : /q/#queryControl;
+		fElem : /q/#filterUnit;
+	mappings
+		variable 	= q.ID[0];
+		control 	= cElem; 
+		cast 		= q.ID[1];
+		filter 		= fElem;
+end_rule
+
+rule 'mapQueryControlFor'
+	from 	queryControl{TOKEN[0].eq("for")} qc
+	to		Gra2MoL::Query::QueryControlFor
+	queries
+	mappings
+		variable 		= qc.ID[0];
+		queryVariable 	= qc.ID[1];
+end_rule
+
+rule 'mapQueryControlGreater'
+	from 	queryControl{TOKEN[0].eq("for")} qc
+	to		Gra2MoL::Query::QueryControlGreater
+	queries
+	mappings
+		variable 		= qc.ID[0];
+		nodeId	 		= qc.NUMBER;
+		nodePosition 	= qc.ID[1];
+end_rule	
+
+rule 'mapFilterUnit'
+	from 	filterUnit fu
+	to		Gra2MoL::Query::FilterUnit
+	queries
+		-- Checking query type
+		isDirect    : /fu/#filterUnitElement{BAR.exists};
+		isIndirect  : /fu/#filterUnitElement{DOUBLEBAR.exists};
+		isRecursive : /fu/#filterUnitElement{TRIPLEBAR.exists};
+	
+		-- Checking query op
+		op       : /fu/filterUnitElement/#filterOperation;
+		isFirst  : /#op{TOKEN[1].eq("first")};
+		isLast   : /#op{TOKEN[1].eq("last")};
+		isUnique : /#op{TOKEN[1].eq("unique")};
+		isDot    : /#op{DOT.exists};
+		isNumber : /#op{NUMBER.exists};
+		
+		-- Extracting other elements
+		elem  : /fu/filterUnitElement/#filterElement;
+		eElem : /fu/#filterExpression;
+		uElem : /fu/#filterUnit;
+	mappings
+		if(isDirect.hasResults) then
+			type = "DIRECT";
+		else
+			if(isIndirect.hasResults) then
+				type = "INDIRECT";
+			else
+				if(isRecursive.hasResults) then
+					type = "RECURSIVE";
+				end_if
+			end_if
+		end_if
+
+
+		if(isFirst.hasResults) then			
+			operation = "POSITION";
+			position  = 0;
+		else
+			if(isLast.hasResults) then	
+				operation = "POSITION";
+				position  = -1;
+			else
+				if(isUnique.hasResults) then
+					operation = "UNIQUE";
+				else
+					if(isDot.hasResults) then	
+						operation = "POSITION";
+						position  = 0;
+					else
+						if(isNumber.hasResults) then
+							operation = "POSITION";
+							position  = op.NUMBER;
+						end_if
+					end_if
+				end_if
+			end_if
+		end_if
+
+		element = elem;
+		expression = eElem;
+		next = uElem;
+end_rule
+
+rule 'mapFilterElement'
+	from 	filterElement fe
+	to		Gra2MoL::Query::QueryElement
+	queries
+		iElem : /fe/#id;
+		aElem : /fe{AL.exists};
+	mappings
+		name = ext digestID(iElem);
+		type = "NODE";
+		if(aElem.hasResults) then
+			mark = "true";
+		else
+			mark = "false"; 
+		end_if
+end_rule
+
+skip_rule 'skipFilterExpressionAND'
+	from	filterExpression{!AND.exists} fe
+	to		Gra2MoL::Query::FilterExpression
+	queries
+		exp : /fe/#filterExpressionAlt[0];
+	mappings
+		skip exp;
+end_rule
+
+rule 'mapFilterExpressionAND'
+	from	filterExpression{AND.exists} fe
+	to		Gra2MoL::Query::FilterExpressionComplex
+	queries
+		exps : /fe/#filterExpressionAlt;
+	mappings
+		expressions = exps;
+		type        = "AND";
+end_rule
+
+skip_rule 'skipFilterExpressionOR'
+	from	filterExpressionAlt{!OR.exists} fe
+	to		Gra2MoL::Query::FilterExpression
+	queries
+		exp : /fe/#filterExpressionNot[0];
+	mappings
+		skip exp;
+end_rule
+
+rule 'mapFilterExpressionOR'
+	from	filterExpressionAlt{OR.exists} fe
+	to		Gra2MoL::Query::FilterExpressionComplex
+	queries
+		exps : /fe/#filterExpressionNot;
+	mappings
+		expressions = exps;
+		type        = "OR";
+end_rule
+
+skip_rule 'skipFilterExpressionNot'
+	from	filterExpressionNot{!NOT.exists} fea
+	to		Gra2MoL::Query::FilterExpression
+	queries
+		exp : /fea/#filterExpressionAtom;
+	mappings
+		skip exp;
+end_rule
+
+skip_rule 'mapFilterExpressionNot'	
+	from	filterExpressionNot{NOT.exists} fea
+	to		Gra2MoL::Query::FilterExpressionComplex
+	queries
+		exp : /fea/#filterExpressionAtom;
+	mappings
+		expressions = exp;
+		type        = "NOT";
+end_rule
+
+skip_rule 'skipFilterExpressionParenthised'
+	from	filterExpressionAtom/filterExpression fea
+	to		Gra2MoL::Query::FilterExpression
+	queries
+		exp : /fea/#filterExpression;
+	mappings
+		skip exp;
+end_rule
+
+-- Be careful, this rule must located after skipFilterExpressionParenthised
+rule 'mapFilterExpressionUnit'
+	from	filterExpressionAtom fea
+	to		Gra2MoL::Query::FilterExpressionUnit
+	queries
+		-- Checking the operator type
+		op : /fea/#filterExpressionOperator;
+	
+		-- Checking the global
+		isGlobal : /fea{TOKEN[0].eq("all")};
+		
+		-- Other useful elements
+		eElem : /fea/#expressionElement;
+		pElem : /fea/#param;
+	mappings
+		element    = eElem;
+		parameters = pElem;
+		operation  = op.ID;
+		 
+		if(isGlobal.hasResults) then
+			global = "true";
+		else
+			global = "false";
+		end_if
+end_rule
+
+rule 'mapExpressionElement'
+	from 	expressionElement ee
+	to 		Gra2MoL::Query::ExpressionElement
+	queries
+		isAt 	 : /ee{AT.exists};
+		isNumber : /ee{NUMBER.exists};
+		isLast   : /ee{TOKEN[0].eq("(") && TOKEN[1].eq("last")};
+	mappings
+		if(isAt.hasResults) then
+			name     = "TOKEN";
+			type     = "TOKEN";
+			position = ee.NUMBER;
+		else
+			name =	ee.ID;
+			type = "LEAF";
+			if(isNumber.hasResults) then
+				position = ee.NUMBER;
+			else 
+				if(isLast.hasResults) then
+					position = -1;
+				else
+					position = 0;
+				end_if
+			end_if
+		end_if
+end_rule	
+
+rule 'mapParamID'
+	from	param{id1.exists && id2.exists} p
+	to		Gra2MoL::Core::Parameter
+	queries
+		ext1 : /p/#pExt1;
+		ext2 : /p/#pExt2;
+	mappings
+		type              = "QUERY_ACCESS";
+		value             = p.id1;
+		valuePosition     = extract ext1;
+		extension         = p.id2;
+		extensionPosition = extract ext2;
+end_rule
+
+rule 'mapParamID'
+	from	param{ID[0].exists && !DOT.exists} p
+	to		Gra2MoL::Core::Parameter
+	queries
+	mappings
+		type  = "VARIABLE";
+		value = extract p;
+end_rule
+
+rule 'mapParamDQValue'
+	from	param{DQVALUE.exists} p
+	to		Gra2MoL::Core::Parameter
+	queries	
+	mappings
+		type  = "STRING_VALUE";
+		value = removeQuotes p.DQVALUE;
+end_rule
+
+rule 'mapParamNumber'
+	from 	param{NUMBER.exists} p
+	to 		Gra2MoL::Core::Parameter
+	queries
+	mappings
+		type  = "NUMBER_VALUE";
+		value = extract p;
+end_rule	
+
+--
+--
+-- Rules for mappings
+--
+--
+
+rule 'mapInitUnitIf'
+	from 	init{TOKEN[0].eq("if")} i
+	to		Gra2MoL::Core::InitUnitGroup
+	queries
+		eElem  : /i/#filterExpression;
+		iElems : /i/#init;
+		elseP  : /i/#elsePart;
+	mappings
+		type       = "IF";
+		expression = eElem;
+		inits      = iElems;
+		inits 	   = elsePart;
+end_rule
+
+rule 'mapInitUnitElsePart'
+	from	elsePart ep
+	to		Gra2MoL::Core::InitUnitGroup
+	queries
+		iElems : /ep/#init;
+	mappings
+		type  = "ELSE";
+		inits = iElems;
+end_rule
+
+rule 'mapInitUnitSkip'
+	from 	init{TOKEN[0].eq("skip")} i
+	to		Gra2MoL::Core::InitUnitElement
+	queries	
+	mappings
+		element     = "SKIP";
+		value       = new Gra2MoL::Core::InitUnitElementValue;
+		value.type  = "SKIP";
+		value.value = i.ID;
+end_rule
+
+-- Be careful this rule must be located after mapInitUnitIf and mapInitUnitSkip
+rule 'mapInitUnitNormal'
+	from 	init i
+	to		Gra2MoL::Core::InitUnitElement
+	queries
+		inElem : /i/initName/#id;
+		enElem : /i/#initName{DOT.exists};
+		vElem  : /i/#initElementValue;
+	mappings
+		element   = ext digestID(inElem);
+		extension = enElem.ID;
+		value     = vElem;
+end_rule
+
+-- Case -> initElementValue : ID
+rule 'mapInitElementValue'
+	from 	initElementValue{!TOKEN[0].exists && ID[0].exists && !DOT.exists} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type  = "QUERY_RESULT";
+		value = extract iev;
+end_rule
+
+-- Case -> initElementValue : DQVALUE
+rule 'mapInitElementValue'
+	from 	initElementValue{DQVALUE.exists} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type  = "VALUE";
+		value = removeQuotes iev.DQVALUE;
+end_rule
+
+-- Case -> initElementValue : NUMBER
+rule 'mapInitElementValue'
+	from 	initElementValue{NUMBER.exists} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type  = "VALUE";
+		value = extract iev;
+end_rule
+
+-- Case -> initElementValue : ID DOT ID ('*' | '[' param ']')?
+rule 'mapInitElementValue'
+	from 	initElementValue{!TOKEN[0].exists && ID[0].exists && DOT.exists} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+		isAst : /iev{TOKEN[0].eq("*")};
+		pElem : /iev/#param;
+	mappings
+		type      = "QUERY_ACCESS";
+		value     = iev.ID[0];
+		extension = iev.ID[1];
+		if(isAst.hasResults) then
+		    -- TODO: Take this point in account
+		    -- (I need support for creating new objects and adding them to multivalue collections)
+			-- params = 
+		else
+			params = pElem;
+		end_if
+end_rule
+
+-- Case -> ip1=param PLUS ip2=param (PLUS ip3+=param)* 
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("+")} iev
+	to		Gra2MoLL::Core::InitUnitElementValue
+	queries
+		pElem : /iev/#param;
+	mappings
+		type   = "OPERATION_CONCAT";
+		params = pElem;
+end_rule
+
+-- Case -> 'new' normalName
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("new")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+		nElem : /iev/#normalName;
+	mappings
+		type  = "OPERATION_CREATION";
+		value = extract nElem;
+end_rule
+
+-- Case ->  'map' map=ID '(' p=param  ')'
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("map")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+		pElem : /iev/#param;
+	mappings
+		type   = "HASH";
+		value  = iev.ID[0];
+		params = pElem;
+end_rule
+
+-- Case ->  'extract' c=ID 
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("extract")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type   = "OPERATION_EXTRACT";
+		value  = iev.ID[0];
+end_rule
+
+-- Case ->  'extractID' c=ID 
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("extractID")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type   = "OPERATION_EXTRACTID";
+		value  = iev.ID[0];
+end_rule
+
+-- Case ->  'execute' rul=ID res=ID
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("execute")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type      = "OPERATION_CALL";
+		value     = iev.ID[0];
+		extension = iev.ID[1];
+end_rule
+
+-- Case -> 'removeQuotes' i1=ID DOT i2=ID ('[' ip = param ']')?
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("execute")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+		pElem : /iev/#param;
+	mappings
+		type      = "OPERATION_REMOVE_QUOTES";
+		value     = iev.ID[0];
+		extension = iev.ID[1];
+		params    = pElem;
+end_rule
+
+-- Case -> 'count' c=ID 
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("count")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type      = "OPERATION_COUNT";
+		value     = iev.ID[0];
+end_rule
+
+-- Case -> 'convertHexToString' i1=ID DOT i2=ID 
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("convertHexToString")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+	mappings
+		type      = "OPERATION_COUNT";
+		value     = iev.ID[0];
+		extension = iev.ID[1];
+end_rule
+
+-- Case -> 'ext' op=normalName ('(' pList+=param (',' pList+=param)? ')')?
+rule 'mapInitElementValue'
+	from 	initElementValue{TOKEN[0].eq("ext")} iev
+	to		Gra2MoL::Core::InitUnitElementValue
+	queries
+		pElem : /iev/#param;
+	mappings
+		type      = "OPERATION_EXTENSION";
+		value     = iev.ID[0];
+		params    = pElem;
+end_rule

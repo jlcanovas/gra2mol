@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/Grammar2Model.Gra2MoL/src"
+    modelPluginID="Grammar2Model.Gra2MoL" modelName="Gra2MoL" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>../../Grammar2Model.GVQ/model/Gra2MoL.ecore</foreignModel>
+  <genPackages prefix="Gra2MoL" basePackage="gts.modernization.model" disposableProviderFactory="true"
+      ecorePackage="Gra2MoL.ecore#/">
+    <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="Gra2MoL.ecore#//Core">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Core/InitUnitElementValueType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/VALUE"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/QUERY_RESULT"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/QUERY_ACCESS"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/OPERATION_CONCAT"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/OPERATION_CREATION"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/HASH"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/OPERATION_CODE"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/OPERATION_CALL"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitElementValueType/OPERATION_REMOVE_QUOTES"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Core/InitUnitGroupType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitGroupType/NORMAL"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitGroupType/IF"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/InitUnitGroupType/ELSE"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Core/ParameterType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/ParameterType/STRING_VALUE"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/ParameterType/NUMBER_VALUE"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/ParameterType/QUERY_ACCESS"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/ParameterType/VARIABLE"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/ParameterType/MULTIPLE"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Core/HashValueType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/HashValueType/VALUE"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/HashValueType/GRAMMAR_ELEMENT"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/HashValueType/METAMODEL_ELEMENT"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Core/HashValueType/DEFAULT"/>
+      </genEnums>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/ViewDefinition">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/ViewDefinition/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/ViewDefinition/hashes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/ViewDefinition/rules"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/Rule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Rule/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/Rule/from"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/Rule/to"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Rule/context"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/Rule/queries"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/Rule/inits"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/FromElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/FromElement/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/FromElement/filter"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/FromElement/alias"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/ToElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/ToElement/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/ToElement/alias"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/InitUnit"/>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/InitUnitElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/InitUnitElement/element"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/InitUnitElement/extension"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/InitUnitElement/value"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/InitUnitElementValue">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/InitUnitElementValue/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/InitUnitElementValue/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/InitUnitElementValue/extension"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/InitUnitElementValue/params"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/InitUnitGroup">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/InitUnitGroup/type"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/InitUnitGroup/inits"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/InitUnitGroup/expression"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/Parameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Parameter/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Parameter/valuePosition"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Parameter/extension"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Parameter/extensionPosition"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Parameter/type"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/Hash">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/Hash/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Core/Hash/content"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Core/HashValue">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/HashValue/fromElement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/HashValue/fromElementType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/HashValue/toElement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Core/HashValue/toElementType"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Query" disposableProviderFactory="true" ecorePackage="Gra2MoL.ecore#//Query">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Query/FilterType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterType/DIRECT"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterType/INDIRECT"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterType/RECURSIVE"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Query/FilterOperationType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterOperationType/NORMAL"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterOperationType/POSITION"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterOperationType/UNIQUE"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Query/QueryElementType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/QueryElementType/NODE"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/QueryElementType/LEAF"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/QueryElementType/TOKEN"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Query/FilterExpressionType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterExpressionType/AND"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterExpressionType/OR"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/FilterExpressionType/NOT"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Query/ExpressionElementType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/ExpressionElementType/LEAF"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/ExpressionElementType/TOKEN"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Gra2MoL.ecore#//Query/OperationType">
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/OperationType/EQUALS"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/OperationType/EXISTS"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/OperationType/CHECK"/>
+        <genEnumLiterals ecoreEnumLiteral="Gra2MoL.ecore#//Query/OperationType/HASRESULTS"/>
+      </genEnums>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/QueryUnit">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/QueryUnit/variable"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/QueryUnit/cast"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/QueryUnit/filter"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/QueryUnit/control"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/QueryControl"/>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/QueryControlFor">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/QueryControlFor/variable"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/QueryControlFor/queryVariable"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/FilterUnit">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/FilterUnit/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/FilterUnit/operation"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/FilterUnit/element"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/FilterUnit/expression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/FilterUnit/next"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/FilterUnit/position"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/QueryElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/QueryElement/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/QueryElement/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/QueryElement/mark"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Gra2MoL.ecore#//Query/FilterExpression"/>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/FilterExpressionComplex">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/FilterExpressionComplex/expressions"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/FilterExpressionComplex/type"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/FilterExpressionUnit">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/FilterExpressionUnit/element"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/FilterExpressionUnit/operation"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/FilterExpressionUnit/global"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gra2MoL.ecore#//Query/FilterExpressionUnit/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="Gra2MoL.ecore#//Query/ExpressionElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/ExpressionElement/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/ExpressionElement/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gra2MoL.ecore#//Query/ExpressionElement/position"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

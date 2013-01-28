@@ -1,0 +1,508 @@
+-- *******************************************************************************
+-- * Copyright (c) 2010
+-- * All rights reserved. This program and the accompanying materials
+-- * are made available under the terms of the Eclipse Public License v1.0
+-- * which accompanies this distribution, and is available at
+-- * http://www.eclipse.org/legal/epl-v10.html
+-- *
+-- * Contributors:
+-- *    Javier Canovas (jlcanovas@um.es) 
+-- *******************************************************************************
+
+
+----------------------------------------------------------------------------------
+-- Gra2MoL transformation definition for extracting ASTM models from Delphi code
+-- Author: Javier Luis Canovas Izquierdo (jlcanovas@um.es)
+--
+-- TODO:
+--   * Scopes are not considered in the extraction process
+----------------------------------------------------------------------------------
+
+--
+-- General Rules
+--
+
+rule 'mapProject'
+	from 	CST c
+	to 		astm::gastm::Project
+	queries
+		fs : //#file[0];
+	mappings
+		files = fs;
+		--outerScope = ;
+end_rule
+
+rule 'mapFileFromUnit'
+	from 	file//unit f
+	to		astm::gastm::CompilationUnit
+	queries
+		intDecls : /f//#interfaceDecl;
+		impDecls : /f//implementationSection//#declSection;
+	mappings
+		language 	= "Delphi";
+		--fragments 	= intDecls;
+		fragments 	= impDecls;
+		--openScope =		
+		
+		-- Attributes inherited from GASTMSyntaxObject
+		locationInfo 						= new astm::gastm::SourceLocation;
+		locationInfo.inSourceFile 			= new astm::gastm::SourceFile;
+		locationInfo.inSourceFile.pathName 	= f.path;
+end_rule
+
+
+-- 
+-- Rules for declarations (labels, constants, types, vars and procedures)
+-- 
+
+--
+-- Rules which deal with interface declarations
+--
+skip_rule 'skipConstDecl'
+	from	interfaceDecl//constSection id
+	to		astm::gastm::VariableDefinition
+	queries
+		cdecl : /id//#constantDecl;
+	mappings
+		skip cdecl;
+end_rule
+
+skip_rule 'skipTypeDecl'
+	from	interfaceDecl//typeSection td
+	to		astm::gastm::NamedTypeDefinition
+	queries
+		tdecl : /td//#typeDecl;
+	mappings
+		skip tdecl;
+end_rule
+
+--
+-- Rules for general declaration sections (normally included in 
+-- implementation section and blocks
+--
+skip_rule 'skipProcedureSection'
+	from	declSection/procedureDeclSection ds
+	to		astm::gastm::Definition
+	queries
+		pdSect : /ds/#procedureDeclSection;
+	mappings
+		skip pdSect;
+end_rule
+
+skip_rule 'skipVarSection'
+	from	declSection/varSection ds
+	to		astm::gastm::Definition
+	queries
+		varSect : /ds//#varDecl;
+	mappings
+		skip varSect;
+end_rule
+
+-- 
+-- Rules for element definitions
+-- 
+
+rule 'mapProcedureOrFunction'
+	from 	procedureDeclSection pd
+	to 		astm::gastm::FunctionDefinition
+	queries
+		nElem  : /pd//#ident[0];
+		pElems : /pd//formalParameters/#formalParm;
+		tElem  : /pd//#type[0];
+		bElem  : /pd//#block[0];
+	mappings
+		-- Attributes inherited from Definition
+		identifierName 				= new astm::gastm::Name;
+		identifierName.nameString 	= extractID nElem;
+		--definitionType
+		
+		-- Own attributes
+		formalParameters 	= pElems;
+		if(bElem.hasResults) then
+			body 		= bElem;
+		end_if
+		if(tElem.hasResults) then 
+			returnType 	= tElem;
+		end_if
+end_rule
+
+skip_rule 'skipParameterDefinition'
+	from 	formalParm fp
+	to 		astm::gastm::FormalParameterDefinition
+	queries
+		ids : /fp//identList/#ident;
+	mappings
+		skip ids;
+end_rule
+
+rule 'mapParameterDefinition'
+	from	ident fp
+	context skipParameterDefinition
+	to		astm::gastm::FormalParameterDefinition
+	queries
+		pDecl : //#formalParm//ident{this.check(fp)};
+		pType : /pDecl//parameter/#type;
+	mappings
+		identifierName 				= new astm::gastm::Name;
+		identifierName.nameString 	= extract fp;
+		definitionType	 			= new astm::gastm::UnnamedTypeReference;
+		definitionType.type 		= pType;
+end_rule
+
+--
+-- Rules for constants
+--
+
+-- TODO: This rules does not deal with the type of the constants yet
+rule 'mapConstDecl'
+	from	constantDecl cd
+	to		astm::gastm::VariableDefinition
+	queries
+		id  : /cd//#ident;
+		exp : /cd//#expression;
+	mappings
+		-- Attributes inhertied from Definition
+		identifierName				= new astm::gastm::Name;
+		identifierName.nameString 	= extract id;
+		--definitionType				=
+		
+		-- Owned attributes 
+		initialValue	= exp;
+		isMutable 		= "false";
+end_rule
+
+--
+-- Rules for types
+--
+rule 'skipToCorrectType'
+	from 	typeDecl td
+	to		astm::gastm::NamedTypeDefinition 
+	queries
+		id    : /td/#ident;
+		nType : /td/#type;
+		rType : /td/#restrictedType;
+	mappings
+		name 				= new astm::gastm::Name;
+		name.nameString 	= extract id;
+		definitionType 		= new astm::gastm::NamedType;
+		if(nType.hasResults) then
+			definitionType.body = ntype;
+		else 		
+			if(rType.hasResults) then
+				definitionType.body = rType;
+			end_if		
+		end_if
+end_rule
+
+rule 'mapClassType'
+	from 	restrictedType/classType ct
+	to		astm::gastm::ClassType
+	queries
+		flist : /ct//classFieldList/#classField;
+		mlist : /ct//classMethodList/#classMethod;
+		plist : /ct//classPropertyList/#classProperty;
+	mappings		
+		members = flist; 
+		members = mlist; 
+		--derivesFrom =
+		--openScope =
+end_rule	
+
+rule 'mapString'
+	from	type/stringType t
+	to		astm::gastm::String
+	queries
+	mappings
+end_rule
+
+rule 'mapInteger'
+	from	type//ordIdent{TOKEN[0].eq("integer")} t
+	to		astm::gastm::Integer
+	queries
+	mappings
+end_rule
+
+--
+-- Rules for class elements
+--
+
+-- This rule only deals with primitive types at now
+rule 'mapClassVariable'
+	from 	classField cf
+	to		astm::gastm::VariableDeclaration
+	queries
+		idList  : /cf//#identList;
+		typeRef : /cf//#type;
+	mappings
+		identifierName					= new astm::gastm::Name;
+		identifierName.nameString		= extract idList;
+		declarationType 				= new astm::gastm::UnnamedTypeReference;
+		declarationType.type 			= typeRef; 
+end_rule
+
+-- This rule only deals with primitive types at now
+rule 'mapFunctionOrProcedure'
+	from	classMethod cm
+	to		astm::gastm::FunctionDeclaration
+	queries
+		idName : /cm//#ident[0];
+		params : /cm//formalParameters/#formalParm;
+		reType : /cm//functionHeading/#type;
+	mappings
+		identifierName 				= new astm::gastm::Name;
+		identifierName.nameString 	= extract idName;
+		formalParameters 			= params;
+		if(reType.hasResults) then
+			returnType 				= new astm::gastm::UnnamedTypeReference;
+			returnType.type			= reType;
+		end_if
+end_rule
+
+skip_rule 'skipParameter'
+	from 	formalParm fp
+	to 		astm::gastm::FormalParameterDeclaration
+	queries
+		ids : /fp//identList/#ident;
+	mappings
+		skip ids;
+end_rule
+
+rule 'mapParameter'
+	from	ident fp
+	context skipParameter
+	to		astm::gastm::FormalParameterDeclaration
+	queries
+		pDecl : //#formalParm//ident{this.check(fp)};
+		pType : /pDecl//parameter/#type;
+	mappings
+		identifierName 				= new astm::gastm::Name;
+		identifierName.nameString 	= extract fp;
+		declarationType 			= new astm::gastm::UnnamedTypeReference;
+		declarationType.type 		= pType;
+end_rule
+
+--
+-- Rules for variables
+--
+rule 'mapVariable'
+	from 	varDecl vd
+	to 		astm::gastm::VariableDefinition
+	queries
+		iElem : /vd/#identList;
+		tElem : /vd/#type;
+	mappings
+		identifierName 				= new astm::gastm::Name;
+		identifierName.nameString 	= extract iElem; 
+		definitionType 				= tElem;
+		isMutable 					= "true";
+end_rule
+
+-- 
+-- Rules for statements
+--
+rule 'mapBlock' 
+	from 	block b
+	to 		astm::gastm::BlockStatement
+	queries
+		vars  : /b//#varSection;
+		stats : /b/compoundStmt//#statement;
+	mappings
+		subStatements = vars;
+		subStatements = stats;
+end_rule
+
+skip_rule 'mapVarSection'
+	from 	varSection vb
+	to		astm::gastm::Statement
+	queries
+		decls : /vb//#varDecl;
+	mappings
+		skip decls;
+end_rule
+
+rule 'mapVarSection'
+	from 	varDecl vd
+	to		astm::gastm::DeclarationOrDefinitionStatement
+	queries
+	mappings
+		declOrDefn = vd;
+end_rule
+
+skip_rule 'skipCorrectStatement'
+	from	statement st
+	to		astm::gastm::Statement
+	queries
+		existsSimple : /st/#simpleStatement;
+		existsStruct : /st/#structStmt;
+	mappings
+		if(existsSimple.hasResults) then
+			skip	existsSimple;
+		else
+			skip 	existsStruct;
+		end_if
+end_rule
+
+rule 'mapAssignment'
+	from	simpleStatement/expression st
+	to		astm::gastm::ExpressionStatement
+	queries
+		lElem : /st/#designator;
+		rElem : /st/#expression;
+	mappings
+		expression 								= new astm::gastm::BinaryExpression;
+		expression.leftOperand 					= new astm::gastm::IdentifierReference;
+		expression.leftOperand.name 			= new astm::gastm::Name;
+		expression.leftOperand.name.nameString 	= extract lElem;
+		expression.leftOperand.refersTo 		= lElem;
+		
+		expression.operator 					= new astm::gastm::Assign;
+		
+		expression.rightOperand 				= rElem;
+end_rule
+
+-- TODO: This rule only deals with simple identifiers
+skip_rule 'locateVar'
+	from 	designator d
+	to 		astm::gastm::Definition
+	queries
+		id     : /d//#ident[0];
+		locVar : //#varDecl//identList/ident{ID.eq(id.ID)};
+	mappings
+		skip locVar;
+end_rule
+
+rule 'mapCallFunction'
+	from	simpleStatement/exprList st
+	to		astm::gastm::ExpressionStatement
+	queries
+		-- Locating called function
+		nElem       : /st//#ident;
+		locFunction : //#procedureDeclSection//ident{ID.eq(nElem.ID)};
+		
+		-- Locating arguments
+		eElem : /st//#expression;
+	mappings
+		expression = new astm::gastm::FunctionCallExpression;
+	
+		--expression.expressionType =
+		
+		expression.calledFunction 					= new astm::gastm::IdentifierReference;
+		expression.calledFunction.name 				= new astm::gastm::Name;
+		expression.calledFunction.name.nameString 	= extract nElem;
+		expression.calledFunction.refersTo 			= locFunction;
+
+		if(eElem.hasResults) then
+			expression.actualParams = eElem;
+		end_if
+end_rule
+
+rule 'mapArgument'
+	from 	expression exp
+	to 		astm::gastm::ActualParameterExpression
+	queries
+		
+	mappings
+		value = exp;
+end_rule
+
+--
+-- Rules for expressions
+--
+skip_rule 'skipRelOp'
+	from	expression exp
+	to		astm::gastm::Expression
+	queries
+		existsRelOp : /exp/#relOp[0];
+		nextNode    : /exp/#simpleExpression;
+	mappings
+		if(existsRelOp.hasResults) then
+			skip existRelOp;
+		else
+			skip nextNode;
+		end_if
+end_rule
+
+skip_rule 'skipAddOp'
+	from 	simpleExpression se
+	to		astm::gastm::Expression
+	queries
+		existsAddOp : /se/#addOp[0];
+		nextNode    : /se/#term;
+	mappings
+		if(existsAddOp.hasResults) then
+			skip existsAddOp;
+		else
+			skip nextNode;
+		end_if
+end_rule
+
+skip_rule 'skipMulOp'
+	from 	term t
+	to		astm::gastm::Expression
+	queries
+		existsMulOp : /t/#mulOp[0];
+		nextNode2    : /t/#factor;
+	mappings
+		if(existsMulOp.hasResults) then
+			skip existsMulOp;
+		else
+			skip nextNode2;
+		end_if
+end_rule
+
+rule 'mapNumber'
+	from 	factor/number f
+	to 		astm::gastm::IntegerLiteral
+	queries
+		nVal : /f//#number;
+	mappings
+		value = extract nVal;
+end_rule
+
+rule 'mapString'
+	from 	factor/string f
+	to 		astm::gastm::StringLiteral
+	queries
+		sVal : /f//#string;
+	mappings
+		value = extract sVal;
+end_rule
+
+-- TODO: This rule is coppy/paste of mapCallFunction, I hate doing this :(
+-- We need any refactor/reuse mechanism!!
+-- Take care, this rule must be located here (before of mapVariableRef rule)
+rule 'mapFunctionCall'
+	from	factor/exprList f
+	to		astm::gastm::FunctionCallExpression
+	queries
+		-- Locating called function
+		nElem       : /f//#ident;
+		locFunction : //#procedureDeclSection//ident{ID.eq(nElem.ID)};
+		
+		-- Locating arguments
+		eElem : /f//#expression;
+	mappings
+		--expressionType =
+		
+		calledFunction 					= new astm::gastm::IdentifierReference;
+		calledFunction.name 			= new astm::gastm::Name;
+		calledFunction.name.nameString 	= extract nElem;
+		--calledFunction.refersTo 		= locFunction;
+
+		if(eElem.hasResults) then
+			actualParams = eElem;
+		end_if
+end_rule
+
+-- TODO: Dealing with complex identifiers
+rule 'mapVariableRef'
+	from	factor/designator f
+	to		astm::gastm::IdentifierReference
+	queries
+		nElem : /f/designator//#ident;		
+		dElem : /f/#designator;
+	mappings
+		name 			= new astm::gastm::Name;
+		name.nameString = extract nElem;
+		refersTo		= dElem; -- This statement calls to locateVar rule
+end_rule
