@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UI Plug-in
+Bundle-SymbolicName: Grammar2Model.UI; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: modelUM
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.debug.core,
+ org.eclipse.debug.ui,
+ org.eclipse.ant.core
+Bundle-ClassPath: .,
+ lib/org.eclipse.gmt.modisco.jar,
+ lib/gts.modernization.grammar2Model.jar,
+ lib/antlr-3.2.jar
+Bundle-Activator: gts.modernization.ui.Gra2molCore
+Bundle-ActivationPolicy: lazy

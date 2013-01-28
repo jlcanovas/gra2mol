@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules name="grammarGroup">
+    <from name="grammarDef" alias="m"/>
+    <to name="Grammar::GrammarGroup"/>
+    <queries variable="gDef">
+      <filter type="INDIRECT">
+        <element name="grammarDef" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="grammarDefs">
+        <value type="QUERY_RESULT" value="gDef"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="grammarDefinition">
+    <from name="grammarDef" alias="gd"/>
+    <to name="Grammar::GrammarDefinition"/>
+    <queries variable="id">
+      <filter>
+        <element name="gd"/>
+        <next>
+          <element name="id" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="ruleDefs">
+      <filter>
+        <element name="gd"/>
+        <next>
+          <element name="rule"/>
+          <next>
+            <element name="ruleName" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionComplex" type="OR">
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                <element name="RULE_REF"/>
+              </expressions>
+              <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                <element name="TOKEN_REF"/>
+              </expressions>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="id" extension="TOKEN_REF"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rules">
+        <value type="QUERY_RESULT" value="ruleDefs"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="sintacticRuleDef">
+    <from name="ruleName" alias="rid">
+      <filter operation="UNIQUE">
+        <element name="ruleName" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="RULE_REF"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="Grammar::SintacticRule"/>
+    <queries variable="rDef">
+      <filter type="INDIRECT">
+        <element name="rule" mark="true"/>
+        <next>
+          <element name="ruleName"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="RULE_REF"/>
+            <parameters value="rid" valuePosition="0" extension="RULE_REF" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="alt1">
+      <filter>
+        <element name="rDef"/>
+        <next type="INDIRECT">
+          <element name="altList"/>
+          <next type="INDIRECT">
+            <element name="ruleName" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="RULE_REF"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="alt2" cast="ruleName">
+      <filter>
+        <element name="rDef"/>
+        <next type="INDIRECT">
+          <element name="altList"/>
+          <next type="INDIRECT">
+            <element name="ruleName"/>
+            <next>
+              <element name="terminal" mark="true"/>
+              <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                <element name="TOKEN_REF"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="altid2">
+      <filter>
+        <element name="rDef"/>
+        <next type="INDIRECT">
+          <element name="altList"/>
+          <next type="INDIRECT">
+            <element name="ruleName"/>
+            <next>
+              <element name="ruleName" mark="true"/>
+              <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+                <element name="TOKEN_REF"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="rid" extension="RULE_REF"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="derivations">
+        <value type="QUERY_RESULT" value="alt1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="derivations">
+        <value type="QUERY_RESULT" value="alt2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="derivations">
+        <value type="QUERY_RESULT" value="altid2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="lexicalRuleDef">
+    <from name="ruleName" alias="rid">
+      <filter operation="UNIQUE">
+        <element name="ruleName" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN_REF"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="Grammar::LexicalRule"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="rid" extension="TOKEN_REF"/>
+      </inits>
+    </inits>
+  </rules>
+</Core:ViewDefinition>

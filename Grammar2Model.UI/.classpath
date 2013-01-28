@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="lib/antlr-3.2.jar"/>
+	<classpathentry kind="lib" path="lib/gts.modernization.grammar2Model.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.gmt.modisco.jar"/>
+	<classpathentry kind="lib" path="lib/gts.modernization.grammar2Model.antTasks.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

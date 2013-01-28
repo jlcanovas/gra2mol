@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:CST="http://gts.inf.um.es/modernization/cst" kind="grammarDef">
+  <children xsi:type="CST:Leaf" kind="DOC_COMMENT" value="/** &#xA; * An example grammar for a simple language&#xA; */"
+      line="1"/>
+  <children xsi:type="CST:Leaf" kind="TOKEN" value="grammar" line="5"/>
+  <children xsi:type="CST:Node" kind="id">
+    <children xsi:type="CST:Leaf" kind="RULE_REF" value="simpleGrammar" pos="8" line="5"/>
+  </children>
+  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="21" line="5"/>
+  <children xsi:type="CST:Node" kind="optionsSpec">
+    <children xsi:type="CST:Leaf" kind="OPTIONS" value="options {" line="7"/>
+    <children xsi:type="CST:Node" kind="option">
+      <children xsi:type="CST:Node" kind="id">
+        <children xsi:type="CST:Leaf" kind="RULE_REF" value="backtrack" pos="1" line="8"/>
+      </children>
+      <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="10" line="8"/>
+      <children xsi:type="CST:Node" kind="optionValue">
+        <children xsi:type="CST:Node" kind="id">
+          <children xsi:type="CST:Leaf" kind="RULE_REF" value="true" pos="11" line="8"/>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="15" line="8"/>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value="}" line="9"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="RULE_REF" value="mainRule" line="11"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="1" line="12"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Leaf" kind="RULE_REF" value="statement" pos="3"
+                  line="12"/>
+            </children>
+            <children xsi:type="CST:Node" kind="ebnfSuffix">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="*" pos="12" line="12"/>
+            </children>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="1" line="13"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="RULE_REF" value="statement" line="16"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="1" line="17"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Leaf" kind="RULE_REF" value="print_statement"
+                  pos="3" line="17"/>
+            </children>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="1" line="18"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="RULE_REF" value="print_statement" line="20"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="1" line="21"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="STRING_LITERAL" value="'print'"
+                    pos="3" line="21"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="DQVAL" pos="11"
+                    line="21"/>
+              </children>
+            </children>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="1" line="22"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="DQUOTE" line="25"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="7" line="25"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\u0022'"
+                    pos="9" line="25"/>
+              </children>
+            </children>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="17" line="25"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="DQVAL" line="26"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="7" line="26"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="DQUOTE" pos="9"
+                    line="26"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ebnf">
+              <children xsi:type="CST:Node" kind="block">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="16" line="26"/>
+                <children xsi:type="CST:Node" kind="optionsSpec">
+                  <children xsi:type="CST:Leaf" kind="OPTIONS" value="options {" pos="17"
+                      line="26"/>
+                  <children xsi:type="CST:Node" kind="option">
+                    <children xsi:type="CST:Node" kind="id">
+                      <children xsi:type="CST:Leaf" kind="RULE_REF" value="greedy"
+                          pos="26" line="26"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="32"
+                        line="26"/>
+                    <children xsi:type="CST:Node" kind="optionValue">
+                      <children xsi:type="CST:Node" kind="id">
+                        <children xsi:type="CST:Leaf" kind="RULE_REF" value="false"
+                            pos="33" line="26"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="38" line="26"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="39" line="26"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="41" line="26"/>
+                <children xsi:type="CST:Node" kind="alternative">
+                  <children xsi:type="CST:Node" kind="element">
+                    <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                      <children xsi:type="CST:Node" kind="ruleName">
+                        <children xsi:type="CST:Node" kind="terminal">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="43"
+                              line="26"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="44" line="26"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="*" pos="45" line="26"/>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="DQUOTE" pos="47"
+                    line="26"/>
+              </children>
+            </children>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="53" line="26"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="WS" line="28"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="7" line="28"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ebnf">
+              <children xsi:type="CST:Node" kind="block">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="9" line="28"/>
+                <children xsi:type="CST:Node" kind="alternative">
+                  <children xsi:type="CST:Node" kind="element">
+                    <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                      <children xsi:type="CST:Node" kind="ruleName">
+                        <children xsi:type="CST:Node" kind="terminal">
+                          <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="' '"
+                              pos="10" line="28"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="|" pos="28" line="28"/>
+                <children xsi:type="CST:Node" kind="alternative">
+                  <children xsi:type="CST:Node" kind="element">
+                    <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                      <children xsi:type="CST:Node" kind="ruleName">
+                        <children xsi:type="CST:Node" kind="terminal">
+                          <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\t'"
+                              pos="16" line="28"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="|" pos="28" line="28"/>
+                <children xsi:type="CST:Node" kind="alternative">
+                  <children xsi:type="CST:Node" kind="element">
+                    <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                      <children xsi:type="CST:Node" kind="ruleName">
+                        <children xsi:type="CST:Node" kind="terminal">
+                          <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\n'"
+                              pos="23" line="28"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="|" pos="28" line="28"/>
+                <children xsi:type="CST:Node" kind="alternative">
+                  <children xsi:type="CST:Node" kind="element">
+                    <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                      <children xsi:type="CST:Node" kind="ruleName">
+                        <children xsi:type="CST:Node" kind="terminal">
+                          <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\r'"
+                              pos="30" line="28"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="34" line="28"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="+" pos="35" line="28"/>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Leaf" kind="ACTION" value="{$channel=HIDDEN;}"
+                pos="37" line="28"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="55" line="28"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="COMMENT" line="29"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="4" line="30"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="STRING_LITERAL" value="'/*'" pos="6"
+                    line="30"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ebnf">
+              <children xsi:type="CST:Node" kind="block">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="11" line="30"/>
+                <children xsi:type="CST:Node" kind="optionsSpec">
+                  <children xsi:type="CST:Leaf" kind="OPTIONS" value="options {" pos="13"
+                      line="30"/>
+                  <children xsi:type="CST:Node" kind="option">
+                    <children xsi:type="CST:Node" kind="id">
+                      <children xsi:type="CST:Leaf" kind="RULE_REF" value="greedy"
+                          pos="22" line="30"/>
+                    </children>
+                    <children xsi:type="CST:Leaf" kind="TOKEN" value="=" pos="28"
+                        line="30"/>
+                    <children xsi:type="CST:Node" kind="optionValue">
+                      <children xsi:type="CST:Node" kind="id">
+                        <children xsi:type="CST:Leaf" kind="RULE_REF" value="false"
+                            pos="29" line="30"/>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="34" line="30"/>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="}" pos="35" line="30"/>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="37" line="30"/>
+                <children xsi:type="CST:Node" kind="alternative">
+                  <children xsi:type="CST:Node" kind="element">
+                    <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                      <children xsi:type="CST:Node" kind="ruleName">
+                        <children xsi:type="CST:Node" kind="terminal">
+                          <children xsi:type="CST:Leaf" kind="TOKEN" value="." pos="39"
+                              line="30"/>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                </children>
+                <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="41" line="30"/>
+              </children>
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="*" pos="42" line="30"/>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="STRING_LITERAL" value="'*/'" pos="44"
+                    line="30"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Leaf" kind="ACTION" value="{$channel=HIDDEN;}"
+                pos="49" line="30"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="4" line="31"/>
+  </children>
+  <children xsi:type="CST:Node" kind="rule">
+    <children xsi:type="CST:Node" kind="ruleName">
+      <children xsi:type="CST:Leaf" kind="TOKEN_REF" value="LINE_COMMENT" line="33"/>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=":" pos="4" line="34"/>
+    <children xsi:type="CST:Node" kind="altList">
+      <children xsi:type="CST:Node" kind="a1">
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="STRING_LITERAL" value="'//'" pos="6"
+                    line="34"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="notSet">
+                <children xsi:type="CST:Leaf" kind="TOKEN" value="~" pos="11" line="34"/>
+                <children xsi:type="CST:Node" kind="block">
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="(" pos="12" line="34"/>
+                  <children xsi:type="CST:Node" kind="alternative">
+                    <children xsi:type="CST:Node" kind="element">
+                      <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                        <children xsi:type="CST:Node" kind="ruleName">
+                          <children xsi:type="CST:Node" kind="terminal">
+                            <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\n'"
+                                pos="13" line="34"/>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value="|" pos="17" line="34"/>
+                  <children xsi:type="CST:Node" kind="alternative">
+                    <children xsi:type="CST:Node" kind="element">
+                      <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+                        <children xsi:type="CST:Node" kind="ruleName">
+                          <children xsi:type="CST:Node" kind="terminal">
+                            <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\r'"
+                                pos="18" line="34"/>
+                          </children>
+                        </children>
+                      </children>
+                    </children>
+                  </children>
+                  <children xsi:type="CST:Leaf" kind="TOKEN" value=")" pos="22" line="34"/>
+                </children>
+              </children>
+            </children>
+            <children xsi:type="CST:Node" kind="ebnfSuffix">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="*" pos="23" line="34"/>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\r'" pos="25"
+                    line="34"/>
+              </children>
+            </children>
+            <children xsi:type="CST:Node" kind="ebnfSuffix">
+              <children xsi:type="CST:Leaf" kind="TOKEN" value="?" pos="29" line="34"/>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Node" kind="ruleName">
+              <children xsi:type="CST:Node" kind="terminal">
+                <children xsi:type="CST:Leaf" kind="CHAR_LITERAL" value="'\n'" pos="31"
+                    line="34"/>
+              </children>
+            </children>
+          </children>
+        </children>
+        <children xsi:type="CST:Node" kind="element">
+          <children xsi:type="CST:Node" kind="elementNoOptionSpec">
+            <children xsi:type="CST:Leaf" kind="ACTION" value="{$channel=HIDDEN;}"
+                pos="36" line="34"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="CST:Leaf" kind="TOKEN" value=";" pos="4" line="35"/>
+  </children>
+  <children xsi:type="CST:Leaf" kind="EOF" pos="-1"/>
+</CST:Node>
