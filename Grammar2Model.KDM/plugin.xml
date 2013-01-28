@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/action"
+            class="kdm.action.ActionPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/build"
+            class="kdm.build.BuildPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/code"
+            class="kdm.code.CodePackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/conceptual"
+            class="kdm.conceptual.ConceptualPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/core"
+            class="kdm.core.CorePackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/data"
+            class="kdm.data.DataPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/event"
+            class="kdm.event.EventPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/source"
+            class="kdm.source.SourcePackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/platform"
+            class="kdm.platform.PlatformPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/structure"
+            class="kdm.structure.StructurePackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/kdm"
+            class="kdm.kdm.KdmPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/MoDisco/kdm/ui"
+            class="kdm.ui.UiPackage"
+            genModel="model/kdm.genmodel"/>
+   </extension>
+
+</plugin>
