@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:Transformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core">
+  <rules xsi:type="Core:StandardRule" name="file2Fichero">
+    <queries variable="fichero">
+      <filter type="INDIRECT">
+        <element name="file" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="entrecomillado">
+      <filter>
+        <element name="f"/>
+        <next type="INDIRECT">
+          <element name="entrecomillado" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="nombre">
+        <value type="QUERY_ACCESS" value="fichero" extension="filename"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="fragmentos">
+        <value type="QUERY_RESULT" value="entrecomillado"/>
+      </inits>
+    </inits>
+    <from name="file" alias="f">
+      <filter variable="f">
+        <filter>
+          <element name="file" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Fichero"/>
+  </rules>
+  <rules xsi:type="Core:StandardRule" name="entrecomillado2Fragmento">
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="texto">
+        <value type="QUERY_ACCESS" value="e" extension="ID"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="numLinea">
+        <value type="OPERATION_EXTENSION" value="getLine">
+          <params value="e" type="VARIABLE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="posCaracter">
+        <value type="OPERATION_EXTENSION" value="getPos">
+          <params value="e" type="VARIABLE"/>
+        </value>
+      </inits>
+    </inits>
+    <from name="entrecomillado" alias="e">
+      <filter variable="e">
+        <filter>
+          <element name="entrecomillado" mark="true"/>
+        </filter>
+      </filter>
+    </from>
+    <to name="Fragmento"/>
+  </rules>
+</Core:Transformation>

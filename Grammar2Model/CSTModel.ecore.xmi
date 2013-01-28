@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:CST="http://gts.inf.um.es/modernization/cst" kind="CST">
+  <children xsi:type="CST:Node" kind="file">
+    <children xsi:type="CST:Leaf" kind="path" value="/home/jcanovas/eclipses/eclipse-indigo/workspace/Grammar2Model/../Java2Fragmentos/sources/Programa.java"/>
+    <children xsi:type="CST:Leaf" kind="filename" value="/Programa.java"/>
+    <children xsi:type="CST:Node" kind="aplicacion">
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="import java.sql.*;" line="1"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="public class Programa {" line="2"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="public static void main(String args[]){"
+            pos="1" line="3"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="try {" pos="2" line="4"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="//Cargar clase de controlador de base de datos"
+            pos="3" line="5"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="Class.forName(" pos="3" line="6"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value=");" pos="40" line="6"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="//Crear el objeto de conexion a la base de datos"
+            pos="3" line="7"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="Connection conexion = DriverManager.getConnection("
+            pos="3" line="8"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value=");" pos="105" line="8"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="//Crear objeto Statement para realizar queries a la base de datos"
+            pos="3" line="9"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="Statement instruccion = conexion.createStatement();"
+            pos="3" line="10"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="//Un objeto ResultSet, almacena los datos de resultados de una consulta"
+            pos="3" line="11"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="ResultSet tabla = instruccion.executeQuery("
+            pos="3" line="12"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value=");" pos="78" line="12"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="System.out.println(" pos="3"
+            line="13"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value=");" pos="38" line="13"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="while(tabla.next())" pos="3"
+            line="14"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="System.out.println(tabla.getInt(1)+"
+            pos="3" line="15"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="+tabla.getString(2));" pos="42"
+            line="15"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="}" pos="2" line="16"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="catch(ClassNotFoundException e){ System.out.println(e); }"
+            pos="2" line="17"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="catch(SQLException e){ System.out.println(e); }"
+            pos="2" line="18"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="catch(Exception e){ System.out.println(e); }"
+            pos="2" line="19"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="}" pos="1" line="20"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo">
+        <children xsi:type="CST:Leaf" kind="ID" value="}" line="21"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo_entre_comillas">
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="17"
+            line="6"/>
+        <children xsi:type="CST:Node" kind="entrecomillado">
+          <children xsi:type="CST:Leaf" kind="ID" value="com.mysql.jdbc.Driver" pos="18"
+              line="6"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="39"
+            line="6"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo_entre_comillas">
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="53"
+            line="8"/>
+        <children xsi:type="CST:Node" kind="entrecomillado">
+          <children xsi:type="CST:Leaf" kind="ID" value="jdbc:mysql://localhost/ejemplo?user=root&amp;password="
+              pos="54" line="8"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="104"
+            line="8"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo_entre_comillas">
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="46"
+            line="12"/>
+        <children xsi:type="CST:Node" kind="entrecomillado">
+          <children xsi:type="CST:Leaf" kind="ID" value="SELECT cod , nombre FROM datos"
+              pos="47" line="12"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="77"
+            line="12"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo_entre_comillas">
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="22"
+            line="13"/>
+        <children xsi:type="CST:Node" kind="entrecomillado">
+          <children xsi:type="CST:Leaf" kind="ID" value="Codigo\tNombre" pos="23"
+              line="13"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="37"
+            line="13"/>
+      </children>
+      <children xsi:type="CST:Node" kind="codigo_entre_comillas">
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="38"
+            line="15"/>
+        <children xsi:type="CST:Node" kind="entrecomillado">
+          <children xsi:type="CST:Leaf" kind="ID" value="\t" pos="39" line="15"/>
+        </children>
+        <children xsi:type="CST:Leaf" kind="COMILLA_DOBLE" value="&quot;" pos="41"
+            line="15"/>
+      </children>
+    </children>
+  </children>
+</CST:Node>

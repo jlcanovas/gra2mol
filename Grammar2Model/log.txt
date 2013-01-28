@@ -1,0 +1,228 @@
+Gra2MoL version 0.6
+
+Executing interpreter...
+Reading configuration file...
+
+Initializing query operation
+gts.modernization.query.actions.QueryOperationCheck query operation found with keywords: [check]
+gts.modernization.query.actions.QueryOperationEndsWith query operation found with keywords: [endsWith]
+gts.modernization.query.actions.QueryOperationEquals query operation found with keywords: [eq, equals]
+gts.modernization.query.actions.QueryOperationExists query operation found with keywords: [exists]
+gts.modernization.query.actions.QueryOperationStartsWith query operation found with keywords: [startsWith]
+
+Initializing query control statement
+[WARNING] No query control statement were found!
+
+Initializing mapping extension
+gts.modernization.extension.TypeHelperExtension mapping extension found with keywords: [typeHelper]
+gts.modernization.extension.DigestFileNameExtension mapping extension found with keywords: [digestFilename]
+gts.modernization.extension.TypeInitializerExtension mapping extension found with keywords: [typeInitializer]
+Models created.
+Initializing indexRules...
+Initializing mixinRules...
+Initializing packages...
+Initializing hashes...
+
+Executing rules...
+RULE: mapCompany
+RULE: mapCompany... executing!
+  Model Element Company created
+  Executing queries...
+    Query dElem with 2 result nodes
+    Query c with 1 result nodes - CONTENT in line 1: [company "companyA" { department "departmentA" { manager "managerA" { address "streetManagerA" salary 10000.00 } employee "employeeA" { address "streetEmployeeA" salary 5000.00 } employee "employeeB" { address "streetEmployeeB" salary 7000.00 } employee "employeeC" { address "streetEmployeeC" salary 9000.00 mentor "employeeB" } } department "departmentB" { manager "managerB" { address "streetManagerB" salary 10000.00 mentor "managerA" } employee "employeeD" { address "streetEmployeeD" salary 2900.00 mentor "employeeE" } employee "employeeE" { address "streetEmployeeE" salary 6500.00 } employee "employeeF" { address "streetEmployeeF" salary 8700.00 mentor "employeeB" } } } null ]
+  Executing mappings...
+    - QUERY_ACCESS: variable: c - 
+      node: company (kind) - leaf: STRING (kind) - "companyA" (value) 
+    - QUERY_RESULT: 2 bindings:
+      (1/2) result node: department (kind). Rule... calling mapDepartment rule
+
+      RULE: mapDepartment
+      RULE: mapDepartment... executing!
+        Model Element Department created
+        Executing queries...
+          Query d with 1 result nodes - CONTENT in line 2: [department "departmentA" { manager "managerA" { address "streetManagerA" salary 10000.00 } employee "employeeA" { address "streetEmployeeA" salary 5000.00 } employee "employeeB" { address "streetEmployeeB" salary 7000.00 } employee "employeeC" { address "streetEmployeeC" salary 9000.00 mentor "employeeB" } } ]
+          Query dElem with 0 result nodes
+          Query mElem with 1 result nodes - CONTENT in line 3: ["managerA" { address "streetManagerA" salary 10000.00 } ]
+          Query eElem with 3 result nodes
+        Executing mappings...
+          - QUERY_ACCESS: variable: d - 
+            node: department (kind) - leaf: STRING (kind) - "departmentA" (value) 
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... executing!
+              Model Element Employee created
+              Executing queries...
+                Query e with 1 result nodes - CONTENT in line 3: ["managerA" { address "streetManagerA" salary 10000.00 } ]
+                Query mElem with 0 result nodes
+              Executing mappings...
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "managerA" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "streetManagerA" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: FLOAT (kind) - 10000.00 (value) 
+                - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+          - QUERY_RESULT: 3 bindings:
+            (1/3) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... executing!
+              Model Element Employee created
+              Executing queries...
+                Query e with 1 result nodes - CONTENT in line 7: ["employeeA" { address "streetEmployeeA" salary 5000.00 } ]
+                Query mElem with 0 result nodes
+              Executing mappings...
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "employeeA" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "streetEmployeeA" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: FLOAT (kind) - 5000.00 (value) 
+                - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+            (2/3) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... executing!
+              Model Element Employee created
+              Executing queries...
+                Query e with 1 result nodes - CONTENT in line 11: ["employeeB" { address "streetEmployeeB" salary 7000.00 } ]
+                Query mElem with 0 result nodes
+              Executing mappings...
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "employeeB" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "streetEmployeeB" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: FLOAT (kind) - 7000.00 (value) 
+                - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+            (3/3) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... executing!
+              Model Element Employee created
+              Executing queries...
+                Query e with 1 result nodes - CONTENT in line 15: ["employeeC" { address "streetEmployeeC" salary 9000.00 mentor "employeeB" } ]
+                Query mElem with 1 result nodes - CONTENT in line 11: ["employeeB" { address "streetEmployeeB" salary 7000.00 } ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "employeeC" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "streetEmployeeC" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: FLOAT (kind) - 9000.00 (value) 
+                - QUERY_RESULT: 1 bindings:
+                  (1/1) result node: employee (kind). Rule... calling mapEmployee rule
+
+                  RULE: mapEmployee
+                  RULE: mapEmployee... cached!!
+
+          - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+      (2/2) result node: department (kind). Rule... calling mapDepartment rule
+
+      RULE: mapDepartment
+      RULE: mapDepartment... executing!
+        Model Element Department created
+        Executing queries...
+          Query d with 1 result nodes - CONTENT in line 22: [department "departmentB" { manager "managerB" { address "streetManagerB" salary 10000.00 mentor "managerA" } employee "employeeD" { address "streetEmployeeD" salary 2900.00 mentor "employeeE" } employee "employeeE" { address "streetEmployeeE" salary 6500.00 } employee "employeeF" { address "streetEmployeeF" salary 8700.00 mentor "employeeB" } } ]
+          Query dElem with 0 result nodes
+          Query mElem with 1 result nodes - CONTENT in line 23: ["managerB" { address "streetManagerB" salary 10000.00 mentor "managerA" } ]
+          Query eElem with 3 result nodes
+        Executing mappings...
+          - QUERY_ACCESS: variable: d - 
+            node: department (kind) - leaf: STRING (kind) - "departmentB" (value) 
+          - QUERY_RESULT: 1 bindings:
+            (1/1) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... executing!
+              Model Element Employee created
+              Executing queries...
+                Query e with 1 result nodes - CONTENT in line 23: ["managerB" { address "streetManagerB" salary 10000.00 mentor "managerA" } ]
+                Query mElem with 1 result nodes - CONTENT in line 3: ["managerA" { address "streetManagerA" salary 10000.00 } ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "managerB" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "streetManagerB" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: FLOAT (kind) - 10000.00 (value) 
+                - QUERY_RESULT: 1 bindings:
+                  (1/1) result node: employee (kind). Rule... calling mapEmployee rule
+
+                  RULE: mapEmployee
+                  RULE: mapEmployee... cached!!
+
+          - QUERY_RESULT: 3 bindings:
+            (1/3) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... executing!
+              Model Element Employee created
+              Executing queries...
+                Query e with 1 result nodes - CONTENT in line 28: ["employeeD" { address "streetEmployeeD" salary 2900.00 mentor "employeeE" } ]
+                Query mElem with 1 result nodes - CONTENT in line 33: ["employeeE" { address "streetEmployeeE" salary 6500.00 } ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "employeeD" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "streetEmployeeD" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: FLOAT (kind) - 2900.00 (value) 
+                - QUERY_RESULT: 1 bindings:
+                  (1/1) result node: employee (kind). Rule... calling mapEmployee rule
+
+                  RULE: mapEmployee
+                  RULE: mapEmployee... executing!
+                    Model Element Employee created
+                    Executing queries...
+                      Query e with 1 result nodes - CONTENT in line 33: ["employeeE" { address "streetEmployeeE" salary 6500.00 } ]
+                      Query mElem with 0 result nodes
+                    Executing mappings...
+                      - QUERY_ACCESS: variable: e - 
+                        node: employee (kind) - leaf: STRING (kind) - "employeeE" (value) 
+                      - QUERY_ACCESS: variable: e - 
+                        node: employee (kind) - leaf: STRING (kind) - "streetEmployeeE" (value) 
+                      - QUERY_ACCESS: variable: e - 
+                        node: employee (kind) - leaf: FLOAT (kind) - 6500.00 (value) 
+                      - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+            (2/3) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... cached!!
+            (3/3) result node: employee (kind). Rule... calling mapEmployee rule
+
+            RULE: mapEmployee
+            RULE: mapEmployee... executing!
+              Model Element Employee created
+              Executing queries...
+                Query e with 1 result nodes - CONTENT in line 37: ["employeeF" { address "streetEmployeeF" salary 8700.00 mentor "employeeB" } ]
+                Query mElem with 1 result nodes - CONTENT in line 11: ["employeeB" { address "streetEmployeeB" salary 7000.00 } ]
+              Executing mappings...
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "employeeF" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: STRING (kind) - "streetEmployeeF" (value) 
+                - QUERY_ACCESS: variable: e - 
+                  node: employee (kind) - leaf: FLOAT (kind) - 8700.00 (value) 
+                - QUERY_RESULT: 1 bindings:
+                  (1/1) result node: employee (kind). Rule... calling mapEmployee rule
+
+                  RULE: mapEmployee
+                  RULE: mapEmployee... cached!!
+
+          - QUERY_RESULT: THE VARIABLE DOESNT EXIST
+
+
+
+Saving...
+ (132 milisecs)
+Saving CST...
+ (10 milisecs)

@@ -1,0 +1,3415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/gra2mol/core" xmlns:Query="http://gts.inf.um.es/modernization/gra2mol/query">
+  <rules name="mapProject">
+    <from name="ccompilationUnit" alias="sf"/>
+    <to name="Project"/>
+    <queries variable="cu">
+      <filter type="INDIRECT">
+        <element name="CST" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="files">
+        <value type="QUERY_RESULT" value="cu"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapCompilationUnit">
+    <from name="CST" alias="cst"/>
+    <to name="CompilationUnit"/>
+    <queries variable="elements">
+      <filter>
+        <element name="cst"/>
+        <next type="INDIRECT">
+          <element name="classOrInterfaceDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="language">
+        <value value="Java"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="fragments">
+        <value type="QUERY_RESULT" value="elements"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapClass">
+    <from name="classOrInterfaceDeclaration" alias="coid">
+      <filter>
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration"/>
+        </next>
+      </filter>
+    </from>
+    <to name="AggregateTypeDefinition"/>
+    <queries variable="name">
+      <filter>
+        <element name="coid"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="elements">
+      <filter>
+        <element name="coid"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="extends">
+      <filter>
+        <element name="coid"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration"/>
+          <next>
+            <element name="type" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="loccu">
+      <filter type="INDIRECT">
+        <element name="compilationUnit" mark="true"/>
+        <next type="INDIRECT">
+          <element name="classOrInterfaceDeclaration"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="coid" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="pack">
+      <filter>
+        <element name="loccu"/>
+        <next>
+          <element name="packageDeclaration"/>
+          <next>
+            <element name="qualifiedName" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="impts">
+      <filter>
+        <element name="loccu"/>
+        <next>
+          <element name="importDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="name" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="aggregateType">
+        <value type="OPERATION_CREATION" value="SpecificClassType"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="aggregateType">
+        <extension>members</extension>
+        <value type="QUERY_RESULT" value="elements"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="aggregateType">
+        <extension>package</extension>
+        <value type="OPERATION_CODE" value="pack"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="aggregateType">
+        <extension>imports</extension>
+        <value type="OPERATION_CODE" value="impts"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapInstanceVariable">
+    <from name="classBodyDeclaration" alias="cbd">
+      <filter>
+        <element name="classBodyDeclaration" mark="true"/>
+        <next>
+          <element name="memberDecl"/>
+          <next>
+            <element name="fieldDeclaration"/>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="VariableDefinition"/>
+    <queries variable="name">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="variableDeclarator" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="cbd"/>
+        <next>
+          <element name="memberDecl"/>
+          <next>
+            <element name="fieldDeclaration"/>
+            <next>
+              <element name="type" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="init">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="variableDeclarator" mark="true"/>
+          <next type="INDIRECT">
+            <element name="variableInitializer"/>
+            <next>
+              <element name="expression" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="name" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="initialValue">
+        <value type="QUERY_RESULT" value="init"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitionType">
+        <value type="OPERATION_CALL" value="mapTypeReference" extension="type"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapTypedMethod">
+    <from name="classBodyDeclaration" alias="cbd">
+      <filter>
+        <element name="classBodyDeclaration" mark="true"/>
+        <next>
+          <element name="memberDecl"/>
+          <next>
+            <element name="methodDeclaration"/>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionDefinition"/>
+    <queries variable="name">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="methodDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="params">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="formalParameters"/>
+          <next type="RECURSIVE">
+            <element name="formalParameterDecls" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="stats">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="rtype">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="methodDeclaration"/>
+          <next>
+            <element name="type" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="name" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="formalParameters">
+        <value type="QUERY_RESULT" value="params"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="body">
+        <value type="QUERY_RESULT" value="stats"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="returnType">
+        <value type="OPERATION_CALL" value="mapTypeReference" extension="rtype"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="voidMethod">
+    <from name="classBodyDeclaration" alias="cbd">
+      <filter>
+        <element name="classBodyDeclaration" mark="true"/>
+        <next>
+          <element name="memberDecl"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionDefinition"/>
+    <queries variable="name">
+      <filter>
+        <element name="cbd"/>
+        <next>
+          <element name="memberDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="params">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="formalParameters"/>
+          <next type="RECURSIVE">
+            <element name="formalParameterDecls" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="stats">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="name" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="formalParameters">
+        <value type="QUERY_RESULT" value="params"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="body">
+        <value type="QUERY_RESULT" value="stats"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapsFormalParameterDefinition">
+    <from name="formalParameterDecls" alias="fpd"/>
+    <to name="FormalParameterDefinition"/>
+    <queries variable="name">
+      <filter>
+        <element name="fpd"/>
+        <next>
+          <element name="formalParameterDeclsRest"/>
+          <next>
+            <element name="variableDeclaratorId" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="fpd"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="name" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitionType">
+        <value type="OPERATION_CALL" value="mapTypeReference" extension="type"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapsStringTypeReference">
+    <from name="type" alias="t">
+      <filter>
+        <element name="type" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="Identifier"/>
+          <parameters value="String"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="UnnamedTypeReference"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="OPERATION_CREATION" value="String"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapsNamedTypeReference">
+    <from name="type" alias="t"/>
+    <to name="NamedTypeReference"/>
+    <queries variable="locatedType">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="Identifier"/>
+            <parameters value="t" valuePosition="0" extension="Identifier" extensionPosition="0"
+                type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="t" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_RESULT" value="locatedType"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapsUnnamedTypeReference">
+    <from name="primitiveType" alias="pt"/>
+    <to name="UnnamedTypeReference"/>
+    <queries variable="isBoolean">
+      <filter>
+        <element name="pt" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="boolean"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="type">
+          <value type="OPERATION_CREATION" value="Boolean"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isBoolean"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="mapTypeReference">
+    <from name="type" alias="t"/>
+    <to name="TypeReference"/>
+    <queries variable="primType">
+      <filter>
+        <element name="t"/>
+        <next>
+          <element name="primitiveType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="SKIP">
+          <value type="SKIP" value="primType"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="t"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="primType"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="mapTypeReference4New">
+    <from name="createdName" alias="cn"/>
+    <to name="TypeReference"/>
+    <queries variable="primType">
+      <filter>
+        <element name="cn"/>
+        <next>
+          <element name="primitiveType" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="cast" cast="type">
+      <filter>
+        <element name="cn" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="SKIP">
+          <value type="SKIP" value="primType"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="SKIP">
+            <value type="SKIP" value="cast"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="primType"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapDeclarationOrDefinitionStatement">
+    <from name="blockStatement" alias="bs">
+      <filter>
+        <element name="blockStatement" mark="true"/>
+        <next>
+          <element name="localVariableDeclaration"/>
+        </next>
+      </filter>
+    </from>
+    <to name="DeclarationOrDefinitionStatement"/>
+    <queries variable="var">
+      <filter>
+        <element name="bs"/>
+        <next>
+          <element name="localVariableDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="declOrDefn">
+        <value type="QUERY_RESULT" value="var"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapVariableDefinition">
+    <from name="localVariableDeclaration" alias="lvd"/>
+    <to name="VariableDefinition"/>
+    <queries variable="name">
+      <filter>
+        <element name="lvd"/>
+        <next type="INDIRECT">
+          <element name="variableDeclarator" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="lvd"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="init">
+      <filter>
+        <element name="lvd"/>
+        <next type="INDIRECT">
+          <element name="variableInitializer"/>
+          <next>
+            <element name="expression" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="identifierName">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="name" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="initialValue">
+        <value type="QUERY_RESULT" value="init"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="definitionType">
+        <value type="OPERATION_CALL" value="mapTypeReference" extension="type"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipBlockStatement">
+    <from name="blockStatement" alias="bs">
+      <filter>
+        <element name="blockStatement" mark="true"/>
+        <next>
+          <element name="statement"/>
+        </next>
+      </filter>
+    </from>
+    <to name="Statement"/>
+    <queries variable="next">
+      <filter>
+        <element name="bs"/>
+        <next>
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapIfStatement">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="if"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="IfStatement"/>
+    <queries variable="exp">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="parExpression"/>
+          <next>
+            <element name="expression" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="thenb">
+      <filter>
+        <element name="st"/>
+        <next operation="POSITION">
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="elseb">
+      <filter>
+        <element name="st"/>
+        <next operation="POSITION" position="1">
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="condition">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="thenBody">
+        <value type="QUERY_RESULT" value="thenb"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="elseBody">
+        <value type="QUERY_RESULT" value="elseb"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapReturnStatement">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="return"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="ReturnStatement"/>
+    <queries variable="exp">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="returnValue">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapStatementExpression">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="statementExpression"/>
+        </next>
+      </filter>
+    </from>
+    <to name="ExpressionStatement"/>
+    <queries variable="exp">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expression">
+        <value type="QUERY_RESULT" value="exp"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapForStatement">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="for"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="ForCheckAfterStatement"/>
+    <queries variable="forInitExps">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="forControl"/>
+          <next>
+            <element name="expressionList"/>
+            <next type="INDIRECT">
+              <element name="expression" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="forInitVar">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="forControl"/>
+          <next>
+            <element name="forInit"/>
+            <next type="INDIRECT" operation="POSITION">
+              <element name="variableDeclarator" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="forInitVarExp">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="forControl"/>
+          <next>
+            <element name="forInit"/>
+            <next type="INDIRECT" operation="POSITION">
+              <element name="variableDeclarator"/>
+              <next>
+                <element name="variableDeclaratorRest"/>
+                <next>
+                  <element name="variableInitializer"/>
+                  <next>
+                    <element name="expression" mark="true"/>
+                  </next>
+                </next>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="forCondition">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="forControl"/>
+          <next>
+            <element name="expression" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="forIterator">
+      <filter>
+        <element name="st"/>
+        <next type="INDIRECT">
+          <element name="forControl"/>
+          <next>
+            <element name="forUpdate"/>
+            <next type="INDIRECT">
+              <element name="expression" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="stats">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="initBody">
+          <value type="QUERY_RESULT" value="forInitExps"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="initBody">
+              <value type="OPERATION_CREATION" value="BinaryExpression"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="initBody">
+              <extension>operator</extension>
+              <value type="OPERATION_CREATION" value="Assign"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="initBody">
+              <extension>leftOperand</extension>
+              <value type="OPERATION_CREATION" value="IdentifierReference"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="initBody">
+              <extension>leftOperand</extension>
+              <extension>name</extension>
+              <value type="OPERATION_CREATION" value="Name"/>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="initBody">
+              <extension>leftOperand</extension>
+              <extension>name</extension>
+              <extension>nameString</extension>
+              <value type="QUERY_ACCESS" value="forInitVar" extension="Identifier">
+                <params value="0" type="NUMBER_VALUE"/>
+              </value>
+            </inits>
+            <inits xsi:type="Core:InitUnitElement" element="initBody">
+              <extension>rightOperand</extension>
+              <value type="QUERY_RESULT" value="forInitVarExp"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="forInitVar"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="forInitExps"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="condition">
+        <value type="QUERY_RESULT" value="forCondition"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="iterationBody">
+        <value type="QUERY_RESULT" value="forIterator"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="body">
+        <value type="QUERY_RESULT" value="stats"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapWhile">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="while"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="WhileStatement"/>
+    <queries variable="wcondition">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="parExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="wstats">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="condition">
+        <value type="QUERY_RESULT" value="wcondition"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="body">
+        <value type="QUERY_RESULT" value="wstats"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapDoWhile">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="do"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN" position="1"/>
+            <parameters value="while"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="DoWhileStatement"/>
+    <queries variable="wcondition">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="parExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="wstats">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="condition">
+        <value type="QUERY_RESULT" value="wcondition"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="body">
+        <value type="QUERY_RESULT" value="wstats"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapBlock">
+    <from name="statement" alias="st">
+      <filter>
+        <element name="statement" mark="true"/>
+        <next>
+          <element name="block"/>
+        </next>
+      </filter>
+    </from>
+    <to name="BlockStatement"/>
+    <queries variable="substs">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="block"/>
+          <next>
+            <element name="blockStatement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="subStatements">
+        <value type="QUERY_RESULT" value="substs"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipParenthesis">
+    <from name="parExpression" alias="exp"/>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapAssignmentExpression">
+    <from name="expression" alias="exp">
+      <filter>
+        <element name="expression" mark="true"/>
+        <next>
+          <element name="assignmentOperator"/>
+        </next>
+      </filter>
+    </from>
+    <to name="BinaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="conditionalExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="Assign"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipConditionalExpression">
+    <from name="expression" alias="exp">
+      <filter>
+        <element name="expression" mark="true"/>
+        <next>
+          <element name="conditionalExpression"/>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="conditionalExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipOr">
+    <from name="conditionalExpression" alias="exp">
+      <filter>
+        <element name="conditionalExpression" mark="true"/>
+        <next>
+          <element name="conditionalOrExpression"/>
+          <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="conditionalAndExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapOrExpression">
+    <from name="conditionalExpression" alias="exp">
+      <filter>
+        <element name="conditionalExpression" mark="true"/>
+        <next>
+          <element name="conditionalOrExpression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="BinaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="conditionalAndExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="conditionalAndExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="Or"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipAnd">
+    <from name="conditionalAndExpression" alias="exp">
+      <filter>
+        <element name="conditionalAndExpression" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="inclusiveOrExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapAndExpression">
+    <from name="conditionalAndExpression" alias="exp">
+      <filter>
+        <element name="conditionalAndExpression" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="BinaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="inclusiveOrExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="inclusiveOrExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="operator">
+        <value type="OPERATION_CREATION" value="And"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipEquality">
+    <from name="inclusiveOrExpression" alias="exp">
+      <filter>
+        <element name="inclusiveOrExpression" mark="true"/>
+        <next type="INDIRECT">
+          <element name="equalityExpression"/>
+          <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="instanceOfExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapEquality">
+    <from name="inclusiveOrExpression" alias="exp">
+      <filter>
+        <element name="inclusiveOrExpression" mark="true"/>
+        <next type="INDIRECT">
+          <element name="equalityExpression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="BinaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="instanceOfExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="instanceOfExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isEqual">
+      <filter>
+        <element name="exp"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="=="/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="isNEqual">
+      <filter>
+        <element name="exp"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="!="/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="Equal"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="NotEqual"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="isNEqual"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isEqual"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapComparators">
+    <from name="instanceOfExpression" alias="exp">
+      <filter>
+        <element name="instanceOfExpression" mark="true"/>
+        <next type="INDIRECT">
+          <element name="relationalExpression"/>
+          <next>
+            <element name="relationalOp"/>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="BinaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="shiftExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="shiftExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isLess">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="relationalExpression"/>
+          <next>
+            <element name="relationalOp" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="&lt;"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isGreater">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="relationalExpression"/>
+          <next>
+            <element name="relationalOp" mark="true"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value=">"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="Less"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="Greater"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="isGreater"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isLess"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipComparators">
+    <from name="instanceOfExpression" alias="exp">
+      <filter>
+        <element name="instanceOfExpression" mark="true"/>
+        <next type="INDIRECT">
+          <element name="relationalExpression"/>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="shiftExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipAdditive">
+    <from name="shiftExpression" alias="exp">
+      <filter>
+        <element name="shiftExpression" mark="true"/>
+        <next type="INDIRECT">
+          <element name="additiveExpression"/>
+          <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="multiplicativeExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapAdditive">
+    <from name="shiftExpression" alias="exp">
+      <filter>
+        <element name="shiftExpression" mark="true"/>
+        <next type="INDIRECT">
+          <element name="additiveExpression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="BinaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="multiplicativeExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT" operation="POSITION" position="1">
+          <element name="multiplicativeExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isMinus">
+      <filter>
+        <element name="exp"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="-"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="isPlus">
+      <filter>
+        <element name="exp"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="+"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="Subtract"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="Add"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="isPlus"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isMinus"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipMultiplicative">
+    <from name="multiplicativeExpression" alias="exp">
+      <filter>
+        <element name="multiplicativeExpression" mark="true"/>
+        <next>
+          <element name="unaryExpression"/>
+          <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="unaryExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapMultiplicative">
+    <from name="multiplicativeExpression" alias="exp">
+      <filter>
+        <element name="multiplicativeExpression" mark="true"/>
+        <next>
+          <element name="unaryExpression"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN"/>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="BinaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="unaryExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="exp2">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION" position="1">
+          <element name="unaryExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isDivide">
+      <filter>
+        <element name="exp"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="/"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="isMult">
+      <filter>
+        <element name="exp"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="*"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="leftOperand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="rightOperand">
+        <value type="QUERY_RESULT" value="exp2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="Divide"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="Multiply"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="isMult"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isDivide"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapUnary">
+    <from name="unaryExpression" alias="exp">
+      <filter>
+        <element name="unaryExpression" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="UnaryExpression"/>
+    <queries variable="expPre">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="unaryExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isIncrement">
+      <filter>
+        <element name="exp" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="++"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="isDecrement">
+      <filter>
+        <element name="exp" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="--"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="QUERY_RESULT" value="expPre"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="Increment"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="Decrement"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="isDecrement"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isIncrement"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapNot">
+    <from name="unaryExpression" alias="exp">
+      <filter>
+        <element name="unaryExpression" mark="true"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="!"/>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="UnaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next operation="POSITION">
+          <element name="unaryExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isNot">
+      <filter>
+        <element name="exp"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="!"/>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="Not"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isNot"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapPostIncrementDecrement">
+    <from name="unaryExpression" alias="exp">
+      <filter>
+        <element name="unaryExpression" mark="true"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionComplex" type="OR">
+              <expressions xsi:type="Query:FilterExpressionUnit">
+                <element name="TOKEN"/>
+                <parameters value="++"/>
+              </expressions>
+              <expressions xsi:type="Query:FilterExpressionUnit">
+                <element name="TOKEN"/>
+                <parameters value="--"/>
+              </expressions>
+            </expressions>
+          </expression>
+        </next>
+      </filter>
+    </from>
+    <to name="UnaryExpression"/>
+    <queries variable="exp1">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <next>
+            <element name="primary" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isIncrement">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="++"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="isDecrement">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="--"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="operand">
+        <value type="QUERY_RESULT" value="exp1"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="operator">
+          <value type="OPERATION_CREATION" value="PostIncrement"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitGroup" type="IF">
+            <inits xsi:type="Core:InitUnitElement" element="operator">
+              <value type="OPERATION_CREATION" value="PostDecrement"/>
+            </inits>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+              <element name="isDecrement"/>
+            </expression>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isIncrement"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapCasting">
+    <from name="unaryExpression" alias="exp">
+      <filter>
+        <element name="unaryExpression" mark="true"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <next>
+            <element name="castExpression"/>
+          </next>
+        </next>
+      </filter>
+    </from>
+    <to name="CastExpression"/>
+    <queries variable="isPrimitive">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <next>
+            <element name="castExpression"/>
+            <next>
+              <element name="primitiveType" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="type">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <next>
+            <element name="castExpression"/>
+            <next>
+              <element name="type" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="unaryExp">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <next>
+            <element name="castExpression"/>
+            <next>
+              <element name="unaryExpression" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="unaryNotExp">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+          <next>
+            <element name="castExpression"/>
+            <next>
+              <element name="unaryExpressionNotPlusMinus" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="castType">
+          <value type="QUERY_RESULT" value="type"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="expression">
+          <value type="QUERY_RESULT" value="unaryExp"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="expression">
+            <value type="QUERY_RESULT" value="unaryNotExp"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="isPrimitive"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipPrimary">
+    <from name="unaryExpression" alias="exp">
+      <filter>
+        <element name="unaryExpression" mark="true"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus"/>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="unaryExpressionNotPlusMinus" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapMethodCallWithReceptorAndSelector">
+    <from name="unaryExpressionNotPlusMinus" alias="exp">
+      <filter>
+        <element name="unaryExpressionNotPlusMinus" mark="true"/>
+        <next>
+          <element name="selector"/>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionCallExpression"/>
+    <queries variable="primary">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="primary" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerMet">
+      <filter type="INDIRECT">
+        <element name="memberDecl" mark="true"/>
+        <next type="INDIRECT">
+          <element name="unaryExpressionNotPlusMinus"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locParam">
+      <filter>
+        <element name="containerMet"/>
+        <next type="INDIRECT">
+          <element name="formalParameterDecls" mark="true"/>
+          <next>
+            <element name="formalParameterDeclsRest"/>
+            <next>
+              <element name="variableDeclaratorId"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="primary" valuePosition="0" extension="Identifier"
+                    extensionPosition="0" type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVar">
+      <filter>
+        <element name="containerMet"/>
+        <next type="INDIRECT">
+          <element name="blockStatement" mark="true"/>
+          <next>
+            <element name="localVariableDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableDeclarator"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="primary" valuePosition="0" extension="Identifier"
+                    extensionPosition="0" type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerCla">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="unaryExpressionNotPlusMinus"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locInstVar">
+      <filter>
+        <element name="containerCla"/>
+        <next>
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <next>
+              <element name="fieldDeclaration"/>
+              <next type="INDIRECT" operation="POSITION">
+                <element name="variableDeclarator"/>
+                <expression xsi:type="Query:FilterExpressionUnit">
+                  <element name="Identifier"/>
+                  <parameters value="primary" valuePosition="0" extension="Identifier"
+                      extensionPosition="0" type="QUERY_ACCESS"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="hasTwoId">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="Identifier" position="1"/>
+        </expression>
+      </filter>
+    </queries>
+    <queries variable="argsSuffix">
+      <filter>
+        <element name="primary"/>
+        <next>
+          <element name="identifierSuffix"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="selector">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="selector" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="argsSelector">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="selector"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <extension>name</extension>
+          <value type="OPERATION_CREATION" value="Name"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <extension>name</extension>
+          <extension>nameString</extension>
+          <value type="QUERY_ACCESS" value="primary" extension="Identifier">
+            <params value="0" type="NUMBER_VALUE"/>
+          </value>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <extension>type</extension>
+          <value type="QUERY_RESULT" value="locInstVar"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <extension>type</extension>
+          <value type="QUERY_RESULT" value="locVar"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <extension>type</extension>
+          <value type="QUERY_RESULT" value="locParam"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+          <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+          <extension>expressionType</extension>
+          <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+          <extension>expressionType</extension>
+          <extension>name</extension>
+          <value type="OPERATION_CREATION" value="Name"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+          <extension>expressionType</extension>
+          <extension>name</extension>
+          <extension>nameString</extension>
+          <value type="QUERY_ACCESS" value="selector" extension="Identifier">
+            <params value="0" type="NUMBER_VALUE"/>
+          </value>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+          <extension>actualParams</extension>
+          <value type="OPERATION_CALL" value="mapArgument" extension="argsSelector"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="expressionType">
+            <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="expressionType">
+            <extension>name</extension>
+            <value type="OPERATION_CREATION" value="Name"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="expressionType">
+            <extension>name</extension>
+            <extension>nameString</extension>
+            <value type="QUERY_ACCESS" value="primary" extension="Identifier">
+              <params value="0" type="NUMBER_VALUE"/>
+            </value>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>expressionType</extension>
+            <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>expressionType</extension>
+            <extension>name</extension>
+            <value type="OPERATION_CREATION" value="Name"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>expressionType</extension>
+            <extension>name</extension>
+            <extension>nameString</extension>
+            <value type="QUERY_ACCESS" value="primary" extension="Identifier">
+              <params value="1" type="NUMBER_VALUE"/>
+            </value>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>actualParams</extension>
+            <value type="OPERATION_CALL" value="mapArgument" extension="argsSuffix"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>calledFunction</extension>
+            <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>calledFunction</extension>
+            <extension>expressionType</extension>
+            <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>calledFunction</extension>
+            <extension>expressionType</extension>
+            <extension>name</extension>
+            <value type="OPERATION_CREATION" value="Name"/>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>calledFunction</extension>
+            <extension>expressionType</extension>
+            <extension>name</extension>
+            <extension>nameString</extension>
+            <value type="QUERY_ACCESS" value="selector" extension="Identifier">
+              <params value="0" type="NUMBER_VALUE"/>
+            </value>
+          </inits>
+          <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+            <extension>calledFunction</extension>
+            <extension>actualParams</extension>
+            <value type="OPERATION_CALL" value="mapArgument" extension="argsSelector"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+            <element name="hasTwoId"/>
+          </expressions>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipUnaryExpressionNotPlusMinus">
+    <from name="unaryExpressionNotPlusMinus" alias="exp">
+      <filter>
+        <element name="unaryExpressionNotPlusMinus" mark="true"/>
+        <next>
+          <element name="primary"/>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="primary" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules type="SKIP" name="skipParenthesisFromPrimary">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <next>
+          <element name="parExpression"/>
+        </next>
+      </filter>
+    </from>
+    <to name="Expression"/>
+    <queries variable="next">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="parExpression"/>
+          <next>
+            <element name="expression" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="SKIP">
+        <value type="SKIP" value="next"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapMethodCall">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="this"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="Identifier" position="1"/>
+            </expressions>
+          </expressions>
+        </expression>
+        <next>
+          <element name="identifierSuffix"/>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionCallExpression"/>
+    <queries variable="args">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="identifierSuffix"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerCla">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="primary"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locTypedMet">
+      <filter>
+        <element name="containerCla"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <next>
+              <element name="methodDeclaration"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeTypedMet">
+      <filter>
+        <element name="locTypedMet"/>
+        <next type="INDIRECT">
+          <element name="memberDecl"/>
+          <next>
+            <element name="methodDeclaration"/>
+            <next>
+              <element name="type" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVoidMet">
+      <filter>
+        <element name="containerCla"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="Identifier"/>
+              <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <value type="OPERATION_CREATION" value="IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="locVoidMet"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="locTypedMet"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actualParams">
+        <value type="OPERATION_CALL" value="mapArgument" extension="args"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <value type="OPERATION_CREATION" value="UnnamedTypeReference"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitElement" element="expressionType">
+          <extension>type</extension>
+          <value type="OPERATION_CALL" value="mapTypeReference" extension="typeTypedMet"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="typeTypedMet"/>
+        </expression>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapMethodCallWith2Receptors">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="this"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier" position="1"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier" position="2"/>
+          </expressions>
+        </expression>
+        <next>
+          <element name="identifierSuffix"/>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionCallExpression"/>
+    <queries variable="args">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="identifierSuffix"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerMet">
+      <filter type="INDIRECT">
+        <element name="memberDecl" mark="true"/>
+        <next type="INDIRECT">
+          <element name="primary"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locParam">
+      <filter>
+        <element name="containerMet"/>
+        <next type="INDIRECT">
+          <element name="formalParameterDecls" mark="true"/>
+          <next>
+            <element name="formalParameterDeclsRest"/>
+            <next>
+              <element name="variableDeclaratorId"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVar">
+      <filter>
+        <element name="containerMet"/>
+        <next type="INDIRECT">
+          <element name="blockStatement" mark="true"/>
+          <next>
+            <element name="localVariableDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableDeclarator"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerCla">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="primary"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locInstVar">
+      <filter>
+        <element name="containerCla"/>
+        <next>
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <next>
+              <element name="fieldDeclaration"/>
+              <next type="INDIRECT" operation="POSITION">
+                <element name="variableDeclarator"/>
+                <expression xsi:type="Query:FilterExpressionUnit">
+                  <element name="Identifier"/>
+                  <parameters value="exp" valuePosition="0" extension="Identifier"
+                      extensionPosition="0" type="QUERY_ACCESS"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locParam"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locInstVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="1" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>expressionType</extension>
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="2" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>actualParams</extension>
+        <value type="OPERATION_CALL" value="mapArgument" extension="args"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapMethodCallWithReceptor">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="this"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier" position="1"/>
+          </expressions>
+        </expression>
+        <next>
+          <element name="identifierSuffix"/>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionCallExpression"/>
+    <queries variable="args">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="identifierSuffix"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerMet">
+      <filter type="INDIRECT">
+        <element name="memberDecl" mark="true"/>
+        <next type="INDIRECT">
+          <element name="primary"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locParam">
+      <filter>
+        <element name="containerMet"/>
+        <next type="INDIRECT">
+          <element name="formalParameterDecls" mark="true"/>
+          <next>
+            <element name="formalParameterDeclsRest"/>
+            <next>
+              <element name="variableDeclaratorId"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVar">
+      <filter>
+        <element name="containerMet"/>
+        <next type="INDIRECT">
+          <element name="blockStatement" mark="true"/>
+          <next>
+            <element name="localVariableDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableDeclarator"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerCla">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="primary"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locInstVar">
+      <filter>
+        <element name="containerCla"/>
+        <next>
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <next>
+              <element name="fieldDeclaration"/>
+              <next type="INDIRECT" operation="POSITION">
+                <element name="variableDeclarator"/>
+                <expression xsi:type="Query:FilterExpressionUnit">
+                  <element name="Identifier"/>
+                  <parameters value="exp" valuePosition="0" extension="Identifier"
+                      extensionPosition="0" type="QUERY_ACCESS"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locParam"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locInstVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="1" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>actualParams</extension>
+        <value type="OPERATION_CALL" value="mapArgument" extension="args"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapThisMethodCall">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="this"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="Identifier" position="1"/>
+            </expressions>
+          </expressions>
+        </expression>
+        <next>
+          <element name="identifierSuffix"/>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionCallExpression"/>
+    <queries variable="args">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="identifierSuffix"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerCla">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="primary"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locTypedMet">
+      <filter>
+        <element name="containerCla"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <next>
+              <element name="methodDeclaration"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="typeTypedMet">
+      <filter>
+        <element name="locTypedMet"/>
+        <next type="INDIRECT">
+          <element name="memberDecl"/>
+          <next>
+            <element name="methodDeclaration"/>
+            <next>
+              <element name="type" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVoidMet">
+      <filter>
+        <element name="containerCla"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="Identifier"/>
+              <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                  type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value value="this"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="containerCla"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locVoidMet"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="locTypedMet"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>actualParams</extension>
+        <value type="OPERATION_CALL" value="mapArgument" extension="args"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapThisMethodCallWithReceptor">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="this"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier" position="1"/>
+          </expressions>
+        </expression>
+        <next>
+          <element name="identifierSuffix"/>
+        </next>
+      </filter>
+    </from>
+    <to name="FunctionCallExpression"/>
+    <queries variable="args">
+      <filter>
+        <element name="exp"/>
+        <next>
+          <element name="identifierSuffix"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="containerCla">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="primary"/>
+          <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+            <element name="this"/>
+            <parameters value="exp" type="VARIABLE"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value value="this"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="expressionType">
+        <extension>type</extension>
+        <value type="QUERY_RESULT" value="containerCla"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <value type="OPERATION_CREATION" value="FunctionCallExpression"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>expressionType</extension>
+        <value type="OPERATION_CREATION" value="NamedTypeReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>expressionType</extension>
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="1" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="calledFunction">
+        <extension>calledFunction</extension>
+        <extension>actualParams</extension>
+        <value type="OPERATION_CALL" value="mapArgument" extension="args"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapThisVariable">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="this"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="QualifiedOverData"/>
+    <queries variable="thisloc">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration"/>
+          <next type="INDIRECT">
+            <element name="primary"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+              <element name="this"/>
+              <parameters value="exp" type="VARIABLE"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="method">
+      <filter type="INDIRECT">
+        <element name="classBodyDeclaration" mark="true"/>
+        <next>
+          <element name="memberDecl"/>
+          <next type="INDIRECT">
+            <element name="primary"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+              <element name="this"/>
+              <parameters value="exp" type="VARIABLE"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locParam">
+      <filter>
+        <element name="method"/>
+        <next type="RECURSIVE">
+          <element name="formalParameterDecls" mark="true"/>
+          <next>
+            <element name="formalParameterDeclsRest"/>
+            <next>
+              <element name="variableDeclaratorId"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVar">
+      <filter>
+        <element name="method"/>
+        <next type="INDIRECT">
+          <element name="blockStatement" mark="true"/>
+          <next>
+            <element name="localVariableDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableDeclarator"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locInstVar">
+      <filter>
+        <element name="thisloc"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <next>
+              <element name="fieldDeclaration"/>
+              <next type="INDIRECT" operation="POSITION">
+                <element name="variableDeclarator"/>
+                <expression xsi:type="Query:FilterExpressionUnit">
+                  <element name="Identifier"/>
+                  <parameters value="exp" valuePosition="0" extension="Identifier"
+                      extensionPosition="0" type="QUERY_ACCESS"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="qualifiers">
+        <value type="OPERATION_CREATION" value="IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="qualifiers">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="qualifiers">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value value="this"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="qualifiers">
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="thisloc"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <value type="OPERATION_CREATION" value="IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="locInstVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="locVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <extension>refersTo</extension>
+        <value type="QUERY_RESULT" value="locParam"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapVariableRef">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="this"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="Identifier" position="1"/>
+            </expressions>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="IdentifierReference"/>
+    <queries variable="thisloc">
+      <filter type="INDIRECT">
+        <element name="classOrInterfaceDeclaration" mark="true"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration"/>
+          <next type="INDIRECT">
+            <element name="primary"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+              <element name="this"/>
+              <parameters value="exp" type="VARIABLE"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="method">
+      <filter type="INDIRECT">
+        <element name="classBodyDeclaration" mark="true"/>
+        <next>
+          <element name="memberDecl"/>
+          <next type="INDIRECT">
+            <element name="primary"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+              <element name="this"/>
+              <parameters value="exp" type="VARIABLE"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locParam">
+      <filter>
+        <element name="method"/>
+        <next type="RECURSIVE">
+          <element name="formalParameterDecls" mark="true"/>
+          <next>
+            <element name="formalParameterDeclsRest"/>
+            <next>
+              <element name="variableDeclaratorId"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locVar">
+      <filter>
+        <element name="method"/>
+        <next type="INDIRECT">
+          <element name="blockStatement" mark="true"/>
+          <next>
+            <element name="localVariableDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableDeclarator"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="exp" valuePosition="0" extension="Identifier" extensionPosition="0"
+                    type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="locInstVar">
+      <filter>
+        <element name="thisloc"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next>
+            <element name="memberDecl"/>
+            <next>
+              <element name="fieldDeclaration"/>
+              <next type="INDIRECT" operation="POSITION">
+                <element name="variableDeclarator"/>
+                <expression xsi:type="Query:FilterExpressionUnit">
+                  <element name="Identifier"/>
+                  <parameters value="exp" valuePosition="0" extension="Identifier"
+                      extensionPosition="0" type="QUERY_ACCESS"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="refersTo">
+        <value type="QUERY_RESULT" value="locInstVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="refersTo">
+        <value type="QUERY_RESULT" value="locVar"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="refersTo">
+        <value type="QUERY_RESULT" value="locParam"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapMemberAccess">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionComplex" type="NOT">
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="this"/>
+            </expressions>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="Identifier" position="1"/>
+          </expressions>
+        </expression>
+      </filter>
+    </from>
+    <to name="QualifiedOverData"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="qualifiers">
+        <value type="OPERATION_CREATION" value="IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="qualifiers">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="qualifiers">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="0" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <value type="OPERATION_CREATION" value="IdentifierReference"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <extension>name</extension>
+        <value type="OPERATION_CREATION" value="Name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="member">
+        <extension>name</extension>
+        <extension>nameString</extension>
+        <value type="QUERY_ACCESS" value="exp" extension="Identifier">
+          <params value="1" type="NUMBER_VALUE"/>
+        </value>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapNew">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="new"/>
+        </expression>
+      </filter>
+    </from>
+    <to name="NewExpression"/>
+    <queries variable="args">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="classCreatorRest"/>
+          <next>
+            <element name="arguments"/>
+            <next type="INDIRECT">
+              <element name="expressionList"/>
+              <next>
+                <element name="expression" mark="true"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="name">
+      <filter>
+        <element name="exp"/>
+        <next type="INDIRECT">
+          <element name="createdName" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="newType">
+        <value type="QUERY_RESULT" value="name"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actualParams">
+        <value type="OPERATION_CALL" value="mapArgument" extension="args"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapArgument">
+    <from name="expression" alias="expArg"/>
+    <to name="ActualParameterExpression"/>
+    <context>mapMethodCall</context>
+    <context>mapNew</context>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="QUERY_RESULT" value="expArg"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="mapLiteral">
+    <from name="primary" alias="exp">
+      <filter>
+        <element name="primary" mark="true"/>
+        <next>
+          <element name="literal"/>
+        </next>
+      </filter>
+    </from>
+    <to name="Literal"/>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="value">
+        <value type="OPERATION_CODE" value="exp"/>
+      </inits>
+    </inits>
+  </rules>
+</Core:ViewDefinition>

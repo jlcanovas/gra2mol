@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:Core="http://gts.inf.um.es/modernization/g2mv/core" xmlns:Query="http://gts.inf.um.es/modernization/g2mv/query">
+  <rules name="createSegment" fromElement="compilationUnit" toElement="kdm::Segment">
+    <queries variable="p">
+      <filter type="RECURSIVE" operation="UNIQUE" position="-1">
+        <element name="normalClassDeclaration" mark="true"/>
+      </filter>
+    </queries>
+    <queries variable="cu">
+      <filter type="INDIRECT">
+        <element name="compilationUnit" mark="true"/>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value value="StrutsSegment"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="model">
+        <value type="QUERY_RESULT" value="cu"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="pp" fromElement="normalClassDeclaration" fromElementAlias="nc" toElement="code::CodeModel">
+    <queries variable="coi">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="classOrInterfaceDeclaration" mark="true"/>
+          <next type="INDIRECT">
+            <element name="normalClassDeclaration"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+              <element name="this"/>
+              <parameters value="nc" type="VARIABLE"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="mod">
+      <filter>
+        <element name="coi"/>
+        <next>
+          <element name="modifier" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="mod" extension="TOKEN"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createModel" fromElement="compilationUnit" fromElementAlias="cu" toElement="code::CodeModel">
+    <queries variable="class">
+      <filter>
+        <element name="cu"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="superclasses">
+      <filter>
+        <element name="cu"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration"/>
+          <expression xsi:type="Query:FilterExpressionComplex">
+            <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+              <element name="TOKEN" position="1"/>
+            </expressions>
+            <expressions xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN" position="1"/>
+              <parameters value="extends"/>
+            </expressions>
+          </expression>
+          <next>
+            <element name="type" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="createdclasses">
+      <filter>
+        <element name="cu"/>
+        <next type="INDIRECT">
+          <element name="primary" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN"/>
+            <parameters value="new"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="t">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="typeDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value value="codeModel"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="t"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="class"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="superclasses"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="createdclasses"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createLanguageUnit" fromElement="typeDeclaration" fromElementAlias="td"
+      toElement="code::LanguageUnit">
+    <queries variable="ts">
+      <filter>
+        <element name="td"/>
+        <next type="INDIRECT">
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value value="Java Datatypes"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="ts"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="StringType" fromElement="type" fromElementAlias="t" toElement="code::StringType">
+    <fromFilter operation="UNIQUE">
+      <element name="type" mark="true"/>
+      <expression xsi:type="Query:FilterExpressionComplex">
+        <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="Identifier"/>
+        </expressions>
+        <expressions xsi:type="Query:FilterExpressionUnit">
+          <element name="Identifier"/>
+          <parameters value="String"/>
+        </expressions>
+      </expression>
+    </fromFilter>
+    <inits/>
+  </rules>
+  <rules name="BooleanType" fromElement="type" fromElementAlias="t" toElement="code::BooleanType">
+    <fromFilter operation="UNIQUE">
+      <element name="type" mark="true"/>
+      <next>
+        <element name="primitiveType"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="boolean"/>
+        </expression>
+      </next>
+    </fromFilter>
+    <inits/>
+  </rules>
+  <rules name="createClass" fromElement="normalClassDeclaration" fromElementAlias="nc"
+      toElement="code::ClassUnit">
+    <queries variable="elements">
+      <filter>
+        <element name="nc"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="extends">
+      <filter>
+        <element name="nc" mark="true"/>
+        <expression xsi:type="Query:FilterExpressionComplex">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+            <element name="TOKEN" position="1"/>
+          </expressions>
+          <expressions xsi:type="Query:FilterExpressionUnit">
+            <element name="TOKEN" position="1"/>
+            <parameters value="extends"/>
+          </expressions>
+        </expression>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeRelation">
+        <value type="QUERY_RESULT" value="extends"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="nc" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="elements"/>
+      </inits>
+    </inits>
+    <context>createModel</context>
+    <context>extendsPart</context>
+  </rules>
+  <rules name="createEmptyClass" fromElement="type" fromElementAlias="t" toElement="code::ClassUnit">
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="t" extension="Identifier"/>
+      </inits>
+    </inits>
+    <context>createModel</context>
+    <context>extendsPart</context>
+  </rules>
+  <rules name="createEmptyClass2" fromElement="primary" fromElementAlias="p" toElement="code::ClassUnit">
+    <queries variable="n">
+      <filter>
+        <element name="p"/>
+        <next>
+          <element name="creator"/>
+          <next>
+            <element name="createdName" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="n" extension="Identifier"/>
+      </inits>
+    </inits>
+    <context>createModel</context>
+    <context>createsobjectcreation</context>
+  </rules>
+  <rules name="extendsPart" fromElement="normalClassDeclaration" fromElementAlias="ncd"
+      toElement="code::Extends">
+    <fromFilter>
+      <element name="normalClassDeclaration" mark="true"/>
+      <expression xsi:type="Query:FilterExpressionComplex">
+        <expressions xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="TOKEN" position="1"/>
+        </expressions>
+        <expressions xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN" position="1"/>
+          <parameters value="extends"/>
+        </expressions>
+      </expression>
+    </fromFilter>
+    <queries variable="father">
+      <filter>
+        <element name="ncd"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="class">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="normalClassDeclaration" mark="true"/>
+          <expression xsi:type="Query:FilterExpressionUnit">
+            <element name="Identifier"/>
+            <parameters value="father" extension="Identifier" type="QUERY_ACCESS"/>
+          </expression>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="extendedClass">
+      <filter>
+        <element name="ncd"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="ncd"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="to">
+          <value type="QUERY_RESULT" value="class"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="class"/>
+        </expression>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="to">
+          <value type="QUERY_RESULT" value="extendedClass"/>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionComplex" type="NOT">
+          <expressions xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+            <element name="class"/>
+          </expressions>
+        </expression>
+      </inits>
+    </inits>
+    <context>createClass</context>
+  </rules>
+  <rules name="field" fromElement="classBodyDeclaration" fromElementAlias="cbd" toElement="code::StorableUnit">
+    <fromFilter>
+      <element name="classBodyDeclaration" mark="true"/>
+      <next type="INDIRECT">
+        <element name="fieldDeclaration"/>
+      </next>
+    </fromFilter>
+    <queries variable="vd">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="variableDeclarator" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="vd" extension="Identifier"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="typedMethod" fromElement="classBodyDeclaration" fromElementAlias="cbd"
+      toElement="code::MethodUnit">
+    <fromFilter>
+      <element name="classBodyDeclaration" mark="true"/>
+      <next>
+        <element name="memberDecl"/>
+        <next>
+          <element name="methodDeclaration"/>
+        </next>
+      </next>
+    </fromFilter>
+    <queries variable="n">
+      <filter>
+        <element name="cbd"/>
+        <next>
+          <element name="memberDecl"/>
+          <next>
+            <element name="methodDeclaration" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="va">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="localVariableDeclaration" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="iva">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="localVariableDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableInitializer" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="st">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="entry">
+      <filter>
+        <element name="cbd"/>
+        <next>
+          <element name="memberDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="n" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="n"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="va"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="iva"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="st"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="entryFlow">
+        <value type="QUERY_RESULT" value="entry"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="voidMethod" fromElement="classBodyDeclaration" fromElementAlias="cbd"
+      toElement="code::MethodUnit">
+    <fromFilter>
+      <element name="classBodyDeclaration" mark="true"/>
+      <next>
+        <element name="memberDecl"/>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="EXISTS">
+          <element name="Identifier"/>
+        </expression>
+      </next>
+    </fromFilter>
+    <queries variable="n">
+      <filter>
+        <element name="cbd"/>
+        <next>
+          <element name="memberDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="p" cast="methodDeclaration">
+      <filter>
+        <element name="cbd"/>
+        <next>
+          <element name="memberDecl" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="va">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="localVariableDeclaration" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="iva">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="localVariableDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableInitializer" mark="true"/>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="st">
+      <filter>
+        <element name="cbd"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="n" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="p"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="va"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="iva"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="st"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="entryFlow">
+        <value type="QUERY_RESULT" value="n"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="entryFlow" fromElement="memberDecl" fromElementAlias="md" toElement="action::EntryFlow">
+    <queries variable="f">
+      <filter type="INDIRECT">
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next type="INDIRECT">
+            <element name="memberDecl"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+              <element name="this"/>
+              <parameters value="md" type="VARIABLE"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="t">
+      <filter>
+        <element name="md"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="blockStatement"/>
+          <next>
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="f"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="to">
+        <value type="QUERY_RESULT" value="t"/>
+      </inits>
+    </inits>
+    <context>typedMethod</context>
+    <context>voidMethod</context>
+  </rules>
+  <rules name="localVariable" fromElement="localVariableDeclaration" fromElementAlias="lvd"
+      toElement="code::StorableUnit">
+    <queries variable="n">
+      <filter>
+        <element name="lvd"/>
+        <next type="INDIRECT">
+          <element name="variableDeclarator" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="n" extension="Identifier"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="objectcreation" fromElement="variableInitializer" fromElementAlias="vi"
+      toElement="action::ActionElement">
+    <fromFilter>
+      <element name="variableInitializer" mark="true"/>
+      <next type="INDIRECT">
+        <element name="primary"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="new"/>
+        </expression>
+      </next>
+    </fromFilter>
+    <queries variable="elem">
+      <filter type="INDIRECT">
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="variableDeclarator" mark="true"/>
+          <next type="INDIRECT">
+            <element name="variableInitializer"/>
+            <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+              <element name="this"/>
+              <parameters value="vi" type="VARIABLE"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="actionRelation">
+        <value type="OPERATION_CALL" value="writesobjectcreation" extension="elem"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actionRelation">
+        <value type="OPERATION_CALL" value="createsobjectcreation" extension="elem"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="writesobjectcreation" fromElement="variableDeclarator" fromElementAlias="vd"
+      toElement="action::Writes">
+    <fromFilter>
+      <element name="variableDeclarator" mark="true"/>
+      <next type="INDIRECT">
+        <element name="primary"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="new"/>
+        </expression>
+      </next>
+    </fromFilter>
+    <queries variable="f">
+      <filter>
+        <element name="vd"/>
+        <next type="INDIRECT">
+          <element name="variableInitializer" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="t">
+      <filter type="INDIRECT">
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="localVariableDeclaration" mark="true"/>
+          <next type="INDIRECT">
+            <element name="variableDeclarator"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="Identifier"/>
+              <parameters value="vd" extension="Identifier" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="f"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="to">
+        <value type="QUERY_RESULT" value="t"/>
+      </inits>
+    </inits>
+    <context>objectcreation</context>
+  </rules>
+  <rules name="createsobjectcreation" fromElement="variableDeclarator" fromElementAlias="vd"
+      toElement="action::Creates">
+    <fromFilter>
+      <element name="variableDeclarator" mark="true"/>
+      <next type="INDIRECT">
+        <element name="primary"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="new"/>
+        </expression>
+      </next>
+    </fromFilter>
+    <queries variable="f">
+      <filter>
+        <element name="vd"/>
+        <next type="INDIRECT">
+          <element name="variableInitializer" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="t" cast="primary">
+      <filter>
+        <element name="vd"/>
+        <next type="INDIRECT">
+          <element name="createdName" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="f"/>
+      </inits>
+    </inits>
+    <context>objectcreation</context>
+  </rules>
+  <rules name="ifStatement" fromElement="statement" fromElementAlias="sif" toElement="action::ActionElement">
+    <fromFilter>
+      <element name="statement" mark="true"/>
+      <expression xsi:type="Query:FilterExpressionUnit">
+        <element name="TOKEN"/>
+        <parameters value="if"/>
+      </expression>
+    </fromFilter>
+    <queries variable="exp">
+      <filter>
+        <element name="sif"/>
+        <next>
+          <element name="parExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="si">
+      <filter>
+        <element name="sif"/>
+        <next>
+          <element name="statement" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="si"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actionRelation">
+        <value type="OPERATION_CALL" value="trueFlow" extension="si"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="trueFlow" fromElement="statement" fromElementAlias="st" toElement="action::TrueFlow">
+    <queries variable="fr">
+      <filter type="INDIRECT">
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="statement" mark="true"/>
+            <next>
+              <element name="statement"/>
+              <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+                <element name="this"/>
+                <parameters value="st" type="VARIABLE"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="fr"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="to">
+        <value type="QUERY_RESULT" value="st"/>
+      </inits>
+    </inits>
+    <context>ifStatement</context>
+  </rules>
+  <rules name="assignmentStatement" fromElement="statement" fromElementAlias="st"
+      toElement="action::ActionElement">
+    <fromFilter>
+      <element name="statement" mark="true"/>
+      <next>
+        <element name="statementExpression"/>
+        <next>
+          <element name="expression"/>
+          <next>
+            <element name="assignmentOperator"/>
+          </next>
+        </next>
+      </next>
+    </fromFilter>
+    <queries variable="expr">
+      <filter>
+        <element name="st"/>
+        <next>
+          <element name="statementExpression"/>
+          <next>
+            <element name="expression" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="e1">
+      <filter>
+        <element name="expr"/>
+        <next>
+          <element name="conditionalExpression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="e2">
+      <filter>
+        <element name="expr"/>
+        <next>
+          <element name="expression" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="op">
+      <filter>
+        <element name="expr"/>
+        <next>
+          <element name="assignmentOperator" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="actionRelation">
+        <value type="QUERY_RESULT" value="e2"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actionRelation">
+        <value type="QUERY_RESULT" value="e1"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="assignmentRight" fromElement="expression" fromElementAlias="e" toElement="action::Reads">
+    <queries variable="member">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="methodDeclaration" mark="true"/>
+          <next type="INDIRECT">
+            <element name="statementExpression"/>
+            <next>
+              <element name="expression"/>
+              <next>
+                <element name="expression"/>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+                  <element name="this"/>
+                  <parameters value="e" type="VARIABLE"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="f">
+      <filter>
+        <element name="member"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="right">
+      <filter>
+        <element name="e"/>
+        <next type="INDIRECT">
+          <element name="primary" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="param">
+      <filter>
+        <element name="member"/>
+        <next type="RECURSIVE">
+          <element name="formalParameterDecls" mark="true"/>
+          <next type="INDIRECT">
+            <element name="variableDeclaratorId"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="Identifier"/>
+              <parameters value="right" extension="Identifier" type="QUERY_ACCESS"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="f"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="to">
+        <value type="QUERY_RESULT" value="param"/>
+      </inits>
+    </inits>
+    <context>assignmentStatement</context>
+  </rules>
+  <rules name="assignmentLeftWithThis" fromElement="conditionalExpression" fromElementAlias="ce"
+      toElement="action::Writes">
+    <fromFilter>
+      <element name="conditionalExpression" mark="true"/>
+      <next type="INDIRECT">
+        <element name="primary"/>
+        <expression xsi:type="Query:FilterExpressionUnit">
+          <element name="TOKEN"/>
+          <parameters value="this"/>
+        </expression>
+      </next>
+    </fromFilter>
+    <queries variable="member">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="methodDeclaration" mark="true"/>
+          <next type="INDIRECT">
+            <element name="statementExpression"/>
+            <next>
+              <element name="expression"/>
+              <next>
+                <element name="conditionalExpression"/>
+                <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+                  <element name="this"/>
+                  <parameters value="ce" type="VARIABLE"/>
+                </expression>
+              </next>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="f">
+      <filter>
+        <element name="member"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="statement" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="left">
+      <filter>
+        <element name="ce"/>
+        <next type="INDIRECT">
+          <element name="primary" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="var">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next type="INDIRECT">
+            <element name="fieldDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableDeclarator"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="left" extension="Identifier" type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="f"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="to">
+        <value type="QUERY_RESULT" value="var"/>
+      </inits>
+    </inits>
+    <context>assignmentStatement</context>
+  </rules>
+  <rules name="returnStatement" fromElement="statement" fromElementAlias="bst" toElement="action::ActionElement">
+    <fromFilter>
+      <element name="statement" mark="true"/>
+      <expression xsi:type="Query:FilterExpressionUnit">
+        <element name="TOKEN"/>
+        <parameters value="return"/>
+      </expression>
+    </fromFilter>
+    <queries variable="p">
+      <filter>
+        <element name="bst"/>
+        <next type="INDIRECT">
+          <element name="primary" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="inmediate">
+      <filter>
+        <element name="bst"/>
+        <next type="INDIRECT">
+          <element name="primary" mark="true"/>
+          <next>
+            <element name="literal"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="kind">
+        <value value="Return"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="codeElement">
+        <value type="QUERY_RESULT" value="inmediate"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="actionRelation">
+        <value type="QUERY_RESULT" value="p"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="value2ActionElement" fromElement="primary" fromElementAlias="p" toElement="code::Value">
+    <fromFilter>
+      <element name="primary" mark="true"/>
+      <next>
+        <element name="literal"/>
+        <next>
+          <element name="booleanLiteral"/>
+        </next>
+      </next>
+    </fromFilter>
+    <queries variable="value">
+      <filter>
+        <element name="p"/>
+        <next>
+          <element name="literal"/>
+          <next>
+            <element name="booleanLiteral" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="t">
+      <filter type="INDIRECT">
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="type" mark="true"/>
+          <next>
+            <element name="primitiveType"/>
+            <expression xsi:type="Query:FilterExpressionUnit">
+              <element name="TOKEN"/>
+              <parameters value="boolean"/>
+            </expression>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="value" extension="TOKEN"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_RESULT" value="t"/>
+      </inits>
+    </inits>
+    <context>returnStatement</context>
+    <context>returnStatementAction</context>
+  </rules>
+  <rules name="returnStatementAction" fromElement="primary" fromElementAlias="p" toElement="action::Reads">
+    <queries variable="cbd">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="classBodyDeclaration" mark="true"/>
+          <next type="INDIRECT">
+            <element name="fieldDeclaration"/>
+            <next type="INDIRECT">
+              <element name="variableDeclarator"/>
+              <expression xsi:type="Query:FilterExpressionUnit">
+                <element name="Identifier"/>
+                <parameters value="p" extension="Identifier" type="QUERY_ACCESS"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="inm">
+      <filter>
+        <element name="p" mark="true"/>
+        <next>
+          <element name="literal"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="f">
+      <filter>
+        <element name="compilationUnit"/>
+        <next type="INDIRECT">
+          <element name="blockStatement"/>
+          <next>
+            <element name="statement" mark="true"/>
+            <next type="INDIRECT">
+              <element name="primary"/>
+              <expression xsi:type="Query:FilterExpressionUnit" operation="CHECK">
+                <element name="this"/>
+                <parameters value="p" type="VARIABLE"/>
+              </expression>
+            </next>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="from">
+        <value type="QUERY_RESULT" value="f"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitGroup" type="IF">
+        <inits xsi:type="Core:InitUnitElement" element="to">
+          <value type="QUERY_RESULT" value="cbd"/>
+        </inits>
+        <inits xsi:type="Core:InitUnitGroup" type="ELSE">
+          <inits xsi:type="Core:InitUnitElement" element="to">
+            <value type="QUERY_RESULT" value="inm"/>
+          </inits>
+        </inits>
+        <expression xsi:type="Query:FilterExpressionUnit" operation="HASRESULTS">
+          <element name="cbd"/>
+        </expression>
+      </inits>
+    </inits>
+    <context>returnStatement</context>
+  </rules>
+  <rules name="createSignature" fromElement="methodDeclaration" fromElementAlias="md"
+      toElement="code::Signature">
+    <queries variable="ps">
+      <filter>
+        <element name="md"/>
+        <next type="INDIRECT">
+          <element name="formalParameters"/>
+          <next type="RECURSIVE">
+            <element name="formalParameterDecls" mark="true"/>
+          </next>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="re">
+      <filter>
+        <element name="md"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="parameterUnit">
+        <value type="QUERY_RESULT" value="ps"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="parameterUnit">
+        <value type="QUERY_RESULT" value="re"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createParameterUnit" fromElement="formalParameterDecls" fromElementAlias="fpd"
+      toElement="code::ParameterUnit">
+    <queries variable="nq">
+      <filter>
+        <element name="fpd"/>
+        <next type="INDIRECT" operation="POSITION">
+          <element name="variableDeclaratorId" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <queries variable="t">
+      <filter>
+        <element name="fpd"/>
+        <next>
+          <element name="type" mark="true"/>
+        </next>
+      </filter>
+    </queries>
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="name">
+        <value type="QUERY_ACCESS" value="nq" extension="Identifier"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_RESULT" value="t"/>
+      </inits>
+    </inits>
+  </rules>
+  <rules name="createParameterUnitReturn" fromElement="type" fromElementAlias="t"
+      toElement="code::ParameterUnit">
+    <inits>
+      <inits xsi:type="Core:InitUnitElement" element="type">
+        <value type="QUERY_RESULT" value="t"/>
+      </inits>
+      <inits xsi:type="Core:InitUnitElement" element="kind">
+        <value value="return"/>
+      </inits>
+    </inits>
+    <context>createSignature</context>
+  </rules>
+</Core:ViewDefinition>

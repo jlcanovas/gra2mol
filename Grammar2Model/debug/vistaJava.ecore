@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Core:ViewDefinition xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:Core="http://gts.inf.um.es/modernization/g2mv/core">
+  <rules name="segment" fromElement="compilationUnit" toElement="kdm::Segment">
+    <queries variable="cu">
+      <filter type="GENERAL">
+        <element name="compilationUnit" mark="true"/>
+      </filter>
+    </queries>
+    <inits element="model" value="cu"/>
+  </rules>
+  <rules name="model" fromElement="compilationUnit" toElement="code::CodeModel">
+    <queries variable="classes">
+      <filter>
+        <next type="GENERAL">
+          <element name="classDecl" mark="true"/>
+        </next>
+        <element name="compilationUnit"/>
+      </filter>
+    </queries>
+    <inits element="name" value="Modelo"/>
+    <inits element="codeElement" value="classes"/>
+  </rules>
+  <rules name="class" fromElement="classDecl" toElement="code::ClassUnit">
+    <queries variable="name">
+      <filter>
+        <next type="GENERAL">
+          <element name="normalClassDeclaration" mark="true"/>
+        </next>
+        <element name="classDecl"/>
+      </filter>
+    </queries>
+    <queries variable="methods">
+      <filter>
+        <next type="GENERAL">
+          <element name="classBodyDeclaration" mark="true"/>
+        </next>
+        <element name="classDecl"/>
+      </filter>
+    </queries>
+    <inits element="name" value="name" extension="classId"/>
+    <inits element="codeElement" value="methods"/>
+  </rules>
+  <rules name="method" fromElement="classBodyDeclaration" toElement="code::MethodUnit">
+    <queries variable="main">
+      <filter>
+        <next type="GENERAL">
+          <element name="memberDecl" mark="true"/>
+        </next>
+        <element name="classBodyDeclaration"/>
+      </filter>
+    </queries>
+    <inits element="name" value="main" extension="IdentifierGen"/>
+  </rules>
+</Core:ViewDefinition>

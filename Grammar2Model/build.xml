@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="G2Ge" default="build.Gra2MoL">
+
+	<property name="src" location="src" />
+	<property name="grammarName" location="G2Ge" /> 
+	<property name="grammarSrc" location="${src}/${grammar}.g3" /> 
+	<property name="output.G2Ge" location="src/gts/modernization/parser/antlr" /> 
+	<property name="output.GVQ" location="src/gts/modernization/parser/views" /> 
+	<property name="output.Gra2MoL" location="src/gts/modernization/parser/gra2mol" /> 
+	
+	<path id="path.antlr3">
+    	<pathelement location="./lib/antlr-3.2.jar"/>
+	</path>
+	
+	<target name="build.G2Ge" description="Creates the G2Ge tool">
+		
+		<delete file="${output.G2Ge}/G2Ge.java"/>
+		
+		<java classname="org.antlr.Tool" fork="true" dir="${src}">
+			<jvmarg value="-Xmx1024m"/>
+		    <arg value="${src}/G2Ge.g3"/>
+			<classpath>
+				<path refid="path.antlr3" />
+			</classpath>
+		</java> 
+					
+	 	<move file="${src}/G2Ge.java" todir="${output.G2Ge}"/>		
+		
+		<delete file="G2Ge.tokens"/>
+		
+		<replace file="${output.G2Ge}/G2Ge.java" token=".getTemplate()" value=""/>
+	</target>	
+	
+	<target name="build.Gra2MoL" description="Creates the Gra2MoL lexer and parser">
+			
+		<!--<delete>
+		    <fileset dir="src/" includes="*.java"/>
+		</delete>-->
+		
+		<delete file="${output.Gra2MoL}/Gra2MoLLexer.java"/>
+		<delete file="${output.Gra2MoL}/Gra2MoLParser.java"/>
+
+		<java classname="org.antlr.Tool" fork="true" >
+			<jvmarg value="-Xmx1024m"/>
+			<arg value="${src}/Gra2MoL.g3"/>
+			<classpath>
+				<path refid="path.antlr3" />
+			</classpath>
+		</java> 
+
+		<delete file="Gra2MoL.tokens"/>
+		<delete file="${src}/Gra2MoL__.g"/>
+		
+		<move file="${src}/Gra2MoLLexer.java" todir="${output.Gra2MoL}"/>		
+	 	<move file="${src}/Gra2MoLParser.java" todir="${output.Gra2MoL}"/>
+
+			
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="rules.getTemplate()" value="((rule_return) rules).ruleReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="hashes.getTemplate()" value="((hash_return) hashes).hashReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="content.getTemplate()" value="((hashValue_return) content).hashValueReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="qList.getTemplate()" value="((query_return) qList).queryReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="iList.getTemplate()" value="((init_return) iList).initReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="fExp2.getTemplate()" value="((filterExpressionAlt_return) fExp2).filterExpressionAltReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="fExpAlt2.getTemplate()" value="((filterExpressionAtom_return) fExpAlt2).filterExpressionAtomReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="pList.getTemplate()" value="((param_return) pList).paramReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="ip3.getTemplate()" value="((param_return) ip3).paramReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="is.getTemplate()" value="((init_return) is).initReturn"/>
+		<replace file="${output.Gra2MoL}/Gra2MoLParser.java" token="is2.getTemplate()" value="((init_return) is2).initReturn"/>
+	</target>
+	
+	<target name="build.ANTLRv3" description="Creates the ANTLRv3 parser">		
+		<java classname="org.antlr.Tool" fork="true" dir="${src}">
+			<jvmarg value="-Xmx1024m"/>
+		    <arg value="${src}/ANTLRv3.g3"/>
+			<classpath>
+				<path refid="path.antlr3" />
+			</classpath>
+		</java> 
+					
+	 	<move file="ANTLRv3Lexer.java" todir="${output.G2Ge}"/>		
+	 	<move file="ANTLRv3Parser.java" todir="${output.G2Ge}"/>		
+		
+	</target>
+	
+	<target name="copy.templates" description="Copy templates to specified projects">
+		<copy file="templates/G2Ge.stg" todir="../Grammar2Model.examples.extractANTLRModel/templates"/>
+		<copy file="templates/G2Ge.stg" todir="../Grammar2Model.examples.extractHierarchy/templates"/>
+		<copy file="templates/G2Ge.stg" todir="../Grammar2Model.examples.extractJava2KDM/templates"/>
+		<copy file="templates/G2Ge.stg" todir="../Grammar2Model.examples.Java2JavaModel/templates"/>
+		<copy file="templates/G2Ge.stg" todir="../Grammar2Model.examples.PLSQL2KDM/templates"/>
+		<copy file="templates/G2Ge.stg" todir="../PruebaPLSQLRubyTL/G2MFiles/templates"/>						
+	</target>
+	
+	<target name="clean">
+		<delete>
+			<fileset dir="src/" includes="*.java"/>
+			<fileset dir="src/" includes="*__.g"/>
+		</delete>
+	</target>
+	
+</project>

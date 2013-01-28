@@ -1,0 +1,692 @@
+grammar Gra2MoL;
+
+options{
+	output=template;
+}
+
+@header {
+	package gts.modernization.parser.gra2mol;
+
+	import gts.modernization.model.Gra2MoL.Core.*;
+	import gts.modernization.model.Gra2MoL.Core.impl.*;
+	import gts.modernization.model.Gra2MoL.Core.util.*;
+	import gts.modernization.model.Gra2MoL.Query.*;
+	import gts.modernization.model.Gra2MoL.Query.impl.*;
+	import gts.modernization.model.Gra2MoL.Query.util.*;
+	import java.util.Iterator;
+}
+
+@lexer::header { 
+	package gts.modernization.parser.gra2mol;
+}
+
+// Parser rules
+comment
+	:
+	ML_COMMENT | OL_COMMENT
+	;
+	
+transformationDefinition returns [Transformation transformationReturn]
+	:	('grammar' ':' sourceGrammar=DQVALUE ';')? 
+		('metamodel' ':' targetMetamodel=DQVALUE ';')?
+		hashes+=hash* rules+=rule* comment?
+	{
+		Transformation tDef = CoreFactoryImpl.eINSTANCE.createTransformation();
+		if($sourceGrammar != null) tDef.setSourceGrammar($sourceGrammar.text); 
+		if($targetMetamodel != null) tDef.setTargetMetamodel($targetMetamodel.text); 
+		if($rules != null) tDef.getRules().addAll($rules); 
+		if($hashes != null) tDef.getHashes().addAll($hashes); 
+		$transformationDefinition.transformationReturn = tDef;
+	}
+	;
+	
+hash returns [Hash hashReturn]
+	:	comment? 'hash' name=ID content+=hashValue (',' content+=hashValue)* 'end_hash'
+	{
+		Hash m = CoreFactoryImpl.eINSTANCE.createHash();
+		m.setName($name.text);
+		if($content != null) m.getContent().addAll($content);
+		$hash.hashReturn = m;
+	}
+	;
+	
+hashValue returns [HashValue hashValueReturn] 
+	:	from=hashValuePart '->' to=hashValuePart
+	{
+		HashValue mv = CoreFactoryImpl.eINSTANCE.createHashValue();
+		mv.setFromElement($from.element);
+		mv.setFromElementType($from.type);
+		mv.setToElement($to.element);
+		mv.setToElementType($to.type);
+		$hashValue.hashValueReturn = mv;
+	}
+	|	'default' '->' to=hashValuePart
+	{
+		HashValue mv = CoreFactoryImpl.eINSTANCE.createHashValue();
+		mv.setFromElement("DEFAULT");
+		mv.setFromElementType(HashValueType.DEFAULT);
+		mv.setToElement($to.element);
+		mv.setToElementType($to.type);
+		$hashValue.hashValueReturn = mv;
+	}
+	;
+
+hashValuePart returns [String element, HashValueType type]
+	:	e=DQVALUE
+	{
+		$hashValuePart.element = ($e.text).substring(1, ($e.text).length()-1);
+		$hashValuePart.type = HashValueType.VALUE;
+	}	
+	|	'G' '(' e=ID ')'
+	{
+		$hashValuePart.element = $e.text;
+		$hashValuePart.type = HashValueType.GRAMMAR_ELEMENT;
+	}	
+	|	'MM' '(' nm=normalName ')'
+	{
+		$hashValuePart.element = $nm.text;
+		$hashValuePart.type = HashValueType.METAMODEL_ELEMENT;
+	}	
+	;	
+	
+rule returns [Rule ruleReturn]
+	: 	mRule=mixinRule
+	{
+		$rule.ruleReturn = (Rule) $mRule.mixinRuleReturn; 
+	}
+	|	stRule=standardRule
+	{
+		$rule.ruleReturn = (Rule) $stRule.standardRuleReturn; 
+	}
+	;
+	
+standardRule returns [Rule standardRuleReturn]
+	:	comment? typeR=ruleType name=ruleName fElement=fromElement (cElement=contextElement)? (tElement=toElement)? (mElement=mixinElement)? qList=queryList iList=initList 'end_rule'
+	{		
+		StandardRule r = CoreFactoryImpl.eINSTANCE.createStandardRule();
+		r.setType($typeR.rt);
+		r.setName($name.name);		
+		r.setFrom($fElement.fromElem);
+		if(cElement != null) r.getContext().addAll($cElement.context);
+		if(tElement != null) r.setTo($tElement.toElem);
+		if(mElement != null) r.getMixins().addAll($mElement.mixins);
+		if($qList.returnList != null) r.getQueries().addAll($qList.returnList);
+		if($iList.initListReturn != null) r.setInits($iList.initListReturn);		
+		$standardRule.standardRuleReturn = r;
+	}
+	;
+
+mixinRule returns [Rule mixinRuleReturn]
+	:	comment? 'mixin_rule' name=ruleName qList=queryList iList=initList 'end_rule'
+	{		
+		MixinRule r = CoreFactoryImpl.eINSTANCE.createMixinRule();
+		r.setName($name.name);		
+		if($qList.returnList != null) r.getQueries().addAll($qList.returnList);
+		if($iList.initListReturn != null) r.setInits($iList.initListReturn);		
+		$mixinRule.mixinRuleReturn = r;
+	}
+	;
+
+ruleType returns [RuleType rt]
+	:	'rule'
+		{
+			$ruleType.rt = RuleType.NORMAL;
+		}
+	|	'skip_rule'
+		{
+			$ruleType.rt = RuleType.SKIP;
+		}
+	|	'copy_rule'
+		{
+			$ruleType.rt = RuleType.COPY;
+		}
+	;
+
+ruleName returns [String name]
+	:	(QUOTE)? ID (QUOTE)?
+	{
+		$ruleName.name = $ID.text;
+	}
+	;
+
+fromElement returns [FromElement fromElem]
+	: 	comment? 'from' elem=id ('[' uniq='unique' ']')? ('{' fExp=filterExpression '}')? (fUnit=filterUnit)? (al=ID)?
+	{
+		FromElement fElement = CoreFactoryImpl.eINSTANCE.createFromElement();
+		fElement.setName($elem.identifier);
+		if($al != null) { fElement.setAlias($al.text); }
+		
+		QueryUnit qUnit = QueryFactoryImpl.eINSTANCE.createQueryUnit();
+		qUnit.setAbsoluteQuery(false);
+		if($al != null) { qUnit.setVariable($al.text); }
+		
+		FilterUnit fu = QueryFactoryImpl.eINSTANCE.createFilterUnit();
+		fu.setType(FilterType.DIRECT);
+		QueryElement qe = QueryFactoryImpl.eINSTANCE.createQueryElement();
+		qe.setMark(true);
+		qe.setName($elem.identifier);
+		qe.setType(QueryElementType.NODE);
+		fu.setElement(qe);
+		if(uniq != null) fu.setOperation(FilterOperationType.UNIQUE);
+		if(fExp != null) fu.setExpression($fExp.filterExpressionReturn);
+		if(fUnit != null) fu.setNext($fUnit.filterUnitReturn);
+		qUnit.setFilter(fu);
+		
+		fElement.setFilter(qUnit);
+		$fromElement.fromElem = fElement;
+	}
+	|	comment? 'from' fUnit=filterUnit (al=ID)?
+	{
+		FromElement fElement = CoreFactoryImpl.eINSTANCE.createFromElement();
+		
+		QueryUnit qUnit = QueryFactoryImpl.eINSTANCE.createQueryUnit();
+		qUnit.setAbsoluteQuery(true);
+		if($al != null) { qUnit.setVariable($al.text); }
+		if(fUnit != null) { qUnit.setFilter($fUnit.filterUnitReturn); }
+		fElement.setFilter(qUnit);
+		if(qUnit.getMarkedFilterUnit() != null && qUnit.getMarkedFilterUnit().getElement() != null) {
+			fElement.setName(qUnit.getMarkedFilterUnit().getElement().getName());
+		}
+		if($al != null) { fElement.setAlias($al.text); }	
+		$fromElement.fromElem = fElement;	
+	}
+	;
+
+contextElement returns [List context] 
+@init {
+	$contextElement.context = new ArrayList();
+}	
+	: 'context' ctx+=ID (',' ctx+=ID)*
+		{
+		 	for(Iterator it = $ctx.iterator(); it.hasNext(); )  { 
+				Token t = (Token) it.next(); 
+				$contextElement.context.add(t.getText());
+			}
+		}
+	;
+	
+mixinElement returns [List mixins] 
+@init {
+	$mixinElement.mixins = new ArrayList();
+}	
+	: 'mixin' mx+=ID (',' mx+=ID)*
+		{
+		 	for(Iterator it = $mx.iterator(); it.hasNext(); )  { 
+				Token t = (Token) it.next(); 
+				$mixinElement.mixins.add(t.getText());
+			}
+		}
+	;
+
+toElement returns [ToElement toElem]
+	: 	comment? 'to' normalName (al=ID)?
+	{
+		ToElement tElement = CoreFactoryImpl.eINSTANCE.createToElement();
+		tElement.setName($normalName.text);
+		if ($al != null) { tElement.setAlias($ID.text); }
+		$toElement.toElem = tElement;
+	}
+	;
+
+normalName
+	: 	ID ((DOT | DDOTS) ID)*
+	;
+
+queryList returns [List returnList] 
+	:	comment? 'queries' qList+=query*
+	{
+		$queryList.returnList = $qList;
+	}
+	;
+
+query returns [QueryUnit queryReturn]
+	:	comment? var=ID ':' ( '{' control=queryControl '}' )? ('(' cast=ID ')')? fUnit=filterUnit ';'
+	{
+		QueryUnit qu = QueryFactoryImpl.eINSTANCE.createQueryUnit();
+		qu.setVariable($var.text);
+		if(control != null) qu.setControl($control.queryControlReturn);
+		if(cast != null) qu.setCast($cast.text);
+		qu.setFilter($fUnit.filterUnitReturn);
+		$query.queryReturn = qu;
+	}
+	;  
+	
+queryControl returns [QueryControl queryControlReturn]
+	:	'for' 'each' var=ID 'in' qvar=ID
+	{
+		QueryControlFor qcf = QueryFactoryImpl.eINSTANCE.createQueryControlFor();
+		if(var != null) qcf.setVariable($var.text);
+		if(qvar != null) qcf.setQueryVariable($qvar.text);			
+		$queryControl.queryControlReturn = qcf;	
+	}
+	|	'greater' (nodeId=ID ('[' nodePos=NUMBER ']')? DOT)? var=ID 
+	{
+		QueryControlGreater qcf = QueryFactoryImpl.eINSTANCE.createQueryControlGreater();
+		if(nodeId != null) qcf.setNodeId($nodeId.text);		
+		if(nodePos != null) qcf.setNodePosition(Integer.parseInt($nodePos.text));		
+		if(var != null) qcf.setVariable($var.text);		
+		$queryControl.queryControlReturn = qcf;	
+	}
+	|	'ext' op=normalName ('(' pList+=param (',' pList+=param)? ')')?
+	{
+		QueryControlExtension qce = QueryFactoryImpl.eINSTANCE.createQueryControlExtension();
+		qce.setOperation($op.text);
+		if($pList != null) qce.getParams().addAll($pList);
+		$queryControl.queryControlReturn = qce;
+	}
+	;
+	
+filterUnit returns [FilterUnit filterUnitReturn]
+	:	e=filterUnitElement ('{' fExp=filterExpression '}')? (fUnit=filterUnit)?
+	{
+		FilterUnit fu = QueryFactoryImpl.eINSTANCE.createFilterUnit();
+		fu.setType($e.type);
+		fu.setElement($e.element);
+		fu.setOperation($e.operation);
+		fu.setPosition($e.position);
+		if(fExp != null) fu.setExpression($fExp.filterExpressionReturn);
+		if(fUnit != null) fu.setNext($fUnit.filterUnitReturn);
+		$filterUnit.filterUnitReturn = fu;
+	}
+	;
+
+filterUnitElement returns [FilterType type, QueryElement element, FilterOperationType operation, int position]
+@init {
+	$filterUnitElement.operation = FilterOperationType.NORMAL;
+	$filterUnitElement.position = 0;
+}
+	: 	TRIPLEBAR filterElement (fo=filterOperation)?
+	{
+		$filterUnitElement.type = FilterType.RECURSIVE;
+		$filterUnitElement.element = $filterElement.filterElementReturn;
+		if(fo != null) {
+			$filterUnitElement.operation = $fo.operation;
+			$filterUnitElement.position = $fo.position;			
+		} 
+	}		
+	|	DOUBLEBAR filterElement (fo=filterOperation)?
+	{
+		$filterUnitElement.type = FilterType.INDIRECT;
+		$filterUnitElement.element = $filterElement.filterElementReturn;
+		if(fo != null) {
+			$filterUnitElement.operation = $fo.operation;
+			$filterUnitElement.position = $fo.position;			
+		} 
+	}	
+	|	BAR filterElement (fo=filterOperation)?
+	{
+		$filterUnitElement.type = FilterType.DIRECT;
+		$filterUnitElement.element = $filterElement.filterElementReturn;
+		if(fo != null) {
+			$filterUnitElement.operation = $fo.operation;
+			$filterUnitElement.position = $fo.position;			
+		} 
+	}	
+	; 
+
+filterOperation returns [FilterOperationType operation, int position]
+@init {
+	$filterOperation.position = -1;
+}
+	: '[' 'first' ']'	
+		{
+			$filterOperation.operation = FilterOperationType.POSITION;
+			$filterOperation.position = 0;
+		}
+	| '[' pos=NUMBER ']'
+		{
+			$filterOperation.operation = FilterOperationType.POSITION;
+			if(pos != null) $filterOperation.position = (Integer.parseInt($pos.text));
+			else $filterOperation.position = 0;
+		}
+	| '[' 'last' ']'
+		{
+			$filterOperation.operation = FilterOperationType.POSITION;
+			$filterOperation.position = -1;
+		}
+	| DOT
+		{
+			$filterOperation.operation = FilterOperationType.POSITION;
+			$filterOperation.position = 0;
+		}
+	| '[' 'unique' ']'
+		{
+			$filterOperation.operation = FilterOperationType.UNIQUE;
+		}
+	;
+
+filterExpression returns [FilterExpression filterExpressionReturn]
+	:	fExp1=filterExpressionAlt (AND fExp2+=filterExpressionAlt)* 
+	{
+		if($fExp1.filterExpressionAltReturn != null && $fExp2 == null) {
+			$filterExpression.filterExpressionReturn = $fExp1.filterExpressionAltReturn;
+		} else if($fExp1.filterExpressionAltReturn != null && $fExp2 != null) {
+			FilterExpressionComplex fe = QueryFactoryImpl.eINSTANCE.createFilterExpressionComplex();
+			fe.setType(FilterExpressionType.AND);
+			fe.getExpressions().add($fExp1.filterExpressionAltReturn);
+			fe.getExpressions().addAll($fExp2);
+			$filterExpression.filterExpressionReturn = fe;
+		}
+	}
+	;
+
+filterExpressionAlt returns [FilterExpression filterExpressionAltReturn]
+	:	fExpAlt1=filterExpressionAtom (OR fExpAlt2+=filterExpressionAtom)* 
+	{
+		if($fExpAlt1.filterExpressionAtomReturn != null && $fExpAlt2 == null) {
+			$filterExpressionAlt.filterExpressionAltReturn = $fExpAlt1.filterExpressionAtomReturn;
+		} else if($fExpAlt1.filterExpressionAtomReturn != null && $fExpAlt2 != null) {
+			FilterExpressionComplex fe = QueryFactoryImpl.eINSTANCE.createFilterExpressionComplex();
+			fe.setType(FilterExpressionType.OR);
+			fe.getExpressions().add($fExpAlt1.filterExpressionAtomReturn);
+			fe.getExpressions().addAll($fExpAlt2);
+			$filterExpressionAlt.filterExpressionAltReturn = fe;
+		}
+	}
+	;
+filterExpressionAtom returns [FilterExpression filterExpressionAtomReturn]
+	:	(global='all')? (not=NOT)? expressionElement DOT op=ID ('(' pList+=param (',' pList+=param)* ')')?
+		{
+			FilterExpressionUnit fe = QueryFactoryImpl.eINSTANCE.createFilterExpressionUnit();
+			fe.setElement($expressionElement.expressionElementReturn);
+			fe.setOperation($op.text);
+			if(global != null) fe.setGlobal(true);
+			if($pList != null) fe.getParameters().addAll($pList); 
+			if(not != null) {
+				FilterExpressionComplex fec = QueryFactoryImpl.eINSTANCE.createFilterExpressionComplex();
+				fec.setType(FilterExpressionType.NOT);
+				fec.getExpressions().add(fe);
+				$filterExpressionAtom.filterExpressionAtomReturn = fec;			
+			} else {
+				$filterExpressionAtom.filterExpressionAtomReturn = fe;		
+			}
+		}
+	| (not=NOT)? '(' fep=filterExpression ')'
+		{
+			if(not == null) {
+				$filterExpressionAtom.filterExpressionAtomReturn = $fep.filterExpressionReturn;
+			} else {
+				FilterExpressionComplex fe = QueryFactoryImpl.eINSTANCE.createFilterExpressionComplex();
+				fe.setType(FilterExpressionType.NOT);
+				fe.getExpressions().add($fep.filterExpressionReturn);
+				$filterExpressionAtom.filterExpressionAtomReturn = fe;			
+			}
+		}
+	;
+	
+expressionElement returns [ExpressionElement expressionElementReturn]
+@init {
+	ExpressionElement ee = QueryFactoryImpl.eINSTANCE.createExpressionElement();
+}
+	: 	AT '[' pos=NUMBER ']' 
+		{
+			ee.setName("TOKEN");
+			ee.setType(ExpressionElementType.TOKEN);
+			ee.setPosition(Integer.parseInt($pos.text));
+			$expressionElement.expressionElementReturn = ee;
+		}
+	|	ID ('[' (pos=NUMBER | last='last') ']')?
+		{
+			ee.setName($ID.text);
+			ee.setType(ExpressionElementType.LEAF);
+			if(pos != null) ee.setPosition(Integer.parseInt($pos.text));
+			else if (last != null) ee.setPosition(-1);
+			else ee.setPosition(0);
+			$expressionElement.expressionElementReturn = ee;	
+		}
+	;
+	
+filterElement returns [QueryElement filterElementReturn]
+@init {
+	QueryElement qe = QueryFactoryImpl.eINSTANCE.createQueryElement();
+}
+	:	AL i=id 
+		{
+			qe.setMark(true);
+			qe.setName($i.identifier);
+			qe.setType(QueryElementType.NODE);
+			$filterElement.filterElementReturn = qe;
+		}
+	| 	i=id  
+		{
+			qe.setMark(false);
+			qe.setName($i.identifier);
+			qe.setType(QueryElementType.NODE);
+			$filterElement.filterElementReturn = qe;
+		}
+	;
+	
+initList returns [InitUnitGroup initListReturn]
+	:	comment? ('mappings' | 'do') iList+=init*
+	{
+		InitUnitGroup ig = CoreFactoryImpl.eINSTANCE.createInitUnitGroup();
+		ig.setType(InitUnitGroupType.NORMAL);
+		if($iList != null) ig.getInits().addAll($iList);	
+		ig.setExpression(null);
+		$initList.initListReturn = ig;
+	}
+	;
+	
+init returns [InitUnit initReturn]
+	:	comment? initName '=' initElementValue ';'
+	{
+		InitUnitElement iu = CoreFactoryImpl.eINSTANCE.createInitUnitElement();
+		iu.setElement($initName.value);
+		if($initName.extension != null) iu.getExtension().addAll($initName.extension);		
+		iu.setValue($initElementValue.initElementValueReturn);
+		$init.initReturn = iu;
+	}
+	|	comment? 'if' '(' fExp=filterExpression ')' 'then' (is+=init)* ('else' (is2+=init)*)? 'end_if'
+	{
+		InitUnitGroup ig = CoreFactoryImpl.eINSTANCE.createInitUnitGroup();
+		ig.setType(InitUnitGroupType.IF);
+		if($is != null) ig.getInits().addAll($is);	
+		if($is2 != null) {
+			InitUnitGroup ig2 = CoreFactoryImpl.eINSTANCE.createInitUnitGroup();
+			ig2.setType(InitUnitGroupType.ELSE);
+			if($is2 != null) ig2.getInits().addAll($is2);
+			ig.getInits().add(ig2);
+		}	
+		ig.setExpression($fExp.filterExpressionReturn);
+		$init.initReturn = ig;
+	}
+	| 'skip' s=ID ';'
+		{		
+			InitUnitElement iu = CoreFactoryImpl.eINSTANCE.createInitUnitElement();
+			iu.setElement("SKIP");
+			
+			InitUnitElementValue iev = CoreFactoryImpl.eINSTANCE.createInitUnitElementValue();
+			iev.setType(InitUnitElementValueType.SKIP);
+			iev.setValue($s.text);
+			 
+			iu.setValue(iev);
+			$init.initReturn = iu;
+		}	
+	;
+
+initName returns [String value, List extension]
+	: v=id (DOT e+=ID)*
+		{
+			$initName.value = $v.identifier;
+			if($e != null) {
+				$initName.extension = new ArrayList();
+				for(Iterator it = $e.iterator(); it.hasNext(); )  { 
+		        	Token t = (Token) it.next(); 
+					$initName.extension.add(t.getText());
+				}
+			}
+		}
+	;
+	
+initElementValue returns [InitUnitElementValue initElementValueReturn] 
+@init {
+	$initElementValue.initElementValueReturn = CoreFactoryImpl.eINSTANCE.createInitUnitElementValue();
+}
+	: ID 
+		{ 	
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.QUERY_RESULT);
+			$initElementValue.initElementValueReturn.setValue($ID.text); 
+		}
+	| e=DQVALUE 
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.VALUE);
+			$initElementValue.initElementValueReturn.setValue(($e.text).substring(1, ($e.text).length()-1)); 
+		 }
+	| NUMBER 
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.VALUE);
+			$initElementValue.initElementValueReturn.setValue($NUMBER.text); 
+		}
+	| i1=ID DOT i2=ID (ast='*' | '[' ip = param ']')?
+		{ 
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.QUERY_ACCESS);
+			$initElementValue.initElementValueReturn.setValue($i1.text); 
+			$initElementValue.initElementValueReturn.setExtension($i2.text); 
+			if (ip!=null) $initElementValue.initElementValueReturn.getParams().add($ip.paramReturn);
+			else if(ast!=null) {
+				Parameter par = CoreFactoryImpl.eINSTANCE.createParameter();
+				par.setType(ParameterType.MULTIPLE);
+				$initElementValue.initElementValueReturn.getParams().add(par);
+			}
+		}
+	| ip1=param PLUS ip2=param (PLUS ip3+=param)* 
+		{ 
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_CONCAT);
+			$initElementValue.initElementValueReturn.getParams().add($ip1.paramReturn); 
+			$initElementValue.initElementValueReturn.getParams().add($ip2.paramReturn);
+			if(ip3 != null) $initElementValue.initElementValueReturn.getParams().addAll($ip3);
+		}
+	| 'new' normalName
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_CREATION);
+			$initElementValue.initElementValueReturn.setValue($normalName.text); 
+		}
+	| 'map' map=ID '(' p=param  ')'
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.HASH);
+			$initElementValue.initElementValueReturn.setValue($map.text);
+			$initElementValue.initElementValueReturn.getParams().add($p.paramReturn);
+		}
+	| 'extract' c=ID 
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_EXTRACT);
+			$initElementValue.initElementValueReturn.setValue($c.text);
+		}		
+	| 'extractID' c=ID 
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_EXTRACTID);
+			$initElementValue.initElementValueReturn.setValue($c.text);
+		}				
+	| 'execute' rul=ID res=ID
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_CALL);
+			$initElementValue.initElementValueReturn.setValue($rul.text);
+			$initElementValue.initElementValueReturn.setExtension($res.text);
+		}		
+	| 'removeQuotes' i1=ID DOT i2=ID ('[' ip = param ']')?
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_REMOVE_QUOTES);
+			$initElementValue.initElementValueReturn.setValue($i1.text); 
+			$initElementValue.initElementValueReturn.setExtension($i2.text); 
+			if (ip!=null) $initElementValue.initElementValueReturn.getParams().add($ip.paramReturn);
+		}	
+	| 'count' c=ID 
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_COUNT);
+			$initElementValue.initElementValueReturn.setValue($c.text); 
+		}	
+	| 'convertHexToString' i1=ID DOT i2=ID 
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_CONVERTH2S);
+			$initElementValue.initElementValueReturn.setValue($i1.text); 
+			$initElementValue.initElementValueReturn.setExtension($i2.text); 
+		}			
+	| 'ext' op=normalName ('(' pList+=param (',' pList+=param)? ')')?
+		{
+			$initElementValue.initElementValueReturn.setType(InitUnitElementValueType.OPERATION_EXTENSION);
+			$initElementValue.initElementValueReturn.setValue($op.text); 
+			if($pList != null) $initElementValue.initElementValueReturn.getParams().addAll($pList);
+		}			
+	;	
+	
+param returns [Parameter paramReturn]
+@init {
+	$param.paramReturn = CoreFactoryImpl.eINSTANCE.createParameter();
+}
+	: i1=ID ('[' ip1=('last'|NUMBER |ID) ']')? DOT i2=ID ('[' ip2=('last'|NUMBER |ID) ']')? 
+		{ 
+			$param.paramReturn.setType(ParameterType.QUERY_ACCESS);
+			$param.paramReturn.setValue($i1.text); 
+			if(ip1 != null) $param.paramReturn.setValuePosition($ip1.text);
+			else $param.paramReturn.setValuePosition("0");
+			$param.paramReturn.setExtension($i2.text); 
+			if(ip2 != null) $param.paramReturn.setExtensionPosition($ip2.text); 
+			else $param.paramReturn.setExtensionPosition("0");
+		}
+	| i1=ID 
+		{ 
+			$param.paramReturn.setType(ParameterType.VARIABLE);
+			$param.paramReturn.setValue($i1.text); 
+		}
+	| e=DQVALUE 
+		{ 
+			$param.paramReturn.setType(ParameterType.STRING_VALUE);
+			$param.paramReturn.setValue(($e.text).substring(1, ($e.text).length()-1)); 
+		}
+ 	| NUMBER
+		{ 
+			$param.paramReturn.setType(ParameterType.NUMBER_VALUE);
+			$param.paramReturn.setValue($NUMBER.text); 
+		}		
+	;	
+
+id returns [String identifier]
+	: v=IDESC 
+		{
+			$id.identifier = ($v.text).substring(1, ($v.text).length());
+		}
+	| v=ID 
+		{
+			$id.identifier = $v.text;
+		}
+	;
+	
+// Lexer rules
+AND: '\u0026\u0026';
+OR: '\u007C\u007C';
+AT: '\u0040';
+AL: '\u0023';
+DOT: '\u002E';
+PLUS: '\u002B';
+NOT: '\u0021';
+DDOTS: '\u003A\u003A';
+QUOTE: '\u0027';
+DOUBLEQUOTE: '\u0022';
+BAR: '\u002F';
+DOUBLEBAR: '\u002F\u002F';
+TRIPLEBAR: '\u002F\u002F\u002F';
+DQVALUE:
+	DOUBLEQUOTE (options {greedy=false;} : .)* DOUBLEQUOTE
+	;
+OPERATION:
+	('+'|'-'|'*'|'\u002F')
+	;
+ID: 
+	('a'..'z' | 'A'..'Z') ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '$' | '#' )*
+	;
+IDESC: 
+	'_' ('a'..'z' | 'A'..'Z') ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '$' | '#' )*
+	;	
+NUMBER:
+	('+' | '-')? ('0'..'9')+
+	;
+WS: 
+	( '\t' | ' ' | '\r' | '\n'| '\u000C' )+ { $channel = HIDDEN; } 
+	;	
+ML_COMMENT:
+	'/*' (options {greedy=false;} : .)* '*/' { $channel=HIDDEN;}
+	;
+	
+OL_COMMENT: '--' ( options {greedy=false;} : . )* '\n'+ { $channel=HIDDEN;}
+	;
+

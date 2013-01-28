@@ -1,0 +1,8 @@
+Some important notes:
+- The context information does not works with bridge rules
+
+About code and project:
+- Use an action factory. Use Gra2MoLInterpreterActionFactory class!!
+- Analyzing the execution of skip and normal rules (there must be something to reuse)
+- Some of the CSTTemplateModelBuilder should be included in its superclass (TemplateModelBuilder). In fact, maybe 
+CSTTemplateModelBuilder could be deleted and its method included in TemplateModelBUilder

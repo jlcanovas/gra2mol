@@ -1,0 +1,398 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2011
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Javier Canovas (jlcanovas@um.es) 
+ *******************************************************************************/
+
+
+rule 'createSegment'
+	from compilationUnit
+	to kdm::Segment 
+	queries 
+		p : ///#normalClassDeclaration[unique];
+		cu : //#compilationUnit;
+	init
+		name = "StrutsSegment";
+		model = cu;
+		--model = p;
+		--if (cu.hasResults) then
+		--	model = cu;
+		--else
+		--	model = cu;
+		--end_if
+end_rule
+
+rule 'pp'
+	from normalClassDeclaration nc
+	to code::CodeModel
+	queries
+		coi : /compilationUnit//#classOrInterfaceDeclaration//normalClassDeclaration{this.check(nc)};
+		mod : /coi/#modifier;
+	mappings
+		name = mod.TOKEN;
+end_rule
+
+rule 'createModel'
+	from compilationUnit cu
+	to code::CodeModel
+	queries
+		class : /cu//#normalClassDeclaration;
+		superclasses : /cu//normalClassDeclaration{TOKEN[1].exists && TOKEN[1].eq("extends")}/#type;
+		createdclasses : /cu//#primary{TOKEN.eq("new")};
+		t  : /compilationUnit//#typeDeclaration[first];
+	mappings
+		name = "codeModel";
+		codeElement = t;
+		codeElement = class;
+		codeElement = superclasses;
+		codeElement = createdclasses;
+end_rule
+
+---------------------------
+-- REGLAS PARA LOS TIPOS --
+---------------------------
+
+rule 'createLanguageUnit'
+	from typeDeclaration td
+	to code::LanguageUnit
+	queries
+		ts : /td//#type;
+	mappings
+		name = "Java Datatypes";
+		codeElement = ts;
+end_rule
+
+rule 'StringType'
+	from type[unique]{Identifier.exists && Identifier.eq("String")} t
+	to code::StringType
+	queries
+	mappings
+end_rule
+
+rule 'BooleanType'
+	from type[unique]/primitiveType{TOKEN.eq("boolean")} t
+	to code::BooleanType
+	queries
+	mappings
+end_rule
+
+
+---------------------------
+-- REGLAS PARA LAS CLASES --
+---------------------------
+
+rule 'createClass'
+	from normalClassDeclaration nc
+	context createModel, extendsPart
+	to code::ClassUnit
+	queries
+		elements : /nc//#classBodyDeclaration;
+		-- Check if the class extends to other class
+		extends : /#nc{TOKEN[1].exists && TOKEN[1].eq("extends")};
+	mappings
+		codeRelation = extends;
+		name = nc.Identifier;
+		codeElement = elements;
+end_rule
+
+rule 'createEmptyClass'
+	from type t
+	context createModel, extendsPart
+	to code::ClassUnit
+	queries
+	mappings
+		name = t.Identifier;
+end_rule	
+
+rule 'createEmptyClass2'
+	from primary p
+	context createModel, createsobjectcreation
+	to code::ClassUnit
+	queries
+		n : /p/creator/#createdName;
+	mappings
+		name = n.Identifier;
+end_rule	
+
+rule 'extendsPart'
+	from normalClassDeclaration{TOKEN[1].exists && TOKEN[1].eq("extends")} ncd
+	context createClass
+	to code::Extends
+	queries
+		father : /ncd/#type;
+		class : /compilationUnit//#normalClassDeclaration{Identifier.eq(father.Identifier)};
+		extendedClass : /ncd/#type;
+	mappings
+		_from = ncd;
+		if(class.hasResults) then 
+			_to = class;
+		end_if
+		if(!class.hasResults) then
+			_to = extendedClass;
+		end_if
+end_rule
+
+rule 'field'
+	from classBodyDeclaration//fieldDeclaration cbd
+	to code::StorableUnit
+	queries 
+		vd : /cbd//#variableDeclarator[first];
+	mappings
+		name = vd.Identifier;
+end_rule
+
+rule 'typedMethod'
+	from classBodyDeclaration/memberDecl/methodDeclaration cbd
+	to code::MethodUnit
+	queries
+		n : /cbd/memberDecl/#methodDeclaration;
+		va : /cbd//blockStatement/#localVariableDeclaration;
+		iva : /cbd//blockStatement/localVariableDeclaration//#variableInitializer;
+		st : /cbd//blockStatement/#statement;
+		entry : /cbd/#memberDecl;
+	mappings
+		name = n.Identifier;
+		-- Adds the parameters
+		codeElement = n;
+		-- Adds statements
+		codeElement = va;
+		codeElement = iva;
+		codeElement = st;
+		-- Creates the entry flow
+		entryFlow = entry;
+end_rule
+
+rule 'voidMethod'
+	from classBodyDeclaration/memberDecl{Identifier.exists} cbd
+	to code::MethodUnit
+	queries
+		n : /cbd/#memberDecl;
+		p : (methodDeclaration) /cbd/#memberDecl;
+		--p : /cbd//#formalParameters//formalParameterDecls;
+		va : /cbd//blockStatement/#localVariableDeclaration;
+		iva : /cbd//blockStatement/localVariableDeclaration//#variableInitializer;
+		st : /cbd//blockStatement/#statement;
+	mappings
+		name = n.Identifier;
+		-- Adds the parameters
+		codeElement = p;
+		-- Adds statements
+		codeElement = va;
+		codeElement = iva;
+		codeElement = st;
+		-- Creates the entry flow
+		entryFlow = n;
+end_rule
+
+rule 'entryFlow'
+	from memberDecl md
+	context typedMethod, voidMethod
+	to action::EntryFlow
+	queries
+		f : //compilationUnit//#classBodyDeclaration//memberDecl{this.check(md)};
+		t : /md//blockStatement[first]/#statement;
+	mappings
+		_from = f;
+		_to = t;
+end_rule
+
+------------------------------- LOCAL VARIABLE STATEMENTS  ------------------------------
+
+rule 'localVariable'
+	from localVariableDeclaration lvd
+	to code::StorableUnit
+	queries
+		n : /lvd//#variableDeclarator;
+	mappings
+		name = n.Identifier; 
+end_rule
+
+rule 'objectcreation' 
+	from variableInitializer//primary{TOKEN.eq("new")} vi
+	to action::ActionElement
+	queries
+		elem : //compilationUnit//#variableDeclarator//variableInitializer{this.check(vi)};
+	mappings
+		actionRelation = execute writesobjectcreation elem;
+		actionRelation = execute createsobjectcreation elem;
+		
+end_rule
+
+rule 'writesobjectcreation' 
+	from variableDeclarator//primary{TOKEN.eq("new")} vd
+	context objectcreation
+	to action::Writes
+	queries
+		f : /vd//#variableInitializer;
+		t : //compilationUnit//#localVariableDeclaration//variableDeclarator{Identifier.eq(vd.Identifier)};
+	mappings
+		_from = f;
+		_to = t;
+end_rule
+
+rule 'createsobjectcreation' 
+	from variableDeclarator//primary{TOKEN.eq("new")} vd
+	context objectcreation
+	to action::Creates
+	queries
+		f : /vd//#variableInitializer;
+		t : (primary) /vd//#createdName;
+	mappings
+		_from = f;
+		--_to = t;
+end_rule
+
+----------------------------------- IF STATEMENT -----------------------------------------------
+rule 'ifStatement'
+	from statement{TOKEN.eq("if")} sif
+	to action::ActionElement
+	queries
+		exp: /sif/#parExpression;
+		si : /sif/#statement;
+	mappings
+		codeElement = si;
+		actionRelation = execute trueFlow si;
+		-- The false flow
+		--actionRelation = no;
+end_rule
+
+rule 'trueFlow'
+	from statement st
+	context ifStatement
+	to action::TrueFlow
+	queries
+		fr : //compilationUnit//blockStatement/#statement/statement{this.check(st)};
+	mappings
+		_from = fr;
+		_to = st;
+end_rule
+
+----------------------------------- ASSIGNMENT STATEMENTS --------------------------------------
+
+rule 'assignmentStatement'
+	from statement/statementExpression/expression/assignmentOperator st
+	to action::ActionElement
+	queries
+		expr : /st/statementExpression/#expression;
+		e1 : /expr/#conditionalExpression;
+		e2 : /expr/#expression;
+		op : /expr/#assignmentOperator;
+	mappings
+		-- Read
+		actionRelation = e2;
+		-- Write
+		actionRelation = e1;
+end_rule
+
+rule 'assignmentRight' 
+	from expression e
+	context assignmentStatement
+	to action::Reads
+	queries		
+		member : /compilationUnit//#methodDeclaration//statementExpression/expression/expression{this.check(e)};
+		f : /member//blockStatement/#statement;
+		right : /e//#primary;
+		param : /member///#formalParameterDecls//variableDeclaratorId{Identifier.eq(right.Identifier)};
+	mappings
+		_from = f;
+		_to = param;
+end_rule
+
+rule 'assignmentLeftWithThis' 
+	from conditionalExpression//primary{TOKEN.eq("this")} ce
+	context assignmentStatement
+	to action::Writes
+	queries		
+		member : /compilationUnit//#methodDeclaration//statementExpression/expression/conditionalExpression{this.check(ce)};
+		f : /member//blockStatement/#statement;
+		left : /ce//#primary;
+		var : /compilationUnit//#classBodyDeclaration//fieldDeclaration//variableDeclarator{Identifier.eq(left.Identifier)};
+	mappings
+		_from = f;
+		_to = var;
+end_rule
+
+----------------------------------- RETURN STATEMENTS --------------------------------------
+
+rule 'returnStatement'
+	from statement{TOKEN.eq("return")} bst
+	to action::ActionElement
+	queries
+		p : /bst//#primary;
+		inmediate : /bst//#primary/literal;
+	mappings
+		kind = "Return";
+		codeElement = inmediate;
+		actionRelation = p;
+end_rule
+
+rule 'value2ActionElement'
+	from primary/literal/booleanLiteral p
+	context returnStatement, returnStatementAction
+	to code::Value
+	queries
+		value : /p/literal/#booleanLiteral;
+		t : //compilationUnit//#type/primitiveType{TOKEN.eq("boolean")};
+	mappings
+		name = value.TOKEN;
+		type = t;
+end_rule
+
+rule 'returnStatementAction'
+	from primary p
+	context returnStatement
+	to action::Reads
+	queries
+		cbd : /compilationUnit//#classBodyDeclaration//fieldDeclaration//variableDeclarator{Identifier.eq(p.Identifier)};
+		inm : /#p/literal;
+		f : /compilationUnit//blockStatement/#statement//primary{this.check(p)};
+	mappings
+		_from = f;
+		if(cbd.hasResults) then
+			_to = cbd;
+		else
+			_to = inm;
+		end_if
+end_rule
+
+------------------------------------- Parameters ----------------------------------
+
+rule 'createSignature'
+	from methodDeclaration md
+	to code::Signature
+	queries
+		ps : /md//formalParameters///#formalParameterDecls;
+		re : /md/#type;
+	mappings
+		-- Add the arguments of the method
+		parameterUnit = ps;
+		-- Add the return (if it exists)
+		parameterUnit = re;
+		
+end_rule
+
+rule 'createParameterUnit'
+	from formalParameterDecls fpd
+	to code::ParameterUnit
+	queries
+		nq : /fpd//#variableDeclaratorId[0];
+		t  : /fpd/#type;
+	mappings
+		name = nq.Identifier; 
+		type = t;
+end_rule
+
+rule 'createParameterUnitReturn'
+	from type t
+	context createSignature
+	to code::ParameterUnit
+	queries
+	mappings
+		type = t;
+		kind = "return";
+end_rule
