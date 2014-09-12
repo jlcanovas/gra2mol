@@ -1,0 +1,11 @@
+[
+    {   attributeName:  "expression"
+    },
+    {   attributeName:  "image"
+    },
+    {   attributeName:  "tooltip"
+    }
+]
+
+//attributeName:  "selection"
+//attributeName:  "selectMissing"

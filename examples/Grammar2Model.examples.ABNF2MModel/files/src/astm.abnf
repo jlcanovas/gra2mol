@@ -1,0 +1,614 @@
+
+GASTMObject => ! GASTMSourceObject
+=> ! GASTMSemanticObject
+=> ! GASTMSyntaxObject
+;
+
+GASTMSourceObject
+=> SourceFile
+=> SourceLocation
+;
+
+SourceFile -> < pathName : String >
+;
+
+SourceLocation -> < startLine : Integer >
+< startColumn : Integer >
+< endLine : Integer >
+< endColumn : Integer >
+inSourceFile : SourceFile
+;
+
+GASTMSemanticObject
+=> Project
+=> Scope
+;
+
+Project -> files : CompilationUnit +
+[ outerScope : GlobalScope ? ]
+;
+
+Scope -> definitionObject : DefinitionObject *
+[ childScope : Scope * ]
+;
+
+Scope => FunctionScope
+=> AggregateScope
+=> BlockScope
+=> ProgramScope
+=> GlobalScope
+;
+
+GASTMSyntaxObject
+-> locationInfo : SourceLocation
+preProcessorElements : PreprocessorElement *
+annotations : AnnotationExpression *
+;
+
+GASTMSyntaxObject
+=> ! PreprocessorElement
+=> ! DefinitionObject
+=> ! Type
+=> ! Expression
+=> ! Statement
+=> ! OtherSyntaxObject
+;
+
+OtherSyntaxObject
+=> Dimension
+=> CompilationUnit
+=> Name
+=> SwitchCase
+=> CatchBlock
+=> ! UnaryOperator
+=> ! BinaryOperator
+=> ! StorageSpecification
+=> ! VirtualSpecification
+=> AccessKind
+=> ! ActualParameter
+=> FunctionMemberAttribute
+=> DerivesFrom
+;
+
+CompilationUnit -> < language : String >
+fragments : DefinitionObject*
+[ opensScope : ProgramScope? ]
+;
+
+Name -> < nameString : String >
+;
+
+DefinitionObject
+=> ! DeclarationOrDefinition
+=> TypeDefinition
+=> NameSpaceDefinition
+=> LabelDefinition
+;
+
+DeclarationOrDefinition
+=> ! Definition
+=> ! Declaration
+;
+
+DeclarationOrDefinition
+-> < isRegister : Boolean >
+storageSpecifiers : StorageSpecification
+accessKind : AccessKind
+< linkageSpecifier : String >
+;
+Definition ->
+identifierName : Name
+definitionType : TypeReference ?
+;
+
+Definition => FunctionDefinition
+=> EntryDefinition
+=> ! DataDefinition
+=> EnumLiteralDefinition
+;
+
+Declaration -> [ defRef : Definition ]
+identifierName : Name ?
+declarationType : TypeReference
+;
+
+Declaration
+=> FunctionDeclaration
+=> VariableDeclaration
+=> FormalParameterDeclaration
+;
+
+StorageSpecification
+=> External
+=> FunctionPersistent
+=> FileLocal
+=> PerClassMember
+=> NoDef
+;
+
+FunctionDeclaration
+-> formalParameters :
+FormalParameterDeclaration *
+functionMemberAttributes :
+FunctionMemberAttributes?
+;
+
+VariableDeclaration
+-> < isMutable : Boolean >
+;
+
+FunctionDefinition
+-> returnType : TypeReference *
+formalParameters : FormalParameterDefinition *
+body : Statement*
+functionMemberAttributes :
+FunctionMemberAttributes?
+[ opensScope : FunctionScope ]
+;
+
+FunctionMemberAttributes
+-> < isFriend : Boolean >
+< isInline : Boolean >
+< isThisConst : Boolean >
+virtualSpecifier : VirtualSpecification
+;
+
+VirtualSpecification
+=> Virtual
+=> PureVirtual
+=> NonVirtual
+;
+
+EntryDefinition
+-> formalParameters : FormalParameterDefinition*
+body:Statement*
+;
+
+DataDefinition -> initialValue : Expression?
+< isMutable : Boolean >
+;
+
+DataDefinition => VariableDefinition
+=> FormalParameterDefinition
+=> BitFieldDefinition
+;
+
+BitFieldDefinition
+-> bitFieldSize : Expression
+;
+
+EnumLiteralDefinition
+-> value : Expression?
+;
+
+TypeDefinition -> name : Name
+;
+
+TypeDefinition => NamedTypeDefinition
+=> AggregateTypeDefinition
+;
+
+NamedTypeDefinition
+-> definitionType : NamedType
+;
+
+AggregateTypeDefinition
+-> aggregateType : AggregateType
+;
+
+NameSpaceDefinition
+-> nameSpace : Name
+body : DefinitionObject+
+nameSpaceType : NameSpaceType
+;
+
+LabelDefinition -> labelName : Name
+labelType : LabelType
+;
+
+PreprocessorElement
+=> IncludeUnit
+=> MacroCall
+=> MacroDefinition
+=> Comment
+;
+
+IncludeUnit -> file : SourceFile
+;
+
+MacroCall -> refersTo : MacroDefinition
+;
+
+MacroDefinition -> < macroName : String >
+< body : String >
+;
+
+Comment -> < text : String >
+;
+
+Type -> < isConst : Boolean >
+< isVolatile : Boolean >
+;
+
+Type => FunctionType
+=> ! DataType
+=> LabelType
+=> NameSpaceType
+=> ! TypeReference
+;
+
+DataType => ! PrimitiveType
+=> EnumType
+=> ! ConstructedType
+=> ! AggregateType
+=> ExceptionType
+=> ! FormalParameterType
+=> NamedType
+;
+
+PrimitiveType -> < isSigned : Boolean >
+;
+
+PrimitiveType => Void
+=> Byte
+=> ShortInteger
+=> Integer
+=> LongInteger
+=> Float
+=> Double
+=> LongDouble
+=> Character
+=> String
+=> Boolean
+=> WideCharacter
+;
+
+EnumType -> enumLiterals : EnumLiteralDefinition+
+;
+
+ConstructedType -> baseType : TypeReference
+;
+
+ConstructedType => CollectionType
+=> PointerType
+=> ReferenceType
+=> RangeType
+=> ArrayType
+;
+
+AggregateType -> members : DefinitionObject+
+[ opensScope : AggregateScope ]
+;
+
+AggregateType => StructureType
+=> UnionType
+=> ClassType
+=> AnnotationType
+;
+
+ArrayType -> ranks : Dimension+
+;
+
+Dimension -> lowBound : Expression?
+highBound : Expression
+;
+
+FunctionType -> returnType : TypeReference?
+parameterTypes : FormalParameterType*
+;
+
+FormalParameterType
+-> type : TypeReference
+;
+
+FormalParameterType
+=> ByValueFormalParameterType
+=> ByReferenceFormalParameterType
+;
+
+NamedType -> body : Type
+;
+
+ClassType -> derivesFrom : DerivesFrom*
+;
+
+DerivesFrom -> < isVirtual : Boolean >
+accessKind : AccessKind
+className : NamedType
+;
+
+AccessKind => Public
+=> Protected
+=> Private
+;
+
+TypeReference => UnnamedTypeReference
+=> NamedTypeReference
+;
+
+UnnamedTypeReference
+-> type : Type
+;
+
+NamedTypeReference
+-> name : Name
+type : TypeDefinition
+;
+
+Statement => ExpressionStatement
+=> JumpStatement
+=> BreakStatement
+=> ContinueStatement
+=> LabeledStatement
+=> BlockStatement
+=> EmptyStatement
+=> IfStatement
+=> SwitchStatement
+=> ReturnStatement
+=> LoopStatement
+=> TryStatement
+=> DeclarationOrDefinitionStatement
+=> ThrowStatement
+=> DeleteStatement
+=> TerminateStatement
+;
+
+DeleteStatement -> operand: Expression
+;
+
+DeclarationOrDefinitionStatement
+-> declOrDefn: DefinitionObject
+;
+
+ExpressionStatement
+-> expression : Expression
+;
+
+JumpStatement -> target : Expression
+;
+
+BreakStatement -> target : LabelAccess?
+;
+
+ContinueStatement
+-> target : LabelAccess?
+;
+
+LabeledStatement
+-> label : LabelDefinition
+statement : Statement?
+;
+
+BlockStatement -> subStatements : Statement*
+[ opensScope : BlockScope ]
+;
+
+EmptyStatement ->
+;
+
+IfStatement -> condition : Expression
+thenBody : Statement
+elseBody : Statement?
+;
+
+SwitchStatement -> switchExpression : Expression
+cases : SwitchCase
+;
+
+SwitchCase -> body : Statement+;
+SwitchCase => CaseBlock
+=> DefaultBlock
+;
+
+CaseBlock -> caseExpressions : Expression+
+;
+
+ReturnStatement -> returnValue : Expression?
+;
+
+LoopStatement -> condition : Expression
+body : Statement
+;
+
+LoopStatement => WhileStatement
+=> DoWhileStatement
+=> ! ForStatement
+;
+
+ForStatement -> initBody : Expression*
+iterationBody : Expression*
+;
+
+ForStatement => ForCheckBeforeStatement
+=> ForCheckAfterStatement
+;
+
+TryStatement -> guardedStatement : Statement
+catchBlocks : CatchBlock*
+finalStatement : Statement?
+;
+
+CatchBlock -> body : Statement
+;
+
+CatchBlock => TypesCatchBlock
+=> VariableCatchBlock
+;
+
+TypesCatchBlock -> exceptions : Type+
+;
+
+VariableCatchBlock
+-> exceptionVariable : DataDefinition
+;
+
+ThrowStatement -> exception : Expression
+;
+
+Expression -> [ expressionType : TypeReference ] ;
+
+Expression => Literal
+=> CastExpression
+=> AggregateExpression
+=> UnaryExpression
+=> BinaryExpression
+=> ConditionalExpression
+=> RangeExpression
+=> FunctionCallExpression
+=> NewExpression
+=> ! NameReference
+=> LabelAccess
+=> ArrayAccess
+=> AnnotationExpression
+;
+
+NameReference => IdentifierReference
+=> ! QualifiedIdentifierReference
+=> TypeQualifiedIdentifierReference
+;
+
+NameReference -> name : Name
+refersTo : DefinitionObject
+;
+
+ArrayAccess -> arrayName : Expression
+subscripts : Expression+
+;
+
+QualifiedIdentifierReference
+-> qualifiers : Expression
+member : IdentifierReference
+;
+
+QualifiedIdentifierReference
+=> QualifiedOverPointer 
+=> QualifiedOverData
+;
+
+TypeQualifiedIdentifierReference
+-> aggregateType : TypeReference +
+member : IdentifierReference
+;
+
+Literal -> < value : String >
+;
+
+Literal => IntegerlLiteral
+=> StringLiteral
+=> CharLiteral
+=> RealLiteral
+=> BooleanLiteral
+=> BitLiteral
+;
+
+CastExpression -> castType : TypeReference
+expression : Expression
+;
+
+UnaryExpression -> operator : UnaryOperator
+operand : Expression
+;
+
+UnaryOperator => UnaryPlus
+=> Negate
+=> Not
+=> BitNot
+=> AddressOf
+=> Deref
+=> Increment
+=> Decrement
+=> PostIncrement
+=> PostDecrement
+;
+
+BinaryExpression
+-> operator : BinaryOperator
+leftOperand : Expression
+rightOperand : Expression
+;
+
+BinaryOperator => Add
+=> Subtract
+=> Multiply
+=> Divide
+=> Modulus
+=> Exponent
+=> And
+=> Or
+=> Equal
+=> NotEqual
+=> Greater
+=> NotGreater
+=> Less
+=> NotLess
+=> BitAnd
+=> BitOr
+=> BitXor
+=> BitLeftShift
+=> BitRightShift
+=> Assign
+=> OperatorAssign
+;
+
+OperatorAssign -> operator : BinaryOperator 
+;
+
+ConditionalExpression
+-> condition : Expression
+onTrueOperand : Expression
+onFalseOperand : Expression
+;
+
+RangeExpression -> fromExpression : Expression
+toExpression : Expression
+;
+
+FunctionCallExpression
+-> calledFunction : Expression
+actualParams : ActualParameter*
+;
+
+ActualParameter
+=> ActualParameterExpression
+=> MissingActualParameter
+;
+
+ActualParameterExpression
+-> value : Expression
+;
+
+ActualParameterExpression
+=> ByValueActualParameterExpression
+=> ByReferenceActualParameterExpression
+;
+
+NewExpression -> newType : TypeReference
+actualParams : ActualParameter *
+;
+
+LabelAccess -> name : Name
+definition : LabelDefinition
+;
+
+AnnotationExpression
+-> annotationType : TypeReference ?
+memberValues : Expression *
+;
+
+GlobalScope -> ;
+PreprocessorElement -> ;
+DefinitionObject -> ;
+ProgramScope -> ;
+TypeReference -> ;
+Statement -> ;
+FunctionScope -> ;
+NameSpaceType -> ;
+LabelType -> ;
+AggregateScope -> ;
+BlockScope -> ;
+IdentifierReference -> ;
+FormalParameterDefinition -> ;
+VirtualSpecification -> ;
+FormalParameterDeclaration -> ;
+VariableDefinition -> ;
+

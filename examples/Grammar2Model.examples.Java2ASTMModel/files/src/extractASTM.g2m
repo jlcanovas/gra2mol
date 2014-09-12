@@ -1,0 +1,911 @@
+--------------------------------------------------------------------------------------
+-- Gra2MoL transformation definition for extracting ASTM models from Java CST models
+-- Author: Javier Luis Canovas Izquierdo (jlcanovas@um.es)
+--
+-- TODO: 
+--  * FunctionCallStatement must be filled to link with the FunctionDefinition
+--  * Dealing with try/catch and switch blocks 
+--  * Dealing with scopes
+--  * Class inheritance (normally, the superclass does not exist in the parsed files)
+--  * Problem with cointainment-noncontainment references:
+--     * returnType from FunctionDefinition y type of TypeReference (e.g. boolean return type from isTituloNoValido)
+--------------------------------------------------------------------------------------
+
+rule 'mapProject'
+	from ccompilationUnit sf
+	to Project
+	queries
+		cu : //#CST;
+	mappings
+		files = cu;
+end_rule
+
+rule 'mapCompilationUnit'
+	from CST cst
+	to CompilationUnit
+	queries
+		elements : /cst//#classOrInterfaceDeclaration;
+	mappings
+		language = "Java";
+		fragments = elements;
+end_rule
+
+-- Maps the class definitions. 
+-- TODO: Superclasses
+rule 'mapClass'
+	from classOrInterfaceDeclaration//normalClassDeclaration coid
+	to AggregateTypeDefinition
+	queries	
+		name     : /coid//#normalClassDeclaration;
+		elements : /coid//#classBodyDeclaration;
+		extends  : /coid//normalClassDeclaration/#type;
+		-- Locate compilationUnit for extracting package and imports
+		loccu    : //#compilationUnit//classOrInterfaceDeclaration{this.check(coid)};
+		pack     : /loccu/packageDeclaration/#qualifiedName;
+		impts    : /loccu/#importDeclaration;
+	mappings
+		name = new Name;
+		name.nameString = name.Identifier;
+				
+		aggregateType = new SpecificClassType;
+		aggregateType.members = elements;
+		aggregateType.package = extract pack;
+		aggregateType.imports = extract impts;
+		
+		--aggregateType.derivesFrom = type;
+end_rule
+
+-- Maps the type elements to classes if they exist in the CST
+
+-- Maps the instance variables of the class
+-- TODO: Make it compatible for multiple variable declarations
+rule 'mapInstanceVariable'
+	from classBodyDeclaration/memberDecl/fieldDeclaration cbd
+	to VariableDefinition
+	queries
+		-- Extracts the name of the variable
+		name : /cbd//#variableDeclarator[0];
+		-- Extracts the type of the variable
+		type : /cbd/memberDecl/fieldDeclaration/#type;
+		-- Extracts the possible initialization		
+		init : /cbd//#variableDeclarator[0]//variableInitializer/#expression;
+	mappings
+		identifierName = new Name;
+		identifierName.nameString = name.Identifier;
+		initialValue = init;
+		definitionType = execute mapTypeReference type;
+end_rule
+
+-- Maps the methods which have a return type
+-- Missing: 
+rule 'mapTypedMethod'
+	from classBodyDeclaration/memberDecl/methodDeclaration cbd
+	to FunctionDefinition
+	queries
+		-- Extracts the name of the method
+		name   : /cbd//#methodDeclaration;
+		-- Extracts the parameters of the method	
+		params : /cbd//formalParameters///#formalParameterDecls;
+		-- Extracts the statements of the method
+		stats  : /cbd//#blockStatement;
+		-- Extracts the return type
+		rtype  : /cbd//methodDeclaration/#type;
+	mappings
+		identifierName = new Name;
+		identifierName.nameString = name.Identifier;
+		formalParameters = params;
+		body = stats;
+		returnType = execute mapTypeReference rtype;
+end_rule
+
+-- Maps the methods which have not a return type
+-- Missing: 
+rule 'voidMethod'
+	from classBodyDeclaration/memberDecl{Identifier.exists} cbd
+	to FunctionDefinition
+	queries
+		-- Extracts the name of the method
+		name   : /cbd/#memberDecl;
+		-- Extracts the parameters of the method	
+		params : /cbd//formalParameters///#formalParameterDecls;
+		-- Extracts the statements of the method
+		stats  : /cbd//#blockStatement;
+	mappings
+		identifierName = new Name;
+		identifierName.nameString = name.Identifier;
+		formalParameters = params;
+		body = stats;
+end_rule
+
+-------------------------------------------
+-------------- PARAMETERS -----------------
+-------------------------------------------
+
+-- Maps the parameters of a method
+-- Missing: Limitation in the declarationType attribute (how can I set such attribute as Boolean, for instance?)
+rule 'mapsFormalParameterDefinition'
+	from formalParameterDecls fpd
+	to FormalParameterDefinition
+	queries
+		-- Extracts the name of the parameter
+		name : /fpd/formalParameterDeclsRest/#variableDeclaratorId;
+		-- Extracts the type of the parameter
+		type : /fpd/#type;
+	mappings
+		identifierName = new Name;
+		identifierName.nameString = name.Identifier;	
+		definitionType = execute mapTypeReference type;
+end_rule
+
+------------------------------------------------
+-------------- TYPE REFERENCES -----------------
+------------------------------------------------
+
+rule 'mapsStringTypeReference'
+	 from type{Identifier.eq("String")} t
+	 to UnnamedTypeReference
+	 queries
+	 mappings
+	 	type = new String;
+end_rule
+
+rule 'mapsNamedTypeReference'
+	 from type t
+	 to NamedTypeReference
+	 queries
+	 	locatedType : //#classOrInterfaceDeclaration//normalClassDeclaration{Identifier.eq(t.Identifier[0])};
+	 mappings
+	 	name = new Name;
+	 	name.nameString = t.Identifier[0];
+	 	type = locatedType;
+end_rule
+
+-- TODO: More types
+rule 'mapsUnnamedTypeReference'
+	 from primitiveType pt
+	 to UnnamedTypeReference
+	 queries
+	 	isBoolean : /#pt{TOKEN.eq("boolean")};
+	 mappings
+	 	if(isBoolean.hasResults) then
+	 		type = new Boolean;
+	 	end_if
+end_rule
+
+-- Maps the type reference used in method parameters
+-- Take care with the order of this rule
+skip_rule 'mapTypeReference'
+	from type t
+	to TypeReference
+	queries
+	 	primType  : /t/#primitiveType;
+	 mappings
+	 	if(primType.hasResults) then
+	 		skip primType;
+	 	else
+	 	 	skip t;
+	 	end_if
+end_rule
+
+-- Maps the type used for creating objects
+-- TODO: Take care with the CAST
+skip_rule 'mapTypeReference4New'
+	from createdName cn
+	to TypeReference
+	queries
+	 	primType  : /cn/#primitiveType;
+	 	cast      : (type) /#cn;
+	 mappings
+	 	if(primType.hasResults) then
+	 		skip primType;
+	 	else
+	 	 	skip cast;
+	 	end_if
+end_rule
+
+-------------------------------------------
+-------------- STATEMENTS------------------
+-------------------------------------------
+
+rule 'mapDeclarationOrDefinitionStatement'
+	from blockStatement/localVariableDeclaration bs
+	to DeclarationOrDefinitionStatement
+	queries
+		var  : /bs/#localVariableDeclaration;
+	mappings
+		declOrDefn = var;
+end_rule
+
+-- Maps the variable declarations of the source code 
+-- (in ASTM they are classified as VariableDefinition since they can
+-- include an expression as initial value.)
+rule 'mapVariableDefinition'
+	from localVariableDeclaration lvd
+	to VariableDefinition
+	queries
+		-- Extracts the name of the variable
+		name : /lvd//#variableDeclarator;
+		-- Extracts the type of the variable
+		type : /lvd/#type;
+		-- Extracts the possible initialization		
+		init : /lvd//variableInitializer/#expression;
+	mappings
+		identifierName = new Name;
+		identifierName.nameString = name.Identifier;
+		initialValue = init;
+		definitionType = execute mapTypeReference type;
+end_rule
+
+skip_rule 'skipBlockStatement'
+	from blockStatement/statement bs
+	to Statement
+	queries
+		next : /bs/#statement;
+	do
+		skip next;
+end_rule
+
+rule 'mapIfStatement'
+	from statement{TOKEN[0].eq("if")} st
+	to IfStatement
+	queries
+		exp   : /st/parExpression/#expression;
+		thenb : /st/#statement[0];
+		elseb : /st/#statement[1];
+	mappings
+		condition = exp;
+		thenBody = thenb;
+		elseBody = elseb;
+end_rule
+
+rule 'mapReturnStatement'
+	from statement{TOKEN[0].eq("return")} st
+	to ReturnStatement
+	queries
+		exp : /st/#expression;
+	mappings
+		returnValue = exp;
+end_rule
+
+rule 'mapStatementExpression'
+	from statement/statementExpression st
+	to ExpressionStatement
+	queries
+		exp : /st//#expression;
+	mappings
+		expression = exp;
+end_rule
+
+-- TODO: Improve the initBody 
+rule 'mapForStatement'
+	from statement{TOKEN[0].eq("for")} st
+	to ForCheckAfterStatement
+	queries
+		forInitExps   : /st//forControl/expressionList//#expression;
+		forInitVar    : /st//forControl/forInit//#variableDeclarator[0];
+		forInitVarExp : /st//forControl/forInit//variableDeclarator[0]/variableDeclaratorRest/variableInitializer/#expression;
+		forCondition  : /st//forControl/#expression;
+		forIterator   : /st//forControl/forUpdate//#expression;
+		stats         : /st/#statement;
+	mappings
+		if(forInitExps.hasResults) then
+			initBody = forInitExps;
+		else
+			if(forInitVar.hasResults) then
+				initBody = new BinaryExpression;
+				initBody.operator = new Assign;
+				initBody.leftOperand = new IdentifierReference;
+				initBody.leftOperand.name = new Name;
+				initBody.leftOperand.name.nameString = forInitVar.Identifier[0];
+				initBody.rightOperand = forInitVarExp;
+			end_if
+		end_if
+		condition = forCondition;
+		iterationBody = forIterator;
+		body = stats;
+end_rule
+
+rule 'mapWhile'
+	from statement{TOKEN[0].eq("while")} st
+	to WhileStatement
+	queries
+		wcondition : /st/#parExpression;
+		wstats     : /st/#statement;
+	mappings
+		condition = wcondition;
+		body = wstats;
+end_rule
+
+rule 'mapDoWhile'
+	from statement{TOKEN[0].eq("do") && TOKEN[1].eq("while")} st
+	to DoWhileStatement
+	queries
+		wcondition : /st/#parExpression;
+		wstats     : /st/#statement;
+	mappings
+		condition = wcondition;
+		body = wstats;
+end_rule
+
+rule 'mapBlock'
+	from statement/block st
+	to BlockStatement
+	queries
+		substs : /st/block/#blockStatement;
+	mappings
+		subStatements = substs;
+end_rule	
+
+
+-------------------------------------------
+-------------- EXPRESSIONS ----------------
+-------------------------------------------
+
+skip_rule 'skipParenthesis'
+	from parExpression exp
+	to Expression
+	queries
+		next : /exp/#expression;
+	do
+		skip next;
+end_rule
+
+rule 'mapAssignmentExpression'
+	from expression/assignmentOperator exp
+	to BinaryExpression
+	queries
+		exp1     : /exp/#conditionalExpression;
+		exp2     : /exp/#expression;
+	mappings
+		leftOperand = exp1;
+		operator = new Assign;
+		rightOperand = exp2;
+end_rule
+
+skip_rule 'skipConditionalExpression'
+	from expression/conditionalExpression exp
+	to Expression
+	queries
+		next : /exp/#conditionalExpression;
+	mappings
+		skip next;
+end_rule
+
+skip_rule 'skipOr'
+	from conditionalExpression/conditionalOrExpression{!TOKEN.exists} exp
+	to Expression
+	queries
+		next : /exp//#conditionalAndExpression;
+	do
+		skip next;
+end_rule
+
+rule 'mapOrExpression' 
+	from conditionalExpression/conditionalOrExpression{TOKEN.exists} exp
+	to BinaryExpression
+	queries
+		exp1     : /exp//#conditionalAndExpression[0];
+		exp2     : /exp//#conditionalAndExpression[1];
+	mappings
+		leftOperand = exp1;
+		operator = new Or;
+		rightOperand = exp2;
+end_rule
+
+skip_rule 'skipAnd'
+	from conditionalAndExpression{!TOKEN.exists} exp
+	to Expression
+	queries
+		next : /exp/#inclusiveOrExpression;
+	do
+		skip next;
+end_rule
+
+rule 'mapAndExpression' 
+	from conditionalAndExpression{TOKEN.exists} exp
+	to BinaryExpression
+	queries
+		exp1     : /exp//#inclusiveOrExpression[0];
+		exp2     : /exp//#inclusiveOrExpression[1];
+	mappings
+		leftOperand = exp1;
+		operator = new And;
+		rightOperand = exp2;
+end_rule
+
+skip_rule 'skipEquality'
+	from inclusiveOrExpression//equalityExpression{!TOKEN.exists} exp
+	to Expression
+	queries
+		next : /exp//#instanceOfExpression;
+	do
+		skip next;
+end_rule
+
+rule 'mapEquality'
+	from inclusiveOrExpression//equalityExpression{TOKEN.exists} exp
+	to BinaryExpression
+	queries
+		exp1     : /exp//#instanceOfExpression[0];
+		exp2     : /exp//#instanceOfExpression[1];
+		isEqual  : /exp{TOKEN.eq("==")};
+		isNEqual : /exp{TOKEN.eq("!=")};
+	mappings
+		leftOperand = exp1;
+		rightOperand = exp2;
+		
+		if(isEqual.hasResults) then
+			operator = new Equal;
+		else
+			if(isNEqual.hasResults) then
+				operator = new NotEqual;
+			end_if		
+		end_if
+end_rule
+
+-- Missing: <= and >=
+rule 'mapComparators'
+	from instanceOfExpression//relationalExpression/relationalOp exp
+	to BinaryExpression
+	queries
+		exp1      : /exp//#shiftExpression[0];
+		exp2      : /exp//#shiftExpression[1];
+		isLess    : /exp//relationalExpression/#relationalOp{TOKEN.eq("<")};
+		isGreater : /exp//relationalExpression/#relationalOp{TOKEN.eq(">")};
+	mappings
+		leftOperand = exp1;
+		rightOperand = exp2;
+		
+		if(isLess.hasResults) then
+			operator = new Less;
+		else
+			if(isGreater.hasResults) then
+				operator = new Greater;
+			end_if		
+		end_if
+end_rule
+
+skip_rule 'skipComparators'
+	from instanceOfExpression//relationalExpression exp
+	to Expression
+	queries
+		next : /exp//#shiftExpression;
+	do
+		skip next;
+end_rule
+
+skip_rule 'skipAdditive'
+	from shiftExpression//additiveExpression{!TOKEN.exists} exp
+	to Expression
+	queries
+		next : /exp//#multiplicativeExpression;
+	do
+		skip next;
+end_rule
+
+rule 'mapAdditive'
+	from shiftExpression//additiveExpression{TOKEN.exists} exp
+	to BinaryExpression
+	queries
+		exp1     : /exp//#multiplicativeExpression[0];
+		exp2     : /exp//#multiplicativeExpression[1];
+		isMinus  : /exp{TOKEN.eq("-")};
+		isPlus   : /exp{TOKEN.eq("+")};
+	mappings
+		leftOperand = exp1;
+		rightOperand = exp2;
+		
+		if(isMinus.hasResults) then
+			operator = new Subtract;
+		else
+			if(isPlus.hasResults) then
+				operator = new Add;
+			end_if		
+		end_if
+end_rule
+
+skip_rule 'skipMultiplicative'
+	from multiplicativeExpression/unaryExpression{!TOKEN.exists} exp
+	to Expression
+	queries
+		next : /exp//#unaryExpression;
+	do
+		skip next;
+end_rule
+
+rule 'mapMultiplicative'
+	from multiplicativeExpression/unaryExpression{TOKEN.exists} exp
+	to BinaryExpression
+	queries
+		exp1     : /exp/#unaryExpression[0];
+		exp2     : /exp/#unaryExpression[1];
+		isDivide : /exp{TOKEN.eq("/")};
+		isMult   : /exp{TOKEN.eq("*")};
+	mappings
+		leftOperand = exp1;
+		rightOperand = exp2;
+		
+		if(isDivide.hasResults) then
+			operator = new Divide;
+		else
+			if(isMult.hasResults) then
+				operator = new Multiply;
+			end_if		
+		end_if
+end_rule
+
+rule 'mapUnary'
+	from unaryExpression{TOKEN.exists} exp
+	to UnaryExpression
+	queries
+		expPre      : /exp/#unaryExpression[0];
+		isIncrement : /#exp{TOKEN.eq("++")};
+		isDecrement : /#exp{TOKEN.eq("--")};		
+	mappings
+		operand = expPre;
+		if(isIncrement.hasResults) then
+			operator = new Increment;
+		else
+			if(isDecrement.hasResults) then
+				operator = new Decrement;
+			end_if		
+		end_if
+end_rule
+
+rule 'mapNot'
+	from unaryExpression/unaryExpressionNotPlusMinus{TOKEN.exists && TOKEN.eq("!")} exp
+	to UnaryExpression
+	queries
+		exp1   : /exp/#unaryExpression[0];
+		isNot  : /exp{TOKEN.eq("!")};
+	mappings
+		operand = exp1;
+		
+		if(isNot.hasResults) then
+			operator = new Not;
+		end_if
+end_rule
+
+-- TODO: Work with selecto node
+rule 'mapPostIncrementDecrement'
+	from unaryExpression/unaryExpressionNotPlusMinus{TOKEN.exists && (TOKEN.eq("++") || TOKEN.eq("--"))} exp
+	to UnaryExpression
+	queries
+		exp1        : /exp/unaryExpressionNotPlusMinus/#primary;
+		isIncrement : /exp/#unaryExpressionNotPlusMinus{TOKEN.eq("++")};
+		isDecrement : /exp/#unaryExpressionNotPlusMinus{TOKEN.eq("--")};	
+	mappings
+		operand = exp1;
+		
+		if(isIncrement.hasResults) then
+			operator = new PostIncrement;
+		else
+			if(isDecrement.hasResults) then
+				operator = new PostDecrement;
+			end_if		
+		end_if
+end_rule
+
+-- TODO: Do the primitive type castings and other types!!
+rule 'mapCasting'
+	from unaryExpression/unaryExpressionNotPlusMinus/castExpression exp
+	to CastExpression
+	queries
+		isPrimitive : /exp/unaryExpressionNotPlusMinus/castExpression/#primitiveType;
+		type        : /exp/unaryExpressionNotPlusMinus/castExpression/#type;
+		unaryExp    : /exp/unaryExpressionNotPlusMinus/castExpression/#unaryExpression;
+		unaryNotExp : /exp/unaryExpressionNotPlusMinus/castExpression/#unaryExpressionNotPlusMinus;
+	mappings
+		if(isPrimitive.hasResults) then
+			castType = type;
+			expression = unaryExp;
+		else
+			-- castType =
+			expression = unaryNotExp;
+		end_if
+end_rule
+
+skip_rule 'skipPrimary'
+	from unaryExpression/unaryExpressionNotPlusMinus exp
+	to Expression
+	queries
+		next : /exp/#unaryExpressionNotPlusMinus;
+	mappings
+		skip next;
+end_rule
+
+-- Mapping methods. This must be optimized.
+rule 'mapMethodCallWithReceptorAndSelector'
+	from unaryExpressionNotPlusMinus/selector exp
+	to FunctionCallExpression	
+	queries
+		primary      : /exp/#primary;		
+		-- Locating the type of the receptor
+		containerMet : //#memberDecl//unaryExpressionNotPlusMinus{this.check(exp)};
+		locParam     : /containerMet//#formalParameterDecls/formalParameterDeclsRest/variableDeclaratorId{Identifier.eq(primary.Identifier[0])};
+		locVar       : /containerMet//#blockStatement/localVariableDeclaration//variableDeclarator{Identifier.eq(primary.Identifier[0])};
+		containerCla : //#classOrInterfaceDeclaration//unaryExpressionNotPlusMinus{this.check(exp)};
+		locInstVar   : /containerCla/#classBodyDeclaration/memberDecl/fieldDeclaration//variableDeclarator[0]{Identifier.eq(primary.Identifier[0])};
+		
+		-- Checks if the node has two identifiers
+		hasTwoId     : /#primary{Identifier[1].exists};
+		-- Extracts the parameters for the second identifier
+		argsSuffix   : /primary/identifierSuffix/arguments//expressionList/#expression;
+		
+		-- Extracts the selector
+		selector     : /exp/#selector;
+		-- Extracts the parameters of the selector
+		argsSelector : /exp/selector/arguments//expressionList/#expression;
+	mappings
+		if(!hasTwoId.hasResults) then
+			expressionType = new NamedTypeReference;
+			expressionType.name = new Name;
+			expressionType.name.nameString = primary.Identifier[0];
+			expressionType.type = locInstVar;
+			expressionType.type = locVar;
+			expressionType.type = locParam;			
+						
+			calledFunction = new FunctionCallExpression;
+			calledFunction.expressionType = new NamedTypeReference;
+			calledFunction.expressionType.name = new Name;
+			calledFunction.expressionType.name.nameString = selector.Identifier[0];	
+			calledFunction.actualParams = execute mapArgument argsSelector;
+		else
+			expressionType = new NamedTypeReference;
+			expressionType.name = new Name;
+			expressionType.name.nameString = primary.Identifier[0];
+							
+			calledFunction = new FunctionCallExpression;
+			calledFunction.expressionType = new NamedTypeReference;
+			calledFunction.expressionType.name = new Name;
+			calledFunction.expressionType.name.nameString = primary.Identifier[1];	
+			calledFunction.actualParams = execute mapArgument argsSuffix;
+					
+			calledFunction.calledFunction = new FunctionCallExpression;
+			calledFunction.calledFunction.expressionType = new NamedTypeReference;
+			calledFunction.calledFunction.expressionType.name = new Name;
+			calledFunction.calledFunction.expressionType.name.nameString = selector.Identifier[0];	
+			calledFunction.calledFunction.actualParams = execute mapArgument argsSelector;
+		end_if		
+end_rule
+
+skip_rule 'skipUnaryExpressionNotPlusMinus'
+	from unaryExpressionNotPlusMinus/primary exp
+	to Expression
+	queries
+		next : /exp/#primary;
+	mappings
+		skip next;
+end_rule
+
+skip_rule 'skipParenthesisFromPrimary'
+	from primary/parExpression exp
+	to Expression
+	queries
+		next : /exp/parExpression/#expression;
+	do
+		skip next;
+end_rule
+
+rule 'mapMethodCall'
+	from primary{!TOKEN[0].eq("this") && Identifier[0].exists && !Identifier[1].exists}/identifierSuffix exp
+	to FunctionCallExpression	
+	queries
+		args : /exp/identifierSuffix/arguments//expressionList/#expression; 
+		-- Locating the class container
+		containerCla : //#classOrInterfaceDeclaration//primary{this.check(exp)};
+		locTypedMet  : /containerCla//#classBodyDeclaration/memberDecl/methodDeclaration{Identifier.eq(exp.Identifier[0])};
+		typeTypedMet : /locTypedMet//memberDecl/methodDeclaration/#type;	
+		locVoidMet   : /containerCla//#classBodyDeclaration/memberDecl{Identifier.eq(exp.Identifier[0])};		
+	mappings
+		calledFunction = new IdentifierReference;
+		calledFunction.name = new Name;
+		calledFunction.name.nameString = exp.Identifier;
+		calledFunction.refersTo = locVoidMet;
+		calledFunction.refersTo = locTypedMet;		
+		actualParams = execute mapArgument args;
+		if(typeTypedMet.hasResults) then 
+			expressionType = new UnnamedTypeReference;
+			expressionType.type = execute mapTypeReference typeTypedMet;
+		end_if
+end_rule
+
+-- TODO: Fill the references of calledFunctions
+rule 'mapMethodCallWith2Receptors'
+	from primary{!TOKEN[0].eq("this") && Identifier[0].exists && Identifier[1].exists && Identifier[2].exists}/identifierSuffix exp
+	to FunctionCallExpression	
+	queries
+		args : /exp/identifierSuffix/arguments//expressionList/#expression; 
+		
+		-- Locating the type of the receptor		
+		containerMet : //#memberDecl//primary{this.check(exp)};
+		locParam     : /containerMet//#formalParameterDecls/formalParameterDeclsRest/variableDeclaratorId{Identifier.eq(exp.Identifier[0])};
+		locVar       : /containerMet//#blockStatement/localVariableDeclaration//variableDeclarator{Identifier.eq(exp.Identifier[0])};
+		containerCla : //#classOrInterfaceDeclaration//primary{this.check(exp)};
+		locInstVar   : /containerCla/#classBodyDeclaration/memberDecl/fieldDeclaration//variableDeclarator[0]{Identifier.eq(exp.Identifier[0])};		
+	mappings
+		expressionType = new NamedTypeReference;
+		expressionType.name = new Name;
+		expressionType.name.nameString = exp.Identifier[0];
+		expressionType.type = locParam;
+		expressionType.type = locVar;
+		expressionType.type = locInstVar;
+			
+		calledFunction = new FunctionCallExpression;
+		calledFunction.expressionType = new NamedTypeReference;
+		calledFunction.expressionType.name = new Name;
+		calledFunction.expressionType.name.nameString = exp.Identifier[1];	
+					
+		calledFunction.calledFunction = new FunctionCallExpression;
+		calledFunction.calledFunction.expressionType = new NamedTypeReference;
+		calledFunction.calledFunction.expressionType.name = new Name;
+		calledFunction.calledFunction.expressionType.name.nameString = exp.Identifier[2];	
+		calledFunction.calledFunction.actualParams = execute mapArgument args;
+end_rule
+
+-- TODO: Fill the references of calledFunctions
+rule 'mapMethodCallWithReceptor'
+	from primary{!TOKEN[0].eq("this") && Identifier[0].exists && Identifier[1].exists}/identifierSuffix exp
+	to FunctionCallExpression	
+	queries
+		args : /exp/identifierSuffix/arguments//expressionList/#expression; 
+		
+		-- Locating the type of the receptor		
+		containerMet : //#memberDecl//primary{this.check(exp)};
+		locParam     : /containerMet//#formalParameterDecls/formalParameterDeclsRest/variableDeclaratorId{Identifier.eq(exp.Identifier[0])};
+		locVar       : /containerMet//#blockStatement/localVariableDeclaration//variableDeclarator{Identifier.eq(exp.Identifier[0])};
+		containerCla : //#classOrInterfaceDeclaration//primary{this.check(exp)};
+		locInstVar   : /containerCla/#classBodyDeclaration/memberDecl/fieldDeclaration//variableDeclarator[0]{Identifier.eq(exp.Identifier[0])};	
+	mappings
+		expressionType = new NamedTypeReference;
+		expressionType.name = new Name;
+		expressionType.name.nameString = exp.Identifier[0];
+		expressionType.type = locParam;
+		expressionType.type = locVar;
+		expressionType.type = locInstVar;
+			
+		calledFunction = new FunctionCallExpression;
+		calledFunction.expressionType = new NamedTypeReference;
+		calledFunction.expressionType.name = new Name;
+		calledFunction.expressionType.name.nameString = exp.Identifier[1];	
+		calledFunction.actualParams = execute mapArgument args;	
+end_rule
+
+rule 'mapThisMethodCall'
+	from primary{TOKEN[0].eq("this") && Identifier[0].exists && !Identifier[1].exists}/identifierSuffix exp
+	to FunctionCallExpression	
+	queries
+		args : /exp/identifierSuffix/arguments//expressionList/#expression; 
+		-- Locating the class container
+		containerCla : //#classOrInterfaceDeclaration//primary{this.check(exp)};
+		locTypedMet  : /containerCla//#classBodyDeclaration/memberDecl/methodDeclaration{Identifier.eq(exp.Identifier[0])};
+		typeTypedMet : /locTypedMet//memberDecl/methodDeclaration/#type;	
+		locVoidMet   : /containerCla//#classBodyDeclaration/memberDecl{Identifier.eq(exp.Identifier[0])};			
+	mappings
+		expressionType = new NamedTypeReference;
+		expressionType.name = new Name;
+		expressionType.name.nameString = "this";
+		expressionType.type = containerCla;
+			
+		calledFunction = new FunctionCallExpression;
+		calledFunction.expressionType = new NamedTypeReference;
+		calledFunction.expressionType.name = new Name;
+		calledFunction.expressionType.name.nameString = exp.Identifier[0];	
+		calledFunction.expressionType.type = locVoidMet;
+		calledFunction.expressionType.type = locTypedMet;
+		calledFunction.actualParams = execute mapArgument args;		
+end_rule
+
+-- TODO: Sets the references of calledFunctions
+rule 'mapThisMethodCallWithReceptor'
+	from primary{TOKEN[0].eq("this") && Identifier[0].exists && Identifier[1].exists}/identifierSuffix exp
+	to FunctionCallExpression	
+	queries
+		args : /exp/identifierSuffix/arguments//expressionList/#expression; 
+		-- Locating the class container
+		containerCla : //#classOrInterfaceDeclaration//primary{this.check(exp)};
+	mappings	
+		expressionType = new NamedTypeReference;
+		expressionType.name = new Name;
+		expressionType.name.nameString = "this";
+		expressionType.type = containerCla;
+					
+		calledFunction = new FunctionCallExpression;
+		calledFunction.expressionType = new NamedTypeReference;
+		calledFunction.expressionType.name = new Name;
+		calledFunction.expressionType.name.nameString = exp.Identifier[0];	
+			
+		calledFunction.calledFunction = new FunctionCallExpression;
+		calledFunction.calledFunction.expressionType = new NamedTypeReference;
+		calledFunction.calledFunction.expressionType.name = new Name;
+		calledFunction.calledFunction.expressionType.name.nameString = exp.Identifier[1];	
+		calledFunction.calledFunction.actualParams = execute mapArgument args;	
+end_rule
+
+rule 'mapThisVariable'
+	from primary{TOKEN[0].eq("this") && Identifier[0].exists} exp
+	to QualifiedOverData	
+	queries
+		thisloc    : //#classOrInterfaceDeclaration//normalClassDeclaration//primary{this.check(exp)};
+		method     : //#classBodyDeclaration/memberDecl//primary{this.check(exp)};
+		locParam   : /method///#formalParameterDecls/formalParameterDeclsRest/variableDeclaratorId{Identifier.eq(exp.Identifier[0])};
+		locVar     : /method//#blockStatement/localVariableDeclaration//variableDeclarator{Identifier.eq(exp.Identifier[0])};
+		locInstVar : /thisloc//#classBodyDeclaration/memberDecl/fieldDeclaration//variableDeclarator[0]{Identifier.eq(exp.Identifier[0])};		
+	mappings
+		qualifiers = new IdentifierReference;
+		qualifiers.name = new Name;
+		qualifiers.name.nameString = "this";
+		qualifiers.refersTo = thisloc; 
+		
+		member = new IdentifierReference;
+		member.name = new Name;
+		member.name.nameString = exp.Identifier[0];
+		member.refersTo = locInstVar; 
+		member.refersTo = locVar; 
+		member.refersTo = locParam; 
+end_rule
+
+-- Take care with the situation of this rule
+rule 'mapVariableRef'
+	from primary {!TOKEN[0].eq("this") && Identifier[0].exists && !Identifier[1].exists} exp
+	to IdentifierReference
+	queries
+		thisloc    : //#classOrInterfaceDeclaration//normalClassDeclaration//primary{this.check(exp)};
+		method     : //#classBodyDeclaration/memberDecl//primary{this.check(exp)};
+		locParam   : /method///#formalParameterDecls/formalParameterDeclsRest/variableDeclaratorId{Identifier.eq(exp.Identifier[0])};
+		locVar     : /method//#blockStatement/localVariableDeclaration//variableDeclarator{Identifier.eq(exp.Identifier[0])};
+		locInstVar : /thisloc//#classBodyDeclaration/memberDecl/fieldDeclaration//variableDeclarator[0]{Identifier.eq(exp.Identifier[0])};		
+	mappings
+		name = new Name;
+		name.nameString = exp.Identifier[0];
+		refersTo = locInstVar; 
+		refersTo = locVar; 
+		refersTo = locParam; 
+end_rule
+
+rule 'mapMemberAccess'
+	from primary {!TOKEN[0].eq("this") && Identifier[0].exists && Identifier[1].exists} exp
+	to QualifiedOverData
+	queries
+	mappings
+		qualifiers = new IdentifierReference;
+		qualifiers.name = new Name;
+		qualifiers.name.nameString = exp.Identifier[0];
+		
+		member = new IdentifierReference;
+		member.name = new Name;
+		member.name.nameString = exp.Identifier[1];
+end_rule
+
+-- Maps the creation of new Objects
+-- TODO: Deals with more cases (now only works with primitive and normal object creation
+-- not with arrays or genericity)
+rule 'mapNew'
+	from primary{TOKEN[0].eq("new")} exp
+	to NewExpression	
+	queries
+		args : /exp//classCreatorRest/arguments//expressionList/#expression;
+		name : /exp//#createdName;
+	mappings
+		newType = name;
+		actualParams = execute mapArgument args;
+end_rule
+
+rule 'mapArgument'
+	from expression expArg
+	context mapMethodCall, mapNew
+	to ActualParameterExpression
+	queries
+	mappings
+		value = expArg;
+end_rule
+
+-- Maps literal values
+rule 'mapLiteral'
+	from primary/literal exp
+	to Literal
+	queries
+	mappings
+		value = extract exp;
+end_rule
+

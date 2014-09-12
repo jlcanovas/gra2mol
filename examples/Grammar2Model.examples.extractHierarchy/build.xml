@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="G2Ge" default="build">
+
+	<!-- GENERAL PROPERTIES -->
+	<!-- Binaries directory -->
+    <property name="binDir" value="files/bin"/>
+	<!-- Generated files directory -->
+    <property name="genDir" value="files/gen"/>
+	<!-- Source files directory -->
+    <property name="srcDir" value="files/src"/>
+	<!-- Metamodels directory -->
+    <property name="metamodelsDir" value="files/metamodels"/>
+	<!-- Templates directory -->
+    <property name="templatesDir" value="templates"/>
+	
+	<!-- PROPERTIES TO CONVERG G INTO Ge -->
+	<!-- Original grammar -->
+    <property name="grammar" value="${srcDir}/Java.g3"/>
+	<!-- Enriched grammar -->
+    <property name="grammarE" value="${genDir}/Java.ge3"/>
+	<!-- Template used to enrich the grammar (dont change) -->
+    <property name="templates" value="${templatesDir}/G2Ge.stg"/>
+
+	<!-- ANTLR OPTIONS TO CONVERT Ge INTO Parser --> 
+	<property name="multithreaded" value="true" /> 
+	<property name="report" value="false" /> 
+	<property name="depend" value="true" /> 
+	<property name="profile" value="false" /> 
+	<property name="lib" location="lib" />
+	<property name="output.antlr" location="${genDir}" /> 
+	
+	<!-- PROPERTIES TO COMPILE THE GENERATED Java code -->
+    <property name="javasrc" value="${genDir}"/>
+    <property name="javaDestDir" value="${binDir}"/>
+	
+	<!-- PROPERTIES TO THE INTERPRETER -->
+	<!-- Name of the grammar -->
+    <property name="grammarName" value="Java"/>
+	<!-- Name of the main rule of the grammar -->
+    <property name="grammarMainRule" value="compilationUnit"/>
+	<!-- Gra2MoL definition -->
+    <property name="sourceView" value="${srcDir}/extractHierarchies.g2m"/>
+	<!-- Path to target metamodel -->
+    <property name="pathMetamodel" value="${metamodelsDir}/ClassM.ecore"/>
+	<!-- Name of the target metamodel -->
+    <property name="targetMetamodel" value="ClassM"/>
+	<!-- Path to result target model -->
+    <property name="resultInterpreter" value="resultado.ecore"/>
+
+    <path id="path.taskdef">
+    	<pathelement location="./lib/antlr-2.7.7.jar"/>
+    	<pathelement location="./lib/antlr-3.0.1.jar"/>
+    	<pathelement location="./lib/antlr-runtime-3.0.1.jar"/>
+    	<pathelement location="./lib/antlr3-antTask.jar"/>
+    	<pathelement location="./lib/stringtemplate-3.1b1.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
+        <pathelement location="./lib/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
+     	<pathelement location="./lib/gts.modernization.grammar2Model.antTasks.jar"/>
+     	<pathelement location="./lib/gts.modernization.grammar2Model.jar"/>
+     	<pathelement location="${binDir}/."/>
+   	</path>
+	
+	<target name="build">
+		<mkdir dir="${binDir}"/>
+		<mkdir dir="${genDir}"/>
+		
+		<!-- PHASE ONE -->
+		
+		<!-- The grammar is enriched -->
+		<taskdef name="G2Ge" classname="gts.modernization.util.G2GeAntTask" classpathref="path.taskdef"/>
+		<G2Ge 
+			pathGrammar="${grammar}" 
+			pathResult="${grammarE}" 
+			pathTemplates="${templates}"
+		/>
+
+		<!-- The parser is built -->
+		<mkdir dir="${output.antlr}"/>
+		<taskdef name="antlr3" classname="org.apache.tools.ant.antlr.ANTLR3" classpathref="path.taskdef"/>
+		<antlr3 xmlns:antlr="antlib:org/apache/tools/ant/antlr" 
+		 	target="${grammarE}" 
+		 	outputdirectory="${output.antlr}" 
+		 	libdirectory="${lib}" 
+		 	multithreaded="${multithreaded}" 
+		 	report="${report}" 
+		 	depend="${depend}" 
+		 	profile="${profile}">          
+				<classpath>
+					<path refid="path.taskdef" />
+				</classpath>
+		</antlr3>
+		
+		<!-- Bug fixed in created parser  -->
+		<replace file="${output.antlr}/${grammarName}Parser.java" token=".getTemplate()" value=""/>
+		
+		<!-- The created parser is compiled -->
+		<mkdir dir="${javaDestDir}"/>
+		<javac srcdir="${javasrc}"
+			destdir="${javaDestDir}"
+		    debug="on"
+		    source="1.4">
+			<classpath>
+				<path refid="path.taskdef" />
+			</classpath>
+		</javac>
+		
+		<!-- PHASE TWO -->
+		<!-- Interpreter of Gra2MoL -->
+		<taskdef name="Gra2MoLDinamicInterpreter" classname="gts.modernization.util.Gra2MoLDinamicInterpreterAntTask" classpathref="path.taskdef"/>
+		<Gra2MoLDinamicInterpreter 
+					pathSourceView="${sourceView}" 
+					pathMetamodel="${pathMetamodel}"
+					targetMetamodel="${targetMetamodel}"
+					className="${grammarName}Test"
+					result="${resultInterpreter}"
+					grammar="${grammarName}" 
+					mainRule="${grammarMainRule}" >
+			<!-- Filter the files to intepreter -->
+			<fileset dir="${srcDir}" includes="*.java"/>
+		</Gra2MoLDinamicInterpreter>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${binDir}"/>
+		<delete dir="${genDir}"/>
+	</target>
+</project>

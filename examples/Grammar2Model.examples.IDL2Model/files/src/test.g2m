@@ -1,0 +1,56 @@
+--------------------------------------------------------------------------------------
+-- Gra2MoL transformation definition example
+--
+-- TODO: 
+--  * Fill in!! :D
+--------------------------------------------------------------------------------------
+
+----------------------------------------
+-- Top rule
+----------------------------------------
+rule 'mapSpecification'
+	from file f
+	to TranslationUnit
+	queries
+		tUnit : //#specification;
+		imps  : /tUnit/#import_decl;
+		defs  : /tUnit/#definition;
+	mappings
+		identifier = "Test"; -- Where is the name (in the source code) for a TranslationUnit?
+		contains   = defs;
+		imports    = imps;
+end_rule
+
+
+----------------------------------------
+-- Rules for modules
+----------------------------------------
+rule 'mapModule' 
+	from definition/module def
+	to ModuleDef
+	queries
+		defs  : /def/module/#definition;
+	mappings
+		contains = defs; 
+end_rule
+
+----------------------------------------
+-- Rules for type_decl
+----------------------------------------
+skip_rule 'skipTypeDecl'
+	from definition/type_decl def
+	to Contained
+	queries
+		s : /def/#type_decl;
+	mappings
+		skip s;
+end_rule
+
+rule 'mapTypeDef' 
+	from type_decl td
+	to AliasDef
+	queries
+		-- queries here
+	mappings
+		-- mappings here
+end_rule

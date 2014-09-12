@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Author: Javier Luis Cánovas Izquierdo 
+     Version: 0.4
+     News:
+      (23/Jan/2010) Use of antlr-3.2. Properties reorganized
+-->
+<project name="Gra2MoL transformation" default="build">
+	<!-- DIRECTORY PROPERTIES-->
+	<!-- The following properties configure the paths needed to locate the different source elements which
+	     Gra2MoL needs -->
+	<!-- Binaries directory 
+	     This directory will contain the generated files for parsing the source language -->
+	<property name="binDir" value="files/bin"/>
+		
+	<!-- Generated files directory  
+	     This directory will contain the enriched grammar (antlr definition, tokens, parser and lexer -->
+	<property name="genDir" value="files/gen"/>
+		
+	<!-- Templates directory  
+	     This directory is used by the enricher tool to generate the enriched grammar -->
+	<property name="templatesDir" value="lib/templates"/>
+		
+	<!-- Extension files directory  
+	     This directory contains the java files which are extensions to be used in the transformation -->
+	<property name="extDir" value="files/extensions"/>
+	
+	<!-- MAIN TRANSFORMATION PROPERTIES -->
+	<!-- These properties configure the main elements involved in the Gra2MoL transformation -->
+	<!-- Source grammar -->
+    <property name="grammarName" value="MaudeGrammar"/>
+    <property name="grammarLocation" value="files/src/MaudeGrammar.g3"/>
+    <property name="grammarMainRule" value="mainRule"/>
+	
+	<!-- Source files -->
+	<property name="sourceFilesLocation" value="files/src/scripts"/>
+	<property name="sourceFilesFilter" value="simple.maude"/>
+	
+	<!-- Gra2MoL transformation -->
+    <property name="transformationLocation" value="files/src/test.g2m"/>
+	
+	<!-- Target metamodel -->
+    <property name="metamodelLocation" value="files/metamodels/Maude.ecore"/>
+    <property name="metamodelMainPackage" value="Maude"/>
+	
+	<!-- Target model -->
+    <property name="resultLocation" value="resultModel.ecore.xmi"/>	
+	
+	<!-- Classpath (it should not be modified) -->
+    <path id="path.taskdef">
+    	<pathelement location="./lib/antlr-3.2.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
+        <pathelement location="./lib/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
+     	<pathelement location="./lib/gts.modernization.grammar2Model.antTasks.jar"/>
+     	<pathelement location="./lib/gts.modernization.grammar2Model.jar"/>
+     	<pathelement location="./lib/org.eclipse.gmt.modisco.jar"/>
+     	<pathelement location="${binDir}/."/>
+   	</path> 
+	
+	<target name="build" depends="checkExtensions, yesExtension, noExtension, checkEGrammarExists, phaseOne, phaseTwo">
+		<tstamp/>
+	</target>	
+	
+	<target name="clean">
+		<delete dir="${binDir}"/> 
+		<delete dir="${genDir}"/>
+	</target>
+		
+	<target name="checkEGrammarExists">
+		<echo>Checking enriched grammar existence...</echo>
+		<condition property="existsCondition">
+	    	<available file="${genDir}/{grammar}.g"/>
+	    </condition>
+	</target>
+
+	<target name="checkDates" if="existsCondition">
+		<echo>Checking enriched grammar date...</echo>
+		<uptodate property="phaseOne.required" targetfile="${grammarLocation}" srcfile="${genDir}/{grammar}.g"/>
+	</target>
+	
+	<target name="dontExist" unless="existsCondition">
+		<echo>Enriched grammar does not exist</echo>
+		<property name="phaseOne.required" value="true"/> 
+	</target>
+	
+	<target name="phaseOne" depends="checkDates, dontExist" if="phaseOne.required"
+		description="This first phase enrich the grammar with semantic actions to create the CSTs. Next it creates
+		the parser with ANTLR tool and compiles it. Finally, the generated parser is fixed.">
+
+		<!-- PHASE ONE -->
+		<echo>Executing Phase 1</echo>
+		<mkdir dir="${binDir}"/>
+		<mkdir dir="${genDir}"/>
+		<!-- The grammar is enriched -->
+		<taskdef name="G2Ge" classname="gts.modernization.util.G2GeAntTask" classpathref="path.taskdef"/>
+			<G2Ge 
+				pathGrammar="${grammarLocation}" 
+				pathResult="${genDir}/${grammarName}.g" 
+				pathTemplates="${templatesDir}/G2Ge.stg"
+		/>
+		
+		<!-- The parser is built -->
+		<mkdir dir="${genDir}"/>
+		<java classname="org.antlr.Tool" fork="true" dir="${genDir}">
+			<jvmarg value="-Xmx1024m"/>
+			<arg value="${grammarName}.g"/>
+			<classpath>
+				<path refid="path.taskdef" />
+			</classpath>
+		</java>    
+		
+		<!-- Bug fixed in created parser  -->
+		<replace file="${genDir}/${grammarName}Parser.java" token=".getTemplate()" value=""/>
+	
+		<!-- The created parser is compiled -->
+		<mkdir dir="${binDir}"/>
+		<javac srcdir="${genDir}"
+			destdir="${binDir}"
+		    debug="on"
+		    source="1.6">
+			<classpath>
+				<path refid="path.taskdef" />
+			</classpath>
+		</javac>
+	</target>
+
+	
+	<target name="phaseTwo"
+		depends="phaseOne"
+		description="This second phase executes the interpreter of Gra2MoL">
+				
+		<!-- PHASE TWO -->
+		<echo>Executing Phase 2</echo>
+		<!-- Interpreter of Gra2MoL -->
+		<taskdef name="Gra2MoLDinamicInterpreter" classname="gts.modernization.util.Gra2MoLDinamicInterpreterAntTask" classpathref="path.taskdef"/>
+		<Gra2MoLDinamicInterpreter 
+					pathSourceView="${transformationLocation}" 
+					pathMetamodel="${metamodelLocation}"
+					targetMetamodel="${metamodelMainPackage}"
+					className="${grammarName}Test"
+					result="${resultLocation}"
+					grammar="${grammarName}" 
+					mainRule="${grammarMainRule}" 
+					caseSensitive="true">
+			<!-- Filter the files to intepreter -->
+			<fileset dir="${sourceFilesLocation}" includes="${sourceFilesFilter}"/>
+		</Gra2MoLDinamicInterpreter>
+	</target>
+	
+
+	<target name="checkExtensions">
+		<echo>Checking extensions...</echo>
+		<condition property="extensionsExist">
+			<available file="${extDir}" type="dir"/>
+		</condition>
+	</target>
+	
+	<target name="yesExtension" if="extensionsExist">
+		<echo>Extensions detected.</echo>
+		<echo>Compiling extensions...</echo>
+		<javac srcdir="${extensionsDir}"
+			destdir="${binDir}"
+		    debug="on"
+		    source="1.6">
+			<classpath>
+				<path refid="path.taskdef" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="noExtension" unless="extensionsExist">
+		<echo>Extensions not detected.</echo>
+		<property name="compileExtensions.required" value="false"/>
+	</target>
+</project>

@@ -1,0 +1,22 @@
+grammar Struct;
+
+// Parser rules
+structs
+	: root*
+	;
+
+root
+	: oki='struct' ID (',' guay=ID field)* '{' field* '}'
+	;
+	
+field:
+	ID ':' ID ';'
+	;
+	
+// Lexer rules
+ID: 
+	('a'..'z' | 'A'..'Z') ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '$' | '#' )*
+	;
+WS: 
+	( '\t' | ' ' | '\r' | '\n'| '\u000C' )+ { $channel = HIDDEN; } 
+	;	

@@ -1,0 +1,112 @@
+--------------------------------------------------------------------------------------
+-- Gra2MoL transformation definition for extracting Script models from BASH Scripts
+--
+-- TODO: 
+--  * Fill in!! :D
+--------------------------------------------------------------------------------------
+
+rule 'mapPackage'
+	from file f
+	to Package
+	queries
+		mains : //#mainRule;
+	mappings
+		preinstScript = mains;
+end_rule
+
+rule 'mapScriptDefinition'
+	from mainRule mr
+	to PreinstScript
+	queries
+		stats : /mr//#statement;
+	mappings
+		statements = stats;
+end_rule
+
+------------------------------------------------------------
+-- Rules for checking templates
+-- (Take care, these rules must be located BEFORE the rest)
+------------------------------------------------------------
+--skip_rule 'mapTemplates'
+--	from statement st
+--	to Statement
+--	queries
+		-- These queries would check the struture of the syntax tree node
+		-- We would need to know how to differenciate each template
+--		q1 : ...
+--		q2 : ...
+--		q3 : ...
+--	mappings
+		-- Depending on the previous query results, we execute the appropiate rule (imperative execution)
+--		if (q1 and q2) then
+--			execute ruleA
+--		else	
+--end_rule
+
+--------------------------------------
+-- Rules for ControlStatements
+--------------------------------------
+
+rule 'mapIfStatement'
+	from statement//if_statement st
+	to If
+	queries
+		cond   : /st//if_statement/#condition;
+		thenst : /st//if_statement/#statement;
+	mappings
+		condition = new BooleanExpression;
+		condition.value = removeQuotes cond.COND;
+		_then = thenst;
+end_rule
+
+rule 'mapIteratorStatement'
+	from statement//for_statement st
+	to EnumerationIterator
+	queries
+		stats : /st//for_statement/#statement;
+	mappings
+		statements = stats;
+end_rule
+
+--------------------------------------
+-- Rules for Commands
+--------------------------------------
+
+-- I don't know exactly when I have to create FileSystemStatement, EnvironmentStatement or PackageSettingStatement
+-- For testing purposes, I create only FileSystenStatements...
+rule 'mapAddittionFileSystemStatement'
+	from statement/command_statement/commandName{ID.eq("touch")} st
+	to AddittionFileSystemStatement
+	queries
+	mappings
+end_rule
+
+rule 'mapDeletionFileSystemStatement'
+	from statement/command_statement/commandName{ID.eq("rm") || ID.eq("rmdir")} st
+	to DeletionFileSystemStatement
+	queries
+	mappings
+end_rule
+
+rule 'mapUpdateFileSystemStatement'
+	from statement/command_statement/commandName{ID.eq("cp")} st
+	to UpdateFileSystemStatement
+	queries
+	mappings
+end_rule
+
+--------------------------------------
+-- Rules for NeutralStatements
+--------------------------------------
+rule 'mapAssignmentStatement'
+	from statement/assignment_statement st
+	to AssignmentStatement
+	queries
+		assign : /st/#assignment_statement;
+		val    : /assign/#value;
+	mappings
+		assigned = assign.ID;
+		expression = extract val;
+end_rule
+
+

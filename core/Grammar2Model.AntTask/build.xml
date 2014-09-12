@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="AntTasks" default="build">
+
+	<!-- GENERAL PROPERTIES -->
+	<!-- Binaries directory -->
+    <property name="binDir" value="files/bin"/>
+	<!-- Generated files directory -->
+    <property name="genDir" value="files/gen"/>
+	<!-- Source files directory -->
+    <property name="srcDir" value="files/src"/>
+	<!-- Metamodels directory -->
+    <property name="metamodelsDir" value="files/metamodels"/>
+	<!-- Templates directory -->
+    <property name="templatesDir" value="templates"/>
+	
+	<!-- PROPERTIES TO CONVERG G INTO Ge -->
+	<!-- Original grammar -->
+    <property name="grammar" value="${srcDir}/Java.g3"/>
+	<!-- Enriched grammar -->
+    <property name="grammarE" value="${genDir}/Java.ge3"/>
+	<!-- Template used to enrich the grammar (dont change) -->
+    <property name="templates" value="${templatesDir}/G2Ge.stg"/>
+
+	<!-- ANTLR OPTIONS TO CONVERT Ge INTO Parser --> 
+	<property name="multithreaded" value="true" /> 
+	<property name="report" value="false" /> 
+	<property name="depend" value="true" /> 
+	<property name="profile" value="false" /> 
+	<property name="lib" location="lib" />
+	<property name="output.antlr" location="${genDir}" /> 
+	
+	<!-- PROPERTIES TO COMPILE THE GENERATED Java code -->
+    <property name="javasrc" value="${genDir}"/>
+    <property name="javaDestDir" value="${binDir}"/>
+	
+	<!-- PROPERTIES TO THE INTERPRETER -->
+	<!-- Name of the grammar -->
+    <property name="grammarName" value="Java"/>
+	<!-- Name of the main rule of the grammar -->
+    <property name="grammarMainRule" value="compilationUnit"/>
+	<!-- Gra2MoL definition -->
+    <property name="sourceView" value="${srcDir}/extractJavaModel.g2m"/>
+	<!-- Path to target metamodel -->
+    <property name="pathMetamodel" value="${metamodelsDir}/javaSimplified.ecore"/>
+	<!-- Name of the target metamodel -->
+    <property name="targetMetamodel" value="JavaSimplified"/>
+	<!-- Path to result target model -->
+    <property name="resultInterpreter" value="resultado.ecore"/>
+
+    <!--<path id="path.taskdef">
+    	<pathelement location="./lib/antlr-2.7.7.jar"/>
+    	<pathelement location="./lib/antlr-3.0.1.jar"/>
+    	<pathelement location="./lib/antlr-runtime-3.0.1.jar"/>
+    	<pathelement location="./lib/antlr3-antTask.jar"/>
+    	<pathelement location="./lib/stringtemplate-3.1b1.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
+        <pathelement location="./lib/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
+     	<pathelement location="./lib/gts.modernization.grammar2Model.antTasks.jar"/>
+     	<pathelement location="./lib/gts.modernization.grammar2Model.jar"/>
+     	<pathelement location="${binDir}/."/>
+   	</path>-->
+
+    <path id="path.taskdef">
+    	<pathelement location="./lib/antlr-3.2.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.cdo_2.0.0.v200906160459.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.cdo.common_2.0.0.v200906160459.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
+        <pathelement location="./lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
+    	<pathelement location="./lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
+    	<pathelement location="./lib/org.eclipse.equinox.common_3.5.0.v20090520-1800.jar"/>
+     	<pathelement location="./lib/gra2mol.jar"/>
+    	<pathelement location="./lib/org.eclipse.net4j_2.0.0.v200906160348.jar"/>
+    	<pathelement location="./lib/org.eclipse.net4j.tcp_2.0.0.v200906160348.jar"/>
+    	<pathelement location="./lib/org.eclipse.net4j.util_2.0.0.v200906160348.jar"/>
+     	<pathelement location="${binDir}/."/>
+   	</path> 
+
+	<target name="build.AntTasks">
+		<delete file="lib/gts.modernization.grammar2Model.antTasks.jar"/>
+		
+		<jar jarfile="lib/gts.modernization.grammar2Model.antTasks.jar">
+			<fileset dir="bin"/>
+		</jar>
+	</target>
+	
+	<target name="build.Grammar2Model">
+
+		<delete file="lib/gts.modernization.grammar2Model.jar"/>
+		
+		<jar jarfile="lib/gts.modernization.grammar2Model.jar">
+			<fileset dir="../Grammar2Model/bin"/>
+			<fileset dir="../Grammar2Model/templates"/>
+			<fileset dir="../Grammar2Model.CST.CDO/bin"/>
+			<fileset dir="../Grammar2Model.Gra2MoL/bin"/>
+			<!--<fileset dir="../org.eclipse.gmt.modisco.core/bin"/>
+			<fileset dir="../org.eclipse.gmt.modisco.modelhandler.emf/bin"/>-->
+		</jar>
+	</target>	
+	
+	<target name="build.onePackage">
+			<delete file="lib/gra2mol.jar"/>
+			<jar jarfile="lib/gra2mol.jar">
+				<fileset dir="./src"/>
+				<fileset dir="./bin"/>
+				<fileset dir="../Grammar2Model/bin"/>
+				<fileset dir="../Grammar2Model/src"/>
+				<fileset dir="../Grammar2Model/templates"/>
+				<fileset dir="../Grammar2Model.CST.CDO/bin"/>
+				<fileset dir="../Grammar2Model.CST.CDO/src"/>
+				<fileset dir="../Grammar2Model.Gra2MoL/bin"/>
+				<fileset dir="../Grammar2Model.Gra2MoL/src"/>
+				<fileset dir="../org.eclipse.gmt.modisco.core/bin"/>
+				<fileset dir="../org.eclipse.gmt.modisco.modelhandler.emf/bin"/>
+			</jar>
+		</target>	
+	
+	<target name="copy.jars">
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../Grammar2Model.examples.extractANTLRModel/lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../Grammar2Model.examples.extractANTLRModel/lib"/>
+		
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../Grammar2Model.examples.extractHierarchy/lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../Grammar2Model.examples.extractHierarchy/lib"/>
+
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../Grammar2Model.examples.Java2JavaModel/lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../Grammar2Model.examples.Java2JavaModel/lib"/>
+		
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../Grammar2Model.examples.PLSQL2KDM/lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../Grammar2Model.examples.PLSQL2KDM/lib"/>
+		
+
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../Grammar2Model.examples.Java2KDMModel/lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../Grammar2Model.examples.Java2KDMModel/lib"/>		
+		
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../Grammar2Model.UI/lib"/>
+		
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../PruebaPLSQLRubyTL/lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../PruebaPLSQLRubyTL/lib"/>
+		
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../Forms2ADF/gra2mol-lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../Forms2ADF/gra2mol-lib"/>
+		
+		<copy file="lib/gts.modernization.grammar2Model.antTasks.jar" todir="../formol.discoverer.plsql/gra2mol-files/lib"/>
+		<copy file="lib/gts.modernization.grammar2Model.jar" todir="../formol.discoverer.plsql/gra2mol-files/lib"/>
+						
+	</target>
+	
+	<target name="build">		
+		<!-- Clean the project -->
+		<antcall target="clean"/>
+		
+		<!-- Builds the gramma2Model jar -->
+		<antcall target="build.Grammar2Model"/>
+		
+		<!-- Compiles the ant tasks -->
+		<antcall target="compile.AntTasks"/>
+		
+		<!-- Builds the grammar2Model ant tasks jar -->
+		<antcall target="build.AntTasks"/>
+
+		<!-- Copy the jars -->
+		<!--<antcall target="copy.jars"/>-->
+	</target>
+	
+	<target name="compile.AntTasks">
+		<delete dir="bin"/>
+		<mkdir dir="bin"/>
+		<javac srcdir="src"
+			destdir="bin"
+		    debug="on"
+		    source="1.5">
+			<include name="**/*.java"/>
+			<classpath>
+				<path refid="path.taskdef" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="update1">
+		<eclipse.refreshLocal resource="Grammar2Model.AntTask" depth="infinite"/>
+	</target>
+	
+	<target name="update2">
+		<eclipse.refreshLocal resource="Grammar2Model.AntTask" depth="infinite"/>
+	</target>
+	
+	<target name="update3">
+		<eclipse.refreshLocal resource="Grammar2Model.AntTask" depth="infinite"/>
+	</target>
+
+	<target name="clean">
+		<delete file="lib/gts.modernization.grammar2Model.antTasks.jar"/>
+		<delete file="lib/gts.modernization.grammar2Model.jar"/>
+	</target>
+</project>

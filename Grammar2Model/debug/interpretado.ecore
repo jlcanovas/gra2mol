@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<Service:Tool xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Service="http://gts.inf.um.es/modernization/service" name="prueba">
-  <services name="hola" option="none"/>
-  <services name="hola" option="none"/>
-</Service:Tool>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.2 2008/01/14 09:18:29 Javier Canovas Exp $
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://gts.inf.um.es/modernization/g2mv/core" 
+       class = "gts.modernization.model.GVQ.Core.CorePackage"
+       genModel = "model/GVQ.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://gts.inf.um.es/modernization/g2mv/query" 
+       class = "gts.modernization.model.GVQ.Query.QueryPackage"
+       genModel = "model/GVQ.genmodel" /> 
+  </extension>
+
+</plugin>

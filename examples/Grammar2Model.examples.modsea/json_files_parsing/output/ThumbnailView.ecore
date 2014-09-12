@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="modsea" nsURI="http://modsea/1.0" nsPrefix="modsea">
+  <eClassifiers xsi:type="ecore:EClass" name="OrderedViewFrame" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ThumbnailView" eSuperTypes="//OrderedViewFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showToolbox" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnCount" defaultValueLiteral="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,10 @@
+[
+    {   accessorName:   "getOrders",
+        attributeName:  "orders",
+        cardinality:	"-1"
+    },
+    {   accessorName:   "getPossibleOrders",
+        attributeName:  "possibleOrders",
+        cardinality:	"-1"
+    }
+]

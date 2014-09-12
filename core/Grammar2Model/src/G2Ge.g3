@@ -1,0 +1,496 @@
+/** ANTLR v3 tree grammar to walk trees created by ANTLRv3.g  */
+tree grammar G2Ge;
+ 
+options {
+	tokenVocab = ANTLRv3;
+	ASTLabelType = CommonTree;
+	output=template; 
+	rewrite=true;
+}
+
+@members {
+	boolean existsHeader = false;
+	boolean existsOutput = false;
+	boolean mainRule = true;
+	String pathTemplates;
+	
+	public G2Ge(TreeNodeStream input, String pathTemplates) {
+    	super(input);
+        this.pathTemplates = pathTemplates;
+   	}
+}
+ 
+@header {
+	package gts.modernization.parser.antlr;
+
+	import gts.modernization.parser.antlr.*;
+}
+
+grammarDef
+scope {
+	boolean inMainOptions; 
+}
+@init {
+	$grammarDef::inMainOptions = false;
+}
+    :   ^( grammarType name=ID { ANTLRUtil.initialize($name.text, pathTemplates); } DOC_COMMENT? 
+    	{ $grammarDef::inMainOptions = true; } optionsSpec? { $grammarDef::inMainOptions = false; }
+    	tokensSpec? attrScope* action* rule+ )
+     
+		{  
+			String sol = $text;
+			if(!existsOutput) {
+				sol = ANTLRUtil.addOutput($text);
+				existsOutput = true;
+			}
+		}
+		-> normalRule(assign={sol})
+    ;
+  
+grammarType 
+	:	LEXER_GRAMMAR
+    |	PARSER_GRAMMAR
+    |	TREE_GRAMMAR
+    |	COMBINED_GRAMMAR
+    ;
+
+tokensSpec
+	:	^(TOKENS tokenSpec+)
+	;
+
+tokenSpec
+	:	^('=' TOKEN_REF STRING_LITERAL)
+	|	^('=' TOKEN_REF CHAR_LITERAL)
+	|	TOKEN_REF
+	;
+
+attrScope 
+	:	^('scope' ID ACTION)
+	;
+
+action
+scope {
+	String type; 
+}
+@init {
+	$action::type = "";
+}
+	:	^('@' ID ID ACTION)
+	|	^('@' i=ID { if($i.text.equals("header")) { existsHeader = true;  $action::type = "header"; }} myAction)
+	;
+	
+myAction
+	: 	ACTION
+	     { 	
+	     	String sol = $text;
+	     	if($action::type.equals("header")) { 
+	     		sol = ANTLRUtil.insertHeader(sol);
+	     	} 
+	     }
+	     -> normalRule(assign={sol})
+	;
+
+optionsSpec
+	:	^(OPTIONS option+)
+	     { 	
+	     	String sol = $text;
+	     	if($grammarDef::inMainOptions && !existsOutput) {
+	     		sol = ANTLRUtil.insertOutput(sol);
+				existsOutput = true;
+			}
+	     }
+		-> normalRule(assign={sol})
+	;
+
+option
+    :   ^('=' ID optionValue)
+ 	;
+ 	
+optionValue
+    :   ID
+    |   STRING_LITERAL
+    |   CHAR_LITERAL
+    |   INT
+    ;
+
+rule
+scope {
+	int deep;
+	String name;
+	boolean existsReturn;
+	boolean mainRule;
+}
+@init {
+	$rule::deep = 0;
+	$rule::existsReturn = false;
+}
+	:	^( RULE ID { $rule::name = $ID.text; } modifier? (^(ARG ARG_ACTION))? (^(RET ret_param))?
+	       optionsSpec? ruleScopeSpec? ruleAction*
+	       altList
+	       exceptionGroup? EOR
+	     ) 
+	     { 	
+	     	String sol = $text;
+	     	if(!$rule::existsReturn && ANTLRUtil.isParserRule($rule::name)) {
+	     		sol = ANTLRUtil.insertReturn($text);
+	     		$rule::existsReturn = true;
+	     	}
+	     	if(!existsHeader) { 
+	     		sol = ANTLRUtil.addHeader(sol);
+	     		existsHeader = true;
+	     	} 
+	     	mainRule = false;
+	     }
+	     -> normalRule(assign={sol})
+	;
+
+ret_param 
+	: 	ARG_ACTION
+		{ 	
+			$rule::existsReturn = true; 
+			String sol = ANTLRUtil.insertReturnIntoReturn($text);
+		} 
+		-> normalRule(assign={sol})
+	;
+
+modifier
+	:	'protected'|'public'|'private'|'fragment'
+	;
+
+/** Match stuff like @init {int i;} */
+ruleAction
+	:	^('@' ID ACTION)
+	;
+
+throwsSpec
+	:	^('throws' ID+)
+	; 
+
+ruleScopeSpec
+	:	^('scope' ACTION)
+	|	^('scope' ACTION ID+)
+	|	^('scope' ID+)
+	;
+
+block[boolean inClosure] returns [List units]
+    :   ^( BLOCK optionsSpec? {$rule::deep++;} a+=alternative[inClosure]+ {$rule::deep--;} EOB )
+    	{
+    		$block.units = $a;
+    	}
+    ;
+  
+altList 
+    :   ^( BLOCK {$rule::deep++; } (alternative[false])+ EOB )
+    ;
+ 
+alternative[boolean inClosure] returns [List units]
+@init {
+	if($rule::deep == 1) ANTLRUtil.initIds();
+}
+    :   ^(ALT e+=element[inClosure]+ EOA) 
+    	{ 
+    		String sol = ""; 
+    		if($rule::deep == 1)  { sol = ANTLRUtil.createRewriteRule($rule::name, $e, mainRule); }
+    		$alternative.units = $e; 
+    	}
+	    -> {($rule::deep == 1) && (ANTLRUtil.isParserRule($rule::name))}? rewriteRule(assign={$text}, list={sol}) 	     	
+	    -> normalRule(assign={$text}) 
+    |   ^(ALT EPSILON EOA)
+    ;
+
+exceptionGroup
+	:	exceptionHandler+ finallyClause?
+	|	finallyClause
+    ;
+
+exceptionHandler
+    :    ^('catch' ARG_ACTION ACTION)
+    ;
+ 
+finallyClause
+    :    ^('finally' ACTION)
+    ;
+
+element[boolean inClosure] returns [String id, String type, String content, int pos, int line, List complex, boolean aggregation, boolean autoId]
+	:	elementNoOptionSpec[inClosure]
+		{ 			
+			$element.id = $elementNoOptionSpec.id;		
+			$element.type = $elementNoOptionSpec.type;	
+			$element.content = $elementNoOptionSpec.content;	
+			$element.pos = $elementNoOptionSpec.pos;	
+			$element.line = $elementNoOptionSpec.line;	
+			$element.complex = $elementNoOptionSpec.complex;	
+			$element.aggregation = $elementNoOptionSpec.aggregation;	
+			$element.autoId = $elementNoOptionSpec.autoId;	
+		}
+	;
+
+elementNoOptionSpec[boolean inClosure] returns [String id, String type, String content, int pos, int line, List complex, boolean aggregation, boolean autoId]
+@init {
+	$elementNoOptionSpec.complex = null;
+	$elementNoOptionSpec.autoId = false;	
+	$elementNoOptionSpec.aggregation = false;
+}
+	:	^(('='|'+=') i=ID b=block[inClosure])
+		{
+			$elementNoOptionSpec.id = $i.text;		
+			$elementNoOptionSpec.type = GrammarElement.PREFIX;	
+			$elementNoOptionSpec.content = GrammarElement.PREFIX;	
+			$elementNoOptionSpec.complex = $b.units;	
+			$elementNoOptionSpec.aggregation = true;	
+			$elementNoOptionSpec.autoId = false;	
+			
+			String sol = ANTLRUtil.correctAssign(null, $text);
+		} 
+		-> normalRule(assign={sol}) 
+	|	^((t1='='|t2='+=') i=ID atom[true, false]) 
+		{ 
+			$elementNoOptionSpec.id = $i.text; 		
+			$elementNoOptionSpec.type = $atom.type;	
+			if((inClosure && $atom.type == GrammarElement.TERMINAL) || ($atom.type == GrammarElement.RULE)) $elementNoOptionSpec.aggregation = true;
+			else $elementNoOptionSpec.aggregation = false;
+			$elementNoOptionSpec.content = $atom.text;
+			$elementNoOptionSpec.pos = $atom.start.token.getCharPositionInLine();
+			$elementNoOptionSpec.line = $atom.start.token.getLine();
+			$elementNoOptionSpec.autoId = false;	
+			 
+			String sol = ANTLRUtil.correctAssign($atom.type, $text);
+		}
+		-> {inClosure && $atom.type == GrammarElement.TERMINAL}? insertIdAggregation(id={$i.text}, rule={$atom.contain})
+    	-> normalRule(assign={sol})
+	|	a=atom[false, inClosure]
+		{ 
+			$elementNoOptionSpec.id = $a.id;		
+			$elementNoOptionSpec.type = $a.type;	
+			$elementNoOptionSpec.content = $a.contain;	
+			$elementNoOptionSpec.pos = $a.start.token.getCharPositionInLine();
+			$elementNoOptionSpec.line = $a.start.token.getLine();
+			$elementNoOptionSpec.autoId = true;	
+			$elementNoOptionSpec.aggregation = $a.aggregation;
+		}
+	|	e=ebnf  
+		{  
+			$elementNoOptionSpec.id = GrammarElement.EBNF;	 	
+			$elementNoOptionSpec.type = GrammarElement.EBNF;	
+			$elementNoOptionSpec.content = $e.suffix;	
+			$elementNoOptionSpec.complex = $e.complex;	
+			$elementNoOptionSpec.pos = $e.start.token.getCharPositionInLine();
+			$elementNoOptionSpec.line = $e.start.token.getLine();
+		}
+	|   ac=ACTION 
+		{  
+			$elementNoOptionSpec.id = GrammarElement.ACTION;		
+			$elementNoOptionSpec.type = GrammarElement.ACTION;	
+			$elementNoOptionSpec.content = $ac.text;	
+		} 
+	|   SEMPRED 
+	|	GATED_SEMPRED 
+	|   treeSpec 
+	;
+
+atom[boolean inAssignment, boolean inClosure] returns [String id, String contain, String type, boolean aggregation]
+@init {
+	$atom.id = GrammarElement.TOKEN;
+	$atom.aggregation = false;
+}
+	:   ^(('^'|'!') atom[false, false])
+		{
+			String newText = ANTLRUtil.removeASTCharacters($text);		
+		}
+		-> normalRule(assign={newText})
+	|	range
+	|	notSet
+    |	^(RULE_REF ARG_ACTION)
+    |	r=RULE_REF 
+    	{ 
+    		String newId = "";
+    		if(!inAssignment && ANTLRUtil.isParserRule($rule::name)) {
+				newId = ANTLRUtil.createId($r.text);
+    			$atom.id = newId;
+				$atom.aggregation = true;
+    		}
+    		$atom.type = GrammarElement.RULE; 
+    		$atom.contain = $r.text; 
+    	}
+    	-> {!inAssignment && ANTLRUtil.isParserRule($rule::name)}? insertIdAggregation(id={newId}, rule={$text})
+    	-> normalRule(assign={$text})
+    |   t=terminal[inAssignment, inClosure]
+    	{ 
+    		$atom.id = $t.id;
+    		$atom.type = GrammarElement.TERMINAL; 
+    		$atom.contain = $t.contain; 
+			$atom.aggregation = $t.aggregation;
+    	}
+    ;
+
+notSet
+	:	^('~' notTerminal)
+	|	^('~' block[false])
+	;
+
+treeSpec
+	:	^(TREE_BEGIN element[false]+) 
+	;
+
+/** Matches ENBF blocks (and token sets via block rule) */
+ebnf returns [List complex, String suffix]
+	:	^(SYNPRED b=block[false]) 
+		{ 
+			$ebnf.complex = $b.units;
+		}
+	|	SYN_SEMPRED 
+	|	^(s=ebnfSuffix b=block[$s.isAggregation]) 
+		{ 
+			$ebnf.complex = $b.units;
+			$ebnf.suffix = $s.suffix;
+		}
+	|	b=block[false]
+		{			
+			$ebnf.complex = $b.units;
+			$ebnf.suffix = GrammarElement.ALTERNATIVE;
+		}
+	;
+
+range
+	:	^(CHAR_RANGE CHAR_LITERAL CHAR_LITERAL)
+	;
+
+terminal[boolean inAssignment, boolean inClosure] returns [String id, String contain, boolean aggregation]
+@init {
+	$terminal.id = GrammarElement.TOKEN;
+	$terminal.aggregation = false;
+}
+    :   c=CHAR_LITERAL
+    	{
+    		String newId = "";
+    		if(!inAssignment && ANTLRUtil.isParserRule($rule::name)) {
+    			newId = ANTLRUtil.createTokenId();
+    			$terminal.id = newId;
+    		}
+    		$terminal.contain = $text;
+    	}
+    	-> {!inAssignment && ANTLRUtil.isParserRule($rule::name)}? insertId(id={newId}, rule={$text})
+    	-> normalRule(assign={$text})
+    |	t=TOKEN_REF
+    	{
+    		String newId = "";
+    		if(!inAssignment && ANTLRUtil.isParserRule($rule::name)) {
+				newId = ANTLRUtil.createId($t.text);
+    			$terminal.id = newId;
+    		}    		
+    		if(inClosure) {
+    			newId = newId + "_List";
+    			$terminal.id = newId;
+				$terminal.aggregation = true;
+    		}
+    		$terminal.contain = $text;
+    	}
+    	-> {!inAssignment && ANTLRUtil.isParserRule($rule::name) && !inClosure}? insertId(id={newId}, rule={$text})
+    	-> {!inAssignment && ANTLRUtil.isParserRule($rule::name) && inClosure}? insertIdAggregation(id={newId}, rule={$text})
+    	-> normalRule(assign={$text})
+    |	s=STRING_LITERAL
+    	{
+    		String newId = "";
+    		if(!inAssignment && ANTLRUtil.isParserRule($rule::name)) {
+    			newId = ANTLRUtil.createTokenId();
+    			$terminal.id = newId;
+    		}
+    		$terminal.contain = $text;
+    	}
+    	-> {!inAssignment && ANTLRUtil.isParserRule($rule::name)}? insertId(id={newId}, rule={$text})
+    	-> normalRule(assign={$text})
+    |	^(TOKEN_REF ARG_ACTION)
+    |	'.'
+	;
+
+notTerminal
+	:   CHAR_LITERAL
+	|	TOKEN_REF
+	|	STRING_LITERAL
+	;
+	
+ebnfSuffix returns [String suffix, boolean isAggregation]
+	:	OPTIONAL { $ebnfSuffix.suffix = GrammarElement.OPTIONAL; $ebnfSuffix.isAggregation = false; }
+  	|	CLOSURE { $ebnfSuffix.suffix = GrammarElement.CLOSURE; $ebnfSuffix.isAggregation = true; }
+   	|	POSITIVE_CLOSURE { $ebnfSuffix.suffix = GrammarElement.PCLOSURE; $ebnfSuffix.isAggregation = false; }
+	;
+	
+// R E W R I T E  S Y N T A X
+
+rewrite
+	:	(^('->' SEMPRED rewrite_alternative))* ^('->' rewrite_alternative)
+	|
+	;
+
+rewrite_alternative
+	:	rewrite_template
+	|	rewrite_tree_alternative
+   	|   ^(ALT EPSILON EOA)
+	;
+	
+rewrite_template_block
+    :   ^(BLOCK rewrite_template EOB)
+    ;
+
+rewrite_tree_block
+    :   ^(BLOCK rewrite_tree_alternative EOB)
+    ;
+
+rewrite_tree_alternative
+    :	^(ALT rewrite_tree_element+ EOA)
+    ;
+
+rewrite_tree_element
+	:	rewrite_tree_atom
+	|	rewrite_tree
+	|   rewrite_tree_block
+	|   rewrite_tree_ebnf
+	;
+
+rewrite_tree_atom
+    :   CHAR_LITERAL
+	|   TOKEN_REF
+	|   ^(TOKEN_REF ARG_ACTION) // for imaginary nodes
+    |   RULE_REF
+	|   STRING_LITERAL
+	|   LABEL
+	|	ACTION
+	;
+
+rewrite_tree_ebnf
+	:	^(ebnfSuffix rewrite_tree_block)
+	;
+	
+rewrite_tree
+	:	^(TREE_BEGIN rewrite_tree_atom rewrite_tree_element* )
+	;
+
+rewrite_template
+	:   ^( TEMPLATE ID rewrite_template_args
+		   (DOUBLE_QUOTE_STRING_LITERAL | DOUBLE_ANGLE_STRING_LITERAL)
+		 )
+	|	rewrite_template_ref
+	|	rewrite_indirect_template_head
+	|	ACTION
+	;
+
+/** foo(a={...}, ...) */
+rewrite_template_ref
+	:	^(TEMPLATE ID rewrite_template_args)
+	; 
+
+/** ({expr})(a={...}, ...) */
+rewrite_indirect_template_head
+	:	^(TEMPLATE ACTION rewrite_template_args)
+	;
+
+rewrite_template_args
+	:	^(ARGLIST rewrite_template_arg+)
+	|	ARGLIST
+	;
+
+rewrite_template_arg
+	:   ^(ARG ID ACTION)
+	;
+	
+

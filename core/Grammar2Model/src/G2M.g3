@@ -1,0 +1,164 @@
+grammar GVQ;
+
+options{
+	output=template;
+}
+
+
+
+@header {
+	package gts.modernization.parser.views;
+
+	import GVQ.Core.*;
+	import GVQ.Core.impl.*;
+	import GVQ.Core.util.*;
+	import GVQ.Query.*;
+	import GVQ.Query.impl.*;
+	import GVQ.Query.util.*;
+	import java.util.Iterator;
+}
+
+@lexer::header {
+	package gts.modernization.parser.views;
+}
+
+// Parser rules
+viewDefinition returns [ViewDefinition viewReturn]
+	:	rules+=rule*
+	{
+		ViewDefinition viewDef = CoreFactoryImpl.eINSTANCE.createViewDefinition();
+		if($rules != null) viewDef.getRules().addAll($rules); 
+		$viewDefinition.viewReturn = viewDef;
+	}
+	;
+	
+rule returns [Rule ruleReturn]
+	:	'rule' name=quotedName cElement=createdElement qList=queryList iList=initList 'end_rule'
+	{		
+		Rule r = CoreFactoryImpl.eINSTANCE.createRule();
+		r.setName($name.name);		
+		r.setCreatedElement($cElement.name);
+		r.setCreatedElementAlias($cElement.alias);
+		if($qList.returnList != null) r.getQueries().addAll($qList.returnList);
+		if($iList.returnList != null) r.getInits().addAll($iList.returnList);		
+		$rule.ruleReturn = r;
+	}
+	;
+
+quotedName returns [String name]
+	:	QUOTE ID QUOTE 
+	{
+		$quotedName.name = $ID.text;
+	}
+	;
+
+createdElement returns [String name, String alias]
+	: 	'creates' normalName (ID)?
+	{
+		$createdElement.name = $normalName.text;
+		$createdElement.alias = $ID.text;
+	}
+	;
+
+normalName
+	: ID (DOT ID)*
+	;
+
+queryList returns [List returnList] 
+	:	'queries' qList+=query*
+	{
+		$queryList.returnList = $qList;
+	}
+	;
+
+query returns [QueryUnit queryReturn]
+	:	ID ':' fuList+=filterUnit* ';'
+	{
+		QueryUnit qu = QueryFactoryImpl.eINSTANCE.createQueryUnit();
+		qu.setVariable($ID.text);
+		if($fuList != null) qu.getFilters().addAll($fuList);
+		$query.queryReturn = qu;
+	}
+	;
+	
+filterUnit returns [FilterUnit filterUnitReturn]
+	:	e=filterUnitElement ('[' feList+=filterExpression* ']')? 
+	{
+		FilterUnit fu = QueryFactoryImpl.eINSTANCE.createFilterUnit();
+		fu.setType($e.type);
+		fu.setElement($e.element);
+		if($feList != null) fu.getExpressions().addAll($feList);
+		$filterUnit.filterUnitReturn = fu;
+	}
+	;
+
+filterUnitElement returns [FilterType type, String element]
+	: 	DOUBLEBAR filterElement
+	{
+		$filterUnitElement.type = FilterType.GENERAL;
+		$filterUnitElement.element = $filterElement.text;
+	}	
+	|	BAR filterElement
+	{
+		$filterUnitElement.type = FilterType.SPECIFIC;
+		$filterUnitElement.element = $filterElement.text;
+	}	
+	;
+
+filterExpression returns [FilterExpressionUnit filterExpressionReturn]
+	:	filterElement ('(' pList+=param (',' pList+=param)* ')')?
+	{
+		FilterExpressionUnit fe = QueryFactoryImpl.eINSTANCE.createFilterExpressionUnit();
+		fe.setType(FilterExpressionType.NODE);
+		fe.setElement($filterElement.text);
+		if($pList != null) fe.getParameters().addAll($pList); 
+		$filterExpression.filterExpressionReturn = fe;
+	}
+	;
+	
+filterElement 
+	: 	(DOT)? normalName
+	;
+
+param returns [Parameter paramReturn]
+@init {
+	$param.paramReturn = CoreFactoryImpl.eINSTANCE.createParameter();
+}
+	: ID { $param.paramReturn.setValue($text); }
+	| DOUBLEQUOTE ID DOUBLEQUOTE { $param.paramReturn.setValue($text); }
+	| ID OPERATION param { $param.paramReturn.setValue($text); }
+	| '(' param ')' { $param.paramReturn.setValue($text); }
+	;	
+	
+initList returns [List returnList]
+	:	'init' iList+=init*
+	{
+		$initList.returnList = $iList;
+	}
+	;
+	
+init returns [InitUnit initReturn]
+	:	normalName '=' param ';'
+	{
+		InitUnit iu = CoreFactoryImpl.eINSTANCE.createInitUnit();
+		iu.setElement($normalName.text);
+		iu.setValue($param.text);
+		$init.initReturn = iu;
+	}
+	;
+	
+// Lexer rules
+DOT: '\u002E';
+QUOTE: '\u0027';
+DOUBLEQUOTE: '\u0022';
+BAR: '\u002F';
+DOUBLEBAR: '\u002F\u002F';
+OPERATION:
+	('+'|'-'|'*'|'\u002F')
+	;
+ID: 
+	('a'..'z' | 'A'..'Z') ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '$' | '#' )*
+	;
+WS: 
+	( '\t' | ' ' | '\r' | '\n'| '\u000C' )+ { $channel = HIDDEN; } 
+	;	

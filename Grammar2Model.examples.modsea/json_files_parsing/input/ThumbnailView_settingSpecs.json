@@ -1,4 +1,0 @@
-{
-    "showToolbox":          { type: "boolean", defaultValue: true },
-    "columnCount":          { type: "int", defaultValue: -1 }
-}

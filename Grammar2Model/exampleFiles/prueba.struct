@@ -1,5 +1,0 @@
-struct Person {
-	name : String;
-	surname : String;
-	age: Integer;
-}

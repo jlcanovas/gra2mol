@@ -1,0 +1,13 @@
+hash assignmentOperatorTypeMap
+	"=" -> "ASSIGN",
+	"+=" -> "PLUS_ASSIGN"
+end_hash
+
+rule 'createPackage'
+	from package_spec ps
+	to Package
+	queries
+		ps : //package_spec[1];
+	mappings
+		name = ps.package_name;
+end_rule

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="ASCII"?>
+<strutsbmm:StrutsBeans xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:javas="gts.inf.um.es/javaSimplified" xmlns:strutsbmm="gts.inf.um.es/Struts/Struts-beans" xsi:schemaLocation="gts.inf.um.es/Struts/Struts-beans gts.inf.um.es/javaSimplified#/0/StrutsBeansMM">
+  <beans strutsClassType="ACTION_FORM" containerBeanMapping="//@beanMappings.0">
+    <name strValue="BeanTablon" identifier="BeanTablon"/>
+    <imports>javax.servlet.http.HttpServletRequest</imports>
+    <imports>org.apache.struts.action.*</imports>
+    <fields type="//@types.0" strValue="private String tituloSeleccionado = &quot;&quot;;" visibility="PRIVATE">
+      <name strValue="tituloSeleccionado" identifier="tituloSeleccionado"/>
+    </fields>
+    <fields type="//@types.0" strValue="private String titulo = &quot;&quot;;" visibility="PRIVATE">
+      <name strValue="titulo" identifier="titulo"/>
+    </fields>
+    <fields type="//@types.0" strValue="private String contenido = &quot;&quot;;" visibility="PRIVATE">
+      <name strValue="contenido" identifier="contenido"/>
+    </fields>
+    <fields type="//@types.0" strValue="private String autor = &quot;&quot;;" visibility="PRIVATE">
+      <name strValue="autor" identifier="autor"/>
+    </fields>
+    <methods xsi:type="strutsbmm:ValidateMethod" strValue="***" returnType="//@types.2" actionMappingParameter="//@beans.0/@methods.0/@parameters.0" requestParameter="//@beans.0/@methods.0/@parameters.1" actionErrorsVar="//@beans.0/@methods.0/@statements.0/@name" containerBean="//@beans.0">
+      <name strValue="validate" identifier="validate"/>
+      <parameters type="//@types.3">
+        <name strValue="mapping" identifier="mapping"/>
+      </parameters>
+      <parameters type="//@types.4">
+        <name strValue="request" identifier="request"/>
+      </parameters>
+      <statements xsi:type="javas:VariableDeclarationStatement" strValue="ActionErrors errores = new ActionErrors();" type="//@types.2">
+        <name strValue="errores" identifier="errores"/>
+        <expr xsi:type="javas:ClassInstanceCreation" strValue="new ActionErrors()" className="//@types.2"/>
+      </statements>
+      <statements xsi:type="javas:IfStatement" strValue="if (isTituloNoValido(getTitulo()))  errores.add(ActionErrors.GLOBAL_ERROR, new ActionError(&quot;tablon.error&quot;));">
+        <expr xsi:type="javas:MethodInvocation" strValue="isTituloNoValido(getTitulo())">
+          <method>
+            <arguments xsi:type="javas:MethodInvocation" strValue="getTitulo()">
+              <method>
+                <methodName strValue="getTitulo" identifier="getTitulo"/>
+              </method>
+            </arguments>
+            <methodName strValue="isTituloNoValido" identifier="isTituloNoValido"/>
+          </method>
+        </expr>
+        <ifst xsi:type="javas:ExpressionStatement" strValue="errores.add(ActionErrors.GLOBAL_ERROR, new ActionError(&quot;tablon.error&quot;));">
+          <expr xsi:type="javas:MethodInvocation" strValue="errores.add(ActionErrors.GLOBAL_ERROR, new ActionError(&quot;tablon.error&quot;))">
+            <object strValue="errores" identifier="errores"/>
+            <method>
+              <arguments xsi:type="javas:Name" strValue="ActionErrors.GLOBAL_ERROR" identifier="ActionErrors.GLOBAL_ERROR"/>
+              <arguments xsi:type="javas:ClassInstanceCreation" strValue="new ActionError(&quot;tablon.error&quot;)" className="//@types.2">
+                <arguments xsi:type="javas:Literal" strValue="&quot;tablon.error&quot;" value="tablon.error"/>
+              </arguments>
+              <methodName strValue="add" identifier="add"/>
+            </method>
+          </expr>
+        </ifst>
+      </statements>
+      <statements xsi:type="javas:ReturnStatement" strValue="return errores;">
+        <expr xsi:type="javas:Name" strValue="errores" identifier="errores"/>
+      </statements>
+    </methods>
+    <methods strValue="private boolean isTituloNoValido(String t){ if (t.contains(&quot;$&quot;) || t.contains(&quot;#&quot;)) return true; return false; }" returnType="//@types.1">
+      <name strValue="isTituloValido" identifier="isTituloValido"/>
+      <parameters type="//@types.0">
+        <name strValue="t" identifier="t"/>
+      </parameters>
+    </methods>
+    <methods strValue="public void setTituloSeleccionado(String tituloSeleccionado) { this.tituloSeleccionado = tituloSeleccionado; }">
+      <name strValue="setTituloSeleccionado" identifier="setTituloSeleccionado"/>
+      <parameters type="//@types.0">
+        <name strValue="tituloSeleccionado" identifier="tituloSeleccionado"/>
+      </parameters>
+    </methods>
+    <methods strValue="public String getTituloSeleccionado() { return tituloSeleccionado; }" returnType="//@types.0">
+      <name strValue="getTituloSeleccionado" identifier="getTituloSeleccionado"/>
+    </methods>
+    <methods strValue=" public void setTitulo(String titulo) { this.titulo = titulo; }">
+      <name strValue="setTitulo" identifier="setTitulo"/>
+      <parameters type="//@types.0">
+        <name strValue="titulo" identifier="titulo"/>
+      </parameters>
+    </methods>
+    <methods strValue="public String getTitulo() {return titulo;}" returnType="//@types.0">
+      <name strValue="getTitulo" identifier="getTitulo"/>
+    </methods>
+    <methods strValue="public void setContenido(String contenido) { this.contenido = contenido; }">
+      <name strValue="setContenido" identifier="setContenido"/>
+      <parameters type="//@types.0">
+        <name strValue="contenido" identifier="contenido"/>
+      </parameters>
+    </methods>
+    <methods strValue="public String getContenido() { return contenido; }" returnType="//@types.0">
+      <name strValue="getContenido" identifier="getContenido"/>
+    </methods>
+    <methods strValue="public void setAutor(String autor) { this.autor = autor; }">
+      <name strValue="setAutor" identifier="setAutor"/>
+      <parameters type="//@types.0">
+        <name strValue="autor" identifier="autor"/>
+      </parameters>
+    </methods>
+    <methods strValue="public String getAutor() { return autor; }" returnType="//@types.0">
+      <name strValue="getAutor" identifier="getAutor"/>
+    </methods>
+  </beans>
+  <beans containerBeanMapping="//@beanMappings.0">
+    <name strValue="ActionVerNoticia" identifier="ActionVerNoticia"/>
+    <imports>beansstruts.BeanTablon</imports>
+    <imports>controladores.ControladorNoticias</imports>
+    <imports>javax.servlet.http.*</imports>
+    <imports>logicaNegocio.Noticia</imports>
+    <imports>org.apache.struts.action.*</imports>
+    <methods xsi:type="strutsbmm:ExecuteMethod" strValue="***" returnType="//@types.7" actionMappingParameter="//@beans.1/@methods.0/@parameters.0" actionFormParameter="//@beans.1/@methods.0/@parameters.1" requestParameter="//@beans.1/@methods.0/@parameters.2" responseParameter="//@beans.1/@methods.0/@parameters.3" containerBean="//@beans.1">
+      <name strValue="execute" identifier="execute"/>
+      <parameters type="//@types.3">
+        <name strValue="actionMapping" identifier="actionMapping"/>
+      </parameters>
+      <parameters type="//@types.6">
+        <name strValue="actionForm" identifier="actionForm"/>
+      </parameters>
+      <parameters type="//@types.4">
+        <name strValue="request" identifier="request"/>
+      </parameters>
+      <parameters type="//@types.5">
+        <name strValue="response" identifier="response"/>
+      </parameters>
+      <exceptions>Exception</exceptions>
+      <statements xsi:type="javas:VariableDeclarationStatement" strValue="BeanTablon bean = (BeanTablon)actionForm;" type="//@types.8">
+        <name strValue="bean" identifier="bean"/>
+        <expr xsi:type="javas:CastExpression" strValue="(BeanTablon)actionForm" type="//@types.8">
+          <expr xsi:type="javas:Name" strValue="actionForm" identifier="actionForm"/>
+        </expr>
+      </statements>
+      <statements xsi:type="javas:VariableDeclarationStatement" strValue="Noticia noticia = ControladorNoticias.getInstancia().findNoticia(bean.getTituloSeleccionado());" type="//@types.9">
+        <name strValue="noticia" identifier="noticia"/>
+        <expr xsi:type="javas:MethodInvocation" strValue="ControladorNoticias.getInstancia().findNoticia(bean.getTituloSeleccionado())">
+          <object strValue="ControladorNoticias" identifier="ControladorNoticias"/>
+          <method>
+            <childCall>
+              <arguments xsi:type="javas:MethodInvocation" strValue="bean.getTituloSeleccionado()">
+                <object strValue="bean" identifier="bean"/>
+                <method>
+                  <methodName strValue="getTituloSeleccionado" identifier="getTituloSeleccionado"/>
+                </method>
+              </arguments>
+              <methodName strValue="findNoticia" identifier="findNoticia"/>
+            </childCall>
+            <methodName strValue="getInstancia" identifier="getInstancia"/>
+          </method>
+        </expr>
+      </statements>
+      <statements xsi:type="javas:ExpressionStatement" strValue="bean.setTitulo(&quot;&quot;);">
+        <expr xsi:type="javas:MethodInvocation" strValue="bean.setTitulo(&quot;&quot;)">
+          <object strValue="bean" identifier="bean"/>
+          <method>
+            <arguments xsi:type="javas:Literal" strValue="&quot;&quot;" value=""/>
+            <methodName strValue="setTitulo" identifier="setTitulo"/>
+          </method>
+        </expr>
+      </statements>
+      <statements xsi:type="javas:ExpressionStatement" strValue="bean.setContenido(&quot;&quot;);">
+        <expr xsi:type="javas:MethodInvocation" strValue="bean.setContenido(&quot;&quot;)">
+          <object strValue="bean" identifier="bean"/>
+          <method>
+            <arguments xsi:type="javas:Literal" strValue="&quot;&quot;" value=""/>
+            <methodName strValue="setContenido" identifier="setContenido"/>
+          </method>
+        </expr>
+      </statements>
+      <statements xsi:type="javas:ExpressionStatement" strValue="bean.setAutor(&quot;&quot;);">
+        <expr xsi:type="javas:MethodInvocation" strValue="bean.setAutor(&quot;&quot;)">
+          <object strValue="bean" identifier="bean"/>
+          <method>
+            <arguments xsi:type="javas:Literal" strValue="&quot;&quot;" value=""/>
+            <methodName strValue="setAutor" identifier="setAutor"/>
+          </method>
+        </expr>
+      </statements>
+      <statements xsi:type="javas:CommentStatement" strValue="// noticia es un result bean">
+        <comment strValue="noticia es un result bean"/>
+      </statements>
+      <statements xsi:type="javas:ExpressionStatement" strValue="request.setAttribute(&quot;noticia&quot;, noticia);">
+        <expr xsi:type="javas:MethodInvocation" strValue="request.setAttribute(&quot;noticia&quot;, noticia)">
+          <object strValue="request" identifier="request"/>
+          <method>
+            <arguments xsi:type="javas:Literal" strValue="&quot;noticia&quot;" value="noticia"/>
+            <arguments xsi:type="javas:Name" strValue="noticia" identifier="noticia"/>
+            <methodName strValue="setAttribute" identifier="setAttribute"/>
+          </method>
+        </expr>
+      </statements>
+      <statements xsi:type="javas:ReturnStatement" strValue="return (actionMapping.findForward(&quot;verNoticia&quot;));">
+        <expr xsi:type="javas:MethodInvocation" strValue="actionMapping.findForward(&quot;verNoticia&quot;)">
+          <object strValue="actionMapping" identifier="actionMapping"/>
+          <method>
+            <arguments xsi:type="javas:Literal" strValue="&quot;verNoticia&quot;" value="verNoticia"/>
+            <methodName strValue="findForward" identifier="findForward"/>
+          </method>
+        </expr>
+      </statements>
+    </methods>
+  </beans>
+  <types type="String"/>
+  <types type="boolean"/>
+  <types type="ActionErrors"/>
+  <types type="ActionMapping"/>
+  <types type="HttpServletRequest"/>
+  <types type="HttpServletResponse"/>
+  <types type="ActionForm"/>
+  <types type="ActionForward"/>
+  <types type="BeanTablon"/>
+  <types type="Noticia"/>
+  <beanMappings actionFormBean="//@beans.0" actionBeans="//@beans.1"/>
+</strutsbmm:StrutsBeans>

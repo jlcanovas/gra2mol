@@ -1,0 +1,8 @@
+[
+    {   attributeName:  "beginDate"
+    },
+    {   attributeName:  "endDate"
+    },
+    {   attributeName:  "timerLimit"
+    }
+]

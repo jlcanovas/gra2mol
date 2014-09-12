@@ -1,0 +1,57 @@
+-- *******************************************************************************
+-- * Copyright (c) 2010
+-- * All rights reserved. This program and the accompanying materials
+-- * are made available under the terms of the Eclipse Public License v1.0
+-- * which accompanies this distribution, and is available at
+-- * http://www.eclipse.org/legal/epl-v10.html
+-- *
+-- * Contributors:
+-- *    Javier Canovas (jlcanovas@um.es) 
+-- *******************************************************************************
+
+
+rule 'grammarGroup'
+	from grammarDef m
+	to Grammar::GrammarGroup
+	queries
+		gDef : //#grammarDef;
+	mappings
+		grammarDefs = gDef;
+end_rule
+
+rule 'grammarDefinition'
+	from grammarDef gd
+	to Grammar::GrammarDefinition
+	queries 
+		id       : /gd/#id;
+		--ruleDefs : /gd/#_rule;
+		ruleDefs : /gd/_rule/#ruleName{RULE_REF.exists || TOKEN_REF.exists};
+		--sruleDefs : /gd/#_rule/id{RULE_REF.exists};
+		--lruleDefs : /gd/#_rule/id{TOKEN_REF.exists};
+	mappings
+		name = id.TOKEN_REF;
+		rules = ruleDefs;
+end_rule
+
+rule 'sintacticRuleDef'
+	from ruleName[unique]{RULE_REF.exists} rid
+	to Grammar::SintacticRule
+	queries
+		rDef   : //#_rule/ruleName{RULE_REF.eq(rid.RULE_REF)};
+		alt1   : /rDef//altList//#ruleName{RULE_REF.exists};
+		alt2   : (ruleName) /rDef//altList//ruleName/#terminal{TOKEN_REF.exists};
+		altid2 : /rDef//altList//ruleName/#ruleName{TOKEN_REF.exists};
+	mappings
+		name = rid.RULE_REF;
+		derivations = alt1;
+		derivations = alt2;
+		derivations = altid2;
+end_rule
+
+rule 'lexicalRuleDef'
+	from ruleName[unique]{TOKEN_REF.exists} rid
+	to Grammar::LexicalRule
+	queries
+	mappings
+		name = rid.TOKEN_REF;
+end_rule

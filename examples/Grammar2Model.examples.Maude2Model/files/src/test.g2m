@@ -1,0 +1,234 @@
+--------------------------------------------------------------------------------------
+-- Gra2MoL transformation for extracting Maude Models
+--
+-- TODO: 
+--  * Fill in!! :D
+--------------------------------------------------------------------------------------
+
+rule 'mapMaudeSpec'
+	from file f
+	to MaudeSpec
+	queries
+		mods : //#module;
+	mappings
+		els = mods;
+end_rule
+
+rule 'mapFMod'
+	from module{TOKEN[0].exists && TOKEN[0].eq("fmod")} m
+	to FModule
+	queries
+		mname  : /m/#modId;
+		elems  : /m/#modElt{!TOKEN[0].eq("sort") && !TOKEN[0].eq("sorts") && !TOKEN[0].eq("subsorts") && !TOKEN[0].eq("vars")};
+		sorts  : /m/modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort;
+		ssorts : /m/modElt{TOKEN[0].eq("subsorts")}/#subsort;
+		vars   : /m/modElt{TOKEN[0].eq("vars")}/#varId;
+	mappings
+		name = mname.ID;
+		els  = elems;
+		els  = sorts;
+		els  = ssorts;
+		els  = vars;
+end_rule
+
+rule 'mapMod'
+	from module{TOKEN[0].exists && TOKEN[0].eq("mod")} m
+	to SModule
+	queries
+		mname  : /m/#modId;
+		elems  : /m//#modElt{!TOKEN[0].eq("sort") && !TOKEN[0].eq("sorts") && !TOKEN[0].eq("subsorts") && !TOKEN[0].eq("vars")};
+		sorts  : /m//modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort;
+		ssorts : /m//modElt{TOKEN[0].eq("subsorts")}/#subsort;
+		vars   : /m//modElt{TOKEN[0].eq("vars")}/#varId;
+	mappings
+		name = mname.ID;
+		els  = elems;
+		els  = sorts;
+		els  = ssorts;
+		els  = vars;
+end_rule
+
+
+-----------------------------
+-- Main module elements
+-----------------------------
+
+rule 'mapProtecting'
+	from modElt{TOKEN[0].eq("protecting")} me
+	to ModImportation
+	queries
+		importId   : /me//#modId;
+		locatedMod : //#module/modId{ID.eq(importId.ID)};
+	mappings
+		imports = new Maude::ModuleIdModExp;
+		imports.module = locatedMod;
+		mode = "protecting";
+end_rule
+
+rule 'mapSort'
+	from sort s
+	to Sort
+	queries
+		sname : /s/#sortId;
+	mappings
+		name = sname.ID;
+end_rule
+
+rule 'mapOp'
+	from modElt{TOKEN[0].eq("op")} me
+	to Operation
+	queries
+		oname : /me/opForm/#opId;
+		
+		-- Seeking sorts located on the left
+		left  : /me/#leftOp;
+		
+		-- Seeking sort located on the right
+		rop       : /me/rightOp//#sortId;
+		-- The following queries restrics the search to one module
+		--container : //#module//modElt{this.check(me)};
+		--right     : /container/modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};
+		right     : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};
+	mappings
+		name    = oname.ID;
+		arity   = left;
+		coarity = right;
+end_rule
+
+skip_rule 'mapLeftOp'
+	from leftOp lo
+	to Type
+	queries
+		nsort     : /lo//#sortId;
+		container : //#module//leftOp{this.check(lo)};
+		located   : /container/modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(nsort.ID)};
+	mappings
+		skip located;
+end_rule
+
+rule 'mapVar'
+	from varId vId
+	to Membership
+	queries
+		-- Locates the module container
+		container : //#module//varId{this.check(vId)};
+		-- Locates the modElem container (var definition)			
+		modElem   : /container//#modElt{TOKEN[0].eq("vars")}//varId{this.check(vId)};
+		-- Locates the sort Identifier
+		typeId    : /modElem//type//#sortId;
+		-- Locates the sort definition
+		selem     : /container/modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(typeId.ID)};
+	mappings
+		term      = new Variable;
+		term.name = vId.ID;
+		term.type = selem;
+		sort      = selem;
+end_rule
+
+-----------------------------
+-- Statements
+-----------------------------
+
+rule 'mapEq'
+	from modElt/statement{TOKEN[0].eq("eq")} st
+	to Equation
+	queries
+		lab    : /st//label/#labelId;
+		lefts  : /st//#leftEqOps;
+		rights : /st//#rightEqOps;
+	mappings
+		label = lab.ID;
+		lhs   = lefts;
+		rhs   = rights;
+end_rule
+
+-- Rules for LEFT EQ elements
+-- Adhoc solution!!
+rule 'mapleftEqOp'
+	from leftEqOps/leftEq[1]/term{TOKEN[0].eq("(")} leo
+	to RecTerm
+	queries
+		opId   : /leo/leftEq[0]/#term;	
+		-- Searching the definition of the op
+		lop    : //#modElt{TOKEN[0].eq("op")}//opId{ID.eq(opId.ID)};
+		rop    : /lop/rightOp//#sortId;
+		tt     : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};
+		-- Searching the arguments
+		argsId : /leo/leftEq[1]/term/#term;
+	mappings
+		op   = opId.ID;
+		type = tt;
+		args = argsId;
+end_rule
+
+-- Rules for RIGHT EQ elements
+rule 'mapRightEqTermToRecTerm'
+	from rightEqOps/rightEq[1]/term{TOKEN[0].eq("(")} reo
+	to RecTerm
+	queries
+		opId   : /reo/rightEq[0]/#term;
+		-- Searching the definition of the op
+		lop    : //#modElt{TOKEN[0].eq("op")}//opId{ID.eq(opId.ID)};
+		rop    : /lop/rightOp//#sortId;
+		tt     : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};
+		-- Searching the arguments
+		argsId : /reo/rightEq[1]/term/#term{ID.exists};
+	mappings
+		op = opId.ID;
+		type = tt;
+		args = argsId;
+end_rule
+
+skip_rule 'skipRightEq'
+	from rightEqOps reo
+	to Term
+	queries
+		s : /reo//#term;
+	mappings
+		skip s;
+end_rule
+
+-- Rules for TERM elements
+rule 'mapNull' 
+	from term{ID.eq("null")} r
+	to Constant
+	queries
+		tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq("OclVoid")};
+	mappings
+		op = extract r;
+		type = tt;
+end_rule
+
+rule 'mapNil' 
+	from term{ID.eq("nil")} r
+	to Constant
+	queries
+		tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq("ListOrd")};
+	mappings
+		op = extract r;
+		type = tt;
+end_rule
+
+rule 'mapDQVAL'
+	from term{DQVAL.exists} r
+	to Constant
+	queries
+		tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq("String")};
+	mappings
+		op = extract r;
+		type = tt;
+end_rule
+
+rule 'mapConstant'
+	from term t
+	to Constant
+	queries
+		lop  : //#modElt{TOKEN[0].eq("op")}//opId{ID.eq(t.ID)};
+		rop  : /lop/rightOp//#sortId;
+		tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};
+	mappings
+		op = t.ID;
+		type = tt;
+end_rule
+
+

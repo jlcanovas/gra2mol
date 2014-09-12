@@ -1,0 +1,33 @@
+[
+	{   accessorName:   "getProxy",
+        attributeName:  "proxy"
+    },
+    {   accessorName:   "getTime",
+        attributeName:  "pointTime",
+        type:           "date"
+    },
+    {   accessorName:   "getValue",
+        attributeName:  "pointValue",
+        type:           "float"
+    },
+    {   accessorName:   "getSeriesConnector",
+        attributeName:  "seriesConnector",
+        type:           "text"
+    },
+    {   accessorName:   "getSeriesTime",
+        attributeName:  "seriesTime",
+        type:           "text"
+    },
+    {   accessorName:   "getSeriesValue",
+        attributeName:  "seriesValue",
+        type:           "text"
+    },
+    {   accessorName:   "getColorKey",
+        attributeName:  "colorKey",
+        type:           "text"
+    },
+    {   accessorName:   "getEventLabel",
+        attributeName:  "eventLabel",
+        type:           "text"
+    }
+]

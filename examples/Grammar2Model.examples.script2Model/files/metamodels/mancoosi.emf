@@ -1,0 +1,127 @@
+@namespace(uri="http://modelum.es/gra2mol/mancoosi", prefix="mancoosi")
+	
+package mancoosi;
+
+abstract class NamedElement {
+   attr String name;
+}
+
+class Package {
+   attr String version;
+   attr String maintainer;
+   attr String description;
+   attr String architecture;
+   
+   val PreinstScript[*] preinstScript;
+   val PostinstScript[*] postinstScript;
+   val PrermScript[*] prermScript;
+   val PostrmScript[*] postrmScript;
+   val ConfigScript[*] configScript;
+}
+
+abstract class Script extends NamedElement {
+   val Statement[*] statements;
+}
+
+class PreinstScript extends Script {
+   
+}
+
+class PostinstScript extends Script {
+   
+}
+
+class PrermScript extends Script {
+   
+}
+
+class PostrmScript extends Script {
+   
+}
+
+class ConfigScript extends Script {
+   
+}
+
+abstract class Statement {
+   
+}
+
+class EnvironmentStatement extends Statement {
+   
+}
+class AdditionEnvironmentStatement extends EnvironmentStatement {
+   
+}
+class DeletionEnvironmentStatement extends EnvironmentStatement {
+   
+}
+class UpdateEnvironmentStatement extends EnvironmentStatement {
+   
+}
+
+
+
+class FileSystemStatement extends Statement {
+   
+}
+class AdditionFileSystemStatement extends FileSystemStatement {
+   
+}
+class DeletionFileSystemStatement extends FileSystemStatement {
+   
+}
+class UpdateFileSystemStatement extends FileSystemStatement {
+   
+}
+
+
+
+class PackageSettingStatement extends Statement {
+   
+}
+class AdditionPackageSettingStatement extends PackageSettingStatement {
+   
+}
+class DeletionPackageSettingStatement extends PackageSettingStatement {
+   
+}
+class UpdatePackageSettingStatement extends PackageSettingStatement {
+   
+}
+
+class ControlStatement extends Statement {
+   
+}
+class If extends ControlStatement {
+   val BooleanExpression[1] condition;
+   val Statement[*] then;
+   val Statement[*] else;
+}
+
+class BooleanExpression  {
+   attr String value;
+}
+
+abstract class Iterator extends ControlStatement {
+   
+} 
+
+class EnumerationIterator extends Iterator {
+   val Statement[*] statements;
+}
+
+
+abstract class NeutralStatement extends Statement {
+   
+}
+
+class AssignmentStatement extends NeutralStatement {
+   attr String assigned;
+   attr String expression;
+}
+
+
+
+
+

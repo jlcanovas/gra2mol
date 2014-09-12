@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/Grammar2Model.GVQ/src"
+    modelPluginID="Grammar2Model.GVQ" modelName="GVQ" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>../../Grammar2Model/metamodel/GVQ.ecore</foreignModel>
+  <genPackages prefix="GVQ" basePackage="gts.modernization.model" disposableProviderFactory="true"
+      ecorePackage="GVQ.ecore#/">
+    <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="GVQ.ecore#//Core">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GVQ.ecore#//Core/InitUnitValueType">
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Core/InitUnitValueType/VALUE"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Core/InitUnitValueType/QUERY_RESULT"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Core/InitUnitValueType/QUERY_ACCESS"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Core/InitUnitValueType/OPERATION_CONCAT"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Core/InitUnitValueType/OPERATION_CREATION"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GVQ.ecore#//Core/ValueParameterType">
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Core/ValueParameterType/VALUE"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Core/ValueParameterType/QUERY_RESULT"/>
+      </genEnums>
+      <genClasses ecoreClass="GVQ.ecore#//Core/ViewDefinition">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/ViewDefinition/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GVQ.ecore#//Core/ViewDefinition/rules"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Core/Rule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/Rule/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/Rule/fromElement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/Rule/fromElementAlias"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/Rule/toElement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/Rule/toElementAlias"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference GVQ.ecore#//Core/Rule/queries"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference GVQ.ecore#//Core/Rule/inits"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Core/InitUnit">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/InitUnit/element"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/InitUnit/extension"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EReference GVQ.ecore#//Core/InitUnit/value"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Core/InitUnitValue">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/InitUnitValue/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/InitUnitValue/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/InitUnitValue/extension"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GVQ.ecore#//Core/InitUnitValue/params"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Core/ValueParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/ValueParameter/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/ValueParameter/extension"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Core/ValueParameter/type"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Query" disposableProviderFactory="true" ecorePackage="GVQ.ecore#//Query">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GVQ.ecore#//Query/FilterType">
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/FilterType/SPECIFIC"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/FilterType/GENERAL"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GVQ.ecore#//Query/FilterOperationType">
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/FilterOperationType/NORMAL"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/FilterOperationType/FIRST"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GVQ.ecore#//Query/OperationType">
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/OperationType/EQUALS"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/OperationType/EXISTS"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GVQ.ecore#//Query/FilterExpressionType">
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/FilterExpressionType/AND"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/FilterExpressionType/OR"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/FilterExpressionType/NOT"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GVQ.ecore#//Query/QueryElementType">
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/QueryElementType/NODE"/>
+        <genEnumLiterals ecoreEnumLiteral="GVQ.ecore#//Query/QueryElementType/LEAF"/>
+      </genEnums>
+      <genClasses ecoreClass="GVQ.ecore#//Query/QueryUnit">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/QueryUnit/variable"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GVQ.ecore#//Query/QueryUnit/filter"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Query/FilterUnit">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/FilterUnit/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/FilterUnit/operation"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EReference GVQ.ecore#//Query/FilterUnit/element"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GVQ.ecore#//Query/FilterUnit/expression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GVQ.ecore#//Query/FilterUnit/next"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Query/FilterExpression"/>
+      <genClasses ecoreClass="GVQ.ecore#//Query/FilterExpressionUnit">
+        <genFeatures createChild="false" ecoreFeature="ecore:EReference GVQ.ecore#//Query/FilterExpressionUnit/element"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/FilterExpressionUnit/operation"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/FilterExpressionUnit/global"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GVQ.ecore#//Query/FilterExpressionUnit/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Query/Parameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/Parameter/value"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Query/FilterExpressionComplex">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GVQ.ecore#//Query/FilterExpressionComplex/expressions"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/FilterExpressionComplex/type"/>
+      </genClasses>
+      <genClasses ecoreClass="GVQ.ecore#//Query/QueryElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/QueryElement/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/QueryElement/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GVQ.ecore#//Query/QueryElement/mark"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

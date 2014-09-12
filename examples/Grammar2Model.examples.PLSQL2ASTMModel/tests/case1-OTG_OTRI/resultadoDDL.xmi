@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<gastm:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gastm="http://modelum.es/modernization/gastm" xmlns:sastm="http://modelum.es/modernization/sastm">
+  <files language="PL/SQL">
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_ACTIVIDADES"/>
+      <PrimKey refersTo="//@files.0/@fragments.0/@Column.0">
+        <name nameString="ACT_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="ACT_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_CON_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_CODIGOOTRI"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_NOMBRE"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_DESCRIPCION"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_DESTINATARIO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_OBJETIVOS"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_CONDICIONES"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_FINANCIACION"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_TIPOSOLI"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_MODALIDADES"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="LOG"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="ACT_DEDICA"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.6/@Column.0">
+          <name nameString="CON_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="ACT_CON_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.0">
+          <name nameString="OTG_ACTIVIDADES"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBUniqueKey">
+        <Column>
+          <name nameString="ACT_CODIGOOTRI"/>
+        </Column>
+      </Constraint>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_MODALIDADES"/>
+      <PrimKey refersTo="//@files.0/@fragments.1/@Column.0">
+        <name nameString="MOD_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="MOD_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_ACT_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_CODIGOOTRI"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_NOMBRE"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_DESCRIPCION"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_DESTINATARIO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_OBJETIVOS"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_FINANCIACION"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_CONDICIONES"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="LOG"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="MOD_DEDICA"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.0/@Column.0">
+          <name nameString="ACT_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="MOD_ACT_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.1">
+          <name nameString="OTG_MODALIDADES"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBUniqueKey">
+        <Column>
+          <name nameString="MOD_CODIGOOTRI"/>
+        </Column>
+      </Constraint>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_PCONVOCATORIAS"/>
+      <PrimKey refersTo="//@files.0/@fragments.2/@Column.0">
+        <name nameString="PCO_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="PCO_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PCO_ACT_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PCO_MOD_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PCO_FINIS"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PCO_FFINS"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PCO_FFINA"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PCO_ANO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PCO_FJUST"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.0/@Column.0">
+          <name nameString="ACT_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="PCO_ACT_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.2">
+          <name nameString="OTG_PCONVOCATORIAS"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.1/@Column.0">
+          <name nameString="MOD_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="PCO_MOD_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.2">
+          <name nameString="OTG_PCONVOCATORIAS"/>
+        </ParentTable>
+      </Constraint>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_TCONVOCATORIAS"/>
+      <PrimKey refersTo="//@files.0/@fragments.3/@Column.0">
+        <name nameString="TCO_TER_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="TCO_CON_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="TCO_TER_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="TCO_PTC_CODIGO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.6/@Column.0">
+          <name nameString="CON_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="TCO_CON_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.3">
+          <name nameString="OTG_TCONVOCATORIAS"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.5/@Column.0">
+          <name nameString="PTC_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="TCO_PTC_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.3">
+          <name nameString="OTG_TCONVOCATORIAS"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.8/@Column.0">
+          <name nameString="TER_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="TCO_TER_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.3">
+          <name nameString="OTG_TCONVOCATORIAS"/>
+        </ParentTable>
+      </Constraint>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_SOLICITUDES"/>
+      <PrimKey refersTo="//@files.0/@fragments.4/@Column.0">
+        <name nameString="SOL_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="SOL_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_CON_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_ACT_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_MOD_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_PCO_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_TITULO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_FENTREGA"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_ESO_CODIGO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_FRES"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_FPUB"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_DURACION"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_UOR_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMP"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_MON_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPP"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPE"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_APR_CODIGO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_COORDINADO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_SUP_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_FANUAL"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_SOL_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_PRO_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_CTR_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_MBE_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPS"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_MON_CODIGOS"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPPS"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPES"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPU"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_MON_CODIGOU"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPPU"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_IMPEU"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_TIPO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_PER_IDT"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="SOL_PER_IDB"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="LOG"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.0/@Column.0">
+          <name nameString="ACT_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="SOL_ACT_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.4">
+          <name nameString="OTG_SOLICITUDES"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.6/@Column.0">
+          <name nameString="CON_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="SOL_CON_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.4">
+          <name nameString="OTG_SOLICITUDES"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.1/@Column.0">
+          <name nameString="MOD_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="SOL_MOD_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.4">
+          <name nameString="OTG_SOLICITUDES"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.2/@Column.0">
+          <name nameString="PCO_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="SOL_PCO_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.4">
+          <name nameString="OTG_SOLICITUDES"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.4/@Column.0">
+          <name nameString="SOL_CODIGO"/>
+        </ForeignKey>
+        <ParentKey refersTo="//@files.0/@fragments.4/@Column.20">
+          <name nameString="SOL_SOL_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.4">
+          <name nameString="OTG_SOLICITUDES"/>
+        </ParentTable>
+      </Constraint>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_PTCONVOCATORIAS"/>
+      <PrimKey refersTo="//@files.0/@fragments.5/@Column.0">
+        <name nameString="PTC_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="PTC_CODIGO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PTC_NOMBRE"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_CONVOCATORIAS"/>
+      <PrimKey refersTo="//@files.0/@fragments.6/@Column.0">
+        <name nameString="CON_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="CON_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_CODIGOOTRI"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_NOMBRE"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_FPUB"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_FRES"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_FCOR1"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_FCOR2"/>
+        <type xsi:type="sastm:RDBDate"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_ACCESO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_TIPO"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_PUB_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="LOG"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_INFOR"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_DEDICA"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_TIPOWEB"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Column>
+        <identifierName nameString="CON_WEB"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+      <Constraint xsi:type="sastm:RDBRefIntegrity">
+        <ForeignKey refersTo="//@files.0/@fragments.7/@Column.0">
+          <name nameString="PUB_CODIGO"/>
+        </ForeignKey>
+        <ParentKey>
+          <name nameString="CON_PUB_CODIGO"/>
+        </ParentKey>
+        <ParentTable refersTo="//@files.0/@fragments.6">
+          <name nameString="OTG_CONVOCATORIAS"/>
+        </ParentTable>
+      </Constraint>
+      <Constraint xsi:type="sastm:RDBUniqueKey">
+        <Column>
+          <name nameString="CON_CODIGOOTRI"/>
+        </Column>
+      </Constraint>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_PUBLICAOFI"/>
+      <PrimKey refersTo="//@files.0/@fragments.7/@Column.0">
+        <name nameString="PUB_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="PUB_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="PUB_NOMBRE"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+    </fragments>
+    <fragments xsi:type="sastm:RDBTableDefinition">
+      <identifierName nameString="OTG_TERCEROS"/>
+      <PrimKey refersTo="//@files.0/@fragments.8/@Column.0">
+        <name nameString="TER_CODIGO"/>
+      </PrimKey>
+      <Column>
+        <identifierName nameString="TER_CODIGO"/>
+        <type xsi:type="sastm:RDBNumber"/>
+      </Column>
+      <Column>
+        <identifierName nameString="TER_NOMBRE"/>
+        <type xsi:type="sastm:RDBVarchar"/>
+      </Column>
+    </fragments>
+  </files>
+</gastm:Project>

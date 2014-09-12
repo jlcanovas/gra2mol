@@ -1,0 +1,49 @@
+rule 'mapOp_plus_'
+	from modElt//opsubplussub st
+	to Equation
+	queries
+		lab   : /st//label/#labelId;
+
+		largs1 : /st//#natSort[0];
+		largs2 : /st//#natSort[1];
+
+		rop   : /st//#natSort[2];
+		rtype : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq("Nat")};
+	mappings
+		label     = lab.ID;
+
+		lhs       = new RecTerm;
+		lhs.op    = "_plus_";
+		lhs.type  = rtype;
+		lhs.args  = largs1;
+		lhs.args  = largs2;
+
+		rhs       = new Constant;
+		rhs.op    = extract rop;
+		rhs.type  = rtype;
+end_rule
+
+-- Rules for Sorts
+rule 'mapnatSort'
+	from natSort aps
+	to Constant
+	queries
+		lop  : //#modElt{TOKEN[0].eq("op")}//opId{ID.eq(aps.ID)};
+		rop  : /lop/rightOp//#sortId;
+		tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};
+	mappings
+		op   = aps.ID;
+		type = tt;
+end_rule
+
+rule 'mapPackageSort'
+	from ordSort aps
+	to Constant
+	queries
+		lop  : //#modElt{TOKEN[0].eq("op")}//opId{ID.eq(aps.ID)};
+		rop  : /lop/rightOp//#sortId;
+		tt   : //modElt{TOKEN[0].eq("sort") || TOKEN[0].eq("sorts")}/#sort//sortId{ID.eq(rop.ID)};
+	mappings
+		op   = aps.ID;
+		type = tt;
+end_rule

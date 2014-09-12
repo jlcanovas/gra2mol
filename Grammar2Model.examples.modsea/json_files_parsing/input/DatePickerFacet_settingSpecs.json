@@ -1,5 +1,0 @@
-{
-    "facetLabel":       { type: "text" },
-    "dateFormat":       { type: "text" }
-    //"dragSelection":	{ type: "boolean", defaultValue: true }
-}
