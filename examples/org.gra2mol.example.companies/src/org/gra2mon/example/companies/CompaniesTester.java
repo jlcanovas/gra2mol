@@ -8,7 +8,7 @@ import gts.modernization.launcher.Gra2MoLProcessLauncher;
 
 public class CompaniesTester {
 		
-	static String basePath = "D:/git/gra2mol/examples/Grammar2Model.examples.101companies/";
+	static String basePath = "../Grammar2Model.examples.101companies/";
 	
 	public static void main(String[] args) {
 	
