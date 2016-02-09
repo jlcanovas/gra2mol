@@ -66,10 +66,10 @@ public class Gra2MoLLogger {
 	private Gra2MoLLogger(PrintStream stream) {
 
 		String debugMode = Gra2MoLConfiguration.getInstance().getProperty(Gra2MoLConfiguration.DEBUG_KEYWORD);
-		if(!debugMode.equals("true")) quiet = true;
+		if(debugMode != null && !debugMode.equals("true")) quiet = true;
 		
 		String debugFile = Gra2MoLConfiguration.getInstance().getProperty(Gra2MoLConfiguration.DEBUG_FILE_KEYWORD);
-		if(!debugFile.equals(Gra2MoLConfiguration.DEBUG_SCREEN)) {
+		if(debugFile != null && !debugFile.equals(Gra2MoLConfiguration.DEBUG_SCREEN)) {
 			try {
 				stream = new PrintStream(new File(debugFile));
 			} catch (FileNotFoundException e) {
