@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.compare_1.2.1.v20110913-0926.jar" sourcepath="/home/jcanovas/eclipses/eclipse-indigo/plugins/org.eclipse.emf.ecore.xmi.source_2.7.0.v20110520-1406.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.compare.diff_1.2.1.v20110913-0926.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.compare.match_1.2.1.v20110913-0926.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/ant.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/antlr-3.2.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.cdo_2.0.0.v200906160459.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.cdo.common_2.0.0.v200906160459.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.equinox.common_3.5.0.v20090520-1800.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.net4j_2.0.0.v200906160348.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.net4j.tcp_2.0.0.v200906160348.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.net4j.util_2.0.0.v200906160348.jar"/>
+	<classpathentry kind="lib" path="/Grammar2Model.examples.101companies/lib/org.eclipse.gmt.modisco.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Grammar2Model"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -16,6 +16,5 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.compare_1.2.1.v20110913-0926.jar" sourcepath="/home/jcanovas/eclipses/eclipse-indigo/plugins/org.eclipse.emf.ecore.xmi.source_2.7.0.v20110520-1406.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.compare.diff_1.2.1.v20110913-0926.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.compare.match_1.2.1.v20110913-0926.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/emf"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
