@@ -19,7 +19,7 @@ rule 'mapDepartment'
 	  name      = removeQuotes d.STRING;
 	  manager   = mElem;
 	  employees = eElem;
-	  subDepts  = dElem;
+	  subdepts  = dElem;
 end_rule
 
 rule 'mapEmployee'

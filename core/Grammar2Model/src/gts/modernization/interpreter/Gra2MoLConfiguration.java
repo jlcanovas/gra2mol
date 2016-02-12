@@ -57,18 +57,14 @@ public class Gra2MoLConfiguration {
 	 */
 	private static Gra2MoLConfiguration instance;
 
-	private Gra2MoLConfiguration(File filePath) {
-		initialize(filePath);
-
-	}
-
 	/**
 	 * Singleton method which uses the default configuration file path
 	 * @return The singleton instance
 	 */
 	public static Gra2MoLConfiguration getInstance() {
 		if(instance == null) {
-			instance = new Gra2MoLConfiguration(new File(CONFIGURATION_FILE_PATH));
+			instance = new Gra2MoLConfiguration();
+			instance.initialize(new File(CONFIGURATION_FILE_PATH));
 			initializeFactories();
 		}
 		return instance;
@@ -79,7 +75,8 @@ public class Gra2MoLConfiguration {
 	 * @param configurationFile The configuration file File
 	 */
 	public static void createInstance(File configurationFile) {
-		instance = new Gra2MoLConfiguration(configurationFile);
+		instance = new Gra2MoLConfiguration();
+		instance.initialize(new File(CONFIGURATION_FILE_PATH));
 		initializeFactories();
 	}
 

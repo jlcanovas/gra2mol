@@ -69,7 +69,7 @@
       <inits xsi:type="Core:InitUnitElement" element="employees">
         <value type="QUERY_RESULT" value="eElem"/>
       </inits>
-      <inits xsi:type="Core:InitUnitElement" element="subDepts">
+      <inits xsi:type="Core:InitUnitElement" element="subdepts">
         <value type="QUERY_RESULT" value="dElem"/>
       </inits>
     </inits>
